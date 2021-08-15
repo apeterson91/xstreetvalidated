@@ -1,0 +1,21 @@
+---
+title: "The Death and Life of Great Cities"
+description: |
+  A commentary on Jane Jacob's seminal work
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 08-07-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+

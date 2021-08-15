@@ -1,0 +1,60 @@
+---
+title: "Cleanup vs. Crime"
+description: |
+  A short description of the post.
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 08-07-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(lubridate)
+library(sf)
+```
+
+vacant lot [data](https://www.opendataphilly.org/dataset/vacant-property-indicators-percentage-by-block/resource/e6402f92-eaf5-4dd0-aaca-d5bb3eeb1dd9)
+
+shooting data [source](https://www.opendataphilly.org/dataset/shooting-victims)
+
+crime incidents [source](https://www.opendataphilly.org/dataset/crime-incidents)
+
+This [paper](https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752)
+
+```{r}
+url <- "https://phl.carto.com/api/v2/sql?q=SELECT+*,+ST_Y(the_geom)+AS+lat,+ST_X(the_geom)+AS+lng+FROM+shootings&filename=shootings&format=csv&skipfields=cartodb_id"
+cdf <- read_csv(url) %>% 
+  mutate(date = ymd(date_),
+         time = hms(time)) %>% 
+  filter(officer_involved == "N")
+cdf
+```
+
+
+```{r}
+fps <- list.files("../../Projects/PhillyCrimeData/",full.names = T)
+fps <- fps[str_detect(fps,"incidents")]
+df <- map_dfr(fps,function(x) read_csv(x) %>% mutate(psa = as.character(psa))) %>% 
+  filter(str_detect(text_general_code,"Firearm")) %>% 
+  filter(str_detect(text_general_code,"No",negate=T)) %>% 
+  mutate(Year = year(dispatch_date),
+         Month = month(dispatch_date),
+         Day  = day(dispatch_date),
+         Hour = hour(dispatch_date_time)) %>% 
+  select(-hour_) %>% 
+  st_as_sf(.,coords=c("lat","lng"))
+```
+
+
+```{r}
+ldf <- read_sf("../../Projects/PhillyCrimeData/Vacant_Block_Percent_Combined/Vacant_Block_Percent_Combined.shp")
+```
+
+

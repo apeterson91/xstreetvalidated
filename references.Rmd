@@ -1,0 +1,41 @@
+---
+title: "References"
+description: |
+---
+
+
+See below for a broad sample of references that I've come across on my journey
+in learning more about the built environment. I will attempt to update this as 
+often as I can to reflext my own perception of the field. If you're looking for 
+statistics references, I have listed some of my favorite statistics-related
+references [here](https://www.apetersonsite.org/post/phdlessons/).
+
+*Last updated 8/7/21*
+
+
+# Books
+
+* The Death and Life of Great American Cities by Jane Jacobs
+* The American City: What Works, What Doesn't by Alexander Gavin
+* The Walkable City: How Downtown can Save America, One Step at a Time by Jeff Speck
+
+
+# Web
+
+* [r/urbanplanning](www.reddit.com/r/urbanplanning)
+* [City Beautiful](youtube.com/citybeautiful)
+* [Not Just Bikes](youtube.com/notjustbikes)
+* [StrongTowns](strongtowns.org)
+
+# Academic
+
+* Health
+   * [Brisa Sanchez](https://drexel.edu/dornsife/academics/faculty/Brisa%20Sanchez/)
+   * See the other researchers at the [Drexel Urban Health Collaborative](https://drexel.edu/uhc/) as well
+* Crime 
+   * [Charles Branas](https://www.publichealth.columbia.edu/people/our-faculty/ccb2166)
+   * [Greg Ridgeway](https://sites.google.com/view/gregridgeway/cv)
+* Economics
+   * [Donald Shoup](shoupdogg.net)
+* Transit, Transit Planning
+   * [Robin Lovelace](robinlovelace.net)

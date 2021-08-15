@@ -1,0 +1,16 @@
+name: "XStreetValidated"
+title: "X Street Validated"
+theme: xsv_theme_one.css
+description: |
+  XStreetValidated
+output_dir: "docs"
+navbar:
+  search: true
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "References"
+      href: references.html
+output: distill::distill_article

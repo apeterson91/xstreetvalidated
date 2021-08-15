@@ -1,0 +1,132 @@
+---
+title: "Causal Inference in the Built Environment"
+description: |
+  How can we know how to best change our environment?
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+citation_url: https://xstreetvalidated.com
+date: 08-08-2021
+output:
+  distill::distill_article:
+    self_contained: false
+categories:
+  - causal inference
+  - statistics
+  - technical
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+If we upzone a region of land from being zoned for single family houses (R1) to 
+mixed-use, will this increase the number of cars on the nearby road? If 
+an individual moves to an apartment where they have a greater number of grocery
+store options to choose from, will they lose weight? These are the kinds of causal 
+questions asked by those interested in understanding the built environment. 
+I've written on this 
+subject [elsewhere](https://www.apetersonsite.org/post/causal_inference_preface/), 
+but want to return to it now in a setting where the complexities of 
+working with built environment data can be more explicitly highlighted.
+Note that if you're not familiar with 
+causal inference concepts already you may need to read the previous post series
+linked and/or check out one of the numerous references I suggest [here](https://www.apetersonsite.org/post/phdlessons/).
+
+# 1. Lack of Randomization
+
+There are a number of obstacles that built environment data typically involve
+when an investigator sets out to learn more. The first
+is that, typically, it is impossible to randomize the exposure - e.g. grocery stores -  of interest.
+Whereas vaccines, drugs, and even some government programs can be randomly 
+assigned to individuals, it isn't possible to randomly assign a park to a 
+neighborhood or a certain kind of business to a specific storefront. 
+These kinds of decisions are extremely expensive and will often involve a 
+substantial amount of political decision making, rendering any attempt to 
+introduce randomness a doomed prospect from the start.
+As the reader may be aware, randomization is key to ensuring that the 
+units of analysis - individuals, streets, etc. -  are comparable.
+That is, there is no reason to think *a priori* that those who have been treated 
+or exposed any different from those in the control. 
+
+<aside>
+The technical term for identifying comparability is exchangeability. 
+Exchangeability also has a technical definition but it can be more easily understood 
+as implying independence between counterfactual outcomes $Y^{x}$ 
+and exposure $X$: $Y^{x} \perp \!\!\! \perp  X$ 
+</aside>
+
+This is obviously not the case in the built environment. We observe differences
+in the underlying populations associated with certain built environment exposures
+constantly. Dense, walk-able neighborhoods, tend to be much more expensive
+than their suburban counterparts. Wealth is correlated with education, and 
+so one might expect a wide range of different health outcomes between those in
+dense walk-able neighborhoods for example and their more rural counterparts that
+are not due to the built environment at all, but rather the wealth and/or education
+with which they are correlated. Adjusting for these factors in order
+to create as comparable a comparison as possible is crucial, if one is 
+to trust the estimate
+
+
+
+
+# 2. Interference
+
+Even if one were able to randomize some treatment to a built environment 
+feature^[any amenity or structure in the built environment, 
+e.g. sidewalk availability or, in this case, vacant lots], one then has to 
+consider the effects of *interference*. Interference is the name given to the
+phenomenon when an intervention or treatment on one entity affects the 
+outcome of another. A violation of the commonly held Stable Unit 
+Treatment Value Assumption or SUTVA, interference rears its heads often 
+in the built environment when the treatment or intervention - the new
+upzoned region -
+affects not only the number of cars on the street immediately in front of it 
+but also proximate streets, all under observation. Decomposing 
+these effects across related units typically requires assumptions or 
+some *a priori* fundamental understanding of the effect relationships. As such,
+interference can represent a major obstacle to making progress in this space.
+
+
+**Put a picture or equation here**
+
+# 3. Homogeneity, Additivity and More
+
+Still more problems await! In trying to understand how certain built environment
+features may affect human health or other aspects of the built environment,
+we'll likely have to make even further assumptions. In our example with grocery
+stores, we'll likely need to make some assumption that say, Kroger and Meier
+are equivalent grocery stores. This could be more justified than saying 
+that the local farmer's market is also an equivalent "grocery store". 
+Assuming homogeneity in this manner greatly simplifies our modeling, but 
+also runs us into conflicting with an assumption of 
+[consistency](https://www.apetersonsite.org/post/causal_inference_preface/) at the heart 
+of causal inference. Additivity is another such assumption I won't get into 
+here, but also represents a maneuver that simplifies the mathematic tools required
+but may be unwarranted.
+
+<aside>
+Assuming additivity can turn the model $Y = f(x_{1},x_{2},...,x_{k})$
+into $Y = \sum_k f(x_{k}$ which is considerably easier to estimate.
+</aside>
+
+# Solutions
+
+At this point, it may seem as though there is no way we can ever hope 
+to understand the built environment amidst all the many non-randomized, correlated
+and interfering forces at work. Fear not, there are still *some* things we can do.
+Though we'll likely never have the same level of confidence in our results 
+as we would in a randomized control trial, we can try to incorporate more 
+information through regression, narrow our focus with difference in 
+difference estimators, model the interference associated with interventions, 
+and allow for heterogeneous treatment effects in our model estimates.
+All this and more will be discussed as a part of blog posts to come but if you're 
+interested in learning more now, I'd suggest you check out the statistics
+references linked to on this site's reference page. Specifically the book by
+Hernan and Robins entitled "Causal Inference - What if?",  Angrist and Pitschke title "Mastering Metrics"
+and "Regression and Other Stories" by Gelman, Hill and Vehtari.
+
+

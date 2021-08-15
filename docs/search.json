@@ -1,0 +1,32 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "XSV: This blog",
+      "author": [],
+      "contents": "\n There’s nothing like a good blog when you’re trying to dig into a subject and learn a bit more than you did previously.\nIn contrast to their sexier siblings, the podcast and video essay, blogs allow for both a speedy read or an in-depth plunge with equal enjoyment. Good blogs are also a labor of love, written just as much for the sake of satisfying the author’s own interest in a subject, as they are to provide material for a viewership.\nWith this blog, I’m hoping to check all the above boxes. The subject of interest, as the blog title may hint, lies at the intersection of statistics and the built environment. This is a broad area, with which I have some familiarity, but even in my dissertation work I have barely scratched the surface of what’s out there. So, though I may no longer be a formal academic, I still intend to delve deeper into those subjects in this space that I find interesting at my leisure. These may include ecological and socially relevant ideas like tree cover differences across neighborhoods, statistically interesting ideas of how to adjust an analysis for causal inference with interference, or more economically grounded ideas that focus on debt service in suburban growth patterns. Politics, economics, justice – and the competing claims of what constitutes justice – I suspect I won’t run out of material to write about.\nWhile I hope to keep my writing as accessible as possible and discuss the material of interest in such a way that minimal prior knowledge is typically needed, I will also, not infrequently, dig into technical matters in some detail. I will do my best to provide summary comments and label such posts so that some hint of what they offer may be understood to those not technically trained.\nAbove all else, it is my hope that this blog will offer the opportunity to deepen an appreciation for this incredibly fascinating subject at a time when it is woefully overlooked and yet more important than ever.\nHappy Reading!\n\n\n\n",
+      "last_modified": "2021-08-15T12:29:47-04:00"
+    },
+    {
+      "path": "index.html",
+      "title": "X Street Validated",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-08-15T12:29:48-04:00"
+    },
+    {
+      "path": "LICENSE.html",
+      "author": [],
+      "contents": "\nCopyright [2021] [Adam peterson]\nLicensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at\nhttp://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.\n\n\n",
+      "last_modified": "2021-08-15T12:29:48-04:00"
+    },
+    {
+      "path": "references.html",
+      "title": "References",
+      "author": [],
+      "contents": "\nSee below for a broad sample of references that I’ve come across on my journey in learning more about the built environment. I will attempt to update this as often as I can to reflext my own perception of the field. If you’re looking for statistics references, I have listed some of my favorite statistics-related references here.\nLast updated 8/7/21\nBooks\nThe Death and Life of Great American Cities by Jane Jacobs\nThe American City: What Works, What Doesn’t by Alexander Gavin\nThe Walkable City: How Downtown can Save America, One Step at a Time by Jeff Speck\nWeb\nr/urbanplanning\nCity Beautiful\nNot Just Bikes\nStrongTowns\nAcademic\nHealth\nBrisa Sanchez\nSee the other researchers at the Drexel Urban Health Collaborative as well\n\nCrime\nCharles Branas\nGreg Ridgeway\n\nEconomics\nDonald Shoup\n\nTransit, Transit Planning\nRobin Lovelace\n\n",
+      "last_modified": "2021-08-15T12:29:48-04:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}
