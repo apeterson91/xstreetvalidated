@@ -1,0 +1,69 @@
+---
+title: "An Introduction to CAR and Besag York Mollie Models"
+description: |
+  A short description of the post.
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 08-17-2021
+categories:
+  - Statistics
+  - Technical
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# The Ordinary Linear Model
+
+One of the very first models introduced in basic statistics curriculum 
+is the "ordinary linear model" shown below with three unknown variables: 
+$\alpha,\beta$ and $\sigma^2$: 
+
+$$
+y_i = \alpha + \beta x_i + \epsilon_i\\
+\epsilon_i \stackrel{ind}{\sim} N(0,\sigma^2), \quad i=1,...,n.
+$$
+
+This is one of the cornerstone models in applied statistics and for good reason,
+a lot of relationships are linear, or at least approximately, and it offers 
+an interpretable way to understand and test scientific hypotheses about reality.
+
+
+```{r,fig.cap="Scatter plot with true linear model overlaid."}
+n <- 20
+x <- rnorm(n)
+alpha <- 5
+beta <- 2
+sigma <- 1
+epsilon <- rnorm(n,mean=0,sd=sigma)
+y <- alpha + beta*x + epsilon
+plot(x,y,main="Ordinary Linear Model")
+abline(a=alpha,b=beta)
+```
+
+Ordinary linear models are great, I love and use them all the time. However,
+there is a key assumption when writing that cute little "ind" in  the
+$\epsilon \stackrel{ind}{\sim} N(0,\sigma^2)$ that can cause us all sorts of problems.
+
+## Assuming Independence
+
+#  Spatial Models
+
+![](why_spatial_models.png)
+
+
+
+### Further reading
+
+* See chapter blah in  "Hierarchical Modeling and Analysis for Spatial Data" by
+Banerjee, Carlin and Gelfand. 
+* There is a nice write up on this topic with particular attention paid to
+implimentation details in stan and an application for disease and demography 
+modeling [here](https://mc-stan.org/users/documentation/case-studies/icar_stan.html).

@@ -6,11 +6,11 @@ description: |
 
 See below for a broad sample of references that I've come across on my journey
 in learning more about the built environment. I will attempt to update this as 
-often as I can to reflext my own perception of the field. If you're looking for 
+often as I can to reflect my own perception of the field. If you're looking for 
 statistics references, I have listed some of my favorite statistics-related
 references [here](https://www.apetersonsite.org/post/phdlessons/).
 
-*Last updated 8/7/21*
+*Last updated 8/19/21*
 
 
 # Books

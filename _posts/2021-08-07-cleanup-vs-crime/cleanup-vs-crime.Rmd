@@ -1,7 +1,7 @@
 ---
-title: "Cleanup vs. Crime"
+title: "Cleanup vs. Crime: A Case Study in $n$ parts"
 description: |
-  A short description of the post.
+  A simple concept and a decent result.
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
@@ -20,40 +20,60 @@ library(lubridate)
 library(sf)
 ```
 
+
+I'm a big fan of this [paper](https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752)
+looking at how cleaning up vacant lots has the potential to effect crime. 
+There's a lot to love here, and I'm hoping to use this paper as an 
+excuse to explore several different ideas that are relevant to both
+the built environment and statistical methods. Let's dive right in!
+
+## Context
+
+The authors' objective in their work is to determine whether cleaning up a 
+series of vacant lots in the areas where, unfortunately, many shootings regularly
+occur, could lead to a reduced rate of gun violence. This idea is simple, 
+though the mechanism of action through which it 
+may reduce gun violence isn't particularly intuitive.
+
+
+
+```{r}
+## this doesn't look comparable to the data in the previous plot!
+read_csv("../../Projects/PhillyCrimeData/shootings_2015_2020.csv") %>% 
+  filter(year==2015,officer_involved=="N") %>% 
+  mutate(Month = month(date_)) %>% 
+  group_by(year,Month) %>% 
+  count() %>% 
+  mutate(date = ymd(str_c(year,"-",Month,"-01"))) %>% 
+  ggplot(aes(x=date,y=n)) + geom_line()
+```
+
+<aside>
+For similar related papers see [here](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2688343) and 
+[here](https://www.pnas.org/content/115/12/2946.short)
+</aside>
 vacant lot [data](https://www.opendataphilly.org/dataset/vacant-property-indicators-percentage-by-block/resource/e6402f92-eaf5-4dd0-aaca-d5bb3eeb1dd9)
 
 shooting data [source](https://www.opendataphilly.org/dataset/shooting-victims)
 
 crime incidents [source](https://www.opendataphilly.org/dataset/crime-incidents)
 
-This [paper](https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752)
 
-```{r}
-url <- "https://phl.carto.com/api/v2/sql?q=SELECT+*,+ST_Y(the_geom)+AS+lat,+ST_X(the_geom)+AS+lng+FROM+shootings&filename=shootings&format=csv&skipfields=cartodb_id"
-cdf <- read_csv(url) %>% 
+```{r,eval=F}
+# url <- "https://phl.carto.com/api/v2/sql?q=SELECT+*,+ST_Y(the_geom)+AS+lat,+ST_X(the_geom)+AS+lng+FROM+shootings&filename=shootings&format=csv&skipfields=cartodb_id"
+cdf <- read_csv("../../Projects/PhillyCrimeData/shootings.csv") %>% 
   mutate(date = ymd(date_),
          time = hms(time)) %>% 
-  filter(officer_involved == "N")
+  filter(officer_involved == "N",year==2015) %>% 
+  st_as_sf(.,coords=c("lat","lng"))
+cdf <- st_set_crs(cdf,'4326')
 cdf
 ```
 
 
-```{r}
-fps <- list.files("../../Projects/PhillyCrimeData/",full.names = T)
-fps <- fps[str_detect(fps,"incidents")]
-df <- map_dfr(fps,function(x) read_csv(x) %>% mutate(psa = as.character(psa))) %>% 
-  filter(str_detect(text_general_code,"Firearm")) %>% 
-  filter(str_detect(text_general_code,"No",negate=T)) %>% 
-  mutate(Year = year(dispatch_date),
-         Month = month(dispatch_date),
-         Day  = day(dispatch_date),
-         Hour = hour(dispatch_date_time)) %>% 
-  select(-hour_) %>% 
-  st_as_sf(.,coords=c("lat","lng"))
-```
 
 
-```{r}
+```{r,eval=F}
 ldf <- read_sf("../../Projects/PhillyCrimeData/Vacant_Block_Percent_Combined/Vacant_Block_Percent_Combined.shp")
 ```
 

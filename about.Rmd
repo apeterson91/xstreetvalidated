@@ -1,5 +1,5 @@
 ---
-title: "XSV: This blog"
+title: "The Kind of Problem a City is"
 description: |
 ---
 
@@ -7,9 +7,6 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r,include=F,fig.cap="Rittenhouse Square"}
-knitr::include_graphics("images/rhouse_network_notext.png")
-```
 ![Rittenhouse Square in Philadelphia,PA](images/rhouse_network_notext.png)
 There's nothing like a good blog when you're trying to dig into a subject and learn a bit more than you did previously.
 
@@ -23,13 +20,13 @@ So, though I may no longer be a formal academic, I still intend to delve deeper
 into those subjects in this space that I find interesting at my leisure.
 These may include ecological and socially relevant ideas like [tree cover differences](https://www.nature.com/articles/s42949-021-00022-0) 
 across neighborhoods, statistically interesting ideas of how to
-adjust an analysis for causal inference with [interference](https://arxiv.org/abs/1702.03578), or more economically 
-grounded ideas that focus on debt service in [suburban growth patterns](https://www.strongtowns.org/journal/2018/8/22/the-more-we-grow-the-poorer-we-become).
-Politics, economics, justice – and the competing claims of what constitutes justice –
-I suspect I won't run out of material to write about. 
+adjust an analysis for causal inference with [interference](https://arxiv.org/abs/1702.03578),
+or more economically grounded ideas that focus on debt service in [suburban growth patterns](https://www.strongtowns.org/journal/2018/8/22/the-more-we-grow-the-poorer-we-become).
+From statistics and urban planning to related politics, economics and justice - 
+I suspect the blog won't lack for material. 
 
 
-While I hope to keep my writing as accessible as possible and discuss the 
+While I hope to keep the blog's writing as accessible as possible and discuss the 
 material of interest in such a way that minimal prior knowledge is typically 
 needed, I will also, not infrequently, dig into technical matters in some detail.
 I will do my best to provide summary comments and label such posts so that
