@@ -5,20 +5,29 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-citation_url: https://xstreetvalidated.com
-date: 08-08-2021
+citation_url: https://apeterson91.github.io/xstreetvalidated/
+date: 09-11-2021
 output:
   distill::distill_article:
     self_contained: false
 categories:
-  - Statistics
-  - Technical
-draft: true
+  - Big Picture
+draft: false
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(tidycensus)
+library(tidyverse)
+library(sf)
+library(sfnetworks)
+library(ggraph)
+library(patchwork)
+census_api_key(key = "867a21fd95563409a3186bfdd9f0ef0eed09af8f",
+               overwrite = T,
+               install = T)
+options(tigris_use_cache = TRUE)
 ```
 
 
@@ -40,7 +49,8 @@ references I suggest [here](https://www.apetersonsite.org/post/phdlessons/).
 
 There are a number of obstacles that built environment data typically involve
 when an investigator sets out to study causal relationship. The first
-is that, typically, it is impossible to randomize the exposure - e.g. grocery stores -  of interest.
+is that, typically, it is impossible to randomize the exposure 
+--- e.g. grocery stores --- of interest.
 Whereas vaccines, drugs, and even some government programs can be randomly 
 assigned to individuals, it isn't possible to randomly assign a park to a 
 neighborhood or a certain kind of business to a specific storefront. 
@@ -50,11 +60,13 @@ introduce randomness a doomed prospect from the start.
 As the reader may be aware, randomization is key to ensuring that the 
 units of analysis - individuals, streets, etc. -  are comparable.
 That is, there is no reason to think *a priori* that those who have been treated 
-or exposed any different from those in the control. 
+or exposed are any different from those in the control. 
 
 <aside>
 If you want to see one interesting case where an environmental exposure
-is randomized. See [here](https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752)
+is randomized. See 
+[here](https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752), to
+be discussed here soon!
 </aside>
 
 This is obviously not the case in the built environment. We observe differences
@@ -67,6 +79,24 @@ are not due to the built environment at all, but rather the wealth and/or educat
 with which they are correlated. Adjusting for these factors in order
 to create as comparable a comparison as possible is crucial, if one is 
 to trust the resulting causal estimate.
+
+
+```{r wealthvis,fig.width=12,fig.height=8,cache=T,fig.cap="Distribution of Median Income Across Allegheny County, PA Census Tracts."}
+pgh_wealth <- get_acs(state = "PA", 
+               county = "Allegheny",
+               geography = "tract",
+               variables = "B19013_001", 
+               geometry = TRUE)
+
+pgh_wealth %>% 
+  rename(`Median Income` = estimate) %>% 
+  ggplot(aes(fill=`Median Income`)) + 
+  geom_sf() + 
+  theme_void() + 
+  theme(text = element_text(size=22)) + 
+  scale_fill_viridis_c(labels = scales::dollar) + 
+  labs(caption = "Data sourced from the 2015-2019 American Community Survey.")
+```
 
 
 # 2. Interference
@@ -86,21 +116,32 @@ these effects across related units typically requires assumptions and/or
 prior understanding of the system under study. As such,
 interference can represent a major obstacle to making progress in this space.
 
-```{r,fig.width=14, fig.height = 8,fig.cap="A graph illustrating street connectivity and potential causal interference."}
-library(tidygraph)
-library(tidyverse)
-library(ggraph)
-theme_set(theme_bw() + 
-            theme(text=element_text(size=22),
-                  panel.border = element_blank()))
-## use sample Philly street network graph here
-nodes <- tibble(ID =c("Street_1","Street_2","Street_3","Street_4","Street_5",
-           "Street_6","Street_7")) %>% 
-  mutate(Label = str_replace(ID,"_"," "))
-edges <- tibble(From = c("Street_1","Street_2","Street_3","Street_4","Street_5","Streeet_6","Street_2","Street_4"),
-                To = c("Street_2","Street_3","Street_4","Street_5","Street_6","Street_7","Street_4","Street_6"))
-gph <- tbl_graph(nodes = nodes,edges = edges,directed = F)
-ggraph(gph,layout='stress') + geom_node_point() + geom_edge_link() + geom_node_label(aes(label = Label))
+```{r traffic-vis,fig.width=14,fig.height=8,fig.cap="Observed 15 minute traffic rate on selected street blocks in Rittenhouse, Philadelphia from 2015-2020. Traffic rate is proportional to point size."}
+rhouse <- read_sf("~/Documents/CityData/Philly/geo-data/Neighborhoods_Philadelphia/Neighborhoods_Philadelphia.shp") %>% 
+  filter(NAME == "RITTENHOUSE") %>% 
+  st_transform(4326)
+
+stdf <- read_sf("~/Documents/CityData/Philly/CompleteStreets-shp/CompleteStreets.shp") %>% 
+  st_filter(rhouse)
+
+tdf <- read_csv("~/Documents/CityData/Philly/DVPRC Traffic/table.csv") %>% 
+  filter(str_detect(`Count Type`,"Volume")) %>% 
+  st_as_sf(.,coords=c("Longitude","Latitude"),crs=4326) %>% 
+  st_filter(rhouse) %>% 
+  st_filter(stdf,.predicate = st_is_within_distance,dist=10)
+
+
+p1 <- stdf %>% 
+  ggplot() + 
+  geom_sf() + 
+  geom_sf(data=tdf %>% 
+            rename(Traffic=AADT),
+          color='red',
+          aes(size=Traffic)) + 
+  theme_void() + 
+  theme(text = element_text(size=22),legend.position='none') + 
+  labs(caption= "Data pulled from OpenDataPhilly.org and DVRPC.org")
+p1
 ```
 
 # 3. Homogeneity, Additivity and More
@@ -113,8 +154,8 @@ are equivalent grocery stores. This could be more justified than saying
 that the local farmer's market could also merit the label of a "grocery store". 
 Assuming homogeneity in this manner greatly simplifies our modeling, but 
 also runs us into conflicting with an assumption of 
-[consistency](https://www.apetersonsite.org/post/causal_inference_preface/) at the heart 
-of causal inference. 
+[consistency](https://www.apetersonsite.org/post/causal_inference_preface/) at 
+the heart of causal inference. 
 
 Additivity is another such assumption that simplifies the mathematical tools required
 to estimate the causal estimand^[an estimand is the thing which one wishes to estimate.]
@@ -129,12 +170,39 @@ impression that we've covered all the obstacles. Others may still rear their hea
 Assuming additivity can turn the model $Y = f(x_{1},x_{2},...,x_{k})$
 into $Y = \sum_k f(x_{k})$ which is considerably easier to estimate.
 </aside>
+```{r model-vis,cache=T,fig.width=12,fig.height=8,fig.cap="Differences in hypothetical exposures for additive vs. non-additive models."}
+num_subj <- 100
+num_dist <- rpois(num_subj,10)
+p1 <- tibble(Distance = seq(from=0,to=1,length.out=1000)) %>%
+  mutate(Exposure = pweibull(Distance,shape = 5,scale=.5,lower.tail = F)) %>%
+  ggplot(aes(x=Distance,y=Exposure)) + geom_line() + 
+  theme_bw() + 
+  theme(text= element_text(size=22))
+dists <- map_dfr(1:num_subj,function(x) {
+  tibble(Subj_id = x,
+         Distances = rexp(num_dist[x])) %>%
+    group_by(Subj_id) %>%
+    summarise(Additive = sum(pweibull(Distances,shape=5,scale=.5,lower.tail = F)),
+              `Log Additive` = log(Additive)*(Additive>=1)
+              ) %>%
+    ungroup()
+})
+p2 <- dists %>% gather(contains("Addi"),
+                       value="Exposure",
+                       key="Model") %>% 
+  ggplot(aes(x=Exposure,fill=Model)) + 
+  geom_density() + theme_bw() + 
+  theme(text=element_text(size=22),legend.position = 'top') + 
+  scale_fill_manual(values=c("darkgreen","darkblue"))
+p2
+```
 
 # Solutions
 
 At this point, it may seem as though there is no way we can ever hope 
-to understand the built environment amidst all the many non-randomized, correlated
-and interfering forces at work. Fear not, there are still *some* things we can do.
+to understand the built environment amidst all the many non-randomized, 
+correlated and interfering forces at work. 
+Fear not, there are still *some* things we can do.
 Though we'll likely never have the same level of confidence in our results 
 as we would in a randomized control trial, we can try to incorporate more 
 information through regression, narrow our focus with difference in 

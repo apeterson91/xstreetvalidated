@@ -4,6 +4,13 @@ theme: xsv_theme_one.css
 description: |
   XStreetValidated
 output_dir: "docs"
+base_url: https://apeterson91.github.io/xstreetvalidated/
+collections: 
+  posts:
+    subscribe: _subscribe.html
+    disqus: XStreetValidated
+    share: [twitter, linkedin]
+favicon: images/XSV_tinylogo.png
 navbar:
   search: true
   right:
@@ -13,4 +20,13 @@ navbar:
       href: about.html
     - text: "References"
       href: references.html
+    - icon: fa fa-rss
+      href: index.xml
+cookie_consent:
+  style: simple
+  type: express
+  palette: light
+  lang: en
+  cookies_policy: url
+repository_url: https://github.com/apeterson91/XStreetValidated
 output: distill::distill_article

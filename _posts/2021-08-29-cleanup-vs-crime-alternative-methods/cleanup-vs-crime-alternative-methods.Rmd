@@ -1,0 +1,18 @@
+---
+title: "Cleanup vs. Crime: Alternative Methods"
+description: |
+  What if the author's had analyzed their data differently?
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 08-29-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+

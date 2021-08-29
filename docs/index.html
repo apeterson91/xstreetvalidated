@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="distill" />
+  <link rel="alternate" type="application/rss+xml" href="https://apeterson91.github.io/xstreetvalidated/index.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -89,6 +90,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <title>X Street Validated</title>
 
 
+  <link rel="icon" type="image/png" href="images/XSV_tinylogo.png"/>
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -2352,6 +2354,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="site_libs/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
+  <script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+  cookieconsent.run({
+  'notice_banner_type':'simple',
+  'consent_type': 'express',
+  'palette': 'light',
+  'language': 'en',
+  'website_name': 'XStreetValidated',
+  'cookies_policy_url': 'url',
+  'change_preferences_selector':'#CookiePreferences'
+  });});</script>
   <!--/radix_placeholder_site_in_header-->
 
 
@@ -2377,6 +2391,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="references.html">References</a>
+<a href="index.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2519,6 +2536,25 @@ function init_posts_list() {
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="X Street Validated">X Street Validated</h1>
+<a href="posts/2021-08-08-causal-inference-in-the-built-environment/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["Big Picture"]}</script>
+<div class="metadata">
+<div class="publishedDate">Sept. 11, 2021</div>
+<div class="dt-authors">
+<div class="dt-author">Adam Peterson</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2021-08-08-causal-inference-in-the-built-environment/causal-inference-in-the-built-environment_files/figure-html5/wealthvis-1.png"/>
+</div>
+<div class="description">
+<h2>Causal Inference in the Built Environment</h2>
+<div class="dt-tags">
+<div class="dt-tag">Big Picture</div>
+</div>
+<p>How can we know how to best change our environment?</p>
+</div>
+</a>
 <a href="posts/motivation/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["Big Picture"]}</script>
 <div class="metadata">
@@ -2541,16 +2577,27 @@ of what's to come.</p>
 </a>
 </div>
 <div class="posts-sidebar">
+<div class="sidebar-section subscribe">
+<h3>Subscribe</h3>
+<form method='post' action='https://blogtrottr.com'>
+  <p>Enjoy this blog? Get notified of new posts via email:</p>
+  <input type='text' name='btr_email' />
+  <input type='hidden' name='btr_url'
+         value='https://beta.rstudioconnect.com/content/11424/index.xml'/>
+  <input type='hidden' name='schedule_type' value='0' />
+  <input type='submit' value='Subscribe' />
+</form>
+</div>
 <div class="sidebar-section categories">
 <h3>Categories</h3>
 <ul>
 <li>
 <a href="#category:Articles">Articles</a>
-<span class="category-count">(1)</span>
+<span class="category-count">(2)</span>
 </li>
 <li>
 <a href="#category:Big_Picture">Big Picture</a>
-<span class="category-count">(1)</span>
+<span class="category-count">(2)</span>
 </li>
 </ul>
 </div>
@@ -2582,7 +2629,10 @@ of what's to come.</p>
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom"></div>
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/apeterson91/XStreetValidated/issues/new">create an issue</a> on the source repository.</p>
+</div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <div class="distill-site-nav distill-site-footer">

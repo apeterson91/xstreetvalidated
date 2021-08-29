@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>X Street Validated</title>
+    <link>https://apeterson91.github.io/xstreetvalidated/</link>
+    <atom:link href="https://apeterson91.github.io/xstreetvalidated/index.xml" rel="self" type="application/rss+xml"/>
+    <description>XStreetValidated
+</description>
+    <image>
+      <title>X Street Validated</title>
+      <url>https://apeterson91.github.io/xstreetvalidated/images/XSV_tinylogo.png</url>
+      <link>https://apeterson91.github.io/xstreetvalidated/</link>
+    </image>
+    <generator>Distill</generator>
+    <lastBuildDate>Sat, 11 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Causal Inference in the Built Environment</title>
+      <dc:creator>Adam Peterson</dc:creator>
+      <link>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-08-causal-inference-in-the-built-environment</link>
+      <description>How can we know how to best change our environment?</description>
+      <category>Big Picture</category>
+      <guid>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-08-causal-inference-in-the-built-environment</guid>
+      <pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/2021-08-08-causal-inference-in-the-built-environment/causal-inference-in-the-built-environment_files/figure-html5/wealthvis-1.png" medium="image" type="image/png" width="2304" height="1536"/>
+    </item>
+    <item>
+      <title>Motivation</title>
+      <dc:creator>Adam Peterson</dc:creator>
+      <link>https://apeterson91.github.io/xstreetvalidated/posts/motivation</link>
+      <description>Urban spaces are more important than ever: Three reasons why and a highlight
+of what's to come.</description>
+      <category>Big Picture</category>
+      <guid>https://apeterson91.github.io/xstreetvalidated/posts/motivation</guid>
+      <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/motivation/spm1.png" medium="image" type="image/png" width="900" height="600"/>
+    </item>
+  </channel>
+</rss>

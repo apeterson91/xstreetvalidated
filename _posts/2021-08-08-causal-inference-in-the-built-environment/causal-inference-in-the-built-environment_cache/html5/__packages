@@ -1,0 +1,15 @@
+base
+tidycensus
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+sf
+sfnetworks
+ggraph
+patchwork

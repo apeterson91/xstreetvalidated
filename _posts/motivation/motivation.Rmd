@@ -23,13 +23,20 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 
-Of all the things to talk about, why talk about the places where we live? Whether a city, town, suburb, or remote rural residence, the environments we live in define our lives. They constrain – or enable – the things we do, the people we see, the food we eat ... you get the picture. But still – who cares? And why write about them right now?
+Of all the things to talk about, why talk about the places where we live?
+Whether a city, town, suburb, or remote rural residence, 
+the environments we live in define our lives. They constrain – or enable – the 
+things we do, the people we see, the food we eat ... you get the picture. 
+But still – who cares? And why write about them right now?
 
 In this post I'm going to try and convince you that, barring any commitments you
 may have made to a myopic nihilism, *you* care about the built environment, and 
-urban spaces^[urban spaces is a term I will use interchangeably with cities to refer to any space in which humans live
-within close proximity to one another. It is not intended to be used with great precision here.] more generally, for at least 3 broad reasons, that will motivate
-many of the writings to follow. Here I'll appeal to intuition, cite news articles, 
+urban spaces^[urban spaces is a term I will use interchangeably with cities to 
+refer to any space in which humans live
+within close proximity to one another. 
+It is not intended to be used with great precision here.] 
+more generally, for at least 3 broad reasons, that will motivate
+much of the writing to follow. Here I'll appeal to intuition, cite news articles, 
 and be generally "un-academic" or imprecise, but this will likely change
 in subsequent posts. For now I hope to convince you, in broad strokes, 
 that these environments are one of humanity's most important inventions and 
@@ -45,24 +52,29 @@ And that's even before we start talking about the difficulties of getting along
 with family at Thanksgiving dinner or the comments on the latest NextDoor post.
 
 Like many things, it is easy to take for granted, but getting along with one 
-another is important, not only to reinforce a feeling of safety in where one lives,
-but to also provide a sense of belonging and social community.  
+another is important, not only to reinforce a feeling of safety in where one 
+lives, but to also provide a sense of belonging and social community.  
 If any neighborhood, town or city is going to have real staying power 
-it will be because people want to live there.
-Safety, belonging and community are each important ways to satisfy these 
-universal human desires.
+it will be because people want to live there. How to accomplish this 
+is another matter. Amidst all the 
+social strife that exists in our modern age, how do we go about creating 
+communities that flourish?
+
 
 # \#2. Efficiency: Cheaper, Faster, Farther
 
 How can we do more with less? In an age of increasing income inequality and
 tight budgets, you'd think we would spend more time thinking about ways to
-stretch the money we have, to do more with what we currently have, or preferably
-even less. Efficiency is one of the key reasons humans began gathering together
-in primitive towns, all those many years ago.
+stretch the money we have. Whether in terms of housing, transit, professional 
+opportunities, or more, the increased density a city possesses *should* offer 
+immense efficiency for its residents in how they spend their money.
+After all, this is one of the key reasons humans began gathering together in 
+primitive towns all those many years ago.
 Easier to be near the specialized skills – healers, farmers, house
-builders, etc. Easier to get to work or play by way of well-established roads.
-Cities are fundamentally an economic bargain and you should be better off living
-in a city in terms of time and money spent than you would be elsewhere.
+builders, etc. Easier to get to work or play by way of well-established roads. 
+And so on. Cities are fundamentally an economic bargain and you should be 
+better off living in a city in terms of time and money spent than you would be 
+elsewhere. How can cities help us to do more with less?
 
 # \#3. Climate Change: Life or Death
 
@@ -71,7 +83,13 @@ While I can remember a time when doubt about the perils of climate change was
 boasted with pride – not too long ago unfortunately – the 
 [evidence](https://www.ipcc.ch/sr15/chapter/spm/spm-a/spm1_figure-final-2/) that the
 climate is changing and we are the cause only continues to climb with a 
-increasing financial and human cost[@de2018ipcc]. But where do cities come into play?
+increasing financial and human cost[@de2018ipcc]. 
+But where do cities come into play?
+
+```{r,include=F}
+# Copyright rules for below figure
+#https://www.ipcc.ch/copyright/#:~:text=Permission%20can%20only%20be%20granted,the%20original%20graphic%20or%20figure.
+```
 
 ![SPM.1: Figure 1 of the Summary for Policymakers of the IPCC’s Special Report on Global Warming of 1.5°C.](spm1.png)
 
@@ -81,7 +99,7 @@ I'll give a brief example for each.
 
 
 1. Electricity:
-   * A [typical](https://qz.com/40707/meet-the-prototypical-american-home-three-bedrooms-two-bathrooms-and-central-air/) suburban home has, on average, 9 rooms to light, heat and cool everyday. 
+   * A [typical](https://qz.com/40707/meet-the-prototypical-american-home-three-bedrooms-two-bathrooms-and-central-air/) suburban home has, on average, 9 rooms to light, heat and cool each day. 
    In contrast, an old school [row home](https://www.phila.gov/media/20190521124726/Philadelphia_Rowhouse_Manual.pdf)
    will typically have 4-5 rooms, 
    and a proportionately smaller electric GHG footprint as a result.  
@@ -95,11 +113,19 @@ I'll give a brief example for each.
    * If you're living in a smaller space, you don't need or want as much stuff.
    Far more importantly, you also don't need to build as many roads, pipes,
    or other infrastructure because you're getting more use out of the 
-   infrastructure you have in place. 
+   infrastructure you already have in place. 
+   
+As we look to the future and marshall what hope we have to meet the 
+challenge a changing climate presents, how can we leverage our cities to be 
+more resilient and help us stave off the worst possibilities climate change
+may present to humanity?
+
    
 # The Reality
 
-It's easy to see in the U.S., whether through [suburban sprawl](https://fivethirtyeight.com/features/how-suburban-are-big-american-cities/), [traffic jammed highways](https://www.forbes.com/sites/niallmccarthy/2020/03/10/traffic-congestion-costs-us-cities-billions-of-dollars-every-year-infographic/?sh=28053bc34ff8), increasing [cost of living](https://www.wsj.com/articles/median-existing-home-price-hit-new-high-in-june-11626963073) or [crime and safety](https://www.cnn.com/2021/04/03/us/us-crime-rate-rise-2020/index.html) 
-issues, our cities fail to live up to the full promise that urban spaces ought to offer. 
-Identifying the nature of these failings explicitly, as well as the solutions 
-that may address them, will form much of the substance of this blog. 
+It's easy to see in the U.S.^[The U.S. will be the primary, though not exclusive
+focus of this blog.], whether through [suburban sprawl](https://fivethirtyeight.com/features/how-suburban-are-big-american-cities/), [traffic jammed highways](https://www.forbes.com/sites/niallmccarthy/2020/03/10/traffic-congestion-costs-us-cities-billions-of-dollars-every-year-infographic/?sh=28053bc34ff8), increasing [cost of living](https://www.wsj.com/articles/median-existing-home-price-hit-new-high-in-june-11626963073) or [crime and safety](https://www.cnn.com/2021/04/03/us/us-crime-rate-rise-2020/index.html) 
+issues, our cities fail to live up to the full promise that urban spaces 
+ought to offer. Identifying the nature of these failings explicitly, as well as
+the solutions that may address them, 
+will form much of the substance of this blog. 
