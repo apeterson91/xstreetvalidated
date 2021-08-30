@@ -24,10 +24,6 @@ library(sf)
 library(sfnetworks)
 library(ggraph)
 library(patchwork)
-census_api_key(key = "867a21fd95563409a3186bfdd9f0ef0eed09af8f",
-               overwrite = T,
-               install = T)
-options(tigris_use_cache = TRUE)
 ```
 
 
