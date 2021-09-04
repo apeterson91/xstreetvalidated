@@ -116,7 +116,9 @@ to nicely visualize across continuous space, the relative "amount" of
 shootings at each location. However, it has a number of drawbacks too. 
 The first, is that we don't know if it's a particularly good estimate. If you
 recall, the author's chose a certain bandwidth of 500m, but wouldn't 400m have 
-been just as good? Further, while the idea of a KDE of shootings can be nicely 
+been just as good? This is a well established problem in this space known as 
+the modifiable areal unit problem [@fotheringham1991modifiable].
+Further, while the idea of a KDE of shootings can be nicely 
 visualized, as in Figure \@ref(fig:kde), it can be difficult to communicate 
 verbally to stakeholders:  
 
@@ -142,9 +144,12 @@ $$
 The second measure the author's use to try and assign a specific number of
 shootings to a vacant lot is known as a "buffer count" or "buffer zone". Put
 simply, the author's looked at the center of each vacant lot, drew a circle
-300 meters around that center, and counted all the shootings that fell into
-that circle, during a given month and assigned that value. 
-See Figure \@ref(fig:buffervis) for a visualization.
+300 meters around that point, and counted all the shootings that fell into
+that circle, during a given month and assigned that value to the vacant lot
+as it's count of shootings, $Y_{it}'$. 
+See Figure \@ref(fig:buffervis) for a visualization of this idea. The authors 
+then went on to check for "spill-over" effects through the use of 
+a second, 600m buffer around the first.
 
 ```{r buffervis,preview=TRUE,fig.cap="Visualization of Hypothetical Buffer with 300 m radius in Upper Kensington. Star represents location of hypothetical vacant lot.",fig.width=14,fig.height=8}
 uk <- read_sf("~/Documents/CityData/Philly/geo-data/Neighborhoods_Philadelphia/Neighborhoods_Philadelphia.shp") %>%
@@ -183,6 +188,7 @@ p1 <- uk %>%
 p1
 ```
 
+
 ### Pros and Cons
 
 The buffer count has a very appealing interpretation, it's  simply the number
@@ -193,7 +199,7 @@ about kernels and bandwidths. It can also be seen as a kind of
 kernel density estimate, except now we're taking an unweighted, unnormalized
 average^[also called a sum]. However, similar to the kernel density estimate,
 it suffers from having to choose some *ad hoc* distance, 
-300 meters in this case, as the "correct" distance 
+300 (or 600 for spillover) meters in this case, as the "correct" distance 
 within which to count shootings. This remains a major drawback.
 
 <aside>
@@ -311,4 +317,5 @@ interventions on shooting crimes.
 We've also seen some of the advantages and disadvantages each of these 
 approaches may involve. Many of these will continue to be of importance as 
 our attention now turns to the causal inference assumptions underlying the 
-statistical methods and estimation procedures discussed here.
+statistical methods and estimation procedures discussed here that, if correct,
+extend the results from this experiment to a more widely generalizable result.

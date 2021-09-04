@@ -12,7 +12,19 @@
       <link>https://apeterson91.github.io/xstreetvalidated/</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 11 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Cleanup vs. Crime: Causal Inference Methods</title>
+      <dc:creator>Adam Peterson</dc:creator>
+      <link>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-24-cleanup-vs-crime-causal-inference</link>
+      <description>What kinds of causal claims are justified from an empirical analysis?</description>
+      <category>Technical</category>
+      <category>Cleanup vs. Crime</category>
+      <category>Social Cohesion</category>
+      <guid>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-24-cleanup-vs-crime-causal-inference</guid>
+      <pubDate>Fri, 01 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/2021-08-24-cleanup-vs-crime-causal-inference/cleanup-vs-crime-causal-inference_files/figure-html5/bufferinterferevis-1.png" medium="image" type="image/png" width="2688" height="1536"/>
+    </item>
     <item>
       <title>Causal Inference in the Built Environment</title>
       <dc:creator>Adam Peterson</dc:creator>

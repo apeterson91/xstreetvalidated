@@ -25,7 +25,7 @@ The subject of interest, as the blog title may hint, lies at the intersection of
 statistics and the built environment.
 This is a broad area, with which I have some [familiarity](http://apetersonsite.org/), 
 but even in my dissertation work I have barely scratched the surface of what's 
-out there. So, though I may no longer be a formal academic, I still intend to 
+out there. So, although I may no longer be a formal academic, I still intend to 
 delve deeper into those subjects in this space that I find interesting,
 at my leisure. These may include ecological and socially relevant ideas like 
 [tree cover differences](https://www.nature.com/articles/s42949-021-00022-0) 
@@ -46,4 +46,4 @@ Above all else, it is my hope that this blog will offer the opportunity to
 deepen an appreciation for this incredibly fascinating subject at a time when
 it is woefully overlooked and yet more important than ever.
 
-Happy Reading!
+Happy Reading

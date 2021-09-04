@@ -74,7 +74,8 @@ occur, could lead to a reduced rate of gun violence.
 
 In order to test this hypothesis, the authors randomly assign 1 of three
 "interventions" to each of 110 geographically close clusters of vacant lots 
---- 541 lots in total --- spread across Philadelphia between April and June of 2013.
+--- 541 lots in total --- spread across Philadelphia between April and June of 
+2013.
 
 The first intervention called "greening" involved "removing trash and debris, 
 grading the land, planting new grass and a small number of trees to create a 
@@ -221,5 +222,6 @@ while there may be those that think a 7% decrease in shootings isn't anything
 to write home about, it's important to keep in mind that (1) their 
 are human lives on the line! and (2) this was a fairly 
 cheap intervention --- all they did was clean up some abandoned lots! 
-That's a good payoff for such a small investment and in my book, 
-cause for celebration.
+That's a good payoff^[See the paper's Conclusion section for healthcare costs 
+related to shootings.] for such a small investment and in my book, cause for 
+celebration.
