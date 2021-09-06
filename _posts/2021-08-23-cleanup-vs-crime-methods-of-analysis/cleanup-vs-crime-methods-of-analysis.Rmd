@@ -5,11 +5,12 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 09-23-2021
+date: 10-02-2021
 output:
   distill::distill_article:
     self_contained: false
 bibliography: cleanup.bib
+creative_commons: CC BY
 categories:
   - Technical
   - Cleanup vs. Crime
@@ -26,8 +27,8 @@ library(sf)
 ```
 # Context
 
-In the previous post we discussed this fantastic article [@moyer2019effect] 
-which studied how different cleaning "interventions" applied to vacant lots
+In the previous post we discussed this fantastic article, [@moyer2019effect] 
+, which studied how different cleaning "interventions" applied to vacant lots
 had the potential to affect the propensity for nearby violent shootings.
 In this post we'll look at the specific measures and statistical methods 
 they used to analyze their data in order to test this hypothesis and break down 
@@ -71,38 +72,50 @@ across the polygonal space defined by Philadelphia's borders and at each grid
 point took a weighted average of the number of shootings during the time period,
 e.g. month, of interest. They chose a bandwidth of 500 meters, which 
 essentially means that shootings within that distance were weighted more
-than those further away. We can't know which exact kernel they used
+than those further away. We can't know which kernel they used
 because they don't state it explicitly, but of the many 
 [options](https://en.wikipedia.org/wiki/Kernel_(statistics)) 
-they may have chosen the Gaussian kernel, as it is popular in 
-these settings. For illustrative purposes, you can see it below with bandwidth 
-$b$ for location 
-$\mathbf{s}=(s_1,s_2)$^[Where $s_1,s_2$ are e.g. latitude and longitude],
+they may have chosen the rectangular kernel, as they state many of their 
+estimates in terms of Crimes per km$^{2}$. For illustrative purposes, 
+you can see this kernel below with bandwidth $b$ for location 
+$\mathbf{s}=(s_a,s_b)$^[Where $s_a,s_b$ are e.g. latitude and longitude],
 
 $$
-\mathcal{K}_b(\mathbf{s}_1,\mathbf{s}_2) = 
-\exp(-\frac{1}{2b^2}d(\mathbf{s}_1,\mathbf{s}_2)),
+\mathcal{K}_b(\mathbf{s},\mathbf{s}') = 
+\begin{cases}
+\frac{1}{b}  & d(\mathbf{s},\mathbf{s}') \leq b \\
+0 & \text{otherwise}
+\end{cases}
 $$
 where $d(\mathbf{s}_1,\mathbf{s}_2)$ is the distance between the two locations. 
-The KDE,$\hat{y}$ at location $\mathbf{s}$ for a given 
-time period (e.g. month) would then be defined as follows:
+The KDE,$\hat{y}$ at an arbitrary location $\mathbf{s}$ for a given 
+month would then combine all $i=1,...n$ shooting samples as follows:
 
 $$
 \hat{y}(\mathbf{s}) = \frac{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s}, 
-\mathbf{s'})y_i(\mathbf{s'})}{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s},
-\mathbf{s}')}.
+\mathbf{s}'_i)y_i(\mathbf{s'})}{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s},
+\mathbf{s}'_i)}.
 $$
 
 What this amounts to conceptually is an average number of shootings at each
 grid point, where those shootings at closer distances are weighted more and 
 those shootings at further distances (especially those more than 500 m) are 
-weighted exponentially less. The authors create their main figure in the paper
+weighted less. The authors create their main figure in the paper
 from plotting the relative averages at each grid point across space. The lower
-values are assigned a more green color and the higher values are assigned a 
-red color. See Figure \@ref(fig:kde) adapted here from their paper[@moyer2019effect].
+values are assigned a light green color and the higher values are assigned a 
+red color. See Figure \@ref(fig:kde) from their 
+paper[@moyer2019effect].
 
-```{r kde,fig.width=8,fig.height=10,fig.cap="Kernel Density Estimate of shootings adapted from [@moyer2019effect]."}
-knitr::include_graphics("Fig1_adapted.jpg")
+```{r kde,fig.width=8,fig.height=10,fig.cap="Kernel Density Estimate of shootings Figure from [@moyer2019effect]."}
+## See PNAS copyright policy here: https://www.pnas.org/content/101/34/12399
+## As this blog is currently non-commercial this image is used according to 
+## the following language:
+## "Our guiding principle is that, while PNAS retains copyright, 
+## anyone can make noncommercial use of work in PNAS without asking our 
+## permission, provided that the original source is cited." 
+##  Publication is cited throughout this paper as well as in this 
+## figure's caption.
+knitr::include_graphics("Fig1.jpeg")
 ```
 
 As you can see, the kernel density estimate gives us this nice visualization 
@@ -132,11 +145,12 @@ bandwidth measure we chose...".
 
 You get the picture. It would be much easier to say, did the average number of shootings at 
 location "x" go down or not? However, this can be much harder to model,
-so the author's, understandably,  went with something more feasible.
+so the author's, understandably,  went with the KDE. The outcome in their first 
+model, $Y_{it}$, was consequently defined as follows:
 
 
 $$ 
-Y_{it} := \text{ KDE at lot } i\text{, in study month } t \\
+Y_{it} := \text{ KDE at lot } i\text{, in study month } t. \\
 $$
 
 ## Buffer Counts 
@@ -192,7 +206,7 @@ p1
 ### Pros and Cons
 
 The buffer count has a very appealing interpretation, it's  simply the number
-of shootings (or whatever you're counting) within a certain distance of the 
+of shootings within a certain distance of the 
 location of interest. This is **much** easier to explain to stakeholders, 
 and others who may be interested in this work, but not interested in learning 
 about kernels and bandwidths. It can also be seen as a kind of 
@@ -203,8 +217,8 @@ it suffers from having to choose some *ad hoc* distance,
 within which to count shootings. This remains a major drawback.
 
 <aside>
-There have been developments in the statistics literature to try and address these
-that we'll discuss in detail at another point in time. See
+There have been developments in the statistics literature to try and address 
+these issues that we'll discuss in detail at another point in time. See
 [@baek2016distributed],[@peterson2021spatial], and [@peterson2021heterogeneous] 
 if you'd like to learn more now.
 </aside>
@@ -228,7 +242,9 @@ may or may not be good reasons for not estimating this latter contrast but
 we'll save that discussion for the causal-inference post. For now,
 let's break down this big equation from the initial post and try to understand
 how they calculate the difference-in-difference estimate for the greening 
-intervention;
+intervention^[I omit the distributional assumptions on the random  
+effects and epsilon term here for space. They are all distributed 
+Normal with mean zero and unknown variance.];
 
 \begin{equation}
 \begin{aligned}
@@ -238,16 +254,18 @@ Y_{it} &= \beta_0 + \beta_1 \text{Greening}_i + \beta_2\text{Mowing}_i
 \beta_6\text{Mowing}_i \times \text{Post}_t  \\
 &+ \beta_7\text{Greening}_i\times \text{AllTreated}_t + 
 \beta_8\text{Mowing}_i \times \text{AllTreated}_t \\
-&+ \alpha_{m(t)} + \delta_{s(i)} + \xi_{c(i)} + \epsilon_{it}.
+&+ \alpha_{m(t)} + \delta_{s(i)} + \xi_{c(i)} + \epsilon_{it},
 \end{aligned}
 (\#eq:dnd)
 \end{equation}
+
 
 <aside>
 This equation uses the notion of indicator functions. That is, Greening$_i$
 is either a 0 or 1 for lot $i$. 1 indicates the lot received the greening 
 intervention and 0 indicates it did not. Post$_t$ is the same where a 1 
-indicates the measurement was recorded after the intervention was administered.
+indicates the measurement was recorded after the intervention was administered 
+and vice versus. 
 </aside>
 
 From \@ref(eq:dnd), we can see that the expected number of shootings
@@ -258,7 +276,7 @@ in the expected number of shootings for the same vacant lots assigned to the
 greening intervention before and after the trial, we simply take the difference 
 between these two equations which gives us $\beta_5$. Our estimate of 
 this quantity, $\hat{\beta}_5$, is the estimated effect of 
-the greening intervention. Similarly, $\beta_6$ is the estimated effect of the 
+the greening intervention. Similarly, $\hat{\beta_6}$ is the estimated effect of the 
 mowing intervention.
 
 Of course, in statistics it isn't sufficient to just calculate a point estimate,
@@ -268,10 +286,9 @@ provides enough evidence to be considered credible, or whether the
 estimated effect is just due to measurement error or random variation. 
 An important part of estimating that uncertainty is taking into account 
 sources of correlation in the measurements. The authors do this by way of 
-incorporating mixed effects. See my post on spatial models or 
-[@fitzmaurice2008longitudinal] for a more general introduction on this topic, 
-as we'll focus only on those aspects relevant to this application in the 
-following section.
+incorporating mixed effects. See  [@fitzmaurice2008longitudinal] for a more 
+general introduction on this topic, as we'll focus only on those aspects 
+relevant to this application in the following section.
 
 
 ## Mixed Effects Regression

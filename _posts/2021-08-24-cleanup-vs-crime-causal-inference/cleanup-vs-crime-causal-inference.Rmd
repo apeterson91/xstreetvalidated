@@ -1,11 +1,12 @@
 ---
-title: "Cleanup vs. Crime: Causal Inference Methods"
+title: "Cleanup vs. Crime: Causal Inference"
 description: |
   What kinds of causal claims are justified from an empirical analysis?
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 10-01-2021
+date: 10-16-2021
+creative_commons: CC BY
 output:
   distill::distill_article:
     self_contained: false
@@ -14,6 +15,7 @@ categories:
   - Technical
   - Cleanup vs. Crime
   - Social Cohesion
+draft: true 
 ---
 
 
@@ -33,7 +35,7 @@ theme_set(theme_bw() + theme(text = element_text(size=22)))
 > regression model what kind of claims can we make about the results?
 
 
-In the paper we've been studying, the author's estimate a negative difference
+In the paper we've been studying, the author's estimate a decrease 
 in the number of crimes around vacant lots randomly assigned the greening or 
 mowing interventions. There are a number of claims that the author's 
 can now make, each requiring an increasing number of assumptions in order to
@@ -46,8 +48,8 @@ the assumption.
 
 Let's start with the easiest, most defensible claim the authors can make 
 after finishing their analysis. I'll limit these statements to 
-just the greening intervention since that had the most robust results
-across models.
+just the greening intervention since that had the more robust results
+across the models.
 
 "The greening intervention was **associated** with a decrease in crimes
 in the area proximal to the vacant lots in our **sample**."
@@ -69,7 +71,7 @@ to our ability to draw a **causal conclusion** from our descriptive analysis.
 
 ## Assumptions Assumptions 
 
-Here's a slightly stronger claim than the previous. 
+Here's a stronger claim than the previous. 
 
 "The decrease in crime observed was *caused* by the greening intervention in 
 our sample."
@@ -80,12 +82,12 @@ identifiability assumptions for a causal effect. I've discussed
 these ideas in greater depth 
 [here](https://www.apetersonsite.org/post/causal_inference_preface/)
 and [here](https://www.xstreetvalidated.com/post/causal-inference-in-the-built-environment)
-but for now we'll focus on (1) the author's used their second buffer model
+but for now we'll focus on (1), the  author's strategy in using their second buffer model
 to check for spillover effects and how this relates to the notion of 
 of interference, as well as (2) how the author's use of randomization **should** 
 provide them with some justification for arguing that the intervention 
 assignment is independent of other potential 
-[confounding factors](https://en.wikipedia.org/wiki/Confounding). 
+confounding factors.
 
 ### Spillover and Interference 
 
@@ -95,13 +97,13 @@ in space? Is it possible that the effect could impinge upon another vacant lot?
 
 <aside>
 Here we're considering the *spatial scale* of the intervention. 
-Just as, potentially important is the *temporal scale*, or that time at 
+Just as potentially important is the *temporal scale*, or that time at 
 which the intervention has it's greatest impact. See [@peterson2021spatial] for 
 more on this idea.
 </aside>
 
 
-```{r bufferinterferevis,fig.width = 14,fig.height=8,fig.cap="Illustration of buffer zones around hypothetical vacant lot. First buffer in green is used to detect proximal increase/decrease in crime, while the second is used to check for spillover effects by considering the non-overlapping area between the two circles."}
+```{r bufferinterferevis,fig.width = 14,fig.height=8,fig.cap="Illustration of buffer zones around hypothetical vacant lot. First buffer in green is used to detect proximal increase/decrease in crime, while the second is used to check for spillover effects by considering the non-overlapping area between the two circles.", cache = TRUE}
 uk <- read_sf("~/Documents/CityData/Philly/geo-data/Neighborhoods_Philadelphia/Neighborhoods_Philadelphia.shp") %>%
   filter(MAPNAME == "Upper Kensington")  %>% 
   st_transform(4326)
@@ -157,7 +159,7 @@ may go farther than previously anticipated. We'll use
 this as a point of discussion in a future blog-post but for now we'll simply
 consider it a question this result leaves us asking.
 
-```{r, fig.width = 14, fig.width = 8,fig.cap="Visualization of different vacant lots proximal to one another whose effects may interfere with one another despite clustering." }
+```{r interfere, cache = TRUE, fig.width = 14, fig.width = 8,fig.cap="Visualization of hypothetical vacant lots proximal to one another whose effects may interfere with one another despite clustering."}
 pts <- st_sample(buffer_one, 2)
 pts <- st_sf(pts) %>% 
   mutate(id = 1:n()) %>% 
@@ -234,22 +236,34 @@ we would be most interested in the difference of outcomes between the individual
 who had the treatment and those who had the control. In statistics and causal 
 inference this is called the Average Treatment Effect (ATE), and 
 is the most frequent causal estimand of interest. If $A_i=1$ 
-indicates the $i$th subject received the treatment and $A_i=0$ indicates the 
-$i$th subject received the placebo and we were measuring some outcome $Y^{(t)}_i$ 
-at time points $t=0,1$, then we would estimate the ATE as follows:
-$$
-\hat{ATE} = E[Y^{1}|A=1] - E[Y^1|A=0].
-$$
+indicates the $i$th subject, $(i=1,...n)$, in a  clinical trial received the 
+treatment and $A_{i'}=0$ indicates the $i'$th subject received the placebo and 
+we were measuring some outcome $Y^{(t)}_i$ at time points $t = 0, 1$, then we 
+would define the ATE and estimated ATE as follows:
+
+\begin{equation}
+\begin{aligned}
+ATE &= E[Y^{1}|A=1] - E[Y^1|A=0] \\
+\hat{ATE} &= \frac{1}{n}\sum_{i=1}^{n} Y_i^1A_i - \frac{1}{n} \sum_{i=1}^{n}Y_{i}^1(1-A_i)
+\end{aligned}
+\end{equation}
+
 Another causal estimand is the Average Treatment Effect on the Treated or 
 ATET. This estimand is represented by the following expression, note the 
 difference in the time points and treatment variables :
 $$
-\hat{ATET} = E[Y^{1}|A=1] - E[Y^{0}|A=1].
+\begin{aligned}
+ATET &= E[Y^{1}|A=1] - E[Y^{0}|A=1].\\
+\hat{ATET} &= \frac{1}{n}\sum_{i=1}^{n} Y_i^1A_i - Y_i^0A_i
+\end{aligned}
 $$
-Graphically, this idea can be represented as the difference between the two
-points connected by the line in Figure \@ref(fig:ATEvis) below.
+Conceptually the regression models the author's used, discussed in the previous 
+post, estimates this latter (ATET) entity, but in a slightly more complicated 
+way.
+To make things simpler, this idea can be represented as the difference 
+between the two points connected by the line in Figure \@ref(fig:ATEvis) below.
 
-```{r ATEvis,fig.width=14,fig.height=8,fig.cap="Visualization of Average Treatment Effect (ATE) and Average Treatment Effect on the Treated(ATET) below using the crime density estimates from [@moyer2019effect]. Solid line is above the two points involved in the ATET and the dotted line is above the two points involved in calculating the ATE."}
+```{r ATEvis, cache = TRUE, fig.width=14,fig.height=8,fig.cap="Visualization of Average Treatment Effect (ATE) and Average Treatment Effect on the Treated(ATET) below using the crime density estimates from [@moyer2019effect]. Solid line is above the two points involved in the ATET and the dotted line is above the two points involved in calculating the ATE.", preview = TRUE}
 pltdf <- tibble(Group = c("Greening","Mowing","Control",
                           "Greening","Mowing","Control"),
                 Crime = c(1.25,1.2,1.09,.98,.91,.89),
@@ -277,20 +291,20 @@ p1
 ```
 
 Bringing these ideas back to the claim at hand, the author's did *not*
-provide or aim to justify this statement. By using a difference-in-difference 
-estimator they estimated the ATET, which was their "take-home" result mentioned 
-in their abstract. While this is still an interesting result, it 
-does make a reader like me wonder why they went to the effort of randomizing 
-interventions as they did, if they didn't even use their control vacant lots
-in the contrast estimate of the intervention effect(s). My guess is that 
-the result was not significantly different, or worse, the control group had 
-significantly less crime than the intervention and they didn't want 
-this result complicating their story. 
+aim to justify this statement. By using a difference-in-difference 
+estimator they estimated the ATET, which was their "take-home" result. 
+While this is still an interesting result, it does make a reader like me wonder 
+why they went to the effort of randomizing interventions as they did, if they 
+didn't even use their control vacant lots in the contrast estimate of the 
+intervention effect(s). My guess is that the result was not significantly 
+different, or worse, the control group had significantly less crime than the 
+intervention and they didn't want this result complicating their story. 
 
-The authors do have some justification for focusing
-on the ATET as they did. As mentioned above, the pre-intervention crime measures
-for the three different vacant lot groups were all different, suggesting these
-may not have been as comparable as they should have been from randomization. 
+However, before we get too dramatic, it is important to realize that the authors
+do have some justification for focusing on the ATET as they did. 
+As mentioned above, the pre-intervention crime measures for the three different 
+vacant lot groups were all different, suggesting these may not have been as 
+comparable as they should have been from randomization. 
 Given that, it seems that one of the best and most conservative things the 
 authors could do, would be to focus on the ATET as they did. Still, it 
 is not the best one might hope for when looking to advance the cause 
@@ -355,7 +369,7 @@ on within group differences.
 4. "Greening vacant lots will reduce in crime in the surrounding area *generally* 
 not just in Philadelphia"
 
-Yes and no, cities are highly variable and not at all homogeneous. The more 
+Yes and no. Cities are highly variable and not at all homogeneous. The more 
 similar a city is to Philadelphia, the more likely the results may apply. 
 However, this is true for every built environment or place-based intervention, 
 and shouldn't be held against the author's good-faith effort here.

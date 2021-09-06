@@ -1,6 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
+.rdb
+.rdx
 .DS_Store
 Projects/
 .Ruserdata

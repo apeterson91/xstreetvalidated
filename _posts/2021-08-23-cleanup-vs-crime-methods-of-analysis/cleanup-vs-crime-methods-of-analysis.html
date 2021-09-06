@@ -90,10 +90,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <meta property="description" itemprop="description" content="From KDEs to Difference-in-Differences"/>
 
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-09-23"/>
-  <meta property="article:created" itemprop="dateCreated" content="2021-09-23"/>
+  <meta property="article:published" itemprop="datePublished" content="2021-10-02"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-10-02"/>
   <meta name="article:author" content="Adam Peterson"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
@@ -114,10 +115,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta name="citation_reference" content="citation_title=Spatial temporal aggregated predictors to examine built environment health effects;citation_publication_date=2021;citation_author=Adam Peterson;citation_author=Jana Hirsch;citation_author=Brisa Sanchez"/>
   <meta name="citation_reference" content="citation_title=Heterogeneous effects in the built environment;citation_publication_date=2021;citation_author=Adam Peterson;citation_author=Emma Sanchez-Vaznaugh;citation_author=Brisa Sanchez"/>
   <meta name="citation_reference" content="citation_title=Longitudinal data analysis;citation_publication_date=2008;citation_publisher=CRC press;citation_author=Garrett Fitzmaurice;citation_author=Marie Davidian;citation_author=Geert Verbeke;citation_author=Geert Molenberghs"/>
+  <meta name="citation_reference" content="citation_title=The modifiable areal unit problem in multivariate statistical analysis;citation_publication_date=1991;citation_publisher=SAGE Publications Sage UK: London, England;citation_volume=23;citation_author=A Stewart Fotheringham;citation_author=David WS Wong"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","bibliography","categories","draft"]}},"value":[{"type":"character","attributes":{},"value":["Cleanup vs. Crime: Methods of Analysis"]},{"type":"character","attributes":{},"value":["From KDEs to Difference-in-Differences\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["09-23-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["cleanup.bib"]},{"type":"character","attributes":{},"value":["Technical","Cleanup vs. Crime","Social Cohesion"]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","bibliography","creative_commons","categories","draft"]}},"value":[{"type":"character","attributes":{},"value":["Cleanup vs. Crime: Methods of Analysis"]},{"type":"character","attributes":{},"value":["From KDEs to Difference-in-Differences\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["10-02-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["cleanup.bib"]},{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Technical","Cleanup vs. Crime","Social Cohesion"]},{"type":"logical","attributes":{},"value":[true]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1461,7 +1463,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Cleanup vs. Crime: Methods of Analysis","description":"From KDEs to Difference-in-Differences","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-09-23T00:00:00.000+00:00","citationText":"Peterson, 2021"}
+{"title":"Cleanup vs. Crime: Methods of Analysis","description":"From KDEs to Difference-in-Differences","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-10-02T00:00:00.000+00:00","citationText":"Peterson, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1485,22 +1487,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-byline">
   Adam Peterson <a href="https://apetersonsite.org" class="uri">https://apetersonsite.org</a> 
   
-<br/>09-23-2021
+<br/>10-02-2021
 </div>
 
 <div class="d-article">
 <h1 id="context">Context</h1>
-<p>In the previous post we discussed this fantastic article <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span> which studied how different cleaning “interventions” applied to vacant lots had the potential to affect the propensity for nearby violent shootings. In this post we’ll look at the specific measures and statistical methods they used to analyze their data in order to test this hypothesis and break down the methods’ various advantages and disadvantages.</p>
+<p>In the previous post we discussed this fantastic article, <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span> , which studied how different cleaning “interventions” applied to vacant lots had the potential to affect the propensity for nearby violent shootings. In this post we’ll look at the specific measures and statistical methods they used to analyze their data in order to test this hypothesis and break down the methods’ various advantages and disadvantages.</p>
 <h1 id="methods">Methods</h1>
 <h2 id="data-and-questions">Data and Questions</h2>
 <p>Recall from the paper that the authors had shooting data accessed from the Philadelphia Police Department, and vacant lot data - location, size, and randomized intervention, that they amassed as part of their project. I’ve already shown, visually, what the shooting data looked like in the first post. As for the vacant lot data, it probably looked something like what’s in Table <a href="#tab:vacant">1</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="knpdzimlut" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tunrbhvrfm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#knpdzimlut .gt_table {
+#tunrbhvrfm .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1525,7 +1527,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-left-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_heading {
+#tunrbhvrfm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1537,7 +1539,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_title {
+#tunrbhvrfm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1547,7 +1549,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-width: 0;
 }
 
-#knpdzimlut .gt_subtitle {
+#tunrbhvrfm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1557,13 +1559,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-width: 0;
 }
 
-#knpdzimlut .gt_bottom_border {
+#tunrbhvrfm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_col_headings {
+#tunrbhvrfm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1578,7 +1580,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_col_heading {
+#tunrbhvrfm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1598,7 +1600,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#knpdzimlut .gt_column_spanner_outer {
+#tunrbhvrfm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1610,15 +1612,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 4px;
 }
 
-#knpdzimlut .gt_column_spanner_outer:first-child {
+#tunrbhvrfm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#knpdzimlut .gt_column_spanner_outer:last-child {
+#tunrbhvrfm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#knpdzimlut .gt_column_spanner {
+#tunrbhvrfm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1630,7 +1632,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   width: 100%;
 }
 
-#knpdzimlut .gt_group_heading {
+#tunrbhvrfm .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1652,7 +1654,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#knpdzimlut .gt_empty_group_heading {
+#tunrbhvrfm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1667,15 +1669,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#knpdzimlut .gt_from_md > :first-child {
+#tunrbhvrfm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#knpdzimlut .gt_from_md > :last-child {
+#tunrbhvrfm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#knpdzimlut .gt_row {
+#tunrbhvrfm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1694,7 +1696,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#knpdzimlut .gt_stub {
+#tunrbhvrfm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1706,7 +1708,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-left: 12px;
 }
 
-#knpdzimlut .gt_summary_row {
+#tunrbhvrfm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1716,7 +1718,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#knpdzimlut .gt_first_summary_row {
+#tunrbhvrfm .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1726,7 +1728,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_grand_summary_row {
+#tunrbhvrfm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1736,7 +1738,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#knpdzimlut .gt_first_grand_summary_row {
+#tunrbhvrfm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1746,11 +1748,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_striped {
+#tunrbhvrfm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#knpdzimlut .gt_table_body {
+#tunrbhvrfm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1759,7 +1761,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_footnotes {
+#tunrbhvrfm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1773,13 +1775,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_footnote {
+#tunrbhvrfm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#knpdzimlut .gt_sourcenotes {
+#tunrbhvrfm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1793,41 +1795,41 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#knpdzimlut .gt_sourcenote {
+#tunrbhvrfm .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#knpdzimlut .gt_left {
+#tunrbhvrfm .gt_left {
   text-align: left;
 }
 
-#knpdzimlut .gt_center {
+#tunrbhvrfm .gt_center {
   text-align: center;
 }
 
-#knpdzimlut .gt_right {
+#tunrbhvrfm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#knpdzimlut .gt_font_normal {
+#tunrbhvrfm .gt_font_normal {
   font-weight: normal;
 }
 
-#knpdzimlut .gt_font_bold {
+#tunrbhvrfm .gt_font_bold {
   font-weight: bold;
 }
 
-#knpdzimlut .gt_font_italic {
+#tunrbhvrfm .gt_font_italic {
   font-style: italic;
 }
 
-#knpdzimlut .gt_super {
+#tunrbhvrfm .gt_super {
   font-size: 65%;
 }
 
-#knpdzimlut .gt_footnote_marks {
+#tunrbhvrfm .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1873,35 +1875,38 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p>But all this begs the question, if we have lots at one location, and shootings at another, how do we relate the two to each other? The authors propose two methods, the first involving a kernel density estimate and the second involving a count of the number of shootings inside a “Buffer” Zone around the vacant lot.</p>
 <h2 id="kernel-density-estimates">Kernel Density Estimates</h2>
-<p>What’s a kernel density estimate(KDE)? Simply put, it is a fancy word for a fancy kind of average<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The author’s created a grid of points across the polygonal space defined by Philadelphia’s borders and at each grid point took a weighted average of the number of shootings during the time period, e.g. month, of interest. They chose a bandwidth of 500 meters, which essentially means that shootings within that distance were weighted more than those further away. We can’t know which exact kernel they used because they don’t state it explicitly, but of the many <a href="https://en.wikipedia.org/wiki/Kernel_(statistics)">options</a> they may have chosen the Gaussian kernel, as it is popular in these settings. For illustrative purposes, you can see it below with bandwidth <span class="math inline">\(b\)</span> for location <span class="math inline">\(\mathbf{s}=(s_1,s_2)\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>,</p>
+<p>What’s a kernel density estimate(KDE)? Simply put, it is a fancy word for a fancy kind of average<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The author’s created a grid of points across the polygonal space defined by Philadelphia’s borders and at each grid point took a weighted average of the number of shootings during the time period, e.g. month, of interest. They chose a bandwidth of 500 meters, which essentially means that shootings within that distance were weighted more than those further away. We can’t know which kernel they used because they don’t state it explicitly, but of the many <a href="https://en.wikipedia.org/wiki/Kernel_(statistics)">options</a> they may have chosen the rectangular kernel, as they state many of their estimates in terms of Crimes per km<span class="math inline">\(^{2}\)</span>. For illustrative purposes, you can see this kernel below with bandwidth <span class="math inline">\(b\)</span> for location <span class="math inline">\(\mathbf{s}=(s_a,s_b)\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>,</p>
 <p><span class="math display">\[
-\mathcal{K}_b(\mathbf{s}_1,\mathbf{s}_2) = 
-\exp(-\frac{1}{2b^2}d(\mathbf{s}_1,\mathbf{s}_2)),
-\]</span> where <span class="math inline">\(d(\mathbf{s}_1,\mathbf{s}_2)\)</span> is the distance between the two locations. The KDE,<span class="math inline">\(\hat{y}\)</span> at location <span class="math inline">\(\mathbf{s}\)</span> for a given time period (e.g. month) would then be defined as follows:</p>
+\mathcal{K}_b(\mathbf{s},\mathbf{s}&#39;) = 
+\begin{cases}
+\frac{1}{b}  &amp; d(\mathbf{s},\mathbf{s}&#39;) \leq b \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span> where <span class="math inline">\(d(\mathbf{s}_1,\mathbf{s}_2)\)</span> is the distance between the two locations. The KDE,<span class="math inline">\(\hat{y}\)</span> at an arbitrary location <span class="math inline">\(\mathbf{s}\)</span> for a given month would then combine all <span class="math inline">\(i=1,...n\)</span> shooting samples as follows:</p>
 <p><span class="math display">\[
 \hat{y}(\mathbf{s}) = \frac{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s}, 
-\mathbf{s&#39;})y_i(\mathbf{s&#39;})}{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s},
-\mathbf{s}&#39;)}.
+\mathbf{s}&#39;_i)y_i(\mathbf{s&#39;})}{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s},
+\mathbf{s}&#39;_i)}.
 \]</span></p>
-<p>What this amounts to conceptually is an average number of shootings at each grid point, where those shootings at closer distances are weighted more and those shootings at further distances (especially those more than 500 m) are weighted exponentially less. The authors create their main figure in the paper from plotting the relative averages at each grid point across space. The lower values are assigned a more green color and the higher values are assigned a red color. See Figure <a href="#fig:kde">1</a> adapted here from their paper<span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.</p>
+<p>What this amounts to conceptually is an average number of shootings at each grid point, where those shootings at closer distances are weighted more and those shootings at further distances (especially those more than 500 m) are weighted less. The authors create their main figure in the paper from plotting the relative averages at each grid point across space. The lower values are assigned a light green color and the higher values are assigned a red color. See Figure <a href="#fig:kde">1</a> from their paper<span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span id="fig:kde"></span>
-<img src="Fig1_adapted.jpg" alt="Kernel Density Estimate of shootings adapted from [@moyer2019effect]." width="936" />
+<img src="Fig1.jpeg" alt="Kernel Density Estimate of shootings Figure from [@moyer2019effect]." width="936" />
 <p class="caption">
-Figure 1: Kernel Density Estimate of shootings adapted from <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.
+Figure 1: Kernel Density Estimate of shootings Figure from <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.
 </p>
 </div>
 </div>
 <p>As you can see, the kernel density estimate gives us this nice visualization and a decent conceptualization of the vacant lots that are most prone to having shootings nearby, but what are the disadvantages, if any?</p>
 <h3 id="pros-and-cons">Pros and Cons</h3>
-<p>As stated previously, the KDE has a number of advantages, including the ability to nicely visualize across continuous space, the relative “amount” of shootings at each location. However, it has a number of drawbacks too. The first, is that we don’t know if it’s a particularly good estimate. If you recall, the author’s chose a certain bandwidth of 500m, but wouldn’t 400m have been just as good? Further, while the idea of a KDE of shootings can be nicely visualized, as in Figure <a href="#fig:kde">1</a>, it can be difficult to communicate verbally to stakeholders:</p>
+<p>As stated previously, the KDE has a number of advantages, including the ability to nicely visualize across continuous space, the relative “amount” of shootings at each location. However, it has a number of drawbacks too. The first, is that we don’t know if it’s a particularly good estimate. If you recall, the author’s chose a certain bandwidth of 500m, but wouldn’t 400m have been just as good? This is a well established problem in this space known as the modifiable areal unit problem <span class="citation" data-cites="fotheringham1991modifiable">(<a href="#ref-fotheringham1991modifiable" role="doc-biblioref">Fotheringham and Wong 1991</a>)</span>. Further, while the idea of a KDE of shootings can be nicely visualized, as in Figure <a href="#fig:kde">1</a>, it can be difficult to communicate verbally to stakeholders:</p>
 <p>“Ah yes, you see when we cleaned up these vacant lots we found that the average number of shootings at the vacant lot decreased as measured by this kernel density estimate, which takes into account a weighted average of those shootings that are nearby. What do I mean by nearby and how did I choose the weights? Well the weights and proximity are defined according to this kernel and bandwidth measure we chose….”</p>
-<p>You get the picture. It would be much easier to say, did the average number of shootings at location “x” go down or not? However, this can be much harder to model, so the author’s, understandably, went with something more feasible.</p>
+<p>You get the picture. It would be much easier to say, did the average number of shootings at location “x” go down or not? However, this can be much harder to model, so the author’s, understandably, went with the KDE. The outcome in their first model, <span class="math inline">\(Y_{it}\)</span>, was consequently defined as follows:</p>
 <p><span class="math display">\[ 
-Y_{it} := \text{ KDE at lot } i\text{, in study month } t \\
+Y_{it} := \text{ KDE at lot } i\text{, in study month } t. \\
 \]</span></p>
 <h2 id="buffer-counts">Buffer Counts</h2>
-<p>The second measure the author’s use to try and assign a specific number of shootings to a vacant lot is known as a “buffer count” or “buffer zone.” Put simply, the author’s looked at the center of each vacant lot, drew a circle 300 meters around that center, and counted all the shootings that fell into that circle, during a given month and assigned that value. See Figure <a href="#fig:buffervis">2</a> for a visualization.</p>
+<p>The second measure the author’s use to try and assign a specific number of shootings to a vacant lot is known as a “buffer count” or “buffer zone.” Put simply, the author’s looked at the center of each vacant lot, drew a circle 300 meters around that point, and counted all the shootings that fell into that circle, during a given month and assigned that value to the vacant lot as it’s count of shootings, <span class="math inline">\(Y_{it}&#39;\)</span>. See Figure <a href="#fig:buffervis">2</a> for a visualization of this idea. The authors then went on to check for “spill-over” effects through the use of a second, 600m buffer around the first.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span id="fig:buffervis"></span>
 <img src="cleanup-vs-crime-methods-of-analysis_files/figure-html5/buffervis-1.png" alt="Visualization of Hypothetical Buffer with 300 m radius in Upper Kensington. Star represents location of hypothetical vacant lot." width="1344" data-distill-preview=1 />
@@ -1911,15 +1916,15 @@ Figure 2: Visualization of Hypothetical Buffer with 300 m radius in Upper Kensin
 </div>
 </div>
 <h3 id="pros-and-cons-1">Pros and Cons</h3>
-<p>The buffer count has a very appealing interpretation, it’s simply the number of shootings (or whatever you’re counting) within a certain distance of the location of interest. This is <strong>much</strong> easier to explain to stakeholders, and others who may be interested in this work, but not interested in learning about kernels and bandwidths. It can also be seen as a kind of kernel density estimate, except now we’re taking an unweighted, unnormalized average<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. However, similar to the kernel density estimate, it suffers from having to choose some <em>ad hoc</em> distance, 300 meters in this case, as the “correct” distance within which to count shootings. This remains a major drawback.</p>
+<p>The buffer count has a very appealing interpretation, it’s simply the number of shootings within a certain distance of the location of interest. This is <strong>much</strong> easier to explain to stakeholders, and others who may be interested in this work, but not interested in learning about kernels and bandwidths. It can also be seen as a kind of kernel density estimate, except now we’re taking an unweighted, unnormalized average<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. However, similar to the kernel density estimate, it suffers from having to choose some <em>ad hoc</em> distance, 300 (or 600 for spillover) meters in this case, as the “correct” distance within which to count shootings. This remains a major drawback.</p>
 <aside>
-There have been developments in the statistics literature to try and address these that we’ll discuss in detail at another point in time. See <span class="citation" data-cites="baek2016distributed">(<a href="#ref-baek2016distributed" role="doc-biblioref">Baek et al. 2016</a>)</span>,<span class="citation" data-cites="peterson2021spatial">(<a href="#ref-peterson2021spatial" role="doc-biblioref">Peterson, Hirsch, and Sanchez 2021</a>)</span>, and <span class="citation" data-cites="peterson2021heterogeneous">(<a href="#ref-peterson2021heterogeneous" role="doc-biblioref">Peterson, Sanchez-Vaznaugh, and Sanchez 2021</a>)</span> if you’d like to learn more now.
+There have been developments in the statistics literature to try and address these issues that we’ll discuss in detail at another point in time. See <span class="citation" data-cites="baek2016distributed">(<a href="#ref-baek2016distributed" role="doc-biblioref">Baek et al. 2016</a>)</span>,<span class="citation" data-cites="peterson2021spatial">(<a href="#ref-peterson2021spatial" role="doc-biblioref">Peterson, Hirsch, and Sanchez 2021</a>)</span>, and <span class="citation" data-cites="peterson2021heterogeneous">(<a href="#ref-peterson2021heterogeneous" role="doc-biblioref">Peterson, Sanchez-Vaznaugh, and Sanchez 2021</a>)</span> if you’d like to learn more now.
 </aside>
 <p><span class="math display">\[
 Y_{it}&#39; = \text{# of shootings within 300m of vacant lot } i \text{ during month } t 
 \]</span></p>
 <h2 id="difference-in-differences">Difference in Differences</h2>
-<p>Now that we have our two outcome measures constructed from the shooting data and vacant lot locations, we can turn to modeling the potential effects of the vacant lot cleanup intervention. The author’s estimate a “Difference-in-Differences”(DnD) of the expected number of shootings at the lots that receive either the “greening” or “mowing” intervention. This is a very specific estimate that we’ll elaborate on in more detail in the causal inference post, but for now it suffices to say they’re comparing the <em>same</em> vacant lots before and after receiving the interventions, <em>as opposed to</em> comparing those lots that received interventions and the control. There may or may not be good reasons for not estimating this latter contrast but we’ll save that discussion for the causal-inference post. For now, let’s break down this big equation from the initial post and try to understand how they calculate the difference-in-difference estimate for the greening intervention;</p>
+<p>Now that we have our two outcome measures constructed from the shooting data and vacant lot locations, we can turn to modeling the potential effects of the vacant lot cleanup intervention. The author’s estimate a “Difference-in-Differences”(DnD) of the expected number of shootings at the lots that receive either the “greening” or “mowing” intervention. This is a very specific estimate that we’ll elaborate on in more detail in the causal inference post, but for now it suffices to say they’re comparing the <em>same</em> vacant lots before and after receiving the interventions, <em>as opposed to</em> comparing those lots that received interventions and the control. There may or may not be good reasons for not estimating this latter contrast but we’ll save that discussion for the causal-inference post. For now, let’s break down this big equation from the initial post and try to understand how they calculate the difference-in-difference estimate for the greening intervention<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>;</p>
 <p><span class="math display" id="eq:dnd">\[\begin{equation}
 \begin{aligned}
 Y_{it} &amp;= \beta_0 + \beta_1 \text{Greening}_i + \beta_2\text{Mowing}_i
@@ -1928,15 +1933,15 @@ Y_{it} &amp;= \beta_0 + \beta_1 \text{Greening}_i + \beta_2\text{Mowing}_i
 \beta_6\text{Mowing}_i \times \text{Post}_t  \\
 &amp;+ \beta_7\text{Greening}_i\times \text{AllTreated}_t + 
 \beta_8\text{Mowing}_i \times \text{AllTreated}_t \\
-&amp;+ \alpha_{m(t)} + \delta_{s(i)} + \xi_{c(i)} + \epsilon_{it}.
+&amp;+ \alpha_{m(t)} + \delta_{s(i)} + \xi_{c(i)} + \epsilon_{it},
 \end{aligned}
 \tag{1}
 \end{equation}\]</span></p>
 <aside>
-This equation uses the notion of indicator functions. That is, Greening<span class="math inline">\(_i\)</span> is either a 0 or 1 for lot <span class="math inline">\(i\)</span>. 1 indicates the lot received the greening intervention and 0 indicates it did not. Post<span class="math inline">\(_t\)</span> is the same where a 1 indicates the measurement was recorded after the intervention was administered.
+This equation uses the notion of indicator functions. That is, Greening<span class="math inline">\(_i\)</span> is either a 0 or 1 for lot <span class="math inline">\(i\)</span>. 1 indicates the lot received the greening intervention and 0 indicates it did not. Post<span class="math inline">\(_t\)</span> is the same where a 1 indicates the measurement was recorded after the intervention was administered and vice versus.
 </aside>
-<p>From <a href="#eq:dnd">(1)</a>, we can see that the expected number of shootings for a greening lot prior and subsequent to the intervention is represented by <span class="math inline">\(\beta_0 + \beta_1\)</span>, and <span class="math inline">\(\beta_0 + \beta_1 + \beta_5\)</span>, respectively. If we want to know the difference then, in the expected number of shootings for the same vacant lots assigned to the greening intervention before and after the trial, we simply take the difference between these two equations which gives us <span class="math inline">\(\beta_5\)</span>. Our estimate of this quantity, <span class="math inline">\(\hat{\beta}_5\)</span>, is the estimated effect of the greening intervention. Similarly, <span class="math inline">\(\beta_6\)</span> is the estimated effect of the mowing intervention.</p>
-<p>Of course, in statistics it isn’t sufficient to just calculate a point estimate, like <span class="math inline">\(\hat{\beta}_5\)</span>, and call it a day. We need to provide some measure of our uncertainty of that estimate as well, to establish whether this result provides enough evidence to be considered credible, or whether the estimated effect is just due to measurement error or random variation. An important part of estimating that uncertainty is taking into account sources of correlation in the measurements. The authors do this by way of incorporating mixed effects. See my post on spatial models or <span class="citation" data-cites="fitzmaurice2008longitudinal">(<a href="#ref-fitzmaurice2008longitudinal" role="doc-biblioref">Fitzmaurice et al. 2008</a>)</span> for a more general introduction on this topic, as we’ll focus only on those aspects relevant to this application in the following section.</p>
+<p>From <a href="#eq:dnd">(1)</a>, we can see that the expected number of shootings for a greening lot prior and subsequent to the intervention is represented by <span class="math inline">\(\beta_0 + \beta_1\)</span>, and <span class="math inline">\(\beta_0 + \beta_1 + \beta_5\)</span>, respectively. If we want to know the difference then, in the expected number of shootings for the same vacant lots assigned to the greening intervention before and after the trial, we simply take the difference between these two equations which gives us <span class="math inline">\(\beta_5\)</span>. Our estimate of this quantity, <span class="math inline">\(\hat{\beta}_5\)</span>, is the estimated effect of the greening intervention. Similarly, <span class="math inline">\(\hat{\beta_6}\)</span> is the estimated effect of the mowing intervention.</p>
+<p>Of course, in statistics it isn’t sufficient to just calculate a point estimate, like <span class="math inline">\(\hat{\beta}_5\)</span>, and call it a day. We need to provide some measure of our uncertainty of that estimate as well, to establish whether this result provides enough evidence to be considered credible, or whether the estimated effect is just due to measurement error or random variation. An important part of estimating that uncertainty is taking into account sources of correlation in the measurements. The authors do this by way of incorporating mixed effects. See <span class="citation" data-cites="fitzmaurice2008longitudinal">(<a href="#ref-fitzmaurice2008longitudinal" role="doc-biblioref">Fitzmaurice et al. 2008</a>)</span> for a more general introduction on this topic, as we’ll focus only on those aspects relevant to this application in the following section.</p>
 <h2 id="mixed-effects-regression">Mixed Effects Regression</h2>
 <p>At the very end of <a href="#eq:dnd">(1)</a> you can see four terms reproduced below for easier focus:</p>
 <p><span class="math display">\[
@@ -1960,7 +1965,7 @@ Y_{it} = ... + \alpha_{m(t)} + \delta_{s(i)} + \xi_{c(i)} + \epsilon_{it}.
 <p>The final term <span class="math inline">\(\epsilon_{it}\)</span> represents measurement error that applies equally to all vacant lots, regardless of space, time, or cluster.</p>
 <p>There is a lot that could be said about these mixed effects terms. However, it suffices to say that the author’s correctly include these terms to assure that the resulting confidence intervals they calculate for their estimates of interest, <span class="math inline">\(\hat{\beta_5}\)</span> and <span class="math inline">\(\hat{\beta_6}\)</span> take into account the variability within seasons, space and cluster.</p>
 <h1 id="conclusion">Conclusion</h1>
-<p>In this post we’ve examined how the author’s use of KDEs, buffer counts, DnD estimators and mixed effects regression came together to try and provide a reliable estimate of the effects of the greening and mowing vacant lot interventions on shooting crimes. We’ve also seen some of the advantages and disadvantages each of these approaches may involve. Many of these will continue to be of importance as our attention now turns to the causal inference assumptions underlying the statistical methods and estimation procedures discussed here.</p>
+<p>In this post we’ve examined how the author’s use of KDEs, buffer counts, DnD estimators and mixed effects regression came together to try and provide a reliable estimate of the effects of the greening and mowing vacant lot interventions on shooting crimes. We’ve also seen some of the advantages and disadvantages each of these approaches may involve. Many of these will continue to be of importance as our attention now turns to the causal inference assumptions underlying the statistical methods and estimation procedures discussed here that, if correct, extend the results from this experiment to a more widely generalizable result.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-baek2016distributed" class="csl-entry" role="doc-biblioentry">
@@ -1968,6 +1973,9 @@ Baek, Jonggyu, Brisa N Sánchez, Veronica J Berrocal, and Emma V Sanchez-Vaznaug
 </div>
 <div id="ref-fitzmaurice2008longitudinal" class="csl-entry" role="doc-biblioentry">
 Fitzmaurice, Garrett, Marie Davidian, Geert Verbeke, and Geert Molenberghs. 2008. <em>Longitudinal Data Analysis</em>. CRC press.
+</div>
+<div id="ref-fotheringham1991modifiable" class="csl-entry" role="doc-biblioentry">
+Fotheringham, A Stewart, and David WS Wong. 1991. <span>“The Modifiable Areal Unit Problem in Multivariate Statistical Analysis.”</span> <em>Environment and Planning A</em> 23 (7): 1025–44.
 </div>
 <div id="ref-moyer2019effect" class="csl-entry" role="doc-biblioentry">
 Moyer, Ruth, John M MacDonald, Greg Ridgeway, and Charles C Branas. 2019. <span>“Effect of Remediating Blighted Vacant Land on Shootings: A Citywide Cluster Randomized Trial.”</span> <em>American Journal of Public Health</em> 109 (1): 140–44.
@@ -1983,8 +1991,10 @@ Peterson, Adam, Emma Sanchez-Vaznaugh, and Brisa Sanchez. 2021. <span>“Heterog
 <hr />
 <ol>
 <li id="fn1" role="doc-endnote"><p>This describes most of the work done in Statistics.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>Where <span class="math inline">\(s_1,s_2\)</span> are e.g. latitude and longitude<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Where <span class="math inline">\(s_a,s_b\)</span> are e.g. latitude and longitude<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3" role="doc-endnote"><p>also called a sum<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>I omit the distributional assumptions on the random<br />
+effects and epsilon term here for space. They are all distributed Normal with mean zero and unknown variance.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->
@@ -2010,6 +2020,8 @@ Peterson, Adam, Emma Sanchez-Vaznaugh, and Brisa Sanchez. 2021. <span>“Heterog
 <div class="appendix-bottom">
 <h3 id="references">References</h3>
 <div id="references-listing"></div>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->

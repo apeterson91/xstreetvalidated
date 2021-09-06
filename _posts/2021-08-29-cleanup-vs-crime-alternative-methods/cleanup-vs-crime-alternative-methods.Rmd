@@ -21,6 +21,36 @@ library(brms)
 ```
 
 
+## Caveats
+However, it is important
+to note that this isn't a panacea^[a fancy word for "magic cure"]. 
+Greening vacant lots may help reduce the crime rate in normal times, but 
+if you destabilize social cohesion in some other way through say, 
+a global pandemic? Things may go a different direction.
+
+
+```{r current-shootings,fig.width=14,fig.height=8} 
+shootings <- read_csv("~/Documents/CityData/Philly/Crime/shootings_2015_2020.csv") %>% 
+  filter(officer_involved == "N",year<=2021) %>% 
+  mutate(month = month(date_))
+
+shootings %>% 
+  group_by(year,month) %>% 
+  count()  %>% 
+  ungroup() %>% 
+  mutate(date = ymd(str_c(year,"-",month,"-01"))) %>% 
+  filter(date<=ymd("2021-08-01")) %>% 
+  ggplot(aes(x=date,y=n)) + 
+  geom_line() + 
+  ylab("# Shootings per Month") + 
+  xlab("Time") + 
+  ggtitle("Monthly Shooting Rate in Philadelphia, PA: 2015-2021",
+          subtitle = "Shootings without police officer involvement") + 
+  labs(caption="Data downloaded from OpenDataPhilly.org") + 
+  geom_vline(aes(xintercept = ymd("2020-03-15")),color='red',linetype=2) + 
+  scale_x_date(date_labels="%Y",date_breaks = "1 year") + 
+  annotate("text",x=ymd("2019-05-01"),y=250,label="Start of Covid-19 Pandemic",size=6)
+```
 
 ```{r}
 

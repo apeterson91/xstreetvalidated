@@ -10,6 +10,7 @@ output:
   distill::distill_article:
     self_contained: false
 bibliography: cleanup.bib
+creative_commons: CC BY
 categories:
   - Big Picture 
   - Cleanup vs. Crime
@@ -39,7 +40,7 @@ understanding the built environment and statistical methods more generally.
 In this post we'll focus on a high-level
 understanding of the paper while future posts will focus on (1) the measures of 
 gun violence and statistical models used, (2) the assumptions and approach 
-that go into the causal inference associated with this trial and Finally (3),
+that go into the causal inference associated with this trial and finally (3),
 I'll devote a post to the conceptual models at play here. Why would cleaning up
 a vacant lot affect nearby gun violence, or other measures of community health? 
 
@@ -56,7 +57,7 @@ For related papers see [here](https://jamanetwork.com/journals/jamanetworkopen/f
 
 # Background 
 
-```{r greening,fig.cap="Graphic demonstration of the different cleaning interventions taken from 'Citywide cluster randomized trial to restore blighted vacant land...' [@Branas2946]"}
+```{r greening,fig.cap="Graphic demonstration of the different cleaning interventions. Figure from 'Citywide cluster randomized trial to restore blighted vacant land...' [@Branas2946]"}
 ## See PNAS copyright policy here: https://www.pnas.org/content/101/34/12399
 ## As this blog is currently non-commercial this image is used according to 
 ## the following language:
@@ -80,13 +81,13 @@ In order to test this hypothesis, the authors randomly assign 1 of three
 The first intervention called "greening" involved "removing trash and debris, 
 grading the land, planting new grass and a small number of trees to create a 
 parklike setting, installing low wooden perimeter fences, and regularly 
-maintaining the lot." You can see a demonstration of this idea in Figure 
-\@ref(fig:greening). 
+maintaining the lot." [@moyer2019effect]. You can see a demonstration of this 
+idea in Figure \@ref(fig:greening). 
 
 The second intervention labeled "mowing" made the vacant lot not so much park-like
 as just generally maintained. The description states it as 
 "mowing existing grass and weeds, removing trash and debris, and regularly 
-maintaining the lot."
+maintaining the lot." [@moyer2019effect].
 
 The third and final "intervention" was simply
 the control group, where no action was taken on the vacant lot whatsoever. 
@@ -103,8 +104,8 @@ uk <- read_sf("~/Documents/CityData/Philly/geo-data/Neighborhoods_Philadelphia/N
   st_transform(4326)
 ```
 
-```{r shootings,cache=T,fig.width=14,fig.height=8,fig.cap="No-Officer Involved Shootings in Upper Kensington,Philadelphia in 2015 represented (left) spatially and (right) as a network, as interference effects are typically understood."}
-## Switch from shootings to DVPRC Rittenhouse Square Traffic Data
+```{r shootings,cache=T,fig.width=14,fig.height=8,fig.cap="Map of No-Officer Involved Shootings in Upper Kensington, Philadelphia during 2015. Red point indicates the occurrence of one shooting."}
+
 shootings <- read_csv("~/Documents/CityData/Philly/Crime/shootings_2015_2020.csv") %>% 
   filter(!is.na(point_x),!is.na(point_y)) %>% 
   filter(point_x > -80,
@@ -156,15 +157,14 @@ p1
 
 The author's used two different measures of the number of shootings each month
 in and around vacant lots to determine whether their interventions 
-were effective: a kernel density estimate and - two, differently sized - buffer 
-counts. The author's fit two models of a similar form, estimating the 
+were effective: a kernel density estimate and two --- differently sized ---
+buffer counts. The author's fit two models of a similar form, estimating the 
 difference in the kernel density estimate and rate, respectively as a function
 of whether the observed lot density estimate or buffer count had received 
 one of the two interventions during June 2013 - April, 2015.  
-They also adjusted for correlation  across time, space and within clusters to 
-try to adjust for similarity in those measures. The kernel density estimate
-model is shown below, but we'll leave a more thorough examination of it and
-the buffer models for a later post.
+They also adjusted for correlation  across time, space and within clusters. 
+The kernel density estimate model is shown below, but we'll leave a more 
+thorough examination of it and the buffer models for a later post.
 
 
 $$ 
@@ -205,23 +205,34 @@ second, larger buffer model and found no significant difference for
 those areas adjacent to the greening intervention and a significant decrease
 in those areas adjacent to the mowing intervention. The author's state that
 "these results suggest spillover benefits of vacant lot remediation, rather than 
-displacement".
+displacement". Meaning that they took this result to be evidence that the 
+interventions didn't simply push shootings to be one or two blocks away from 
+where the clean-up occurred.
+
+<aside>
+A *non-significant* result here means that the author's did not think 
+there was sufficient evidence to conclude that the estimated change 
+was not zero. See this 
+[example](https://en.wikipedia.org/wiki/Confidence_interval#Practical_example_interpretation) 
+for more.
+</aside>
 
 # Conclusion 
 
 
 So ... that's neat! What's the take home message? If you clean up that dirty 
 parking lot near where you live, you'll disincentive crime? Well, maybe. 
-While the analysis isn't perfect, the author's certainly put in a lot 
-of effort to make their results as defensible as possible. We'll talk 
-more about why this is the case in the post focused on causal inference but 
-for now, you can look at the consistency of the effect of the 
-greening intervention across the two different methods of analysis as a good 
-indication that there may be something going on here. Furthermore, 
-while there may be those that think a 7% decrease in shootings isn't anything 
-to write home about, it's important to keep in mind that (1) their 
-are human lives on the line! and (2) this was a fairly 
-cheap intervention --- all they did was clean up some abandoned lots! 
-That's a good payoff^[See the paper's Conclusion section for healthcare costs 
-related to shootings.] for such a small investment and in my book, cause for 
-celebration.
+As with all human endeavors, nothing is perfect. In this case 
+things aren't always simple either. In the posts to come we'll talk 
+more about the problems this analysis has, despite the author's best efforts, 
+as well as why this result is still so encouraging in spite of those problems. 
+One overarching theme to keep in mind, is that this is a fairly 
+cheap endeavor, just cleaning up some vacant lots, with a potentially huge 
+payoff --- saving human lives! This represents both the simplicity and the 
+power that I hope to show is a regular theme in building better 
+built environments.
+
+
+## Acknowledgements {.appendix}
+
+Thanks to Robert Svoboda for reading and offering comments on this article.

@@ -10,6 +10,8 @@ date: 09-11-2021
 output:
   distill::distill_article:
     self_contained: false
+creative_commons: CC BY
+bibliography: BEcausalinference.bib
 categories:
   - Big Picture
 draft: false
@@ -60,9 +62,9 @@ or exposed are any different from those in the control.
 
 <aside>
 If you want to see one interesting case where an environmental exposure
-is randomized. See 
-[here](https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752), to
-be discussed here soon!
+is randomized ... and the subsequent difficulty they had ---  see 
+[here](https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752). 
+This paper will be discussed soon!
 </aside>
 
 This is obviously not the case in the built environment. We observe differences
@@ -154,7 +156,7 @@ also runs us into conflicting with an assumption of
 the heart of causal inference. 
 
 Additivity is another such assumption that simplifies the mathematical tools required
-to estimate the causal estimand^[an estimand is the thing which one wishes to estimate.]
+to estimate the causal estimand^[an estimand is the thing one wishes to estimate.]
 of interest. However, just as with assuming homogeneity, the simplicity that 
 additivity enables in our mathematical modeling may not be justified by our 
 principled understanding of the causal system under study. 
@@ -214,6 +216,10 @@ Angrist and Pitschke's work,
 ["Counterfactuals and Causal 
 Inference"](https://www.cambridge.org/core/books/counterfactuals-and-causal-inference/5CC81E6DF63C5E5A8B88F79D45E1D1B7) by Stephen Morgan and Christopher Winshop and 
 ["Regression and Other Stories"](https://avehtari.github.io/ROS-Examples/index.html)
-by Gelman, Hill and Vehtari.
+by Gelman, Hill and Vehtari 
+[@hernan2010causal;@gelman2020regression;@angrist2014mastering;@morgan2015counterfactuals].
 
 
+## Acknowledgements {.appendix}
+
+Thanks to Robert Svoboda for reading and offering comments on this article.
