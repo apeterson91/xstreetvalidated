@@ -379,3 +379,7 @@ Overall, this study is still quite strong, with only aspects of
 interference related to point 2. and lack of comparability related to point 3. 
 holding them back from making all the claims that one could hope for from 
 this work.
+
+## Acknowledgements {.appendix}
+
+Thanks to Robert Svoboda for reading and offering comments on this article.

@@ -9,6 +9,7 @@ date: 08-29-2021
 output:
   distill::distill_article:
     self_contained: false
+draft: true
 ---
 
 
@@ -16,22 +17,16 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(sf)
+library(lubridate)
 library(sfnetworks)
 library(brms)
 ```
 
 
-## Caveats
-However, it is important
-to note that this isn't a panacea^[a fancy word for "magic cure"]. 
-Greening vacant lots may help reduce the crime rate in normal times, but 
-if you destabilize social cohesion in some other way through say, 
-a global pandemic? Things may go a different direction.
-
 
 ```{r current-shootings,fig.width=14,fig.height=8} 
 shootings <- read_csv("~/Documents/CityData/Philly/Crime/shootings_2015_2020.csv") %>% 
-  filter(officer_involved == "N",year<=2021) %>% 
+  filter(officer_involved == "N") %>% 
   mutate(month = month(date_))
 
 shootings %>% 
@@ -51,6 +46,8 @@ shootings %>%
   scale_x_date(date_labels="%Y",date_breaks = "1 year") + 
   annotate("text",x=ymd("2019-05-01"),y=250,label="Start of Covid-19 Pandemic",size=6)
 ```
+
+
 
 ```{r}
 

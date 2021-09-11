@@ -2,73 +2,27 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>X Street Validated</title>
-    <link>https://apeterson91.github.io/xstreetvalidated/</link>
-    <atom:link href="https://apeterson91.github.io/xstreetvalidated/index.xml" rel="self" type="application/rss+xml"/>
+    <link>https://xstreetvalidated.com</link>
+    <atom:link href="https://xstreetvalidated.com/index.xml" rel="self" type="application/rss+xml"/>
     <description>XStreetValidated
 </description>
     <image>
       <title>X Street Validated</title>
-      <url>https://apeterson91.github.io/xstreetvalidated/images/XSV_tinylogo.png</url>
-      <link>https://apeterson91.github.io/xstreetvalidated/</link>
+      <url>https://xstreetvalidated.com/images/XSV_tinylogo.png</url>
+      <link>https://xstreetvalidated.com</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate>
-    <item>
-      <title>Cleanup vs. Crime: Mechanics</title>
-      <dc:creator>Adam Peterson</dc:creator>
-      <link>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-26-cleanup-vs-crime-mechanics</link>
-      <description>Why did it work?</description>
-      <category>Technical</category>
-      <category>Cleanup vs. Crime</category>
-      <category>Social Cohesion</category>
-      <guid>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-26-cleanup-vs-crime-mechanics</guid>
-      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/2021-08-26-cleanup-vs-crime-mechanics/Broken_window_large.jpeg" medium="image" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Cleanup vs. Crime: Methods of Analysis</title>
-      <dc:creator>Adam Peterson</dc:creator>
-      <link>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-23-cleanup-vs-crime-methods-of-analysis</link>
-      <description>From KDEs to Difference-in-Differences</description>
-      <category>Technical</category>
-      <category>Cleanup vs. Crime</category>
-      <category>Social Cohesion</category>
-      <guid>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-23-cleanup-vs-crime-methods-of-analysis</guid>
-      <pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/2021-08-23-cleanup-vs-crime-methods-of-analysis/cleanup-vs-crime-methods-of-analysis_files/figure-html5/buffervis-1.png" medium="image" type="image/png" width="2688" height="1536"/>
-    </item>
-    <item>
-      <title>Cleanup vs. Crime: A Case Study in 4 parts</title>
-      <dc:creator>Adam Peterson</dc:creator>
-      <link>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-07-cleanup-vs-crime</link>
-      <description>A simple concept and a decent result.</description>
-      <category>Big Picture</category>
-      <category>Cleanup vs. Crime</category>
-      <category>Social Cohesion</category>
-      <guid>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-07-cleanup-vs-crime</guid>
-      <pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/2021-08-07-cleanup-vs-crime/F1.jpg" medium="image" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Causal Inference in the Built Environment</title>
-      <dc:creator>Adam Peterson</dc:creator>
-      <link>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-08-causal-inference-in-the-built-environment</link>
-      <description>How can we know how to best change our environment?</description>
-      <category>Big Picture</category>
-      <guid>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-08-causal-inference-in-the-built-environment</guid>
-      <pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/2021-08-08-causal-inference-in-the-built-environment/causal-inference-in-the-built-environment_files/figure-html5/wealthvis-1.png" medium="image" type="image/png" width="2304" height="1536"/>
-    </item>
+    <lastBuildDate>Sat, 07 Aug 2021 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Motivation</title>
       <dc:creator>Adam Peterson</dc:creator>
-      <link>https://apeterson91.github.io/xstreetvalidated/posts/motivation</link>
+      <link>https://xstreetvalidated.com/posts/motivation</link>
       <description>Urban spaces are more important than ever: Three reasons why and a highlight
 of what's to come.</description>
       <category>Big Picture</category>
-      <guid>https://apeterson91.github.io/xstreetvalidated/posts/motivation</guid>
+      <guid>https://xstreetvalidated.com/posts/motivation</guid>
       <pubDate>Sat, 07 Aug 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://apeterson91.github.io/xstreetvalidated/posts/motivation/spm1.png" medium="image" type="image/png" width="900" height="600"/>
+      <media:content url="https://xstreetvalidated.com/posts/motivation/spm1.png" medium="image" type="image/png" width="900" height="600"/>
     </item>
   </channel>
 </rss>

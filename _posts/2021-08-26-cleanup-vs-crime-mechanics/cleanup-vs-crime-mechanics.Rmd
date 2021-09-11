@@ -23,6 +23,7 @@ draft: true
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(lubridate)
+theme_set(theme_bw() + theme(text=element_text(size=22)))
 ```
 
 > The lowest and vilest alleys in London do not present a more dreadful record 
@@ -140,3 +141,7 @@ phenomena.
 > year in, year out, in such places, and none the wiser." - Sherlock Holmes,
 > The Adventures of the Copper Beaches
 []
+
+## Acknowledgements {.appendix}
+
+Thanks to Robert Svoboda for reading and offering comments on this article.

@@ -1,26 +1,252 @@
 ---
 title: "Spatial Models"
 description: |
-  A short description of the post.
+  Have spatial data? You may need a spatial model!
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 08-26-2021
+date: 9-26-2021
+citation_url: https://xstreetvalidated.com
 output:
   distill::distill_article:
     self_contained: false
+bibliography: spatial.bib
+creative_commons: CC BY
 categories:
-  - Technical
+  - Big Picture 
+draft: true
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
+library(tidycensus)
+library(tmap)
 library(sf)
-library(sfnetworks)
 library(brms)
+library(lubridate)
+library(stars)
+library(spatstat)
+library(leafpop)
+options(tigris_use_cache = TRUE)
+mapview::mapviewOptions(fgb = FALSE)
+theme_set(theme_bw() + theme(text=element_text(size=22)))
+```
+
+What's a spatial model and how does it differ from an "ordinary" model? 
+In this post I'll provide a brief introduction to the three most common 
+classes of spatial data structures and the models most often used with them. 
+While I'll do my best to build these up from the standard linear model 
+commonly used across many quantitative disciplines, this post is no 
+substitute for the more rigorous presentations offered elsewhere. See 
+[@casella2021statistical] or [@gelman2020regression] for a more
+though introduction to regression models and [@banerjee2003hierarchical] for 
+a more thorough exposition on spatial models.
+
+
+# The Ordinary Linear Model
+
+One of the very first models introduced in basic statistics curriculum 
+is the "ordinary linear model" shown below with three unknown variables: 
+$\alpha,\beta$ and $\sigma^2$: 
+
+$$
+y_i = \alpha + \beta x_i + \epsilon_i\\
+\epsilon_i \stackrel{ind}{\sim} N(0,\sigma^2), \quad i=1,...,n.
+$$
+
+This is one of the cornerstone models in applied statistics and for good reason,
+a lot of relationships are linear, or at least approximately, and it offers 
+an interpretable way to understand and test scientific hypotheses about reality.
+
+
+```{r,fig.cap="Scatter plot with true linear model overlaid.",cache = TRUE}
+n <- 20
+x <- runif(n)
+alpha <- 5
+beta <- 2
+sigma <- 1
+epsilon <- rnorm(n,mean=0,sd=sigma)
+y <- alpha + beta*x + epsilon
+tibble(y=y,x=x) %>% 
+  ggplot(aes(y=y,x=x)) + 
+  geom_point() + 
+  geom_abline(intercept = alpha,slope = beta) 
+```
+
+Ordinary linear models are great, I love and use them all the time. However,
+there is a key assumption when writing that cute little "ind" in  the
+$\epsilon \stackrel{ind}{\sim} N(0,\sigma^2)$ that can cause us all sorts of problems.
+
+## Assuming Independence
+
+By writing those three little letters on top of that little squiggly line,
+we're making a *strong* assumption about how we think those data are 
+generated. In effect, we're saying that each $y_i$ does not in anyway depend on 
+any other $y_i'$, or more formally $P(y_i|y_{i'}) = P(y_i)$: the probability 
+of $y_i$ being equal to some value is the same whether we observe $y_{i'}$ 
+or not!
+
+As you can imagine, this is often not the case! In the context of the built 
+environment especially, where we may be concerned with estimating the 
+rate of crime, traffic, human health outcomes, economic productivity, etc.,
+we'd often expect to find that the measurements in one area are very similar
+to the rates in an adjacent area. This idea is so well established, that in
+the field of geography it has been given high status as a "law".
+
+
+>"everything is related to everything else, but near 
+> things are more related than distant things." - Waldo Tobler's First 
+> Law of Geography
+
+Still even after all this exposition, you may find yourself asking a 
+particularly titular question.
+
+![](why_spatial_models.png)
+
+#  Spatial Models
+
+Spatial models, as well as many other classes of models, loosen the
+independence assumption by assuming some structural form of dependence 
+between the observations. The manner in which this dependence or correlation 
+between observations is formed depends on both the system under study as well 
+as the data collected.
+
+We'll briefly consider three classes of spatial data structures and highlight 
+one general family of models commonly used with them.
+
+## Spatial Surfaces
+
+Air pollution, tree cover --- measured by satellite imagery and 
+carbon dioxide levels. Each of these represent 
+a kind of continuous surface across space that one may be interested in modeling 
+but would likely need to account for spatial dependency in so doing. 
+A common method for modeling this class of data is the Gaussian Process, used 
+as a random spatial effect, analogous to typical random effect, as 
+described in [@fitzmaurice2008longitudinal], but now explicitly modeling 
+the spatial dependence, or covariance between two observations, $\Sigma{i,i'}$, 
+through a covariance function 
+$\Sigma_{i,i'} = \kappa(\mathbf{s}_{i},\mathbf{s}_{i'})$, where $\mathbf{s}_{i},
+\mathbf{s}_{i'}$ represent two different spatial locations:
+
+$$
+y_i = \alpha + \beta x_i + b_i + \epsilon_i \\ 
+\mathbf{b} \sim MVN_n(\mathbf{0},\Sigma) \\ 
+\epsilon_i \sim N(0,\sigma^2),
+$$
+
+```{r ozonevis1, fig.cap = "Visualization of average ozone air quality data across Pittsburgh monitors during August 2021. Data taken from the [epa](https://www.epa.gov/outdoor-air-quality-data/)."}
+
+## data taken from 
+# https://www.epa.gov/outdoor-air-quality-data/download-daily-data
+ozone <- read_csv("~/Documents/CityData/Burgh/AirPollution/ad_viz_plotval_data.csv") %>% 
+  st_as_sf(coords = c("SITE_LONGITUDE","SITE_LATITUDE")) %>% 
+  st_set_crs(4326) %>% 
+  rename(ozone = `Daily Max 8-hour Ozone Concentration`) %>% 
+  mutate(Date = mdy(Date)) %>% 
+  filter(month(Date) == 8) %>% 
+  group_by(`Site ID`) %>% 
+  summarise(ozone = mean(ozone)) %>% 
+  ungroup() %>% 
+  select(ozone)  
+
+mapview::mapview(ozone)
 ```
 
 
+```{r gpfit,cache = TRUE,echo = F, message = FALSE, warning = FALSE, include = F}
+df <- read_csv("~/Documents/CityData/Burgh/AirPollution/ad_viz_plotval_data.csv") %>%  
+  rename(ozone = `Daily Max 8-hour Ozone Concentration`) %>% 
+  mutate(Date = mdy(Date),
+         Day = factor(wday(Date))) %>% 
+  filter(month(Date) == 8) %>% 
+  group_by(`Site ID`,SITE_LATITUDE,SITE_LONGITUDE,Day) %>% 
+  summarise(ozone = mean(ozone)) %>% 
+  ungroup()
 
+gpfit <- brm(ozone ~ Day + gp(SITE_LATITUDE,SITE_LONGITUDE), 
+             data = df, 
+             cores = 4)
+```
+
+```{r ozonevis2,cache = TRUE, fig.width = 14, fig.height = 8, fig.cap = "Estimated Ozone Surface across PGH using Neighborhood Centroids as prediction points for each Neighborhood's surface."}
+
+# https://data.wprdc.org/dataset/neighborhoods2
+pgh <- read_sf("~/Documents/CityData/Burgh/Neighborhoods/Neighborhoods_.shp") %>% 
+  st_transform(4326)
+
+cntroids <- pgh %>% dplyr::select(hood) %>% st_centroid()
+
+smples <-  cntroids %>% 
+  as_tibble() %>% 
+  mutate(hood = pgh%>% dplyr::select(hood) %>% pull(hood),
+         SITE_LONGITUDE = map_dbl(geometry,function(x) x[1]),
+         SITE_LATITUDE = map_dbl(geometry,function(x) x[2])) %>% 
+  mutate(Day = 1) %>% 
+  dplyr::select(-geometry)
+
+estimates <- predict(gpfit,newdata = smples)[,1]
+pltdf <- smples %>% 
+  inner_join(pgh %>% dplyr::select(hood)) %>%
+  mutate(ozone = estimates) %>% 
+  st_as_sf()
+
+
+rst <- st_rasterize(pltdf %>% dplyr::select(ozone))
+
+tmap_mode("plot")
+tm_shape(pgh) + 
+  tm_fill() + 
+  tm_shape(rst) + 
+  tm_raster() 
+```
+
+## Areal Spatial Networks
+
+
+$$
+y_i = \alpha + \beta x_i + b_i + \epsilon_i \\ 
+\mathbf{b} \sim MVN_n(\mathbf{0},\Sigma) \\ 
+\Sigma = \tau D(I-\alpha A)
+$$
+
+
+```{r arealvis, cache = TRUE, fig.width = 14, fig.height=8,fig.cap = "Distribution of Median Income Across Allegheny County, PA Census Tracts."}
+## American Community Survey
+pgh_wealth <- get_acs(state = "PA", 
+               county = "Allegheny",
+               geography = "tract",
+               variables = "B19013_001", 
+               geometry = TRUE) %>% 
+  mutate(lwealth=log(estimate)) %>% 
+  filter(!is.na(lwealth))
+
+A <- st_touches(pgh_wealth ,sparse = FALSE)*1
+rownames(A) <- pgh_wealth$GEOID
+
+pgh_wealth %>% 
+  rename(`Median Income` = estimate) %>% 
+  ggplot(aes(fill=`Median Income`)) + 
+  geom_sf() + 
+  theme_void() + 
+  theme(text = element_text(size=22)) + 
+  scale_fill_viridis_c(labels = scales::dollar) + 
+  labs(caption = "Data sourced from the 2015-2019 American Community Survey.")
+```
+
+```{r carfit, cache = TRUE, include=F}
+carfit <- brm(lwealth ~ 1 + car(A, gr = GEOID,type = 'esicar'),
+              data = pgh_wealth %>% st_drop_geometry(),
+              data2 = list(A = A),
+              iter = 5E3,
+              cores = 4)
+```
+
+
+## Spatial Point Processes
+
+```{r sppp, cache = TRUE, fig.width = 14, fig.height = 8, fig.cap = "Fast Food Restaurants (FFRs) and Schools (subjects) across CA."}
+bdf <- rbenvo::create_CA_benvo()
+rbenvo::plot_map(bdf) + theme_void() + theme(legend.title = element_blank())
+```

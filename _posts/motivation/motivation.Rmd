@@ -129,3 +129,7 @@ issues, our cities fail to live up to the full promise that urban spaces
 ought to offer. Identifying the nature of these failings explicitly, as well as
 the solutions that may address them, 
 will form much of the substance of this blog. 
+
+## Acknowledgements {.appendix}
+
+This post was updated on 9/11/2012 with minor editorial changes.

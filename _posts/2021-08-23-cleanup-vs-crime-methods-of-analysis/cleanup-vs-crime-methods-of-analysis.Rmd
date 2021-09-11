@@ -24,6 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(gt)
 library(sf)
+theme_set(theme_bw() + theme(text=element_text(size=22)))
 ```
 # Context
 
@@ -87,7 +88,7 @@ $$
 0 & \text{otherwise}
 \end{cases}
 $$
-where $d(\mathbf{s}_1,\mathbf{s}_2)$ is the distance between the two locations. 
+where $d(\mathbf{s},\mathbf{s}')$ is the distance between the two locations. 
 The KDE,$\hat{y}$ at an arbitrary location $\mathbf{s}$ for a given 
 month would then combine all $i=1,...n$ shooting samples as follows:
 
@@ -336,3 +337,7 @@ approaches may involve. Many of these will continue to be of importance as
 our attention now turns to the causal inference assumptions underlying the 
 statistical methods and estimation procedures discussed here that, if correct,
 extend the results from this experiment to a more widely generalizable result.
+
+## Acknowledgements {.appendix}
+
+Thanks to Robert Svoboda for reading and offering comments on this article.

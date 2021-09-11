@@ -1,39 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/about.html</loc>
+    <loc>https://xstreetvalidated.com/about.html</loc>
     <lastmod>2021-09-04T13:01:56-04:00</lastmod>
   </url>
   <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/</loc>
+    <loc>https://xstreetvalidated.com/</loc>
     <lastmod>2021-09-05T09:10:56-04:00</lastmod>
   </url>
   <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/LICENSE.html</loc>
-    <lastmod>2021-09-05T10:40:00-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/references.html</loc>
+    <loc>https://xstreetvalidated.com/references.html</loc>
     <lastmod>2021-08-19T22:38:11-04:00</lastmod>
   </url>
   <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-26-cleanup-vs-crime-mechanics/</loc>
-    <lastmod>2021-09-05T23:03:41-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-23-cleanup-vs-crime-methods-of-analysis/</loc>
-    <lastmod>2021-09-04T13:05:15-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-07-cleanup-vs-crime/</loc>
-    <lastmod>2021-09-05T22:23:40-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/posts/2021-08-08-causal-inference-in-the-built-environment/</loc>
-    <lastmod>2021-09-05T22:18:07-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://apeterson91.github.io/xstreetvalidated/posts/motivation/</loc>
-    <lastmod>2021-08-29T14:10:29-04:00</lastmod>
+    <loc>https://xstreetvalidated.com/posts/motivation/</loc>
+    <lastmod>2021-09-11T19:26:56-04:00</lastmod>
   </url>
 </urlset>
