@@ -6,7 +6,8 @@ author:
   - name: Adam Peterson
     url: https://apetersonsite.org
 citation_url: https://xstreetvalidated.com
-date: 09-12-2021
+base_url: https://xstreetvalidated.com
+date: 2021-09-12
 output:
   distill::distill_article:
     self_contained: false
@@ -14,7 +15,7 @@ creative_commons: CC BY
 bibliography: BEcausalinference.bib
 categories:
   - Big Picture
-draft: true 
+draft: false 
 ---
 
 
@@ -36,16 +37,15 @@ increase the number of cars on nearby roads? If an individual moves to an
 apartment where they have a greater number of grocery store options to choose 
 from, will they weigh less in 2 months than if they stayed at their current 
 location surrounded by fast food? These are the kinds of causal questions asked 
-by those interested in understanding the built environment. I've written on this 
-subject more broadly 
+by those interested in understanding the built environment. 
+
+I've written on this subject more broadly 
 [elsewhere](https://www.apetersonsite.org/post/causal_inference_preface/), 
 but want to return to it now in a setting where the complexities of 
 working with built environment data can be more explicitly highlighted.
 Note that if you're not familiar with causal inference concepts already you may
 want to read the previous post series linked and/or check out one of the 
-numerous references I suggest 
-[here](https://www.apetersonsite.org/post/phdlessons/) to get fully 
-up to speed.
+numerous references I cite at the end of this post to get fully up to speed.
 
 # 1. Difficulties with Randomization
 
@@ -61,8 +61,8 @@ substantial amount of political decision making, rendering any attempt to
 introduce randomness a doomed prospect from the start.
 As the reader may be aware, randomization is key to ensuring that the 
 units of analysis - individuals, streets, etc. -  are comparable.
-That is, there is no reason to think *a priori* that those who have been treated 
-or exposed are any different from those in the control group, the unexposed. 
+That is, there is no reason to think that those who have been treated or 
+exposed are any different from those in the control group, the unexposed. 
 
 <aside>
 If you want to see one interesting case where an environmental exposure
@@ -73,11 +73,11 @@ This paper will be discussed soon!
 
 This is obviously not the case in the built environment. We observe differences
 in the underlying populations associated with certain built environment 
-exposures constantly. Dense, walk-able neighborhoods, tend to be much more 
-expensive than their suburban counterparts. Wealth is correlated with 
+exposures constantly. For example, dense walkable neighborhoods tend to be 
+much more expensive than their suburban counterparts. Wealth is correlated with 
 education, as well as number of other factors and so one might expect a wide 
-range of different health outcomes between those in dense walk-able 
-neighborhoods, for example, and their more rural counterparts that are not due to 
+range of different health outcomes between those in walkable 
+neighborhoods and their more rural counterparts that are not due to 
 the built environment at all, but rather the wealth and/or education with which 
 they are correlated. Adjusting for these factors in order to create as 
 comparable a comparison as possible is crucial, if one is to trust the 
@@ -104,18 +104,20 @@ pgh_wealth %>%
 
 # 2. Interference
 
-Even if one were able to randomize some treatment to a built environment 
-feature^[any amenity or structure in the built environment, 
-e.g. sidewalk availability or, in this case, vacant lots] (BEF), one then has to 
+Even if one were able to randomize exposure to some built environment 
+feature^[Catch-all term referring to any amenity or structure in the built environment. 
+Examples include sidewalk availability, grocery stores or tree cover.] (BEF), one then has to 
 consider the effects of *interference*. Interference is the name given to the
 phenomenon when an intervention or treatment on one entity affects the 
 outcome of another. A violation of the commonly held Stable Unit 
-Treatment Value Assumption or SUTVA, interference rears its heads often 
-in the built environment. Consider our example with upzoning. Changing the 
+Treatment Value Assumption or [SUTVA](https://tinyurl.com/cbezj9uu), 
+interference rears its heads often in the built environment. 
+
+Consider our example with upzoning. Changing the 
 zoning on a plot of land will likely affect not only the number of cars on the 
 street immediately in front of it but also other nearby streets. These
 streets traffic levels can "interfere" with one another, making a simple 
-causal estimate more difficult. Decomposing 
+causal estimate more difficult to derive. Decomposing 
 these effects across related units typically requires assumptions and/or 
 prior understanding of the system under study. As such,
 interference can represent a major obstacle to making progress in this space.
@@ -150,13 +152,14 @@ p1
 
 # 3. Homogeneity, Additivity and More
 
-Still more problems await! In trying to understand how certain built environment
-features may affect human health or other aspects of the built environment,
+Still more problems await! In trying to understand how certain BEFs 
+may affect human health or other aspects of the built environment,
 we'll likely have to make even further assumptions. In our example with grocery
 stores, we'll likely need to make some assumption that say, Kroger and Meier
 are equivalent grocery stores. This could be more justified than saying 
 that the local farmer's market could also merit the label of a "grocery store". 
-Assuming homogeneity in this manner greatly simplifies our modeling, but 
+Assuming homogeneity in this manner greatly simplifies our modeling, and 
+potentially increases our ability to detect an effect, but 
 also runs us into conflicting with an assumption of 
 [consistency](https://www.apetersonsite.org/post/causal_inference_preface/) at 
 the heart of causal inference. 
@@ -171,6 +174,11 @@ appreciable weight that they wouldn't have otherwise? Probably not - otherwise
 those individuals living in dense mixed-use areas like New York City and other 
 big cities would be huge! The exposure effect is more likely to be 
 *log additive*, but this can be more difficult to model mathematically.
+
+<aside>
+See [@peterson2021spatial] for an example of where these ideas are put 
+into practice.
+</aside>
 
 Even now, after listing all these challenges, I don't want to leave you with the 
 impression that we've covered everything. Other obstacles may still rear their 
@@ -206,9 +214,8 @@ p2
 # Solutions
 
 At this point, it may seem as though there is no way we can ever hope 
-to understand the built environment amidst all the many non-randomized, 
-correlated and interfering forces at work. 
-Fear not, there are still *some* things we can do.
+to understand the built environment amidst the many correlated and 
+interfering forces at work. Fear not, there are still *some* things we can do.
 Though we'll likely never have the same level of confidence in our results 
 as we would in a randomized control trial, we can try to incorporate more 
 information through regression, narrow our focus with difference in 

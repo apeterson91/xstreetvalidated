@@ -12,7 +12,17 @@
       <link>https://xstreetvalidated.com</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 07 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Causal Inference in the Built Environment</title>
+      <dc:creator>Adam Peterson</dc:creator>
+      <link>https://xstreetvalidated.com/posts/2021-09-12-causal-inference-in-the-built-environment</link>
+      <description>How can we know how to best change our environment?</description>
+      <category>Big Picture</category>
+      <guid>https://xstreetvalidated.com/posts/2021-09-12-causal-inference-in-the-built-environment</guid>
+      <pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://xstreetvalidated.com/posts/2021-09-12-causal-inference-in-the-built-environment/causal-inference-in-the-built-environment_files/figure-html5/wealthvis-1.png" medium="image" type="image/png" width="2304" height="1536"/>
+    </item>
     <item>
       <title>Motivation</title>
       <dc:creator>Adam Peterson</dc:creator>
