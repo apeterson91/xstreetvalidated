@@ -5,7 +5,7 @@ description: |
   XStreetValidated
 output_dir: "docs"
 base_url: https://xstreetvalidated.com
-google_analytics: "G-KGJXYTD3D4"
+google_analytics: "UA-207384038-1"
 collections: 
   posts:
     subscribe: _subscribe.html
