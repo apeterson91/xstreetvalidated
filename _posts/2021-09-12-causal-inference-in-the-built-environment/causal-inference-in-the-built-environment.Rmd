@@ -229,4 +229,5 @@ cited here [@hernan2010causal;@gelman2020regression;@angrist2014mastering;@morga
 
 ## Acknowledgements {.appendix}
 
-Thanks to Robert Svoboda for reading and offering comments on this article.
+Thanks to [Robert Svoboda](https://www.linkedin.com/in/rcsvoboda/) for reading 
+and offering comments on this article.

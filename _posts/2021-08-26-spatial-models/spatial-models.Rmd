@@ -5,7 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 9-26-2021
+date: 10-02-2021
 citation_url: https://xstreetvalidated.com
 output:
   distill::distill_article:
@@ -14,7 +14,8 @@ bibliography: spatial.bib
 creative_commons: CC BY
 categories:
   - Big Picture 
-draft: true
+  - Technical
+draft: false
 ---
 
 
@@ -36,6 +37,13 @@ mapview::mapviewOptions(fgb = FALSE)
 theme_set(theme_bw() + theme(text=element_text(size=22)))
 ```
 
+In studying the built environment and furthering our understanding of how 
+to build better urban spaces, we're often forced to study data that are spatially 
+indexed --- that is, the measurement's spatial location is relevant to the 
+project of interest. In order to handle this class of data we consequently 
+need models that are specifically built to handle that spatial component: a 
+spatial model.
+
 What's a spatial model and how does it differ from a "non-spatial" model? 
 In this post I'll give an answer to these questions and more by providing a 
 brief introduction to the three most common classes of spatial data structures 
@@ -44,7 +52,8 @@ While I'll do my best to build these up from the standard linear model
 commonly used across many quantitative disciplines, this post is no 
 substitute for the more rigorous presentations offered elsewhere. See 
 [@casella2021statistical;@gelman2020regression] or[@fitzmaurice2008longitudinal] 
-for a more though introduction to regression models and 
+for a more thorough introduction to standard regression models, mixed effects 
+models and 
 [@banerjee2003hierarchical;@diggle2006spatio] for a more thorough introduction 
 to spatial models.
 
@@ -57,7 +66,7 @@ $\alpha,\beta$ and $\sigma^2$:
 
 $$
 y_i = \alpha + \beta x_i + \epsilon_i\\
-\epsilon_i \stackrel{ind}{\sim} N(0,\sigma^2), \quad i=1,...,n.
+\epsilon_i \stackrel{iid}{\sim} N(0,\sigma^2), \quad i=1,...,n.
 $$
 
 <aside>
@@ -86,16 +95,20 @@ tibble(y=y,x=x) %>%
 ```
 
 Ordinary linear models are great, I love and use them all the time. However,
-there is a key assumption when writing that cute little "ind" in  the
-$\epsilon \stackrel{ind}{\sim} N(0,\sigma^2)$ that can cause us all sorts of 
+there is a key assumption when writing that cute little "iid" in  the
+$\epsilon \stackrel{iid}{\sim} N(0,\sigma^2)$ that can cause us all sorts of 
 problems.
+
+<aside>
+*iid* stands for [independent and identically distributed](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables).
+</aside>
 
 ## Assuming Independence
 
 By writing those three little letters on top of that little squiggly line,
 we're making a *strong* assumption about how we think those data are 
 generated. In effect, we're saying that each $y_i$ does not in anyway depend on 
-any other $y_i'$, or more formally for any $i\neq i'$, $P(y_i|y_{i'}) = P(y_i)$:
+any other $y_i'$, or more formally, for any $i\neq i'$, $P(y_i|y_{i'}) = P(y_i)$:
 the probability of $y_i$ being equal to some value is the same whether we 
 observe $y_{i'}$ or not!
 
@@ -125,10 +138,10 @@ Spatial models, as well as many other classes of models, remove the
 independence assumption by assuming some structural form of dependence 
 between observations. Accounting for this is not only crucial to 
 conducting valid inference --- our ability to credibly identify the effect 
-of some exposure or intervention of interest --- it also helps us predict 
-measures in areas where we might not otherwise be able to collect data. The 
-manner in which this dependence or correlation between observations is formed 
-depends on both the system under study as well as the data collected. 
+of some exposure or intervention of interest --- it also helps us to better
+predict measures in areas where we might not otherwise be able to collect data. 
+The manner in which this dependence or correlation between observations is 
+formed depends on both the system under study as well as the data collected. 
 
 ## Spatial Surfaces
 
@@ -146,7 +159,7 @@ $\Sigma_{i,i'} = \kappa(\mathbf{s}_{i},\mathbf{s}_{i'})$, where $\mathbf{s}_{i},
 $$
 y_i = \alpha + \beta x_i + b_i + \epsilon_i \\ 
 \mathbf{b} \sim MVN_n(\mathbf{0},\Sigma) \\ 
-\epsilon_i \sim N(0,\sigma^2),
+\epsilon_i \sim N(0,\sigma^2).
 $$
 <aside>
 one common $\kappa(\cdot,\cdot)$ is:
@@ -157,7 +170,7 @@ Allegheny county for the month of August, 2021, shown in
 Figure \@ref(fig:ozonevis1).
 
 
-```{r ozonevis1, fig.cap="Visualization of average ozone air quality data across Pittsburgh monitors during August 2021. Data taken from the [epa](https://www.epa.gov/outdoor-air-quality-data/)"}
+```{r ozonevis1, fig.cap="Visualization of average ozone air quality data across Pittsburgh monitors during August 2021. Data taken from the [EPA](https://www.epa.gov/outdoor-air-quality-data/)."}
 
 ## data taken from 
 # https://www.epa.gov/outdoor-air-quality-data/download-daily-data
@@ -195,13 +208,15 @@ gpfit <- brm(ozone ~ Day + gp(SITE_LATITUDE,SITE_LONGITUDE),
 Even though we only observe specific points, we understand that the ozone 
 levels could be continuously observed across the entire county. Fitting 
 a GP model allows us to estimate that underlying spatial dependence and use 
-the few points we observed to interpolate across the wider space. 
+the few points we observed to interpolate across the wider space: Two $b_i$, 
+$b_{i'}$ terms will be more similar the smaller the distance is 
+between the two points' spatial locations.
 
 Looking at Figure \@ref(fig:ozonevis2), you can see this point illustrated.
 While we only had a small number of points available, we can now see the 
 estimated surface across all the neighborhoods of Pittsburgh.
 
-```{r ozonevis2,cache = TRUE,fig.cap = "Estimated Ozone Surface across PGH using Neighborhood Centroids as prediction points for each Neighborhood's surface."}
+```{r ozonevis2,cache = TRUE, preview = TRUE, fig.cap = "Estimated Ozone Surface across PGH using Neighborhood Centroids as prediction points for each Neighborhood's surface."}
 
 # https://data.wprdc.org/dataset/neighborhoods2
 pgh <- read_sf("~/Documents/CityData/Burgh/Neighborhoods/Neighborhoods_.shp") %>% 
@@ -237,7 +252,7 @@ tm_shape(pgh) +
 ## Areal Spatial Networks
 
 In contrast to points that we know are surfaces, we can also observe measures 
-at an areal level, census tracts, neighborhoods, city streets, etc.  where 
+at an areal level: census tracts, neighborhoods, city streets, etc.  where 
 the spatial correlation isn't understood in terms of the distance between two
 points, but rather the adjacency of the two observed units in space. 
 
@@ -277,17 +292,24 @@ Conditional Autoregressive, or CAR model shown below:
 $$
 y_i = \alpha + \beta x_i + b_i + \epsilon_i \\ 
 \mathbf{b} \sim MVN_n(\mathbf{0},\Sigma) \\ 
-\Sigma = \tau D(I-\alpha \mathbf{A})
+\Sigma = \tau D(I-\alpha \mathbf{A}).
 $$
+<aside>
+What are all those $\tau$'s and $\alpha$'s doing? It's not important 
+for this post to know exactly what they do, but conceptually they 
+can be understood as tuning the strength of the spatial correlation
+across neighboring observations.
+</aside>
+
 Where before the correlation between two points, $\Sigma_{i,i'}$, 
 was a function of the distance between those points, now it is a function 
-of the adjacency matrix $\mathbf{A}$ which has a 1 in row $i$ and column $j$
-if the $i$th and $j$th observation are connected and is 0 otherwise.
+of the adjacency matrix $\mathbf{A}$ which has a 1 in row $i$ and column $i$'
+if the $i$th and $i$'th observation are adjacent and 0 otherwise.
 
 Similar to how we could use the $\kappa(\cdot,\cdot)$ function in the GP 
 to learn the correlation of observations across space, the CAR model uses 
 the adjacency matrix and associated parameters to learn the how measures 
-may be spatially correlated across the spatial network of observations.
+may be correlated across the spatial network of observations.
 
 
 
@@ -311,7 +333,7 @@ are not only observed as points, they are also modeled as points.
 
 Consider the locations of your favorite nearby fast food restaurants (FFRs). 
 These can be plotted as points, as in Figure \@ref(fig:sppp), and modeled as 
-realizations from a **point process**.
+realizations from a point process.
 
 ```{r sppp, cache = TRUE, fig.cap = "Fast Food Restaurants (FFRs) and Schools across Los Angeles."}
 bdf <- rbenvo::create_CA_benvo()
@@ -328,25 +350,30 @@ simply using the points as data to condition on in some other model of interest.
 
 For example, in the FFR example above, we may be interested in how the 
 FFRs are distributed across space from the schools. In this setting one 
-could model the distances of the FFRs from the schools as 
-arising from an Inhomogeneous Poisson Process, estimating the spatial 
-intensity function $\Lambda(d)$ of how likely a FFR is to be located at 
-distance $d$ from a school.
+could model the set of distances, $\{d\}_{i=1}^{n}$, of the FFRs from the 
+schools as arising from an Inhomogeneous Poisson Process 
+([IPP](https://en.wikipedia.org/wiki/Poisson_point_process#Inhomogeneous_Poisson_point_process)),
+estimating the spatial intensity function, $\Lambda(d)$, of how likely a FFR is 
+to be located at distance $d$ from a school.
 
 $$
 \{d\}_{i=1}^{n}|\Lambda(d) \sim \text{IPP}(\Lambda(d))
 $$
-
+<aside>
+See [here](https://www.apetersonsite.org/publication/howclose/) for more on
+this idea.
+</aside>
 # Conclusion
 
-This has been a whirlwind tour of spatial models that I hope has given a taste
-of what spatial models look like and how they can be used. These models 
-will likely come up again and again throughout the course of this blog, as 
-so many objects in the built environment are studied across space (and time) 
-and so it is worth understanding early-on, if only conceptually, before 
-they start to pop up in an applied analysis.
+This has been a whirlwind tour that I hope has given a taste of what spatial 
+models look like and how they can be used. These models will likely come up 
+again and again throughout the course of this blog, as so many objects in the 
+built environment are studied across space, so they are worth understanding 
+early-on conceptually before they start to pop up in a "real-world" setting.
 
 
 ## Acknowledgements {.appendix}
 
-Thanks to Kevin Putschko for reading and offering comments on this article.
+Thanks to [Kevin Putschko](https://www.linkedin.com/in/kevinputschko/) and
+[Robert Svoboda](https://www.linkedin.com/in/rcsvoboda/) for 
+reading and offering comments on this article.

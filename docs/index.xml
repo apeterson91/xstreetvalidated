@@ -12,7 +12,18 @@
       <link>https://xstreetvalidated.com</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 12 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Spatial Models</title>
+      <dc:creator>Adam Peterson</dc:creator>
+      <link>https://xstreetvalidated.com/posts/2021-08-26-spatial-models</link>
+      <description>Have spatial data? You may need a spatial model!</description>
+      <category>Big Picture</category>
+      <category>Technical</category>
+      <guid>https://xstreetvalidated.com/posts/2021-08-26-spatial-models</guid>
+      <pubDate>Sat, 02 Oct 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://xstreetvalidated.com/posts/2021-08-26-spatial-models/spatial-models_files/figure-html5/ozonevis2-1.png" medium="image" type="image/png" width="2688" height="1536"/>
+    </item>
     <item>
       <title>Causal Inference in the Built Environment</title>
       <dc:creator>Adam Peterson</dc:creator>

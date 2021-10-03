@@ -1,0 +1,97 @@
+---
+title: "Shadyside Connector: Background Information"
+description: |
+  A short description of the post.
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.com/
+date: 10-02-2021
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(lubridate)
+library(sf)
+```
+
+```{r}
+hoods <- read_sf("~/Documents/CityData/Burgh/Neighborhoods/Neighborhoods_.shp")
+tdf <- read_csv("~/Documents/CityData/Burgh/311/311_data.csv")
+stsdf <- read_sf("~/Documents/CityData/Burgh/alleghenycounty_streetcenterlines202107/AlleghenyCounty_StreetCenterlines202107.shp") %>%
+  filter(str_detect(FULL_NAME,"BUSWAY",negate=T)) %>%
+  st_join(hoods %>% filter(hood=="Shadyside"),
+          left = FALSE) %>% 
+  st_transform(st_crs(hoods))
+
+crashes <- read_csv("~/Documents/CityData/Burgh/Crash Data/alleghenycrashdata.csv") %>% 
+  filter(CRASH_YEAR>=2015) %>% 
+  filter(!is.na(DEC_LAT),!is.na(DEC_LONG)) %>% 
+  st_as_sf(.,coords=c("DEC_LONG","DEC_LAT")) %>% 
+  st_set_crs(4326) %>% 
+  sstsdf %>% 
+```
+
+
+```{r}
+tdf %>% 
+  filter(NEIGHBORHOOD == "Shadyside") %>% 
+  mutate(Year = year(CREATED_ON)) %>%
+  group_by(Year,REQUEST_TYPE) %>% 
+  count() %>%  
+  arrange(desc(Year),desc(n)) %>% 
+  DT::datatable()
+```
+
+```{r}
+hoods %>% 
+    select(hood) %>% 
+    st_join(crashes) %>% 
+    st_drop_geometry() %>% 
+    group_by(CRASH_YEAR,hood) %>% 
+    count() %>% 
+  left_join(hoods %>% 
+              select(hood)) %>% 
+  ungroup() %>% 
+  st_as_sf() %>% 
+  ggplot() + 
+  geom_sf(aes(fill=n)) + 
+  theme_void() + facet_wrap(~CRASH_YEAR) + 
+  scale_fill_viridis_c()
+```
+
+
+```{r}
+crashes %>% 
+  filter(CRASH_YEAR == 2019) %>% 
+  mutate(COLLISION_TYPE = factor(COLLISION_TYPE,
+                                 labels = c("Non-Collision",
+                                            "Rear-End",
+                                            "Head-On",
+                                            "Rear-to-rear",
+                                            "Angle",
+                                            "Sideswipe (same direction)",
+                                            "Sideswipe (opp direction)",
+                                            "Hit fixed object",
+                                            "Hit pedestrian",
+                                            "Other/Unknown",
+                                            "Other/Unknown",
+                                            "Other/Unknown"))) %>% 
+  select(COLLISION_TYPE) %>% 
+    st_join(hoods %>% 
+              select(hood) %>% 
+              filter(hood == "Shadyside"),left = FALSE) %>% 
+  ggplot() + 
+  geom_sf(data = hoods %>% filter(hood == "Shadyside")) +
+  geom_sf(data = stsdf) + 
+  geom_sf(aes(color = COLLISION_TYPE)) +
+  theme_void() + 
+  # facet_wrap(~CRASH_YEAR) + 
+  scale_fill_viridis_c() + 
+  theme(legend.title = element_blank())
+```

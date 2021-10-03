@@ -1,7 +1,8 @@
 ## X Street Validated
 
-This repository holds the files and some code for the X Street Validated blog 
-discussing all things urban and statistical. 
+This repository holds the files and some code for the 
+[X Street Validated blog](https://xstreetvalidated.com/) discussing all things 
+urban and statistical. 
 
 This is a [distill](https://rstudio.github.io/distill/blog.html) blog and 
 as such uses R markdown to author posts. If you're looking for the 
