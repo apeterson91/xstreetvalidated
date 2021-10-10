@@ -8,7 +8,10 @@ author:
 date: 10-10-2021
 output: distill::distill_article
 citation_url: https://xstreetvalidated.com
-draft: true 
+creative_commons: CC BY
+categories:
+  - Big Picture 
+draft: false 
 preview: proposed.jpeg
 ---
 
@@ -25,32 +28,35 @@ mapview::mapviewOptions(fgb = FALSE)
 
 I recently had the great joy of participating in the civil engagement process 
 at the Shadyside Connector virtual meeting hosted by the City of Pittsburgh's
-[Department of Mobility and Infrastructure](https://pittsburghpa.gov/domi/).
-The video of the night's meeting can be found 
-[here](https://youtu.be/Svuex_-1nQE) and the slides can be found [here](https://mcusercontent.com/231e8697ed9b0d699b1b55c82/files/2c626c6a-8c49-5727-eb6b-bc016116ddd8/pdfresizer.com_pdf_resize_1_.pdf).
+[Department of Mobility and Infrastructure](https://pittsburghpa.gov/domi/) 
+(DOMI). If you're interested, the video of the night's meeting can be found 
+[here](https://youtu.be/Svuex_-1nQE) along with
+[slides](https://mcusercontent.com/231e8697ed9b0d699b1b55c82/files/2c626c6a-8c49-5727-eb6b-bc016116ddd8/pdfresizer.com_pdf_resize_1_.pdf) and 
+[map](https://drive.google.com/file/d/1ofRCt_C5jcxq4XTt7xskD1lUGaD4DLh1/view) of
+the street with the proposed changes for the first phase.
 
 This meeting, and the project that is its focus, captures so many different 
 aspects of what the planning process looks like, from the high level concept,
 to on the ground data collection, public engagement, comment periods and so on,
 that I thought it offered the perfect opportunity to give a "real-world" 
-application for many of the statistical ideas that are also discussed on this 
-blog. This project is currently ongoing, so there will be more to write about
-as time goes on. For now we'll focus on the background leading up to this 
+application for the many statistical and substantive ideas that are discussed 
+on this blog. This project is currently ongoing, so there will be more to write 
+about as time goes on. For now, we'll focus on the background leading up to this 
 meeting, the proposed changes to the neighborhood's streets and the 
 plan for implementing these changes in the years to come.
 
 
 ```{r bikeplan, preview = TRUE,fig.cap="Proposed Bike Network from Pittsburgh's Bike+ Plan. Figure taken from pittsburghpa.gov"}
-knitr::include_graphics(path = "https://apps.pittsburghpa.gov/redtail/images/10132_2020-06-16_Pittsburgh_Complete_Streets_Proposed_Bicycle_Network.jpeg")
+knitr::include_graphics(path = "proposed.jpeg")
 ```
 
 # Overview
 
 This meeting comes amid a larger effort by the city to expand and improve 
 the city bike network's^[An all encompassing term, including dedicated bike lanes as 
-well as streets without dedicated lanes where cyclists feel safe riding] access 
-and safety. The high level overview of this plan is contained in the 
-city's [Bike+ Plan](https://pittsburghpa.gov/domi/bikeplan) 
+well as streets without dedicated lanes where cyclists (should) feel safe 
+riding] access and safety. The high level overview of this plan is contained in 
+the city's [Bike+ Plan](https://pittsburghpa.gov/domi/bikeplan) 
 (See Figure \@ref(fig:bikeplan)) which provides a long term vision of how the
 city hopes to expand the bike network. This meeting specifically focused on the
 "Neighborhood Connector" connecting the East Liberty and Shadyside 
@@ -62,27 +68,43 @@ for improving cycling safety.
 The city of Pittsburgh also recently announced a 50 year mobility 
 [plan](https://triblive.com/local/pittsburgh-unveils-50-year-mobility-plan-with-hyperloop-gondolas-bike-network/) 
 which includes all sorts of eyebrow raising ideas like gondolas, hyperloops, 
-and good'ol fashioned bike lanes.
+as well as good'ol fashioned bike lanes.
 </aside>
 
 
-```{r shady,fig.cap = "Shadyside neighborhood and Ellsworth Street. Neighborhood highlighted in grey, street in blue. Data from wprdc.org"}
+```{r shady, warning = FALSE, fig.cap = "Shadyside neighborhood and Ellsworth Street. Neighborhood highlighted in grey, street in blue. Connector in Green. Data from wprdc.org"}
 shadyside <- read_sf("~/Documents/CityData/Burgh/Neighborhoods/Neighborhoods_.shp") %>% 
   filter(hood == "Shadyside") %>% 
   transmute(Object = "Shadyside")
 
-ellsworth <- read_sf("~/Documents/CityData/Burgh/alleghenycounty_streetcenterlines202107/AlleghenyCounty_StreetCenterlines202107.shp") %>% 
+sts_fp <- "~/Documents/CityData/Burgh/alleghenycounty_streetcenterlines202107/AlleghenyCounty_StreetCenterlines202107.shp"
+
+ellsworth <- read_sf(sts_fp) %>% 
   filter(str_detect(ST_NAME,"ELLSWORTH")) %>% 
   st_filter(shadyside) %>% 
   st_union() %>% 
   st_as_sf() %>% 
   rename(geometry = x) %>% 
   transmute(Object = "Ellsworth")
-  
 
-mp <- mapview::mapview(list(shadyside,ellsworth),
+
+# west_aiken <- st_polygon(list(rbind(c(-79.94721385356186,40.44709489815797),
+#                         c(-79.94869443293808, 40.450377027948846),
+#                       c(-79.93708583232163, 40.45346306347182),
+#                       c(-79.93421050425766, 40.448401237675085),
+#                       c(-79.94721385356186, 40.44709489815797)))) %>% 
+#   st_sfc(.,crs=4326) %>% 
+#   st_transform(st_crs(ellsworth))
+
+# ells <- st_difference(ellsworth,west_aiken)
+# connector <- st_intersection(ellsworth,west_aiken) %>% 
+#   mutate(Object = "Connector")
+
+mp <- mapview::mapview(list(shadyside,
+                            ellsworth),
                  layer.name = c("Shadyside","Ellsworth"), 
                  col.regions = c("grey","blue"))
+
 mp@map
 ```
 
@@ -101,10 +123,18 @@ The goals for the connector plan are as follows (taken from their slides):
 * Reduces amount and severity of crashes
    * Increases safety for all users including motorists
    * Maintains vehicular access and parking
-   
-While these goals aren't quite as quantitative as a statistician would 
-like, they still speak to values many members of the community share --- 
-an important feature in all political discussions.
+
+Each of these goals offers a number of opportunities for 
+statistical innovations. I hope to cover these ideas in a future blog post, 
+but one point that came to mind was how far the effect a given change might 
+extend down the road; if we place one speed bump on a stretch of road, what is 
+the expected decrease in traffic volume that we might expect at the point where 
+the bump is added and how does that effect diminish further down the road.
+
+Finally, while these goals are laudable, they may not be achievable: 
+It was admitted in the course of the presentation that at least one 
+of the more quantitative goals --- reducing vehicle volumes to below 3000 --- 
+was likely not attainable with the changes that were being planned. 
 
 
 ```{r trafficcrashes,fig.cap="Traffic and accidents on Ellsworth Ave. Traffic counts from 2021, injuries from 2018-2019. Posted speed limit on this street is 25 miles per hour."}
@@ -130,17 +160,12 @@ mp <- mapview::mapview(ellsworth,legend.display = FALSE) +
 mp@map
 ```
 
-The proposed "treatments"^[A term I love for framing traffic, accidents, etc. 
-as public health ills.] consist of a number of street shape alterations ranging
-from "rounding out" the corners at stop signs (See Figure \@ref(fig:tx)), adding "chokers" or street 
-narrowing concrete planters and roundabouts. The last of these recognize the 
-realities of how cars and bikes *actually* use stop signs --- they don't. 
-Whether these various treatments are sufficient to reach the goals listed above 
-is debatable and several of the [questions](https://youtu.be/Svuex_-1nQE?t=3708) 
-aired at the end of the meeting highlighted this point, while still 
-appreciating the approach the city's engineering team was taking: flexible at 
-the beginning, committing to more long term infrastructure changes after 
-initial evaluation. 
+The proposed changes or "treatments"^[A term I love for framing traffic, 
+accidents, etc. as public health ills.] consist of a number of street shape 
+alterations ranging from "rounding out" the corners at stop signs 
+(See Figure \@ref(fig:tx)), adding street narrowing concrete 
+planters and roundabouts. The last of these recognize the realities of how 
+many cars and bikes actually use stop signs --- they don't. 
 
 ```{r tx,fig.cap="Example Treatment used to 'round out' Stop Sign areas. Figure taken meeting slides linked above."}
 knitr::include_graphics("bollards.png")
@@ -164,31 +189,53 @@ mp@map
 ```
 
 
-# What Lies Ahead?
+## What Lies Ahead?
 
-I enjoyed this meeting and plan to return to this topic again in the weeks and 
-months to come, both to provide a perspective in evaluating the proposed 
-treatments --- pending data access --- and to discuss the various social 
-and political dynamics that undercut these meetings. 
+The changes will occur in three phases, moving from west to east with phase one 
+changes occurring on the stretch of Ellsworth west of Aiken, the second 
+occurring between Aiken and Negley, and the final phase extending from 
+Negley to Shady. Phase 1 is expected to occur in the final months of this year
+with subsequent changes rolled out in the years to come. In bullet form:
 
-While I'm very happy to say that the meeting was conducted in a friendly and 
-civil manner, due in no small part to the professionalism of the Dept. of 
-Mobility and Infrastructure, MoveForward, and BikePGH staff, there were several
-issues that predominate here and across the U.S. that raised their heads at this 
-meeting, warning of potential conflict to come. These included (1) The issue of
-parking and whether more or less space should be given to parking, (2) how 
-space for cyclists should be prioritized relative to cars, and (3) the rate of 
-progress in developing these, largely bike-friendly plans, relative to 
-car street development. Many of these spoke to a generational gap --- I 
-recall hearing [frustration](https://youtu.be/Svuex_-1nQE?t=5112) on the part 
-of the younger people on the call that the 
-[progress](https://youtu.be/Svuex_-1nQE?t=3818) of bike friendly 
-infrastructure wasn't happening quickly enough and concern on the part of 
-older individuals at to [what exactly](https://youtu.be/Svuex_-1nQE?t=4474) 
-might happen and how it might affect 
-[their parking](https://youtu.be/Svuex_-1nQE?t=3772). Though I also think it is 
-fair to say that even amidst their concern or impatience, everyone was 
-generally very supportive.
+* October 2021 / Spring 2022
+
+   * Initial Installation
+
+* 2022 
+
+   * Install traffic circles
+
+* 2023 
+
+   * Potential material upgrades at key locations
+   
+* 2025 
+
+   * Signal upgrades
+
+
+## Final Thoughts
+
+I enjoyed this meeting and the "pop-up" meeting that followed shortly after. 
+I  plan to return to this topic again in the weeks and months to come, both to 
+provide a perspective in evaluating the proposed treatments --- pending data 
+access --- and to discuss the various social and political dynamics that 
+undercut these meetings. 
+
+On that note, while I'm very happy to say that the meeting was conducted in a 
+friendly and civil manner, due in no small part to the professionalism of 
+the DOMI, MoveForward, and BikePGH staff, there was an underlying 
+tension between those who predominantly drive and those who predominantly walk 
+or bike. While not necessarily the case across the neighborhood at large, this 
+did seem to manifest across a generational gap; I recall hearing 
+[frustration](https://youtu.be/Svuex_-1nQE?t=5112) on the part of the younger 
+people on the call that the [progress](https://youtu.be/Svuex_-1nQE?t=3818) of 
+bike friendly infrastructure wasn't happening quickly enough and concern on the 
+part of older individuals at to
+[what exactly](https://youtu.be/Svuex_-1nQE?t=4474) might happen and how it 
+might affect [their parking](https://youtu.be/Svuex_-1nQE?t=3772). Though I also 
+think it is fair to say that even amidst their concern or impatience, everyone 
+was generally very supportive.
 
 Whether young or old, **everyone** deserves to use streets safely and I am 
 excited to see how the community works together as this project progresses.
@@ -198,10 +245,6 @@ excited to see how the community works together as this project progresses.
 
 I live near Shadyside and bike in this neighborhood and on Ellsworth regularly. 
 While I'd like to think I can still offer a dispassionate view of this topic, 
-I would be remiss if I didn't mention this very important point to you, 
-dear reader, so that you might judge my opinions accordingly.
+I would be remiss if I didn't mention this point to you, dear reader, so that 
+you might judge my opinions accordingly.
 
-## Acknowledgements  {.appendix}
-
-Thanks to [Robert Svoboda](https://www.linkedin.com/in/rcsvoboda/) for reading 
-and offering comments on this article.
