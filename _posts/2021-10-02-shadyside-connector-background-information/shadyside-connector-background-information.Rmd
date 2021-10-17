@@ -5,68 +5,199 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.com/
-date: 10-02-2021
+date: 10-10-2021
 output:
   distill::distill_article:
     self_contained: false
+creative_commons: CC BY
+categories:
+  - Big Picture 
+  - Technical
+  - Supplement
 draft: true
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+options(tigris_use_cache = TRUE)
 library(tidyverse)
 library(lubridate)
 library(sf)
+library(tidycensus)
+library(gt)
+library(brms)
 ```
 
-```{r}
+```{r data}
 hoods <- read_sf("~/Documents/CityData/Burgh/Neighborhoods/Neighborhoods_.shp")
+
 tdf <- read_csv("~/Documents/CityData/Burgh/311/311_data.csv")
+
 stsdf <- read_sf("~/Documents/CityData/Burgh/alleghenycounty_streetcenterlines202107/AlleghenyCounty_StreetCenterlines202107.shp") %>%
   filter(str_detect(FULL_NAME,"BUSWAY",negate=T)) %>%
   st_join(hoods %>% filter(hood=="Shadyside"),
           left = FALSE) %>% 
-  st_transform(st_crs(hoods))
+  mutate(street_ix = 1:n())
 
 crashes <- read_csv("~/Documents/CityData/Burgh/Crash Data/alleghenycrashdata.csv") %>% 
   filter(CRASH_YEAR>=2015) %>% 
   filter(!is.na(DEC_LAT),!is.na(DEC_LONG)) %>% 
   st_as_sf(.,coords=c("DEC_LONG","DEC_LAT")) %>% 
-  st_set_crs(4326) %>% 
-  sstsdf %>% 
+  st_set_crs(4326) 
 ```
 
+```{r acsquery, cache = TRUE}
+dsdf <- get_acs(state = "PA", 
+               county = "Allegheny",
+               geography = "tract",
+               variables = c("B19013_001",
+                             "B01001_001", ## Total
+                             "B01001_002", ## Male
+                             "B01001_026", ## Female
+                             "B02001_002", ## White
+                             "B02001_003", ## Black
+                             "B02001_005",## Asian
+                             "B02001_008", ## >=2 Races
+                             "B01002_001" # Median Age
+               ),
+               geometry = TRUE) %>% 
+  mutate(Q = case_when(variable == "B19013_001" ~ "Median Income",
+                              variable == "B01001_001" ~ "Population",
+                              variable == "B01001_026" ~ "# Female",
+                              variable == "B02001_002" ~ "White",
+                              variable == "B02001_003" ~ "Black",
+                              variable == "B02001_005" ~ "Asian",
+                              variable == "B02001_008" ~ ">=2 Races",
+                              variable == "B01002_001" ~ "Median Age"
+                       )) 
 
-```{r}
+shadyside <- dsdf %>% 
+  st_transform(st_crs(hoods)) %>% 
+  st_filter(hoods %>% st_union()) %>% 
+  ## From eyeballing neighborhood geometry and census tract geometries
+  ## using st_within or st_contains did not capture "all of the tract/hood"
+  ## probably not perfect, but close enough for our purposes
+  mutate(hood = case_when(GEOID %in% c(42003070900,42003070300,
+                                       42003070500,42003070600,
+                                       42003070800) ~ "Shadyside",
+                          TRUE ~ "Pittsburgh")) %>%  
+  select(hood,GEOID,Q,estimate,moe)  
+```
+
+I wanted to write a bit more background information to complement the 
+post on the [Shadyside Connector](https://moveforwardpgh.org/shadyside/) 
+project. This effort has two benefits in showcasing: (1) the contextual 
+information that should always be taken into account when trying to understand
+the built environment as well as (2) the kinds of data sources, descriptions and 
+summaries one might look to try to flesh out the aforementioned contextual 
+information.
+
+## Demographics
+
+
+We'll start with demographics. What kind of people live in 
+[Shadyside](https://en.wikipedia.org/wiki/Shadyside_(Pittsburgh)) and 
+how do they compare to the rest of Pittsburgh? The American 
+Community Survey, or ACS can give us a sense of who lives in this neighborhood.
+
+```{r tbl_one}
+## need to put # (Fe)male --> %'s; Take median/mean of median age/income
+tbl_one <- shadyside %>% 
+  st_drop_geometry() %>% 
+  filter(Q %in% c("# Female",">=2 Races","Asian","Black","White",
+                  "Population")) %>% 
+  group_by(hood,Q) %>% 
+  summarise(estimate = sum(estimate),
+            moe = moe_sum(moe,estimate)) %>%
+  mutate(Population = max(case_when(Q=="Population" ~ estimate,
+                                TRUE ~ 0)),
+         Population_moe = max(case_when(Q=="Population" ~ moe,
+                                TRUE ~ 0)),) %>% 
+  mutate(`%` = round(100*estimate / Population,2),
+         moe_pct = round(100*moe_prop(estimate,
+                            Population,
+                            moe_num = moe,
+                            moe_denom = Population_moe),1) ) %>% 
+  select(-Population) %>% 
+  filter(Q!= "Population") %>% 
+  ungroup() %>%
+  mutate(Lower = round(`%` - 1.96*moe_pct,1),
+         Upper = round(`%` + 1.96*moe_pct,1), ## assume Z dist moe
+         estimate = str_c(`%`," (",Lower,", ",Upper,")")) %>% 
+  select(hood,Q,estimate) %>% 
+  arrange(estimate) %>% 
+  spread(hood,estimate) %>% 
+  mutate(Q = str_remove(Q,"#")) %>% 
+  mutate(Cat = case_when(str_detect(Q,"Female") ~ "Sex",
+                         str_detect(Q,"Asian|Black|White|Race")  ~ "Race")) %>% 
+  group_by(Cat) %>% 
+  rename(` ` = Q) %>% 
+  arrange(desc(Pittsburgh),desc(Shadyside)) %>% 
+  select(Cat,` `,Shadyside,Pittsburgh)
+
+tbl_two <- shadyside %>% 
+  st_drop_geometry() %>% 
+  filter(str_detect(Q,"Median")) %>% 
+  group_by(hood,Q) %>% 
+  summarise(estimate = mean(estimate,na.rm = T),
+            moe = moe_sum(moe,estimate,na.rm = T) / n()) %>% 
+  mutate(estimate = case_when(estimate>1E3 ~ estimate/1E3,
+                              TRUE ~ estimate),
+         moe = case_when(moe>1E3 ~ moe/1E3,
+                         TRUE ~ moe)) %>% 
+  mutate(Lower = round(estimate - 1.96*moe,1),
+         Upper = round(estimate + 1.96*moe,1), ## assume Z dist moe
+         estimate = str_c(round(estimate,2),
+                          " (",
+                          Lower,", ",
+                          Upper,")")) %>% 
+  select(hood,Q,estimate) %>% 
+  spread(hood,estimate) %>% 
+  arrange(desc(Pittsburgh),desc(Shadyside)) %>% 
+  mutate(Cat = "Continuous Descriptives") %>% 
+  rename(` ` = Q) %>% 
+  select(Cat,` `,Shadyside,Pittsburgh)
+
+rbind(tbl_one,tbl_two) %>% 
+  gt(caption = "Data taken from 2015-2019 American Community Survey. Median Income in 1000's USD.") %>% 
+  tab_header("Shadyside-Pittsburgh Descriptives",
+             subtitle = "Data taken from 2015-2019 American Community Survey.") %>% 
+  tab_footnote(footnote = "% For Category Variables (Race, Female) and 
+               Mean for Continuous Variables (Median Income, etc.)",
+               locations = cells_column_labels(columns = c("Pittsburgh",
+                                                           "Shadyside")))
+```
+
+From Table \@ref(fig:tbl_one) we can see that Shadyside is a younger, 
+
+## 311 
+
+A reasonable next question might be, what are the problems that people 
+report in Shadyside and how "big" of a problem are they? One way, though there 
+are many more, would be to look at the compiled 311 reports for the 
+neighborhood across the years.
+
+
+```{r, fig.cap = "Aggregated 311 reports by Year, and Type. Data pulled from wrpdc.org."}
 tdf %>% 
   filter(NEIGHBORHOOD == "Shadyside") %>% 
   mutate(Year = year(CREATED_ON)) %>%
   group_by(Year,REQUEST_TYPE) %>% 
   count() %>%  
   arrange(desc(Year),desc(n)) %>% 
-  DT::datatable()
+  rename(`311-Request`=REQUEST_TYPE,
+         `# Calls` = n) %>% 
+  DT::datatable(.,rownames = FALSE)
 ```
 
-```{r}
-hoods %>% 
-    select(hood) %>% 
-    st_join(crashes) %>% 
-    st_drop_geometry() %>% 
-    group_by(CRASH_YEAR,hood) %>% 
-    count() %>% 
-  left_join(hoods %>% 
-              select(hood)) %>% 
-  ungroup() %>% 
-  st_as_sf() %>% 
-  ggplot() + 
-  geom_sf(aes(fill=n)) + 
-  theme_void() + facet_wrap(~CRASH_YEAR) + 
-  scale_fill_viridis_c()
-```
+## Crashes and public safety
 
+In relation to the project in the Shadyside connector, one might 
+want to know what kinds of crashes are there in Shadyside and where 
+are they located?
 
-```{r}
+```{r crashes_map,cache = TRUE,fig.cap="Crashes in Shadyside during year 2019"}
 crashes %>% 
   filter(CRASH_YEAR == 2019) %>% 
   mutate(COLLISION_TYPE = factor(COLLISION_TYPE,
@@ -83,6 +214,7 @@ crashes %>%
                                             "Other/Unknown",
                                             "Other/Unknown"))) %>% 
   select(COLLISION_TYPE) %>% 
+  st_transform(st_crs(hoods)) %>% 
     st_join(hoods %>% 
               select(hood) %>% 
               filter(hood == "Shadyside"),left = FALSE) %>% 
@@ -91,7 +223,143 @@ crashes %>%
   geom_sf(data = stsdf) + 
   geom_sf(aes(color = COLLISION_TYPE)) +
   theme_void() + 
-  # facet_wrap(~CRASH_YEAR) + 
   scale_fill_viridis_c() + 
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank(),
+        legend.position = "bottom")  
+```
+
+
+```{r}
+shady_crashes <- crashes %>% 
+  filter(CRASH_YEAR == 2019) %>% 
+  mutate(COLLISION_TYPE = factor(COLLISION_TYPE,
+                                 labels = c("Non-Collision",
+                                            "Rear-End",
+                                            "Head-On",
+                                            "Rear-to-rear",
+                                            "Angle",
+                                            "Sideswipe (same direction)",
+                                            "Sideswipe (opp direction)",
+                                            "Hit fixed object",
+                                            "Hit pedestrian",
+                                            "Other/Unknown",
+                                            "Other/Unknown",
+                                            "Other/Unknown"))) %>% 
+  select(COLLISION_TYPE,CRASH_MONTH) %>% 
+  st_transform(st_crs(hoods)) %>% 
+    st_join(hoods %>% 
+              select(hood) %>% 
+              filter(hood == "Shadyside"), left = FALSE)
+
+
+sdf <- shady_crashes %>% 
+  split(.$CRASH_MONTH) %>% 
+  map_dfr(.,function(x){
+    tibble(street_ix = apply(st_distance(stsdf,x),2,which.min),count=1,
+           Date = lubridate::ym(str_c("2019-",unique(x$CRASH_MONTH))),
+           Month = lubridate::month(Date))
+    })
+
+
+mdf <- stsdf %>% 
+  select(FULL_NAME,
+         shape_leng) %>% 
+  mutate(street_ix = 1:n()) %>% 
+  st_drop_geometry() %>% 
+  crossing(tibble(Month = 1:12)) %>% 
+  left_join(sdf %>% select(-Date)) %>% 
+  mutate(crashes = as.numeric(replace_na(count,0))) %>% 
+  group_by(street_ix,Month) %>% 
+  summarise(crashes = sum(crashes)) %>% 
+  ungroup() %>% 
+  mutate(Season = factor(case_when(Month %in% c(12,1,2,3) ~ "Winter",
+                            Month %in% c(4,5,6) ~ "Spring",
+                            Month %in% 7:9 ~ "Summer",
+                            Month %in% 10:11 ~ "Fall"))) %>% 
+  arrange(street_ix,Month) %>% 
+  inner_join(stsdf %>% 
+              mutate(street_ix = 1:n(),
+                     Speed_limit = factor(SPEED)) %>% 
+              select(street_ix,
+                     FULL_NAME,
+                     Speed_limit) %>% 
+              st_drop_geometry())
+
+
+
+ntdf <- sfnetworks::as_sfnetwork(stsdf, directed = F)
+
+A <- ntdf %>% 
+  tidygraph::convert(tidygraph::to_linegraph) %>% 
+  tidygraph::activate(edges) %>% 
+  distinct(from,to) %>% 
+  igraph::as_adjacency_matrix()
+
+rownames(A) <- mdf %>% filter(Month==1)  %>%  pull(street_ix)
+```
+
+
+```{r model,cache = TRUE,message = F,warning = F}
+fit <- brm(crashes ~ 1 + car(A, gr = street_ix, type = 'bym2'),
+           data = mdf, 
+           data2 = list(A=A),
+           family = zero_inflated_poisson(),
+           backend = "cmdstanr",
+           threads = threading(2),
+           cores = 3,
+           chains = 3,
+           iter = 3E3)
+```
+
+
+```{r}
+tdf <- read_csv("~/Documents/CityData/Burgh/Traffic Count/traffic_count.csv") %>% 
+  mutate(Year = year(count_start_date),
+         Month = month(count_start_date),
+         Season = factor(case_when(Month %in% c(12,1,2,3) ~ "Winter",
+                            Month %in% c(4,5,6) ~ "Spring",
+                            Month %in% 7:9 ~ "Summer",
+                            Month %in% 10:11 ~ "Fall"))) %>% 
+  filter(Year == 2019) %>% 
+  st_as_sf(.,coords=c("longitude","latitude")) %>% 
+  st_set_crs(4326) %>% 
+  st_transform(st_crs(hoods)) %>% 
+  st_filter(hoods %>% filter(hood=="Shadyside"))
+
+
+spstdf <- tdf %>% 
+  filter(!is.na(average_daily_car_traffic)) %>% 
+  split(.$Month) %>% 
+  map_dfr(.,function(x){
+    tibble(street_ix = apply(st_distance(stsdf,x),2,which.min),
+           traffic = x$average_daily_car_traffic,
+           med_speed = x$median_speed,
+           limit = x$speed_limit,
+           speed85_percent = x$speed85_percent, 
+           Date = lubridate::ym(str_c("2019-",unique(x$Month))),
+           Season = x$Season,
+           Year = x$Year,
+           Month = lubridate::month(Date))
+    }) %>% 
+  right_join(stsdf %>% 
+               st_drop_geometry() %>% 
+               mutate(street_ix = 1:n()) %>% 
+               select(street_ix,FULL_NAME,SPEED) %>% 
+               mutate(Speed = factor(SPEED)) %>% 
+               crossing(tibble(Season=c("Winter","Summer","Fall","Summer"))))
+
+A2 <- as.matrix(A %*% A)
+diag(A2) <- 0
+A2[which(A2>1)] <- 1
+A2 <- Matrix::Matrix(A2)
+
+## Try second order CAR relationship
+# rit <- brm( I(traffic/1E3) | mi() ~ Season + SPEED + car(A, gr = street_ix, type = "bym2"),
+#            data = spstdf, 
+#            data2 = list(A=A),
+#            backend = "cmdstanr",
+#            cores = 4,
+#            chains = 4,
+#            iter = 4E3)
+
 ```

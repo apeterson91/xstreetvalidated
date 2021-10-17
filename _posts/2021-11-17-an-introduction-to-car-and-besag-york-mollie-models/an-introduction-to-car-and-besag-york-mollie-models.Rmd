@@ -1,0 +1,348 @@
+---
+title: "From CAR to Besag,York & Mollie Models"
+description: | 
+  Different approaches to modeling spatial areal networks within
+  the conditional autoregressive family and a novel application.
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 08-17-2021
+categories:
+  - Statistics
+  - Technical
+  - Cleanup vs. Crime
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+bibliography: car.bib
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(sf)
+library(brms)
+theme_set(theme_bw() + theme(text=element_text(size=22)))
+```
+
+
+Conditional Auto Regressive or CAR models are one of the foundational 
+tools for modeling areal level data. In this post we'll examine some 
+of the different variants of this model, the different strengths and 
+weaknesses each possess and discuss how they can be used in modeling 
+built environment data. This post is largely inspired by the 
+[case study](shorturl.at/bvIW2) by Mitzi et al. with less elaboration on 
+technical details and a novel application to street crime data.
+
+The first two sections focus on the technical details and history in the literature, 
+while the third and fourth focus on how this method can be applied and 
+used to inform urban policy making.
+
+## The CAR model
+
+The reader may recall from the [previous post](https://github.com/apeterson91/xstreetvalidated/tree/main/_posts/2021-08-26-spatial-models) 
+on spatial models, that the CAR family accommodates spatial correlation 
+between spatially adjacent observations through the incorporation of a spatial 
+effect $\mathbf{b}_i$ whose covariance was a function of the aforementioned 
+spatial adjacency. Specifically, for an areal observation $y_i$, a linear model 
+with design matrix $\mathbf{X}$ and regression coefficients vector 
+$\mathbf{\beta}$, would incorporate CAR effects as follows:
+
+\begin{equation}
+\begin{aligned}
+y_i &=  \mathbf{X}\mathbf{\beta} + b_i\\
+\mathbf{b}_i &\sim MVN(\mathbf{0},\Sigma)\\
+\Sigma &= \tau D(I-\rho \mathbf{A}),
+\end{aligned}
+(\#eq:car)
+\end{equation}
+
+where $\Sigma$, the covariance matrix for the random effects $\mathbf{b}_i$ 
+are a function of scale $\tau$, difference matrix $D$, adjacency matrix 
+$\mathbf{A}$, and spatial correlation $\rho$. When $\rho=1$ the adjacent 
+observations are understood to be completely correlated and when fixing 
+this parameter as such the model is called the Intrinsic Conditional 
+Autoregressive (ICAR) model.
+
+
+There are various theoretical details that make using CAR and ICAR models 
+problematic. To start, when considering the spatial parameter $\rho$ unknown, 
+as in the CAR framework, the parameter does not offer an intuitive 
+interpretation; values of $\rho$ that are not very close to 1 allow for almost 
+no spatial correlation whatsoever and negative spatial correlation usually does 
+not comport with substantive understanding of the data. As for the ICAR model, 
+by fixing $\rho=1$, the correlation between observations is understood to be completely driven by 
+spatial association which can be problematic in situations where there is 
+non-spatial variability or problems with over-dispersion, as is often in the 
+case with spatial applications modeling the counts of disease cases using a 
+Poisson distribution. All of these issues prompted the development of a 
+new approach by Besag, York and Mollie, that strives to take advantage of the 
+inherent intuition behind the ICAR model but also overcome it's weaknesses. 
+It is to this new framework we now turn our attention, but if the reader is 
+interested in learning more about the details underlying the CAR and ICAR 
+models they should consult chapter 3 of [@banerjee2003hierarchical], 
+[@morris2019bayesian] and the latter's online 
+[case study](https://mc-stan.org/users/documentation/case-studies/icar_stan.html).
+
+## The Besag York and Mollie Model
+
+
+The original paper by Besag York and Mollie (BYM) proposed a model that incorporated 
+the two sources of variability --- extra-Poisson site specific variability and 
+spatial variability --- previously addressed with one spatial effect term 
+in ICAR models with two types of random effects: a site specific effect 
+independent of spatial correlation, and a spatial effect complete with an ICAR 
+variance structure [@besag1991bayesian]. 
+The addition of this extra term caused *new* issues with identifiability and 
+appropriate placement of priors which prompted further work by 
+[@riebler2016intuitive] and 
+others^[ [@riebler2016intuitive] contains a nice summary of the work leading up
+to their model.] to further improve the parameterization 
+introduced by BYM by introducing a new constraint, shared scale, $\sigma$ and 
+correlation parameter, $\rho$ that improved identifiability and facilitated a 
+more intuitive placement of priors on the hyper parameters. Denoting the 
+site-specific effect for the $i$th location as $\psi_i$ and the spatial effect 
+as $\phi_i$ and their original variants as $\psi_i^{*}$,$\phi_i^{*}$, the new 
+model specification is as follows:
+
+\begin{equation}
+\begin{aligned}
+y_i &=  \mathbf{X}\mathbf{\beta} + b_i\\
+\mathbf{b}_i  &= \psi_i + \phi_i \\
+&= \sigma(\sqrt{1-\rho}\psi^{*}_i + \sqrt{\rho}\phi_i^{*}) \\
+\psi^{*} &\sim N(0,\mathbf{I})\\
+\phi^{*} &\sim N(0,\Sigma^{\star}) \\ 
+\Sigma^{\star} &=  D(I-\rho \mathbf{A}).
+\end{aligned}
+(\#eq:bym2)
+\end{equation}
+
+Note that $\Sigma^{\star}$ is now scaled and constrained so that 
+$V[\phi] \approx 1$. With all this machinery in place, the more application 
+driven reader would be well warranted asking if **now**, we have a model 
+that offers us a better chance of modeling spatially networked data. 
+The application in the following section aspires to show that we do.
+
+
+## BYM Application to Crime and other City Street Events   
+
+Turning our attention back to the class of crime data discussed in 
+[@moyer2019effect] we look to see how we can improve the methods used in their 
+work to better reflect the level at which more focused policy and community 
+efforts can take effect: city streets.
+
+The reader may recall that the authors used two approaches to estimate the 
+effect of cleaned up vacant lots on the rate of violent shootings not involving
+police officers in Philadelphia. The first used a kernel density estimate 
+of the shootings, while the second used a simple count within a given buffer 
+ --- 300 and 600 meters --- of the vacant lot. In this section I'd like to 
+propose a method that will simplify the effort of "counting" where crimes 
+occur, and enable a more intuitive modeling framework.
+
+### Mapping Crimes to Streets
+
+
+The police reports documenting crime by the Philadelphia Police Department, 
+record a GPS coordinate as the location of the shooting, a single point in space 
+and time, but individuals belonging to neighborhoods similarly understand the 
+crime --- and many other similar city events --- to have occurred "on a street".
+Thus the idea of mapping crimes from the single point location to the 
+closest street by, e.g. euclidean distance^[Other distance measures could be 
+used, but at the small distances we are considering the differences should be 
+negligible.], and using the street as the spatial index where outcomes are 
+measured follows naturally. This idea is illustrated in Figure 
+\@ref(fig:sstreets), where shootings regularly occur on a city street 
+or can be understood as occurring on a city street --- if an event 
+occurs inside a store whose address corresponds to a street, we would 
+still colloquially understand the crime to have occurred "on the street", even 
+though the crime did not occur on the asphalt representing the literal physical
+street.
+
+
+```{r data_prep}
+uk <- read_sf("~/Documents/CityData/Philly/geo-data/Neighborhoods_Philadelphia/Neighborhoods_Philadelphia.shp") %>%
+  filter(MAPNAME == "Upper Kensington")  %>% 
+  st_transform(4326)
+
+shootings <- read_csv("~/Documents/CityData/Philly/Crime/shootings_2015_2020.csv") %>% 
+  filter(!is.na(point_x),!is.na(point_y)) %>% 
+  filter(point_x > -80,
+         year == 2015,
+         officer_involved=="N") %>% 
+  st_as_sf(coords = c("lng","lat")) %>% 
+  st_set_crs(4326) %>% 
+  st_filter(uk)
+
+streets <- read_sf("~/Documents/CityData/Philly/CompleteStreets-shp/CompleteStreets.shp") %>% 
+  st_filter(uk)
+
+
+sdf <- tibble(street_ix = apply(st_distance(streets,shootings),2,which.min),count=1) %>% 
+  group_by(street_ix) %>% count() %>% ungroup()
+
+pltdf <- streets %>% 
+  mutate(street_ix = 1:n()) %>% 
+  left_join(sdf) %>% 
+  mutate(shootings = as.numeric(replace_na(n,0)),
+         shooting = factor(as.integer((shootings>=1)*1))) %>% 
+  select(shootings,shooting,OBJECTID) %>% 
+  filter(OBJECTID!=34432) ## singleton street
+
+
+ntdf <- sfnetworks::as_sfnetwork(pltdf,directed=F)
+
+A <- ntdf %>% 
+  tidygraph::convert(tidygraph::to_linegraph) %>% 
+  igraph::as_adjacency_matrix()
+
+rownames(A) <- pltdf$OBJECTID
+```
+
+```{r sstreets, fig.width = 14, fig.height = 8, fig.cap = "Shootings in the Neighborhood of Upper Kensington during Calendar year 2015. City Street and Crime data are from opendataphilly.org."}
+shootings %>% 
+  ggplot() + 
+  geom_sf(color='red') + 
+  geom_sf(data=streets) + 
+  theme_void()
+```
+
+Not only does mapping crimes to streets offer an intuitive understanding for 
+modeling city events, such as the shootings studied in [@moyer2019effect], the 
+street network also allows us to *borrow* information across the different streets
+by street adjacency to model correlation through using, for example 
+the BYM parameterization of the ICAR prior. Figure \@ref(fig:networkvis) gives 
+an illustration of how one might visualize the network determined by city 
+streets.
+
+```{r,networkvis, fig.cap="Network visualization of the streets in Upper Kensington. Note that this is not the exact manner in which the network information is used in the Besag York and Mollie model, as the streets are in fact considered to be the nodes of the graph and the street intersections the edges, but the plot is illustrative of the general idea."}
+plot(ntdf)
+```
+
+### Zero Inflated Poisson BYM Model
+
+
+The use of the BYM model is particularly important, as we are often 
+interested in modeling the count of events on a particular street and will need
+the extra flexibility provided by the random effect $\psi_i$ described above 
+to avoid problems with over dispersion in modeling the counts as distributed 
+from a poisson distribution. On a similar note, city events will also 
+typically by zero-inflated, as events such as shootings, car accidents, etc. do 
+not --- typically --- occur at such a high frequency across every single street 
+as to receive daily, monthly or possibly even an annual record. Thus, a 
+zero point mass, or zero-inflated poisson model, is critical to accurately 
+modeling the underlying process from which the data are generated. Let 
+$Y_i$ be the number of shootings observed at street $i$ across the 2015 
+calendar year and $\pi$, the probability of being assigned to the zero point 
+mass. Using a similar notation as above for the BYM components, the model is as 
+follows:
+
+\begin{equation}
+\begin{aligned}
+Y_i \sim \ \pi\delta_{0}(\cdot) + (1-\pi)\text{Pois}(\exp{(\alpha + b_i)}),
+\end{aligned}
+(\#eq:ukeq)
+\end{equation}
+
+where $\delta_{0}(\cdot)$ is the dirac delta function at zero, $\alpha$ is a 
+global intercept and $b_i$ is the composite spatial and street specific effect 
+as described in \@ref(eq:bym2). 
+
+We can fit this model in the `brms` package after creating the spatial network 
+and adjacency matrix from functions in the `sfnetworks`,`tidygraph` and 
+`igraph` R packages.
+
+```{r bym_fit, echo = TRUE, cache = TRUE, message = FALSE, results = FALSE}
+fit <- brm(shootings ~ 1 + car(A, gr = OBJECTID,type='bym2'),
+           data = pltdf,
+           data2 = list(A = A),
+           family = zero_inflated_poisson(),
+           cores = 3,
+           chains = 3,
+           backend = "cmdstanr",
+           threads = threading(2),
+           iter = 2E3)
+```
+
+Plotting the spatial effects $\phi_i$ in Figure \@ref(fig:bym2plot) we're able 
+to observe how the rate of shootings varies spatially across the city streets. 
+
+
+```{r bym2plot, cache = TRUE, fig.cap="Distribution of estimated log rate ratio, as compared to a typical street, of shootings across city streets in Upper Kensington."}
+posterior_samples(fit) %>% 
+  as_tibble() %>% 
+  select(contains("rcar")) %>% 
+  mutate(sample_ix = 1:n()) %>% 
+  gather(contains("rcar"),key="Par",value="Sample") %>%
+  mutate(street_ix = as.integer(str_extract(Par,"[0-9][0-9]?[0-9]?"))) %>% 
+  select(street_ix,Sample,sample_ix) %>% 
+  group_by(street_ix) %>% 
+  summarise(`50%` = median(Sample),
+            `2.5%` = quantile(Sample,0.025),
+            `97.5%` = quantile(Sample,0.975)) %>% 
+  inner_join(pltdf %>% mutate(street_ix=1:n())) %>% 
+  gather(contains("%"),key="Stat",value="StatValue") %>% 
+  st_as_sf() %>% 
+  ggplot() + 
+  geom_sf(aes(color=StatValue)) + 
+  theme_void() + 
+  scale_color_gradientn(colours = c("black","yellow","red")) + 
+  facet_grid(~Stat) + 
+  theme(legend.title = element_blank())
+```
+
+Need to add in description of model results here as well as uncertainty estimates.
+
+I emphasize here that this model is merely descriptive --- it is describing 
+the variability of shootings across the Upper Kensington neighborhood streets 
+in 2015 --- rather than offering us anything inferential or potentially causal 
+as [@moyer2019effect]'s work sought to do. This is however, as far as I can tell,
+the first application of the BYM framework to city street level events, though
+[@rose2018risk] attempted to do something similar using a Gaussian process.
+I hope to show in a future post and possibly a proper paper, how this modeling 
+framework can be combined with other ideas, such as the 
+spatial temporal aggregated predictors I developed alongside my coauthors in 
+[@rsstap;@peterson2021spatial] to improve the estimate of the vacant lot 
+cleanup effect [@moyer2019effect] estimated in their work. Until then!
+
+
+```{r buffer_model,eval = FALSE}
+df <- read_sf("~/Documents/CityData/Philly/vacant_lot_cleanups/vacant_lot_cleanups.shp") %>% 
+  st_drop_geometry() %>% 
+  mutate(lot_id = 1:n(),
+         latlong = str_split(str_remove_all(location,"\\(|\\)"),", ")) %>% 
+  mutate(Lat = map_dbl(latlong, function(x) as.numeric(x[[1]])),
+         Long = map_dbl(latlong, function(x) as.numeric(x[[2]])) ) %>% 
+  st_as_sf(.,coords = c("Long","Lat")) %>% 
+  st_set_crs(4326) %>% 
+  st_filter(uk)
+
+mdf <- pltdf %>% 
+  st_buffer(300) %>% 
+  st_join(df %>% select(lot_id)) %>% 
+  group_by(OBJECTID,shootings) %>% 
+  summarise(num_lots = sum(!is.na(lot_id)))
+
+dmat <- st_distance(pltdf,df %>% st_centroid()) / 1E3
+attr(dmat,"units") <- NULL
+class(dmat) <- setdiff(class(dmat),"units")
+
+mdf$distances <- dmat
+
+fit <- brm(bf(shootings ~ num_lots + car(A, gr = OBJECTID,type='bym2'), 
+              zi ~ num_lots),
+           data = mdf,
+           data2 = list(A = A),
+           family = zero_inflated_poisson(),
+           cores = 4,
+           chains = 3,
+           backend = "cmdstanr",
+           threads = threading(2),
+           iter = 3E3)
+
+```
+
+
