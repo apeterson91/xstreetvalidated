@@ -5,7 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 10-02-2021
+date: 11-07-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -340,4 +340,5 @@ extend the results from this experiment to a more widely generalizable result.
 
 ## Acknowledgements {.appendix}
 
-Thanks to Robert Svoboda for reading and offering comments on this article.
+Thanks to [Kat Hoffman](https://www.khstats.com/) for reading and offering 
+comments on this article.

@@ -5,7 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 10-16-2021
+date: 11-21-2021
 creative_commons: CC BY
 output:
   distill::distill_article:
@@ -31,9 +31,9 @@ theme_set(theme_bw() + theme(text = element_text(size=22)))
 #OPA property assessments - includes a Category Code where 6 = vacant land - this is available online in several forms at https://www.opendataphilly.org/dataset/opa-property-assessments
 ```
 
-> After we've calculated our buffer counts and fit our fancy mixed effects 
-> regression model what kind of claims can we make about the results?
 
+After we've calculated our buffer counts and fit our fancy mixed effects 
+regression model what kind of claims can we make about the results?
 
 In the paper we've been studying, the author's estimate a decrease 
 in the number of crimes around vacant lots randomly assigned the greening or 
@@ -382,4 +382,5 @@ this work.
 
 ## Acknowledgements {.appendix}
 
-Thanks to Robert Svoboda for reading and offering comments on this article.
+Thanks to [Kat Hoffman](https://www.khstats.com/) for reading and offering 
+comments on this article.

@@ -5,7 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 10-30-2021
+date: 12-05-2021
 output:
   distill::distill_article:
     self_contained: false
@@ -140,8 +140,8 @@ phenomena.
 > Think of the deeds of hellish cruelty, the hidden wickedness which may go on, 
 > year in, year out, in such places, and none the wiser." - Sherlock Holmes,
 > The Adventures of the Copper Beaches
-[]
 
 ## Acknowledgements {.appendix}
 
-Thanks to Robert Svoboda for reading and offering comments on this article.
+Thanks to [Robert Svoboda](https://www.linkedin.com/in/rcsvoboda/) for reading 
+and offering comments on this article.
