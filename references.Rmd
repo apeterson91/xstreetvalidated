@@ -10,7 +10,7 @@ often as I can to reflect my own perception of the field. If you're looking for
 statistics references, I have listed some of my favorite statistics-related
 references [here](https://www.apetersonsite.org/post/phdlessons/).
 
-*Last updated 8/19/21*
+*Last updated 10/18/21*
 
 
 # Books
@@ -22,16 +22,17 @@ references [here](https://www.apetersonsite.org/post/phdlessons/).
 
 # Web
 
-* [r/urbanplanning](www.reddit.com/r/urbanplanning)
-* [City Beautiful](youtube.com/citybeautiful)
-* [Not Just Bikes](youtube.com/notjustbikes)
-* [StrongTowns](strongtowns.org)
+* [r/urbanplanning](https://www.reddit.com/r/urbanplanning)
+* [City Beautiful](https://youtube.com/citybeautiful)
+* [Not Just Bikes](https://youtube.com/notjustbikes)
+* [StrongTowns](https://strongtowns.org)
 
 # Academic
 
 * Health
    * [Brisa Sanchez](https://drexel.edu/dornsife/academics/faculty/Brisa%20Sanchez/)
    * See the other researchers at the [Drexel Urban Health Collaborative](https://drexel.edu/uhc/) as well
+   * [Mark Nieuwenhuijsen](https://www.isglobal.org/en/our-team/-/profiles/18505)
 * Crime 
    * [Charles Branas](https://www.publichealth.columbia.edu/people/our-faculty/ccb2166)
    * [Greg Ridgeway](https://sites.google.com/view/gregridgeway/cv)
