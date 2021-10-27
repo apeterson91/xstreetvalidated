@@ -149,9 +149,15 @@ Air pollution, tree cover and carbon dioxide levels. Each of these represent
 a kind of continuous surface across space that one may be interested in modeling 
 but would likely need to account for spatial dependency in so doing. 
 A common method for modeling this class of data is the Gaussian Process (GP), 
-used as a random spatial effect, analogous to a typical random effect, as 
+used as a spatial random effect, analogous to a typical random effect, as 
 described in [@fitzmaurice2008longitudinal], but now explicitly modeling 
 the spatial dependence, or covariance between two observations, $\Sigma_{i,i'}$, 
+^[Note here that I am slightly abusing notation. Since we said that we are 
+modeling $y_i$ as a function of space, we might indicate this by denoting the 
+the covariance as $\Sigma(\mathbf{s}_i,\mathbf{s}_i)$, outcome as $y(s_i)$ and 
+other spatially indexed variables equivalently. 
+I have omitted these details for the sake of exposition so that the similarities
+between the different models may be more easily understood.]
 through a covariance function 
 $\Sigma_{i,i'} = \kappa(\mathbf{s}_{i},\mathbf{s}_{i'})$, where $\mathbf{s}_{i},
 \mathbf{s}_{i'}$ represent two different spatial locations:
@@ -161,9 +167,9 @@ y_i = \alpha + \beta x_i + b_i + \epsilon_i \\
 \mathbf{b} \sim MVN_n(\mathbf{0},\Sigma) \\ 
 \epsilon_i \sim N(0,\sigma^2).
 $$
+
 <aside>
-one common $\kappa(\cdot,\cdot)$ is:
-$\kappa(\cdot,\cdot|\alpha,\rho) = \alpha\exp\{ \frac{ \mid \mid \mathbf{s}_{i} - \mathbf{s}_{i'} \mid \mid^2}{\rho} \}$.
+one common $\kappa(\cdot,\cdot)$ is: $\kappa(\cdot,\cdot|\alpha,\rho) = \alpha\exp \left \{ \frac{ \mid \mid \mathbf{s}_{i} - \mathbf{s}_{i'} \mid \mid^2}{\rho} \right \}$.
 </aside>
 For example, suppose we look at the EPA's ozone measurements over 
 Allegheny county for the month of August, 2021, shown in 
@@ -377,3 +383,8 @@ early-on conceptually before they start to pop up in a "real-world" setting.
 Thanks to [Kevin Putschko](https://www.linkedin.com/in/kevinputschko/) and
 [Robert Svoboda](https://www.linkedin.com/in/rcsvoboda/) for 
 reading and offering comments on this article.
+
+## Updates {.appendix}
+
+I added a footnote on 10/26/21 to clarify notation for the 
+spatial process model.

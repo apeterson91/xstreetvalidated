@@ -2510,14 +2510,14 @@ Figure 1: Scatter plot with true linear model overlaid.
 <h1 id="spatial-models">Spatial Models</h1>
 <p>Spatial models, as well as many other classes of models, remove the independence assumption by assuming some structural form of dependence between observations. Accounting for this is not only crucial to conducting valid inference — our ability to credibly identify the effect of some exposure or intervention of interest — it also helps us to better predict measures in areas where we might not otherwise be able to collect data. The manner in which this dependence or correlation between observations is formed depends on both the system under study as well as the data collected.</p>
 <h2 id="spatial-surfaces">Spatial Surfaces</h2>
-<p>Air pollution, tree cover and carbon dioxide levels. Each of these represent a kind of continuous surface across space that one may be interested in modeling but would likely need to account for spatial dependency in so doing. A common method for modeling this class of data is the Gaussian Process (GP), used as a random spatial effect, analogous to a typical random effect, as described in <span class="citation" data-cites="fitzmaurice2008longitudinal">(<a href="#ref-fitzmaurice2008longitudinal" role="doc-biblioref">Fitzmaurice et al. 2008</a>)</span>, but now explicitly modeling the spatial dependence, or covariance between two observations, <span class="math inline">\(\Sigma_{i,i&#39;}\)</span>, through a covariance function <span class="math inline">\(\Sigma_{i,i&#39;} = \kappa(\mathbf{s}_{i},\mathbf{s}_{i&#39;})\)</span>, where <span class="math inline">\(\mathbf{s}_{i}, \mathbf{s}_{i&#39;}\)</span> represent two different spatial locations:</p>
-<span class="math display">\[
+<p>Air pollution, tree cover and carbon dioxide levels. Each of these represent a kind of continuous surface across space that one may be interested in modeling but would likely need to account for spatial dependency in so doing. A common method for modeling this class of data is the Gaussian Process (GP), used as a spatial random effect, analogous to a typical random effect, as described in <span class="citation" data-cites="fitzmaurice2008longitudinal">(<a href="#ref-fitzmaurice2008longitudinal" role="doc-biblioref">Fitzmaurice et al. 2008</a>)</span>, but now explicitly modeling the spatial dependence, or covariance between two observations, <span class="math inline">\(\Sigma_{i,i&#39;}\)</span>,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> through a covariance function <span class="math inline">\(\Sigma_{i,i&#39;} = \kappa(\mathbf{s}_{i},\mathbf{s}_{i&#39;})\)</span>, where <span class="math inline">\(\mathbf{s}_{i}, \mathbf{s}_{i&#39;}\)</span> represent two different spatial locations:</p>
+<p><span class="math display">\[
 y_i = \alpha + \beta x_i + b_i + \epsilon_i \\ 
 \mathbf{b} \sim MVN_n(\mathbf{0},\Sigma) \\ 
 \epsilon_i \sim N(0,\sigma^2).
-\]</span>
+\]</span></p>
 <aside>
-one common <span class="math inline">\(\kappa(\cdot,\cdot)\)</span> is: <span class="math inline">\(\kappa(\cdot,\cdot|\alpha,\rho) = \alpha\exp\{ \frac{ \mid \mid \mathbf{s}_{i} - \mathbf{s}_{i&#39;} \mid \mid^2}{\rho} \}\)</span>.
+one common <span class="math inline">\(\kappa(\cdot,\cdot)\)</span> is: <span class="math inline">\(\kappa(\cdot,\cdot|\alpha,\rho) = \alpha\exp \left \{ \frac{ \mid \mid \mathbf{s}_{i} - \mathbf{s}_{i&#39;} \mid \mid^2}{\rho} \right \}\)</span>.
 </aside>
 <p>For example, suppose we look at the EPA’s ozone measurements over Allegheny county for the month of August, 2021, shown in Figure <a href="#fig:ozonevis1">2</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2585,6 +2585,8 @@ See <a href="https://www.apetersonsite.org/publication/howclose/">here</a> for m
 <p>This has been a whirlwind tour that I hope has given a taste of what spatial models look like and how they can be used. These models will likely come up again and again throughout the course of this blog, as so many objects in the built environment are studied across space, so they are worth understanding early-on conceptually before they start to pop up in a “real-world” setting.</p>
 <h2 class="appendix" id="acknowledgements">Acknowledgements</h2>
 <p>Thanks to <a href="https://www.linkedin.com/in/kevinputschko/">Kevin Putschko</a> and <a href="https://www.linkedin.com/in/rcsvoboda/">Robert Svoboda</a> for reading and offering comments on this article.</p>
+<h2 class="appendix" id="updates">Updates</h2>
+<p>I added a footnote on 10/26/21 to clarify notation for the spatial process model.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-banerjee2003hierarchical" class="csl-entry" role="doc-biblioentry">
@@ -2603,6 +2605,12 @@ Fitzmaurice, Garrett, Marie Davidian, Geert Verbeke, and Geert Molenberghs. 2008
 Gelman, Andrew, Jennifer Hill, and Aki Vehtari. 2020. <em>Regression and Other Stories</em>. Cambridge University Press.
 </div>
 </div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Note here that I am slightly abusing notation. Since we said that we are modeling <span class="math inline">\(y_i\)</span> as a function of space, we might indicate this by denoting the the covariance as <span class="math inline">\(\Sigma(\mathbf{s}_i,\mathbf{s}_i)\)</span>, outcome as <span class="math inline">\(y(s_i)\)</span> and other spatially indexed variables equivalently. I have omitted these details for the sake of exposition so that the similarities between the different models may be more easily understood.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
   <p class="social_footer">
