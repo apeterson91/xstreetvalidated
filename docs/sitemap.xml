@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://xstreetvalidated.com/about.html</loc>
-    <lastmod>2021-09-11T19:51:35-04:00</lastmod>
-  </url>
-  <url>
-    <loc>https://xstreetvalidated.com/CODE_OF_CONDUCT.html</loc>
-    <lastmod>2021-10-18T21:14:36-04:00</lastmod>
+    <lastmod>2021-10-30T21:04:11-04:00</lastmod>
   </url>
   <url>
     <loc>https://xstreetvalidated.com/</loc>
-    <lastmod>2021-09-05T09:10:56-04:00</lastmod>
+    <lastmod>2021-11-07T11:24:36-05:00</lastmod>
   </url>
   <url>
     <loc>https://xstreetvalidated.com/references.html</loc>
     <lastmod>2021-10-18T21:41:55-04:00</lastmod>
   </url>
   <url>
+    <loc>https://xstreetvalidated.com/posts/2021-08-23-cleanup-vs-crime-methods-of-analysis/</loc>
+    <lastmod>2021-11-07T11:38:15-05:00</lastmod>
+  </url>
+  <url>
     <loc>https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime/</loc>
-    <lastmod>2021-10-17T11:18:28-04:00</lastmod>
+    <lastmod>2021-10-26T21:34:00-04:00</lastmod>
   </url>
   <url>
     <loc>https://xstreetvalidated.com/posts/2021-10-10-Shadyside-Connector/</loc>
@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://xstreetvalidated.com/posts/2021-08-26-spatial-models/</loc>
-    <lastmod>2021-10-03T10:54:26-04:00</lastmod>
+    <lastmod>2021-11-07T11:26:35-05:00</lastmod>
   </url>
   <url>
     <loc>https://xstreetvalidated.com/posts/2021-09-12-causal-inference-in-the-built-environment/</loc>

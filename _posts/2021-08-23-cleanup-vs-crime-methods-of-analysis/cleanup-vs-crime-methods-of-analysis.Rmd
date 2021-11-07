@@ -15,9 +15,8 @@ categories:
   - Technical
   - Cleanup vs. Crime
   - Social Cohesion
-draft: true 
+draft: false 
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -26,17 +25,16 @@ library(gt)
 library(sf)
 theme_set(theme_bw() + theme(text=element_text(size=22)))
 ```
-# Context
 
-In the previous post we discussed this fantastic article, [@moyer2019effect] 
-, which studied how different cleaning "interventions" applied to vacant lots
-had the potential to affect the propensity for nearby violent shootings.
+In the previous [post](https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime/)
+we discussed this fantastic article, [@moyer2019effect], 
+which studied how different cleaning "interventions" applied to vacant lots
+had the potential to affect the rate of nearby violent shootings.
 In this post we'll look at the specific measures and statistical methods 
 they used to analyze their data in order to test this hypothesis and break down 
 the methods' various advantages and disadvantages.
 
 # Methods  
-
 
 ## Data and Questions
 
@@ -44,7 +42,7 @@ Recall from the paper that the authors had shooting data accessed
 from the Philadelphia Police Department, and vacant lot data - location, size,
 and randomized intervention, that they amassed 
 as part of their project. I've already shown, visually, what the
-shooting data looked like in the first post. As for the vacant lot data, it 
+shooting data looked like in the first post. The data structure for the vacant lot data 
 probably looked something like what's in Table \@ref(tab:vacant).
 
 ```{r vacant}
@@ -52,8 +50,8 @@ vldf <- tibble(`Lot Cluster ID` = 1:5,
                Intervention = c("Greening","Mowing",
                                 "Greening","Control",
                                 "Control"),
-               Latitude = rep(0,5), ## comment on this if not able 
-               Longitude = rep(0,5)) ## to get data access
+               Latitude = rep(0,5), 
+               Longitude = rep(0,5)) 
 vldf %>% 
   gt(caption = "Hypothetical Vacant Lot Data")
 ```
@@ -62,7 +60,7 @@ But all this begs the question, if we have lots at one location, and
 shootings at another, how do we relate the two to each other? The authors 
 propose two methods, the first involving a kernel density estimate and the 
 second involving a count of the number of shootings inside a "Buffer" Zone
-around the vacant lot.
+around the vacant lots.
 
 ##  Kernel Density Estimates 
 
@@ -71,43 +69,32 @@ fancy kind of average^[This describes most of the work
 done in Statistics.]. The author's created a grid of points
 across the polygonal space defined by Philadelphia's borders and at each grid 
 point took a weighted average of the number of shootings during the time period,
-e.g. month, of interest. They chose a bandwidth of 500 meters, which 
+e.g. month of interest. They chose a bandwidth of 500 meters, which 
 essentially means that shootings within that distance were weighted more
 than those further away. We can't know which kernel they used
 because they don't state it explicitly, but of the many 
 [options](https://en.wikipedia.org/wiki/Kernel_(statistics)) 
 they may have chosen the rectangular kernel, as they state many of their 
-estimates in terms of Crimes per km$^{2}$. For illustrative purposes, 
-you can see this kernel below with bandwidth $b$ for location 
-$\mathbf{s}=(s_a,s_b)$^[Where $s_a,s_b$ are e.g. latitude and longitude],
-
-$$
-\mathcal{K}_b(\mathbf{s},\mathbf{s}') = 
-\begin{cases}
-\frac{1}{b}  & d(\mathbf{s},\mathbf{s}') \leq b \\
-0 & \text{otherwise}
-\end{cases}
-$$
-where $d(\mathbf{s},\mathbf{s}')$ is the distance between the two locations. 
-The KDE,$\hat{y}$ at an arbitrary location $\mathbf{s}$ for a given 
+estimates in terms of Crimes per km$^{2}$. 
+The KDE,$Y_{it}$ at an arbitrary location $\mathbf{s}$ for a given 
 month would then combine all $i=1,...n$ shooting samples as follows:
-
 $$
-\hat{y}(\mathbf{s}) = \frac{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s}, 
-\mathbf{s}'_i)y_i(\mathbf{s'})}{\sum_{i=1}^{n}\mathcal{K}_b(\mathbf{s},
-\mathbf{s}'_i)}.
+Y_{it}(\mathbf{s}) := \frac{1}{(0.500)^2}\sum_{i=1}^{n} I(\mathbf{s}'_{it} \in U),
 $$
+where $I(\mathbf{s}' \in U)$ is a function that returns a 1 if the location of 
+shooting $i$ is in the box $U$ of coordinates defining a 500 m$^2$ square around 
+location $\mathbf{s}'_{it}$ during time period $t$ and 0 otherwise.
 
-What this amounts to conceptually is an average number of shootings at each
+Again, what this amounts to conceptually is an average number of shootings at each
 grid point, where those shootings at closer distances are weighted more and 
-those shootings at further distances (especially those more than 500 m) are 
-weighted less. The authors create their main figure in the paper
+those shootings at further distances (those more than 500 m) are 
+weighted zero. The authors create their main figure in the paper
 from plotting the relative averages at each grid point across space. The lower
 values are assigned a light green color and the higher values are assigned a 
-red color. See Figure \@ref(fig:kde) from their 
-paper[@moyer2019effect].
+red color. See Figure \@ref(fig:kde) from their paper, below where the shootings
+are calculated at at yearly rate.
 
-```{r kde,fig.width=8,fig.height=10,fig.cap="Kernel Density Estimate of shootings Figure from [@moyer2019effect]."}
+```{r kde, preview = FALSE, fig.width=8,fig.height=10,fig.cap="Kernel Density Estimate of shootings Figure from [@moyer2019effect]."}
 ## See PNAS copyright policy here: https://www.pnas.org/content/101/34/12399
 ## As this blog is currently non-commercial this image is used according to 
 ## the following language:
@@ -131,8 +118,11 @@ shootings at each location. However, it has a number of drawbacks too.
 The first, is that we don't know if it's a particularly good estimate. If you
 recall, the author's chose a certain bandwidth of 500m, but wouldn't 400m have 
 been just as good? This is a well established problem in this space known as 
-the modifiable areal unit problem [@fotheringham1991modifiable].
-Further, while the idea of a KDE of shootings can be nicely 
+the modifiable areal unit problem [@fotheringham1991modifiable] (MAUP),
+which formalizes the notion that different bandwidths or buffer choices 
+correspond to different levels of exposure – exposure to cleaned vacant lots 
+in this setting –  and consequently different estimates of how exposure may 
+affect the outcome.Further, while the idea of a KDE of shootings can be nicely 
 visualized, as in Figure \@ref(fig:kde), it can be difficult to communicate 
 verbally to stakeholders:  
 
@@ -144,11 +134,10 @@ how did I choose the weights?
 Well the weights and proximity are defined according to this kernel and 
 bandwidth measure we chose...".
 
-You get the picture. It would be much easier to say, did the average number of shootings at 
-location "x" go down or not? However, this can be much harder to model,
-so the author's, understandably,  went with the KDE. The outcome in their first 
-model, $Y_{it}$, was consequently defined as follows:
-
+You get the picture. It would be much easier to say, did the average number of 
+shootings at location "x" go down or not? However, this can be much harder to 
+model, so the authors, understandably,  went with the KDE. The outcome in their 
+first model, $Y_{it}$, was consequently defined as follows:
 
 $$ 
 Y_{it} := \text{ KDE at lot } i\text{, in study month } t. \\
@@ -166,7 +155,7 @@ See Figure \@ref(fig:buffervis) for a visualization of this idea. The authors
 then went on to check for "spill-over" effects through the use of 
 a second, 600m buffer around the first.
 
-```{r buffervis,preview=TRUE,fig.cap="Visualization of Hypothetical Buffer with 300 m radius in Upper Kensington. Star represents location of hypothetical vacant lot.",fig.width=14,fig.height=8}
+```{r buffervis,preview = TRUE,fig.cap="Visualization of Hypothetical Buffer with 300 m radius in Upper Kensington. Star represents location of hypothetical vacant lot.",fig.width=14,fig.height=8}
 uk <- read_sf("~/Documents/CityData/Philly/geo-data/Neighborhoods_Philadelphia/Neighborhoods_Philadelphia.shp") %>%
   filter(MAPNAME == "Upper Kensington")  %>% 
   st_transform(4326)
@@ -203,17 +192,16 @@ p1 <- uk %>%
 p1
 ```
 
-
 ### Pros and Cons
 
-The buffer count has a very appealing interpretation, it's  simply the number
+The buffer count has a very appealing interpretation as it is simply the number
 of shootings within a certain distance of the 
 location of interest. This is **much** easier to explain to stakeholders, 
 and others who may be interested in this work, but not interested in learning 
 about kernels and bandwidths. It can also be seen as a kind of 
 kernel density estimate, except now we're taking an unweighted, unnormalized
 average^[also called a sum]. However, similar to the kernel density estimate,
-it suffers from having to choose some *ad hoc* distance, 
+it suffers from the MAUP by having to choose some *ad hoc* distance, 
 300 (or 600 for spillover) meters in this case, as the "correct" distance 
 within which to count shootings. This remains a major drawback.
 
@@ -238,9 +226,9 @@ that receive either the "greening" or "mowing" intervention. This is a very
 specific estimate that we'll elaborate on in more detail in the causal 
 inference post, but for now it suffices to say they're comparing the *same* 
 vacant lots before and after receiving the interventions, *as opposed to* 
-comparing those lots that received interventions and the control. There 
+comparing those lots that received interventions and the control. ^[There 
 may or may not be good reasons for not estimating this latter contrast but 
-we'll save that discussion for the causal-inference post. For now,
+we'll save that discussion for the causal-inference post.] For now,
 let's break down this big equation from the initial post and try to understand
 how they calculate the difference-in-difference estimate for the greening 
 intervention^[I omit the distributional assumptions on the random  
@@ -260,13 +248,12 @@ Y_{it} &= \beta_0 + \beta_1 \text{Greening}_i + \beta_2\text{Mowing}_i
 (\#eq:dnd)
 \end{equation}
 
-
 <aside>
 This equation uses the notion of indicator functions. That is, Greening$_i$
 is either a 0 or 1 for lot $i$. 1 indicates the lot received the greening 
 intervention and 0 indicates it did not. Post$_t$ is the same where a 1 
 indicates the measurement was recorded after the intervention was administered 
-and vice versus. 
+and vice versa. 
 </aside>
 
 From \@ref(eq:dnd), we can see that the expected number of shootings
@@ -291,7 +278,6 @@ incorporating mixed effects. See  [@fitzmaurice2008longitudinal] for a more
 general introduction on this topic, as we'll focus only on those aspects 
 relevant to this application in the following section.
 
-
 ## Mixed Effects Regression
 
 At the very end of \@ref(eq:dnd) you can see four terms reproduced below
@@ -301,8 +287,8 @@ $$
 Y_{it} = ... + \alpha_{m(t)} + \delta_{s(i)} + \xi_{c(i)} + \epsilon_{it}.
 $$
 
-Each of these terms account for a different source of correlation 
-between the different vacant lots. The sources
+Each of the first three of these terms account for a different source of 
+correlation between the different vacant lots. The sources
 of variation and the corresponding parameter are as follows:
 
 1.  Temporal correlation 
@@ -327,7 +313,6 @@ the variability within seasons, space and cluster.
 
 # Conclusion
 
-
 In this post we've examined how the author's use of KDEs, buffer counts, 
 DnD estimators and mixed effects regression came together to try and provide
 a reliable estimate of the effects of the greening and mowing vacant lot
@@ -340,5 +325,6 @@ extend the results from this experiment to a more widely generalizable result.
 
 ## Acknowledgements {.appendix}
 
-Thanks to [Kat Hoffman](https://www.khstats.com/) for reading and offering 
-comments on this article.
+Thanks to [Robert Svoboda](https://www.linkedin.com/in/rcsvoboda/) and
+[Paul Haluszczak](https://www.linkedin.com/in/paul-haluszczak-96805737/) 
+for reading and offering comments on this article.
