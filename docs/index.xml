@@ -12,7 +12,19 @@
       <link>https://xstreetvalidated.com</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 07 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Cleanup vs. Crime: Causal Inference</title>
+      <dc:creator>Adam Peterson</dc:creator>
+      <link>https://xstreetvalidated.com/posts/2021-11-28-cleanup-vs-crime-causal-inference</link>
+      <description>What kinds of causal claims are justified from an empirical analysis?</description>
+      <category>Technical</category>
+      <category>Cleanup vs. Crime</category>
+      <category>Social Cohesion</category>
+      <guid>https://xstreetvalidated.com/posts/2021-11-28-cleanup-vs-crime-causal-inference</guid>
+      <pubDate>Sun, 28 Nov 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://xstreetvalidated.com/posts/2021-11-28-cleanup-vs-crime-causal-inference/cleanup-vs-crime-causal-inference_files/figure-html5/ATEvis-1.png" medium="image" type="image/png" width="2688" height="1536"/>
+    </item>
     <item>
       <title>Cleanup vs. Crime: Methods of Analysis</title>
       <dc:creator>Adam Peterson</dc:creator>
