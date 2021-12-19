@@ -2284,6 +2284,39 @@
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
   <!--radix_placeholder_site_in_header-->
+  <script>
+     document.addEventListener("DOMContentLoaded", function () {
+       if (!/posts/.test(location.pathname)) {
+         return;
+       }
+
+       var script = document.createElement("script");
+       script.src = "https://giscus.app/client.js";
+       script.setAttribute("data-repo", "apeterson91/xstreetvalidated");
+       script.setAttribute("data-repo-id", "MDEwOlJlcG9zaXRvcnkzOTQwMDY4Njk=");
+       script.setAttribute("data-category", "Comments");
+       script.setAttribute("data-category-id", "DIC_kwDOF3wRVc4CAWhh");
+       script.setAttribute("data-mapping", "pathname");
+       script.setAttribute("data-reactions-enabled", "1");
+       script.setAttribute("data-emit-metadata", "0");
+       script.setAttribute("data-theme", "light");
+       script.setAttribute("data-lang", "en");
+
+       /* wait for article to load, append script to article element */
+       var observer = new MutationObserver(function (mutations, observer) {
+         var article = document.querySelector("d-article");
+         if (article) {
+           observer.disconnect();
+           /* HACK: article scroll */
+           article.setAttribute("style", "overflow-y: hidden");
+           article.appendChild(script);
+         }
+       });
+
+       observer.observe(document.body, { childList: true });
+     });
+   </script>
+
   <script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
   <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function () {
