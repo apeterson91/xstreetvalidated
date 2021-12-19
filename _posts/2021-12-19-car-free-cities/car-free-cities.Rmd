@@ -1,0 +1,80 @@
+---
+title: "Car Free Cities"
+description: |
+
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 2-12-2021
+output:
+  distill::distill_article:
+    self_contained: false
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+bibliography: bikes.bib
+categories:
+  - Bikes
+  - Big Picture
+draft: true 
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+In the previous [post](xstreetvalidated.com/posts/2021-10-09-bikes/) we examined
+why, fundamentally, bikes and multi-modal transit have several advantages over 
+cars in urban spaces with regards to traffic, economic cost, safety and 
+as well as several other dimensions. With this understanding,
+we turn our attention to the, at times dramatic, changes that several cities 
+have begun to make in order to exploit these advantages and provide their 
+citizens with all the benefits a less auto-centric city design can offer. 
+We'll start with the dramatic sweeping changes in Europe and work our way to 
+the more moderate progress in the U.S. 
+
+Before we dive deeper into things, a quick word on references. This post draws 
+heavily from the material from material produced by the 
+city beautiful [channel](https://youtu.be/g9-9CxCxrVE) and the 
+not just bikes [channel](https://youtu.be/sI-1YNAmWlk). I highly encourage you
+to check out their material as I've enjoyed learning from it.
+
+## Europe 
+
+### Oslo, Norway
+
+In 2017 city leaders in Oslo, Norway announced that they would block off 
+large swaths of the city to private passenger vehicles[@youtubecb]. 
+Such demonstrative actions are rarely easy, even in a nation as committed to 
+its environmental character as Norway --- the country plans to be carbon 
+neutral by 2030. In this case both members of the public and business leaders
+needed convincing [@wolfe_2018]. Thankfully, it would appear at least so far 
+that their change of heart has been rewarded --- not only has pedestrian traffic
+increased in the commercial districts but Oslo was also the only major 
+city to report no pedestrian or cycling deaths during 2019 [@peters_2019;@youtubecb]^[Note that 
+these sources are reporting time periods prior to the global Covid-19 pandemic.]
+. Current research examining how mobility patterns have changed since these 
+measures were put in place show that in some neighborhoods, cars are used for 
+only 1/6 trips and that those who do still drive do so mainly for job
+or health related reasons[@odot].
+
+
+While Oslo is clearly ahead of the game, other cities in Europe have also made 
+similar efforts: London, Hamburg, Madrid and Paris have each renewed efforts 
+to prioritize cycling and pedestrian over cars in city centers 
+[@wolfe_2018;@youtubenjb;@youtubecb;@nieuwenhuijsen2016car]. 
+Perhaps, the eager to try and overtake Oslo is Paris, whose city government set 
+the ambitious goal of becoming 100% cyclable by 2026.
+
+### Paris, France
+
+
+## USA
+
+### New York City, NY
+
+### Pittsburgh, PA
+
+
+## From Autos to Bikes and Beyond 
+

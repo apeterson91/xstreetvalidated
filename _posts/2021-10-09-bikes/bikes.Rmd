@@ -1,0 +1,281 @@
+---
+title: "What's the Buzz around Bikes?"
+description: |
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 12-12-2021
+output:
+  distill::distill_article:
+    self_contained: false
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+bibliography: bikes.bib
+categories:
+  - Bikes
+  - Big Picture
+draft: true 
+---
+
+
+```{r setup, include=FALSE}
+#library(tidycensus)
+library(tidyverse)
+library(sf)
+library(gt)
+library(osrm)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+> What's in a bicycle? Does not a trip by other means 
+> ride just as smooth? - Shakespeare's sonnets
+
+Bike lanes, climbing lanes and sharrows, oh my! The rise of commuting 
+by bike has risen dramatically over the past two decades as everything from
+climate change and traffic jams to gas prices and health issues have sent cities
+looking for easy ways to provide cheap, healthy, efficient and environmentally 
+friendly modes of transit to their residents(See Figure \@ref(fig:commute)). 
+In fact, some cities are even trying to go "car free"[@nieuwenhuijsen2016car].
+But why bikes? They may have been fun to ride around with 
+your friends when you were growing up, but do they really offer a viable 
+alternative to the crown jewel of american transit - the automobile? 
+This post will look at how a bike compares to a car as a primary mode of 
+transit highlight the critical role that 
+[land use](https://en.wikipedia.org/wiki/Land_use), 
+[zoning](https://en.wikipedia.org/wiki/Zoning), and other forms of transit play 
+in the process.
+
+```{r commute,fig.cap="Commuting Statistics as shown in the NYC 2018 bike plan."}
+knitr::include_graphics("bikecommute.png")
+```
+
+# Cost Time and Safety
+
+Every day people need to go places. They need to go to work,
+^[ Okay, not as much as they used to maybe.] to the grocery store, to the 
+doctor, and so on. Importantly, before any given person makes their choice of 
+how to go from A to B, the environment they live in will play a large role in 
+determining their choice as well. As the environment determines how far an 
+individual will have to go to reach their destination, what routes and modes 
+of transit are available, the likelihood of traffic, and so on, some 
+environments will be more amenable to certain types of transit than others. 
+
+If your entire neighborhood has been 
+[zoned](https://en.wikipedia.org/wiki/Zoning#Single-use_zoning) only for 
+single family residential homes, and the nearest grocery store is a 10 minute 
+car ride, 30 minute bike or 20 minute bus ride with wait, and the route to the grocery store does not feel
+safe to walk or bike on, then the obvious choice of purchasing and using a car 
+will be made. We don't have to build our environments like this however, 
+Figure \@ref(fig:extrips) show how two such trips in the city of Philadelphia
+that I once made regularly by biking, walking or transit exclusively.
+
+
+```{r extrips, fig.cap = "Examples of two trips for grocery and work respectively for a resident of the Spring Garden Neighborhood in Philadelphia."}
+philly_hoods <- read_sf("~/Documents/CityData/Philly/geo-data/Neighborhoods_Philadelphia/Neighborhoods_Philadelphia.shp") %>% 
+  filter(MAPNAME %in% c("Spring Garden","University City"))
+#phsdf <- read_sf("~/Documents/CityData/Philly/CompleteStreets-shp/") %>% 
+#  st_transform(st_crs(philly_hoods)) %>% 
+#  st_filter(philly_hoods)
+spring_univ <- philly_hoods %>% st_transform(4326) %>% st_centroid()
+groceries_philly <- stplanr::route(
+  from = as.vector(spring_univ$geometry[[1]]),
+  to = c(-75.174294, 39.962923), 
+  route_fun = osrmRoute,
+  returnclass = "sf"
+  )
+work_philly <- stplanr::route(
+  from = as.vector(spring_univ$geometry[[1]]),
+  to = as.vector(spring_univ$geometry[[2]]),
+  route_fun = osrmRoute,
+  returnclass = "sf"
+)
+groceries <- groceries_philly %>% 
+  select(duration,distance) %>% 
+  rename(`Trip Distance (km)` = distance,
+         `Car Trip Time (min, assumes no traffic)` = duration)
+work <- work_philly %>% 
+  select(duration,distance) %>% 
+  rename(`Trip Distance (km)` = distance,
+         `Car Trip Time (min, assumes no traffic)` = duration)
+mp <- mapview::mapview(groceries,color='green') + 
+  mapview::mapview(work,color='blue')
+
+mp@map
+```
+
+In both circumstances, the choices are made based upon what is most convenient
+according to the perception of how the mode of transit on the route varies 
+as a function of (1) trip time, (2) trip cost and (3) trip safety 
+[@transitwikibook].
+
+```{r,eval = FALSE}
+pa_pums <- get_pums(
+  variables = c("PUMA", "JWMNP", "JWTR", "COW", "ESR","JWTRNS"),
+  state = "PA",
+  survey = "acs5",
+  year = 2018,
+  rep_weights = "both"
+  )
+```
+
+##  Cost
+
+What follows may seem like common sense. However, sometimes 
+even common sense bears repeating. If we were to consider the 4 modes of transit
+that are most popular (1) walking, (2) biking, (3) driving in a personal car
+and (4) taking public transit^[Airplane travel might fairly 
+be considered public transit, but we're concerned with modes of transit 
+used daily for regular trips.] (e.g. bus, subway, etc.). We could broadly 
+consider the cost of each to be something like what we see
+in the table below.
+
+
+```{r}
+tibble(Mode = c("Walking","Biking","Public Transit","Driving"),
+       Cost = c("Free", "Cheap", "Affordable", "Expensive")) %>% 
+  gt()
+```
+
+Walking is free of course, a typical commuting bike 
+(not those fancy carbon fiber bikes) costs a few hundred dollars, 
+public transit fares are explicitly designed to be affordable, and 
+driving ... well driving costs a bit. 
+
+The upfront cost is usually in the 
+thousands of (U.S.) dollars for a used car, and typically in the 
+tens of thousands for a new car. Furthermore, most states in the U.S. will 
+require individuals to regularly register their car, as well as have it 
+inspected and insured. On top of *that*, most car manufacturers recommend 
+car owners maintenance their vehicle twice a year or every 20,000 miles --- 
+whichever comes first. The cost of gas, which one might buy more or less of 
+depending on the kind of car they have and how 
+many miles they drive, tends to vary substantially depending on what 
+state/country one lives in and what global economic forces are in play at the 
+time. We haven't even gotten to depreciation yet and there are still
+*even more* costs. Cars' use of gas contributes to global warming and
+also plays a role in air pollution [@johansson2017impacts]. 
+
+<aside>
+You can find out more 
+about cost depreciation associated with car purchases in this pbs 
+educational
+[video](https://www.youtube.com/watch?v=TtJXl6pk0Z4&ab_channel=TwoCents).
+</aside>
+
+With all the money a car requires, totaling somewhere in the thousands of dollars
+both initially and, potentially, regularly depending on one's driving patterns, 
+it seems an obvious question to ask why it is the dominant mode of transit in 
+much of the modern world, and especially in the U.S.? Well to really do justice
+to that question and answer it in all its worth would take more time than this 
+post can afford. We'll explore some of the advantages a car has even with 
+all its expense in the sections that follow, but with this starting cost,
+it shouldn't be hard to see why so many cities are starting to turn to bikes.
+
+
+
+## Time 
+
+Given all the cost we're spending to be in our cars, surely the car owner 
+can rest easy knowing that they're opting for a mode of transit that is 
+far quicker and safer, right? Well ... it depends. 
+
+While it is undeniably true that the longer the distance, the more favorable 
+the car becomes as a mode of transit (see Figure \@ref(fig:ptc) from 
+[@lovelace2017propensity]), this isn't usually the type of trip most 
+often made day-to-day in urban (or even some suburban) environments. 
+
+For short trips such as these, car trips will take much longer, because their 
+drivers will have to wait in traffic and, again, depending on the environment, 
+look/pay for parking. In contrast, a bike rider will typically not have to 
+wait for any traffic^[This may depend on the presence of bike lanes,
+the bike riders comfort with passing cars, etc.] and almost never have to pay 
+or wait for parking.
+
+```{r ptc,fig.align='center',fig.width=14,fig.height=8,fig.cap="Figure from [@lovelace2017propensity] -see original caption in figure."}
+knitr::include_graphics("ptc.png")
+```
+
+One  key factor may be confounding our argument here. Cars have to 
+wait in traffic because there are so many cars, whereas bikes don't because 
+there aren't a proportional number of cyclists, right? Well, 
+even if there *were* more cyclists, it's not likely they'd have to wait too 
+long in traffic. This is simply because of the efficiency in space that a bike 
+has compared to a vehicle. Where a bike takes up $\approx$ 5 feet lengthwise, and 
+a "human-size" width (maybe a foot or two), a typical sedan will be about 14 
+feet long and 5 feet wide^[taken from nadaguides.com].  If we compare area
+footprints, that implies that a car takes up 7 times more space than a cyclist. 
+This huge efficiency will mean a lot more cyclists can be put on the road than
+cars and still achieve a level of decent transit throughput.
+
+<aside>
+This space efficiency carries through to parking as well which is the 
+source of many woes in urban development. We'll follow up on this later 
+through the work of the economist Donald Shoup.
+</aside>
+
+
+```{r bikesize, fig.align='center',fig.cap="Car-bike size comparison. Photo from http://vk.com/letsbikeit"}
+knitr::include_graphics("lets-bike-it2.jpeg")
+```
+
+
+## Safety
+
+While this is the last topic, this is by far the most important!! No one
+would get in car if they thought there were good odds of the trip ending 
+in disaster.
+And yet, automobile accident fatalities continue to number in the tens of 
+thousands each year, with countless more causing injury and property damage
+[@nhtsa]. 
+Why is this? The simple (physics) fact is that cars have a lot of mass and 
+when they hit something while moving at a decent speed, an 
+appreciable amount of de-acceleration occurs. Consulting our good old friend, 
+Sir Isaac Newton's second law, we can recall that:
+
+$$
+\text{Force} = \text{Mass} \times \text{Acceleration}
+$$
+Large mass and large acceleration = large force = injuries, death, and property
+damage. 
+
+In contrast... a bike with a human on board has much less mass and since bikes 
+rarely go *too* fast, even in the age of e-bikes, there's not as severe a 
+de-acceleration when hitting a stationary object. Consequently, a bike 
+collision, *sans* car, does not produce as much force as their automobile 
+counterparts. This isn't to say that there can't be meaningful harm as a 
+result of bike accidents, or that, in an environment where bikes are a 
+predominant form of transit, accidents won't happen. However, the physics are 
+certainly more supportive of bike transit producing safer trips --- 
+fundamentally --- in comparison to cars.
+
+
+## Groceries, weather, kids and more
+
+Yes, well bikes may have these advantages but what about when you have to haul 
+a week's worth of groceries home, take your kids to school, or get to work 
+in bad weather? Just as adaptation measures were and are taken to try and
+improve the feasibility of cars' weakness --- seat belts, anti-drunk driving
+campaigns, and so on --- there are equivalent adaptation measures that are 
+taken by those committed to commuting by bike. 
+[Cargo bikes](https://tinyurl.com/2p9496h2), especially their electric variants,
+are one preferred strategy for hauling goods and/or children to and fro, 
+though there are also some services offering grocery delivery by bike as well.
+Bad weather may be simply overcome by a mixture of proper clothing and 
+equipment.
+
+However, bikes are still not and cannot be for everyone. Those who are unable 
+to ride bikes, due to a lack of physical capacity for instance, still need a 
+service that can offer them a means of transportation across a city and it 
+is for *this* population, that cars --- or possibly buses --- should 
+undoubtedly be offered.
+
+
+# Bikes, Buses and Beyond! 
+
+While this post likely covers a lot of material that may feel like common 
+knowledge, I'm hoping to use it as the foundation from which to carry this topic
+further. What kind of efforts are being taken in the U.S. and across the globe 
+as better support bike, pedestrian and public transit infrastructure? What 
+statistical innovations can we develop to further these causes? More on these
+ideas soon!
