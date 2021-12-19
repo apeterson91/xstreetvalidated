@@ -1,0 +1,46 @@
+---
+title: "Car Free Cities"
+description: |
+  They're
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 12-12-2021
+output:
+  distill::distill_article:
+    self_contained: false
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+bibliography: bikes.bib
+categories:
+  - Bikes
+  - Big Picture
+draft: true 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+In the previous [post](xstreetvalidated.com/posts/2021-10-09-bikes/) we examined
+why, fundamentally, bikes have several advantages for transporting humans that 
+cars lack resulting in cheaper, faster and safer trips. With this understanding 
+we turn our attention to the, at times dramatic, changes that several cities 
+have begun to make in order to exploit these advantages and provide their 
+citizens with all the benefits a less auto-centric city design can offer. 
+We'll start with the dramatic sweeping changes in Europe and work our way to 
+the more moderate progress in the U.S. 
+
+Before we dive deeper into things, a quick word on references. This post draws 
+heavily from the material from material produced by the 
+city beautiful [channel](https://youtu.be/g9-9CxCxrVE) and the 
+not just bikes [channel](https://youtu.be/sI-1YNAmWlk). I highly encourage you
+to check out their material as I've enjoyed learning from it.
+
+## Europe 
+
+In 2018 Oslo announced 
+
+
+## USA
+

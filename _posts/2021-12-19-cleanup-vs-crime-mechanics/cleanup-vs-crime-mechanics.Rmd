@@ -5,17 +5,16 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 12-05-2021
+date: 12-19-2021
 output:
   distill::distill_article:
     self_contained: false
 bibliography: cleanup.bib
 creative_commons: CC BY
 categories:
-  - Technical
   - Cleanup vs. Crime
   - Social Cohesion
-draft: true 
+draft: false 
 ---
 
 
@@ -33,7 +32,7 @@ theme_set(theme_bw() + theme(text=element_text(size=22)))
 After all the randomization, cleaning and measuring, now comes the philosophical
 pondering. Why did we see the low rates of crime we did in the areas around
 the greened lots? This is not a question to which we can provide a definitive 
-answer, at least not from this study. However, we should at least discuss 
+answer, at least not from this study alone. However, we can discuss 
 some of the prevailing ideas in this space and consider which among them 
 are most compelling.
 
@@ -69,7 +68,7 @@ for what makes city streets safe [@jacobs1959death]:
 > blank sides on it and leave it blind.
 
 Personally, I find this idea so compelling because it is so simple. We are 
-innately social creatures and care *a lot* about what others think about us.  
+innately social creatures and care *a lot* about what others think about us.
 We simply act differently when we think others may be watching, 
 no matter our capacity for ill-intent. Still, there may be more at work here 
 then simply increasing the number of eyes on the street.
@@ -85,13 +84,14 @@ cite both **collective efficacy theory** as well as **broken windows theory**
 as being relevant in their final comments 
 [@sampson1997neighborhoods;@kellingwindows1982]. 
 The first theory speaks directly to the idea of social cohesion highlighted 
-in this blog's introductory motivation: that members of a neighborhood 
-community will attempt to self-regulate one another, separate of a more 
-formal process, in order to avoid problems like those that may arise with the 
-police, as well as encourage other behaviors that promote shared values. The 
-authors in our paper argue that the cleaned up vacant lots may have
-promoted this sense of social cohesion, prompting a renewed willingness to act 
-for the common good and normalizing a higher standard of behavior in the 
+in this blog's introductory 
+[motivation](https://xstreetvalidated.com/posts/motivation/): that members of a
+neighborhood community will attempt to self-regulate one another, separate of a 
+more formal process, in order to avoid problems like those that may arise with the 
+police. Additionally, they'll also act to encourage other behaviors that promote
+shared values. The authors in our paper argue that the cleaned up vacant lots 
+may have promoted this sense of social cohesion, prompting a renewed willingness
+to act for the common good and normalizing a higher standard of behavior in the 
 community. 
 
 Building off this idea, the broken windows theory posits that 
@@ -99,7 +99,10 @@ a sense of disorder may promote further disorder --- if one
 window is broken in a building, the rest will soon be broken. By restoring 
 some sense of "order" to the built environment, 
 the greened and mowed vacant lots reduced the inherent psychological feeling
-that crime was appropriate.
+that crime was appropriate. It may be worth noting here, briefly, that 
+what constitutes a sense of order broadly is not necessarily uniformly 
+understood, but for our purposes we'll consider "order" in this context to 
+mean the vacant lots without trash or apparent lack of use.
 
 # Which is it?
 

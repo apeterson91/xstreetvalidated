@@ -56,7 +56,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
 code span.cf { color: #007ba5; } /* ControlFlow */
@@ -77,12 +77,34 @@ code span.kw { color: #007ba5; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
 code span.ot { color: #007ba5; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
 code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
 </style>
 
   <!--radix_placeholder_meta_tags-->
@@ -1271,7 +1293,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1463,7 +1488,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Cleanup vs. Crime: Methods of Analysis","description":"From KDEs to Difference-in-Differences","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-07T00:00:00.000+00:00","citationText":"Peterson, 2021"}
+{"title":"Cleanup vs. Crime: Methods of Analysis","description":"From KDEs to Difference-in-Differences","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-11-07T00:00:00.000-04:00","citationText":"Peterson, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1496,12 +1521,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="data-and-questions">Data and Questions</h2>
 <p>Recall from the paper that the authors had shooting data accessed from the Philadelphia Police Department, and vacant lot data - location, size, and randomized intervention, that they amassed as part of their project. I’ve already shown, visually, what the shooting data looked like in the first post. The data structure for the vacant lot data probably looked something like what’s in Table <a href="#tab:vacant">1</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="zolbrvnflt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="umglopmntd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zolbrvnflt .gt_table {
+#umglopmntd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1526,7 +1551,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-left-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_heading {
+#umglopmntd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1538,7 +1563,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_title {
+#umglopmntd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1548,7 +1573,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-width: 0;
 }
 
-#zolbrvnflt .gt_subtitle {
+#umglopmntd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1558,13 +1583,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-width: 0;
 }
 
-#zolbrvnflt .gt_bottom_border {
+#umglopmntd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_col_headings {
+#umglopmntd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1579,7 +1604,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_col_heading {
+#umglopmntd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1599,7 +1624,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#zolbrvnflt .gt_column_spanner_outer {
+#umglopmntd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1611,15 +1636,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 4px;
 }
 
-#zolbrvnflt .gt_column_spanner_outer:first-child {
+#umglopmntd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zolbrvnflt .gt_column_spanner_outer:last-child {
+#umglopmntd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zolbrvnflt .gt_column_spanner {
+#umglopmntd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1631,7 +1656,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   width: 100%;
 }
 
-#zolbrvnflt .gt_group_heading {
+#umglopmntd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1653,7 +1678,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#zolbrvnflt .gt_empty_group_heading {
+#umglopmntd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1668,15 +1693,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   vertical-align: middle;
 }
 
-#zolbrvnflt .gt_from_md > :first-child {
+#umglopmntd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zolbrvnflt .gt_from_md > :last-child {
+#umglopmntd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zolbrvnflt .gt_row {
+#umglopmntd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1695,7 +1720,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   overflow-x: hidden;
 }
 
-#zolbrvnflt .gt_stub {
+#umglopmntd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1707,7 +1732,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-left: 12px;
 }
 
-#zolbrvnflt .gt_summary_row {
+#umglopmntd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1717,7 +1742,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#zolbrvnflt .gt_first_summary_row {
+#umglopmntd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1727,7 +1752,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_grand_summary_row {
+#umglopmntd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1737,7 +1762,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   padding-right: 5px;
 }
 
-#zolbrvnflt .gt_first_grand_summary_row {
+#umglopmntd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1747,11 +1772,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-top-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_striped {
+#umglopmntd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zolbrvnflt .gt_table_body {
+#umglopmntd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1760,7 +1785,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-bottom-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_footnotes {
+#umglopmntd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1774,13 +1799,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_footnote {
+#umglopmntd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#zolbrvnflt .gt_sourcenotes {
+#umglopmntd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1794,41 +1819,41 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   border-right-color: #D3D3D3;
 }
 
-#zolbrvnflt .gt_sourcenote {
+#umglopmntd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#zolbrvnflt .gt_left {
+#umglopmntd .gt_left {
   text-align: left;
 }
 
-#zolbrvnflt .gt_center {
+#umglopmntd .gt_center {
   text-align: center;
 }
 
-#zolbrvnflt .gt_right {
+#umglopmntd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zolbrvnflt .gt_font_normal {
+#umglopmntd .gt_font_normal {
   font-weight: normal;
 }
 
-#zolbrvnflt .gt_font_bold {
+#umglopmntd .gt_font_bold {
   font-weight: bold;
 }
 
-#zolbrvnflt .gt_font_italic {
+#umglopmntd .gt_font_italic {
   font-style: italic;
 }
 
-#zolbrvnflt .gt_super {
+#umglopmntd .gt_super {
   font-size: 65%;
 }
 
-#zolbrvnflt .gt_footnote_marks {
+#umglopmntd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1879,7 +1904,7 @@ Y_{it}(\mathbf{s}) := \frac{1}{(0.500)^2}\sum_{i=1}^{n} I(\mathbf{s}&#39;_{it} \
 \]</span> where <span class="math inline">\(I(\mathbf{s}&#39; \in U)\)</span> is a function that returns a 1 if the location of shooting <span class="math inline">\(i\)</span> is in the box <span class="math inline">\(U\)</span> of coordinates defining a 500 m<span class="math inline">\(^2\)</span> square around location <span class="math inline">\(\mathbf{s}&#39;_{it}\)</span> during time period <span class="math inline">\(t\)</span> and 0 otherwise.</p>
 <p>Again, what this amounts to conceptually is an average number of shootings at each grid point, where those shootings at closer distances are weighted more and those shootings at further distances (those more than 500 m) are weighted zero. The authors create their main figure in the paper from plotting the relative averages at each grid point across space. The lower values are assigned a light green color and the higher values are assigned a red color. See Figure <a href="#fig:kde">1</a> from their paper, below where the shootings are calculated at at yearly rate.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:kde"></span>
+<div class="figure"><span style="display:block;" id="fig:kde"></span>
 <img src="Fig1.jpeg" alt="Kernel Density Estimate of shootings Figure from [@moyer2019effect]." width="936" />
 <p class="caption">
 Figure 1: Kernel Density Estimate of shootings Figure from <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.
@@ -1897,7 +1922,7 @@ Y_{it} := \text{ KDE at lot } i\text{, in study month } t. \\
 <h2 id="buffer-counts">Buffer Counts</h2>
 <p>The second measure the author’s use to try and assign a specific number of shootings to a vacant lot is known as a “buffer count” or “buffer zone.” Put simply, the author’s looked at the center of each vacant lot, drew a circle 300 meters around that point, and counted all the shootings that fell into that circle, during a given month and assigned that value to the vacant lot as it’s count of shootings, <span class="math inline">\(Y_{it}&#39;\)</span>. See Figure <a href="#fig:buffervis">2</a> for a visualization of this idea. The authors then went on to check for “spill-over” effects through the use of a second, 600m buffer around the first.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:buffervis"></span>
+<div class="figure"><span style="display:block;" id="fig:buffervis"></span>
 <img src="cleanup-vs-crime-methods-of-analysis_files/figure-html5/buffervis-1.png" alt="Visualization of Hypothetical Buffer with 300 m radius in Upper Kensington. Star represents location of hypothetical vacant lot." width="1344" data-distill-preview=1 />
 <p class="caption">
 Figure 2: Visualization of Hypothetical Buffer with 300 m radius in Upper Kensington. Star represents location of hypothetical vacant lot.
