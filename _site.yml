@@ -9,7 +9,6 @@ google_analytics: "UA-207384038-1"
 collections: 
   posts:
     subscribe: _subscribe.html
-    disqus: XStreetValidated
     share: [twitter, linkedin]
 favicon: images/XSV_tinylogo.png
 creative_commons: CC BY
