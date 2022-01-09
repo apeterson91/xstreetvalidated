@@ -6,7 +6,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 12-12-2021
+date: 01-16-2022
 categories:
   - Statistics
   - Technical 
@@ -42,32 +42,37 @@ technical details and a novel application to street crime data.
 
 The first two sections focus on the technical details and history in the literature, 
 while the third focuses on how this method can be applied 
-with hints of how it might be used to inform urban policy making.
+and hints of how it might be used to inform urban policy making.
 
 ## The CAR model
 
-The reader may recall from the [previous post](https://github.com/apeterson91/xstreetvalidated/tree/main/_posts/2021-08-26-spatial-models) 
-on spatial models, that the CAR family accommodates spatial correlation 
+The CAR family accommodates spatial correlation 
 between spatially adjacent observations through the incorporation of a spatial 
-effect $\mathbf{b}_i$ whose covariance was a function of the aforementioned 
-spatial adjacency. Specifically, for an areal observation $y_i$, a linear model 
-with design matrix $\mathbf{X}$ and regression coefficients vector 
+effect $b_i$, whose covariance is a function of the spatial adjacency
+between observations. Specifically, for an areal observation $y_i$, a linear model 
+with covariate vector $\mathbf{x}_{i}$ and regression coefficients vector 
 $\mathbf{\beta}$, would incorporate CAR effects as follows:
+
+<aside>
+The reader may recall this model family was first introduced in a  
+[previous post](https://github.com/apeterson91/xstreetvalidated/tree/main/_posts/2021-08-26-spatial-models) 
+on spatial models.
+</aside>
 
 \begin{equation}
 \begin{aligned}
-y_i &=  \mathbf{X}\mathbf{\beta} + b_i\\
-\mathbf{b}_i &\sim MVN(\mathbf{0},\Sigma)\\
+y_i &=  \mathbf{x}^{T}_i\mathbf{\beta} + b_i\\
+\mathbf{b} &\sim MVN(\mathbf{0},\Sigma)\\
 \Sigma &= \tau D(I-\rho \mathbf{A}),
 \end{aligned}
 (\#eq:car)
 \end{equation}
 
-where $\Sigma$, the covariance matrix for the random effects $\mathbf{b}_i$ 
+where $\Sigma$, the covariance matrix for $\mathbf{b}$ 
 are a function of scale $\tau$, difference matrix^[where $D_{i,i}$ 
-is the number of neighbors for area $i$ and 0 everywhere else] 
-$D$, adjacency matrix^[where $A_{i,j} = 1$ indicates area $i$ and $j$ are 
-spatially connected and 0 indicates they are not] $\mathbf{A}$, and spatial 
+is the number of spatially adjacent neighbors for area $i$ and 0 everywhere 
+else] $D$, adjacency matrix $\mathbf{A}$^[where $A_{i,j} = 1$ indicates area 
+$i$ and $j$ are spatially connected and 0 indicates they are not], and spatial 
 correlation $\rho$. When $\rho=1$ the adjacent observations are understood to 
 be completely correlated and when fixing this parameter as such the model is 
 called the Intrinsic Conditional Autoregressive (ICAR) model.
@@ -78,17 +83,17 @@ problematic. To start, when considering the spatial parameter $\rho$ unknown,
 as in the CAR framework, the parameter does not offer an intuitive 
 interpretation; values of $\rho$ that are not very close to 1 allow for almost 
 no spatial correlation whatsoever and negative spatial correlation usually does 
-not comport with substantive understanding of the data. As for the ICAR model, 
-by fixing $\rho=1$, the correlation between observations is understood to be completely driven by 
-spatial association which can be problematic in situations where there is 
-non-spatial variability or problems with over-dispersion, as is often in the 
-case with spatial applications modeling the counts of disease cases using, e.g.
-a Poisson distribution. All of these issues prompted the development of a 
-new approach by Besag, York and Mollie, that strives to take advantage of the 
-inherent intuition behind the ICAR model but also overcome it's weaknesses. 
-It is to this new framework we now turn our attention, but if the reader is 
-interested in learning more about the details underlying the CAR and ICAR 
-models they should consult chapter 3 of [@banerjee2003hierarchical], 
+not comport with a substantive understanding of the data. As for the ICAR model, 
+by fixing $\rho=1$, the correlation between observations is understood to be
+completely driven by spatial association, which can be problematic in situations 
+where there is non-spatial variability or problems with over-dispersion, as is 
+often in the case with spatial applications modeling counts using, e.g. a 
+Poisson distribution. All of these issues prompted the 
+development of a new approach by Besag, York and Mollie, that strives to take 
+advantage of the inherent intuition behind the ICAR model but also overcome 
+it's weaknesses. It is to this new framework we now turn our attention, but if 
+the reader is interested in learning more about the details underlying the CAR 
+and ICAR models they should consult chapter 3 of [@banerjee2003hierarchical], 
 [@morris2019bayesian] and the latter's online 
 [case study](https://mc-stan.org/users/documentation/case-studies/icar_stan.html).
 
@@ -96,7 +101,7 @@ models they should consult chapter 3 of [@banerjee2003hierarchical],
 
 
 The original paper by Besag York and Mollie (BYM) proposed a model that incorporated 
-the two sources of variability --- extra-Poisson site specific variability and 
+the two sources of variability ---  site specific and 
 spatial variability --- previously addressed with one spatial effect term 
 in ICAR models with two types of random effects: a site specific effect 
 independent of spatial correlation, and a spatial effect complete with an ICAR 
@@ -105,8 +110,8 @@ The addition of this extra term caused *new* issues with identifiability and
 appropriate placement of priors which prompted further work by 
 [@riebler2016intuitive] and others^[[@riebler2016intuitive] contains a 
 nice summary of the work leading up to their model.] to further improve the 
-parameterization introduced by BYM by introducing a new constraint, 
-shared scale $\sigma$ and correlation parameter $\rho$, that improved 
+parameterization introduced by BYM. By introducing a new constraint, 
+shared scale $\sigma$ and correlation parameter $\rho$, their model improved 
 identifiability and facilitated a more intuitive placement of priors on the 
 hyper parameters. Denoting the scaled site-specific effect for the $i$th 
 location as $\psi_i$ and the spatial effect as $\phi_i$ and their original 
@@ -114,7 +119,7 @@ variants as $\psi_i^{*}$,$\phi_i^{*}$, the new model specification is as follows
 
 \begin{equation}
 \begin{aligned}
-y_i &=  \mathbf{X}\mathbf{\beta} + b_i\\
+y_i &=  \mathbf{x}_{i}\mathbf{\beta} + b_i\\
 \mathbf{b}_i  &= \psi_i + \phi_i \\
 &= \sigma(\sqrt{1-\rho}\psi^{*}_i + \sqrt{\rho}\phi_i^{*}) \\
 \psi^{*} &\sim N(0,\mathbf{I})\\
@@ -128,7 +133,7 @@ Note that $\Sigma^{\star}$ is now scaled and constrained so that
 $V[\phi] \approx 1$. With all this machinery in place, the more application 
 driven reader would be well warranted asking if **now**, we have a model 
 that offers us a better chance of modeling spatially networked data. 
-The application in the following section aspires to show that we do.
+The short analysis in the following section aspires to show that we do.
 
 
 ## BYM Application to Crime and other City Street Events   
@@ -144,7 +149,9 @@ police officers in Philadelphia. The first used a kernel density estimate
 of the shootings, while the second used a simple count within a given buffer 
  --- 300 and 600 meters --- of the vacant lot. In this section I'd like to 
 propose a method that will simplify the effort of "counting" where crimes 
-occur, and enable a more intuitive modeling framework.
+occur, and enable a more intuitive modeling framework. Note that I do not (yet)
+involve the estimation of the effect of vacant lots on the incidence of crime, 
+leaving that topic for a future post.
 
 ### Mapping Crimes to Streets
 
@@ -159,7 +166,7 @@ used, but at the small distances we are considering the differences should be
 negligible.], and using the street as the spatial index where outcomes are 
 measured follows naturally. This idea is illustrated in Figure 
 \@ref(fig:sstreets), where shootings regularly occur on a city street 
-or can be understood as occurring on a city street --- if an event 
+or can be understood as occurring on a city street: if an event 
 occurs inside a store whose address corresponds to a street, we would 
 still colloquially understand the crime to have occurred "on the street", even 
 though the crime did not occur on the asphalt representing the literal physical
@@ -238,8 +245,13 @@ shootings %>%
 Not only does mapping crimes to streets offer an intuitive understanding for 
 modeling city events, such as the shootings studied in [@moyer2019effect], the 
 street network also allows us to *borrow* information across the different streets
-by street adjacency to model correlation through using, for example 
-the BYM parameterization of the ICAR prior. Figure \@ref(fig:networkvis) gives 
+by street adjacency to model correlation through using, for example, 
+the BYM parameterization of the ICAR prior. The previous modeling framework 
+employed by [@moyer2019effect] used a neighborhood specific effect to try and
+capture this correlation, but by incorporating 
+spatial structure we should be able to improve upon their efforts to more
+efficiently and accurately estimating the parameters of interest.
+Figure \@ref(fig:networkvis) gives 
 an illustration of how one might visualize the network determined by city 
 streets.
 
@@ -252,22 +264,23 @@ plot(ntdf)
 
 The use of the BYM model is particularly important, as we are often 
 interested in modeling the count of events on a particular street and will need
-the extra flexibility provided by the random effect $\psi_i$ described above 
-to avoid problems with over dispersion in modeling the counts as distributed 
-from a poisson distribution. As with disease incidence, city events will also 
-typically by zero-inflated, as events such as shootings, car accidents, etc. do 
-not --- typically --- occur at such a high frequency across every single street 
+the extra flexibility provided by the random effect $\psi_i$, described above, 
+to avoid problems with over-dispersion in modeling the counts as distributed 
+from a poisson distribution. City events will typically by zero-inflated, as 
+incidents such as shootings, car accidents, etc. do not --- typically --- occur 
+at such a high frequency across every single street 
 as to receive daily, monthly or possibly even an annual record. Thus, a 
-zero point mass, or zero-inflated poisson model, is critical to accurately 
-modeling the underlying process from which the data are generated. Let 
-$Y_{itm}$ be the number of shootings observed at street $i$, during calendar 
-year $t$, month $m$ and $\pi$, the probability of being assigned to the zero 
-point mass. Using a similar notation as above for the BYM components, 
-the model is as follows:
+zero point mass, or 
+[zero-inflated model](https://en.wikipedia.org/wiki/Zero-inflated_model), is 
+critical to accurately modeling the underlying process from which the data are 
+generated. Let $Y_{itm}$ be the number of shootings observed at street $i$, 
+during calendar year $t$ and month $m$. Then let $\pi$ be the probability of an 
+observation being drawn from the zero point mass. Using a similar notation as 
+above for the BYM components, the model is as follows:
 
 \begin{equation}
 \begin{aligned}
-Y_{it} \sim \ \pi\delta_{0}(\cdot) + 
+Y_{itm} \sim \ \pi\delta_{0}(\cdot) +  
 (1-\pi)\text{Pois}(\exp{(\alpha + \text{Year}_{t}\times \beta_t + 
 \gamma_m + b_i)}),
 \end{aligned}
@@ -344,14 +357,18 @@ for each street in the Upper Kensington Neighborhood that is determined to be "c
 non-zero. That is, with 90% probability the model estimates that the effect is 
 greater than 0. We can interpret an example street estimate of 1.97 to indicate 
 that that street has `exp(1.97)` $\approx$ 7 times more shootings than a typical 
-street (where $b_i = 0$) all else equal. As a final note, you should notice 
-how this plot agrees with Figure \@ref(fig:sstreets) which is a nice 
-reinforcement that the model is capturing the data correctly.
+street in Kensington (where $b_i = 0$), all else equal. Further, you 
+should notice how this plot agrees with Figure \@ref(fig:sstreets) which is a 
+nice reinforcement that the model is capturing the data correctly. There is 
+much more that could be learned from this modeling framework. For example, 
+the parameter $\pi$, could be made street specific, $\pi_{i}$, so as to identify
+what features of a street are most likely to be associated with a complete 
+lack of shootings. For the sake of brevity, we'll simply conclude with one final 
+note, a reminder of what this model is and is **not** saying.
 
-
-I emphasize here that this model is merely descriptive --- it is describing 
+This model is merely descriptive --- it is describing 
 the variability of shootings across the Upper Kensington neighborhood streets 
-from 2019-2021 --- rather than offering us anything inferential or potentially causal 
+from 2019-2021 --- rather than offering us anything causal 
 as [@moyer2019effect]'s work sought to do. This is however, as far as I can tell,
 the first application of the BYM framework to city street level events^[
 [@rose2018risk] attempted to do something similar using a Gaussian process].
@@ -362,6 +379,7 @@ spatial temporal aggregated predictors I developed alongside my coauthors in
 cleanup effect [@moyer2019effect] estimated in their work. Such efforts 
 usually take a *long* time, but I will post more about that here as soon 
 as any meaningful progress has been made. 
+
 
 <details>
 ```{r yrest}
@@ -415,9 +433,3 @@ fit <- brm(bf(shootings ~ num_lots + car(A, gr = OBJECTID,type='bym2'),
 
 ```
 
-
-
-## Acknowledgements {.appendix}
-
-Thanks to [Robert Svoboda](https://www.linkedin.com/in/rcsvoboda/) for 
-reading and offering comments on this article.
