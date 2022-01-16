@@ -17,7 +17,7 @@ bibliography: car.bib
 output:
   distill::distill_article:
     self_contained: false
-draft: true
+draft: false 
 ---
 
 
@@ -55,7 +55,7 @@ $\mathbf{\beta}$, would incorporate CAR effects as follows:
 
 <aside>
 The reader may recall this model family was first introduced in a  
-[previous post](https://github.com/apeterson91/xstreetvalidated/tree/main/_posts/2021-08-26-spatial-models) 
+[previous post](https://xstreetvalidated.com/posts/2021-08-26-spatial-models/) 
 on spatial models.
 </aside>
 
@@ -86,7 +86,7 @@ no spatial correlation whatsoever and negative spatial correlation usually does
 not comport with a substantive understanding of the data. As for the ICAR model, 
 by fixing $\rho=1$, the correlation between observations is understood to be
 completely driven by spatial association, which can be problematic in situations 
-where there is non-spatial variability or problems with over-dispersion, as is 
+where there is non-spatial variability, or problems with over-dispersion, as is 
 often in the case with spatial applications modeling counts using, e.g. a 
 Poisson distribution. All of these issues prompted the 
 development of a new approach by Besag, York and Mollie, that strives to take 
@@ -157,7 +157,7 @@ leaving that topic for a future post.
 
 
 The police reports documenting crime by the Philadelphia Police Department, 
-record a GPS coordinate as the location of the shooting, a single point in space 
+contain a GPS coordinate as the location of the shooting, a single point in space 
 and time, but individuals belonging to neighborhoods similarly understand the 
 crime --- and many other similar city events --- to have occurred "on a street".
 Thus the idea of mapping crimes from the single point location to the 
@@ -255,25 +255,27 @@ Figure \@ref(fig:networkvis) gives
 an illustration of how one might visualize the network determined by city 
 streets.
 
-```{r,networkvis, fig.cap="Network visualization of the streets in Upper Kensington. Note that this is not the exact manner in which the network information is used in the Besag York and Mollie model, as the streets are in fact considered to be the nodes of the graph and the street intersections the edges, but the plot is illustrative of the general idea."}
+```{r,networkvis, preview = TRUE, fig.cap="Network visualization of the streets in Upper Kensington. Note that this is not the exact manner in which the network information is used in the Besag York and Mollie model, as the streets are in fact considered to be the nodes of the graph and the street intersections the edges, but the plot is illustrative of the general idea."}
 plot(ntdf)
 ```
 
 ### Zero Inflated Poisson BYM Model
 
 
-The use of the BYM model is particularly important, as we are often 
-interested in modeling the count of events on a particular street and will need
-the extra flexibility provided by the random effect $\psi_i$, described above, 
+The use of the BYM model is particularly important in modeling the count of 
+shootings or other events on a particular street as we will need the 
+extra flexibility provided by the random effect $\psi_i$, described above, 
 to avoid problems with over-dispersion in modeling the counts as distributed 
-from a poisson distribution. City events will typically by zero-inflated, as 
-incidents such as shootings, car accidents, etc. do not --- typically --- occur 
+from a poisson distribution. City events like shootings, accidents, etc. 
+will typically by zero-inflated, as they do not --- typically --- occur 
 at such a high frequency across every single street 
 as to receive daily, monthly or possibly even an annual record. Thus, a 
 zero point mass, or 
 [zero-inflated model](https://en.wikipedia.org/wiki/Zero-inflated_model), is 
 critical to accurately modeling the underlying process from which the data are 
-generated. Let $Y_{itm}$ be the number of shootings observed at street $i$, 
+generated. I'll present, fit and interpret a simple model to briefly
+illustrate the idea.
+Let $Y_{itm}$ be the number of shootings observed at street $i$, 
 during calendar year $t$ and month $m$. Then let $\pi$ be the probability of an 
 observation being drawn from the zero point mass. Using a similar notation as 
 above for the BYM components, the model is as follows:
@@ -363,8 +365,14 @@ nice reinforcement that the model is capturing the data correctly. There is
 much more that could be learned from this modeling framework. For example, 
 the parameter $\pi$, could be made street specific, $\pi_{i}$, so as to identify
 what features of a street are most likely to be associated with a complete 
-lack of shootings. For the sake of brevity, we'll simply conclude with one final 
-note, a reminder of what this model is and is **not** saying.
+lack of shootings. At this point, hopefully one can start to imagine how this 
+model might be used in the context of urban policy decision making. By 
+identifying those streets that are most at risk, the strength of correlation 
+at the spatial or street specific level, or even just being able to offer a 
+more intuitive interpretation of how policy may affect resident's lives in a 
+context they can appreciate, there are lots of opportunities.
+For the sake of brevity, I'll simply conclude with one final note, a reminder 
+of what this model is and is **not** saying.
 
 This model is merely descriptive --- it is describing 
 the variability of shootings across the Upper Kensington neighborhood streets 
