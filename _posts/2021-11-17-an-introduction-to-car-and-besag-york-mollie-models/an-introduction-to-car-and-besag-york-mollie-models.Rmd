@@ -1,5 +1,5 @@
 ---
-title: "From CAR to Besag,York & Mollie Models"
+title: "From CAR to Besag, York & Mollie Models"
 description: | 
   Different approaches to modeling spatial areal networks within
   the conditional autoregressive family and a novel application.
