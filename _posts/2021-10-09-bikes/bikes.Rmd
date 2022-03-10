@@ -46,7 +46,7 @@ knitr::include_graphics("bikecommute.png")
 
 # Environments $\rightarrow$ Cost Time and Safety
 
-Everyday people need to go places—work, grocery stores, medical offices, and so on,
+Everyday people need to go places—work, grocery stores, medical offices, and so on.
 ^[ Okay, maybe [not as much as they used to](https://www.google.com/url?q=https://www.census.gov/library/stories/2021/03/working-from-home-during-the-pandemic.html&sa=D&source=docs&ust=1645397830021676&usg=AOvVaw1jIpQT0RqRFVIIa66clYiH).] Before someone chooses how to go from A to B, the environment they live in will play a large role in 
 determining their choice. How far will they have to travel? What routes and modes 
 of transit available? What’s the likelihood of traffic? In answering these questions, some environments will be more amenable to certain types of transit than others. 
