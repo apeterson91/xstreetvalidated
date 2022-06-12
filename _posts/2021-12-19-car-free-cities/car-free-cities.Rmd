@@ -5,7 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 3-27-2021
+date: 6-12-2022
 output:
   distill::distill_article:
     self_contained: false
@@ -44,7 +44,7 @@ encourage you to check out their material as I've enjoyed learning from it.
 
 In 2017 city leaders in Oslo, Norway announced they would block off 
 large swaths of the city to private passenger vehicles[@youtubecb]. 
-Such demonstrative actions are rarely easy, even in a nation as committed to 
+Big steps like these are rarely easy, even in a nation as committed to 
 its environmental character as Norway --- the country plans to be carbon 
 neutral by 2030. In this case, both members of the public and business leaders
 needed convincing [@wolfe_2018]. Thankfully, it would appear at least so far 
