@@ -842,6 +842,7 @@ d-title .dt-tags {
 d-article table.gt_table td,
 d-article table.gt_table th {
   border-bottom: none;
+  font-size: 100%;
 }
 
 .html-widget {
@@ -1083,10 +1084,6 @@ figure img.external {
   position: relative;
   margin-bottom: 2.5em;
   margin-top: 1.5em;
-}
-
-.figure img {
-  width: 100%;
 }
 
 .figure .caption {
@@ -1918,9 +1915,21 @@ function init_distill() {
 
     // hoverable references
     $('span.citation[data-cites]').each(function() {
+      const citeChild = $(this).children()[0]
+      // Do not process if @xyz has been used without escaping and without bibliography activated
+      // https://github.com/rstudio/distill/issues/466
+      if (citeChild === undefined) return true
+
+      if (citeChild.nodeName == "D-FOOTNOTE") {
+        var fn = citeChild
+        $(this).html(fn.shadowRoot.querySelector("sup"))
+        $(this).id = fn.id
+        fn.remove()
+      }
       var refs = $(this).attr('data-cites').split(" ");
       var refHtml = refs.map(function(ref) {
-        return "<p>" + $('#ref-' + ref).html() + "</p>";
+        // Could use CSS.escape too here, we insure backward compatibility in navigator
+        return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
       }).join("\n");
       window.tippy(this, {
         allowHTML: true,
@@ -1932,6 +1941,31 @@ function init_distill() {
         placement: 'bottom-start'
       });
     });
+
+    // fix footnotes in tables (#411)
+    // replacing broken distill.pub feature
+    $('table d-footnote').each(function() {
+      // we replace internal showAtNode methode which is triggered when hovering a footnote
+      this.hoverBox.showAtNode = function(node) {
+        // ported from https://github.com/distillpub/template/pull/105/files
+        calcOffset = function(elem) {
+            let x = elem.offsetLeft;
+            let y = elem.offsetTop;
+            // Traverse upwards until an `absolute` element is found or `elem`
+            // becomes null.
+            while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                x += elem.offsetLeft;
+                y += elem.offsetTop;
+            }
+
+            return { left: x, top: y };
+        }
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+        const bbox = node.getBoundingClientRect();
+        const offset = calcOffset(node);
+        this.show([offset.left + bbox.width, offset.top + bbox.height]);
+      }
+    })
 
     // clear polling timer
     clearInterval(tid);
@@ -2031,6 +2065,8 @@ function init_common() {
   // mark non-body figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
     var figures = $(this).find('img, .html-widget');
+    // ignore leaflet img layers (#106)
+    figures = figures.filter(':not(img[class*="leaflet"])')
     if ($(this).attr('data-layout') !== "l-body") {
       figures.css('width', '100%');
     } else {
@@ -2053,7 +2089,7 @@ function init_common() {
   // get rid of index.html references in header
   if (window.location.protocol !== "file:") {
     $('.distill-site-header a[href]').each(function(i,val) {
-      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
     });
   }
 
@@ -2589,12 +2625,12 @@ transit that are most popular—walking, biking, driving in a personal car
 and taking public transit —we could broadly consider the cost of each to
 be something like what we see in the table below.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="ccieleqyry" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lavahdenbj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ccieleqyry .gt_table {
+#lavahdenbj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2619,7 +2655,7 @@ be something like what we see in the table below.</p>
   border-left-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_heading {
+#lavahdenbj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2631,7 +2667,7 @@ be something like what we see in the table below.</p>
   border-right-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_title {
+#lavahdenbj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2641,7 +2677,7 @@ be something like what we see in the table below.</p>
   border-bottom-width: 0;
 }
 
-#ccieleqyry .gt_subtitle {
+#lavahdenbj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2651,13 +2687,13 @@ be something like what we see in the table below.</p>
   border-top-width: 0;
 }
 
-#ccieleqyry .gt_bottom_border {
+#lavahdenbj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_col_headings {
+#lavahdenbj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2672,7 +2708,7 @@ be something like what we see in the table below.</p>
   border-right-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_col_heading {
+#lavahdenbj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2692,7 +2728,7 @@ be something like what we see in the table below.</p>
   overflow-x: hidden;
 }
 
-#ccieleqyry .gt_column_spanner_outer {
+#lavahdenbj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2704,15 +2740,15 @@ be something like what we see in the table below.</p>
   padding-right: 4px;
 }
 
-#ccieleqyry .gt_column_spanner_outer:first-child {
+#lavahdenbj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ccieleqyry .gt_column_spanner_outer:last-child {
+#lavahdenbj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ccieleqyry .gt_column_spanner {
+#lavahdenbj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2724,7 +2760,7 @@ be something like what we see in the table below.</p>
   width: 100%;
 }
 
-#ccieleqyry .gt_group_heading {
+#lavahdenbj .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2746,7 +2782,7 @@ be something like what we see in the table below.</p>
   vertical-align: middle;
 }
 
-#ccieleqyry .gt_empty_group_heading {
+#lavahdenbj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2761,15 +2797,15 @@ be something like what we see in the table below.</p>
   vertical-align: middle;
 }
 
-#ccieleqyry .gt_from_md > :first-child {
+#lavahdenbj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ccieleqyry .gt_from_md > :last-child {
+#lavahdenbj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ccieleqyry .gt_row {
+#lavahdenbj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2788,7 +2824,7 @@ be something like what we see in the table below.</p>
   overflow-x: hidden;
 }
 
-#ccieleqyry .gt_stub {
+#lavahdenbj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2800,7 +2836,7 @@ be something like what we see in the table below.</p>
   padding-left: 12px;
 }
 
-#ccieleqyry .gt_summary_row {
+#lavahdenbj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2810,7 +2846,7 @@ be something like what we see in the table below.</p>
   padding-right: 5px;
 }
 
-#ccieleqyry .gt_first_summary_row {
+#lavahdenbj .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2820,7 +2856,7 @@ be something like what we see in the table below.</p>
   border-top-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_grand_summary_row {
+#lavahdenbj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2830,7 +2866,7 @@ be something like what we see in the table below.</p>
   padding-right: 5px;
 }
 
-#ccieleqyry .gt_first_grand_summary_row {
+#lavahdenbj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2840,11 +2876,11 @@ be something like what we see in the table below.</p>
   border-top-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_striped {
+#lavahdenbj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ccieleqyry .gt_table_body {
+#lavahdenbj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2853,7 +2889,7 @@ be something like what we see in the table below.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_footnotes {
+#lavahdenbj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2867,13 +2903,13 @@ be something like what we see in the table below.</p>
   border-right-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_footnote {
+#lavahdenbj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ccieleqyry .gt_sourcenotes {
+#lavahdenbj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2887,41 +2923,41 @@ be something like what we see in the table below.</p>
   border-right-color: #D3D3D3;
 }
 
-#ccieleqyry .gt_sourcenote {
+#lavahdenbj .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ccieleqyry .gt_left {
+#lavahdenbj .gt_left {
   text-align: left;
 }
 
-#ccieleqyry .gt_center {
+#lavahdenbj .gt_center {
   text-align: center;
 }
 
-#ccieleqyry .gt_right {
+#lavahdenbj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ccieleqyry .gt_font_normal {
+#lavahdenbj .gt_font_normal {
   font-weight: normal;
 }
 
-#ccieleqyry .gt_font_bold {
+#lavahdenbj .gt_font_bold {
   font-weight: bold;
 }
 
-#ccieleqyry .gt_font_italic {
+#lavahdenbj .gt_font_italic {
   font-style: italic;
 }
 
-#ccieleqyry .gt_super {
+#lavahdenbj .gt_super {
   font-size: 65%;
 }
 
-#ccieleqyry .gt_footnote_marks {
+#lavahdenbj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2965,7 +3001,7 @@ depending on the kind of car they have and how many miles they drive,
 tends to vary substantially depending on what state/country one lives in
 and what global economic forces are in play at the time. We haven’t even
 gotten to depreciation yet and there are still <em>even more</em> costs.
-By taking up space for parking, dependency on cars can increase the rate
+By taking up space for parking, dependency on cars can increase the cost
 of housing <span class="citation" data-cites="shoup2021high">(<a
 href="#ref-shoup2021high" role="doc-biblioref">Shoup 2021</a>)</span>.
 And finally, cars’ use of fossil fuels contributes to global warming and
@@ -3147,23 +3183,23 @@ Shoup, Donald C. 2021. <em>The High Cost of Free Parking</em>.
 Routledge.
 </div>
 </div>
-<section class="footnotes footnotes-end-of-document"
+<section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p> Okay, maybe <a
+<li id="fn1"><p> Okay, maybe <a
 href="https://www.google.com/url?q=https://www.census.gov/library/stories/2021/03/working-from-home-during-the-pandemic.html&amp;sa=D&amp;source=docs&amp;ust=1645397830021676&amp;usg=AOvVaw1jIpQT0RqRFVIIa66clYiH">not
 as much as they used to</a>.<a href="#fnref1" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>a statistical/mathematical term,
-meaning that we’re not interested in exploring how this variable
-contributes to the relationship of interest<a href="#fnref2"
+<li id="fn2"><p>a statistical/mathematical term, meaning that we’re not
+interested in exploring how this variable contributes to the
+relationship of interest<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This may depend on the presence of bike lanes, the bike
+riders comfort with passing cars, etc.<a href="#fnref3"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>This may depend on the presence of
-bike lanes, the bike riders comfort with passing cars, etc.<a
-href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>taken from nadaguides.com<a
-href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>taken from nadaguides.com<a href="#fnref4"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->
@@ -3171,11 +3207,11 @@ href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
   <p class="social_footer">
     <span class="article-sharing">
       Share: &nbsp;
-      <a href="https://twitter.com/share?text=What%27s%20the%20Buzz%20around%20Bikes%3F&amp;url=https%3A%2F%2Fxstreetvalidated.com%2Fposts%2F2021-10-09-bikes%2F">
-        <i class="fab fa-twitter"></i>
+      <a href="https://twitter.com/share?text=What%27s%20the%20Buzz%20around%20Bikes%3F&amp;url=https%3A%2F%2Fxstreetvalidated.com%2Fposts%2F2021-10-09-bikes%2F" aria-label="share on twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
       </a>
-      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fxstreetvalidated.com%2Fposts%2F2021-10-09-bikes%2F&amp;title=What%27s%20the%20Buzz%20around%20Bikes%3F">
-        <i class="fab fa-linkedin"></i>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fxstreetvalidated.com%2Fposts%2F2021-10-09-bikes%2F&amp;title=What%27s%20the%20Buzz%20around%20Bikes%3F" aria-label="share on linkedin">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
       </a>
     </span>
   </p>

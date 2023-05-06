@@ -1,6 +1,7 @@
 ---
 title: "What's the Buzz around Bikes?"
 description: |
+  *Bring Bring*
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
@@ -95,7 +96,7 @@ many miles they drive, tends to vary substantially depending on what
 state/country one lives in and what global economic forces are in play at the 
 time. We haven't even gotten to depreciation yet and there are still
 *even more* costs. By taking up space for parking, dependency on 
-cars can increase the rate of housing [@shoup2021high]. And finally, cars' use of fossil fuels contributes to global warming and also plays a role in air pollution [@johansson2017impacts]. 
+cars can increase the cost of housing [@shoup2021high]. And finally, cars' use of fossil fuels contributes to global warming and also plays a role in air pollution [@johansson2017impacts].
 
 <aside>
 You can find out more 
