@@ -51,7 +51,7 @@ find this topic so exciting. You can also take a look at my
 [notes](https://docs.google.com/document/d/e/2PACX-1vTvus6fjM0nmt1WKOZZCp7Y-x9JNS8-W5w4wBSK-xXyn4pj4KyGbeuz1gyOLfJ1NhwS88V33LIyzjL-/pub), for those interested in reading more.
 
 
-```{r, fig.cap="Zoning Map of Pittsburgh. Each color corresponds to a different zoning district. Data From [wprdc.org](http://www.wprdc.org/)"}
+```{r zonemap, fig.cap="Zoning Map of Pittsburgh. Each color corresponds to a different zoning district. Data From [wprdc.org](http://www.wprdc.org/)"}
 zones <- read_sf("~/Documents/CityData/Burgh/Zoning/Zoning.shp")
 zones %>% 
   ggplot(aes(fill = full_zonin)) +
