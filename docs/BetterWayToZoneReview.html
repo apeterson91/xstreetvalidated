@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="distill" />
-  <link rel="alternate" type="application/rss+xml" href="https://xstreetvalidated.com/index.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -89,28 +88,42 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>X Street Validated</title>
+  <title>X Street Validated: A Better Way To Zone</title>
 
+  <meta property="description" itemprop="description" content="One zone for this, one zone for that"/>
 
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
   <link rel="icon" type="image/png" href="images/XSV_tinylogo.png"/>
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2023-07-15"/>
+  <meta property="article:created" itemprop="dateCreated" content="2023-07-15"/>
+  <meta name="article:author" content="Adam Peterson"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="X Street Validated"/>
+  <meta property="og:title" content="X Street Validated: A Better Way To Zone"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="One zone for this, one zone for that"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="X Street Validated"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="X Street Validated"/>
+  <meta property="twitter:title" content="X Street Validated: A Better Way To Zone"/>
+  <meta property="twitter:description" content="One zone for this, one zone for that"/>
 
+  <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+  <meta name="citation_title" content="X Street Validated: A Better Way To Zone"/>
+  <meta name="citation_fulltext_html_url" content="https://xstreetvalidated.com"/>
+  <meta name="citation_fulltext_world_readable" content=""/>
+  <meta name="citation_online_date" content="2023/07/15"/>
+  <meta name="citation_publication_date" content="2023/07/15"/>
+  <meta name="citation_author" content="Adam Peterson"/>
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":["X Street Validated"]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","citation_url","creative_commons","categories","draft"]}},"value":[{"type":"character","attributes":{},"value":["A Better Way To Zone"]},{"type":"character","attributes":{},"value":["One zone for this, one zone for that\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.com/"]}]}]},{"type":"character","attributes":{},"value":["07-15-2023"]},{"type":"character","attributes":{},"value":["distill::distill_article"]},{"type":"character","attributes":{},"value":["https://xstreetvalidated.com"]},{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Book Review","Zoning"]},{"type":"logical","attributes":{},"value":[false]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2453,12 +2466,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 </head>
 
-<body class="layout-listing">
+<body>
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"X Street Validated","authors":[]}
+{"title":"A Better Way To Zone","description":"One zone for this, one zone for that","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.com/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2023-07-15T00:00:00.000-04:00","citationText":"Peterson, 2023"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2483,470 +2496,160 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
-<!--radix_placeholder_article_listing-->
 
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).on("load", function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      page_category = decodeURIComponent(page_category)
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
-
-<div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
-<div class="posts-list">
-<h1 class="posts-list-caption" data-caption="X Street Validated">X Street Validated</h1>
-<a href="posts/2023-07-15-betterwaytozonereview/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Book Review","Zoning"]}</script>
-<div class="metadata">
-<div class="publishedDate">July 28, 2023</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2023-07-15-betterwaytozonereview/distill-preview.png"/>
-</div>
-<div class="description">
-<h2>A Better Way To Zone</h2>
+<div class="d-title">
+<h1>A Better Way To Zone</h1>
+<!--radix_placeholder_categories-->
 <div class="dt-tags">
 <div class="dt-tag">Book Review</div>
 <div class="dt-tag">Zoning</div>
 </div>
-<p>One zone for this, one zone for that</p>
-</div>
-</a>
-<a href="posts/2021-12-19-propensity-to-cycle/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Bikes","Technical"]}</script>
-<div class="metadata">
-<div class="publishedDate">May 6, 2023</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-12-19-propensity-to-cycle/pct_viz.png"/>
-</div>
-<div class="description">
-<h2>Propensity to Cycle</h2>
-<div class="dt-tags">
-<div class="dt-tag">Bikes</div>
-<div class="dt-tag">Technical</div>
-</div>
-<p>How can we plan the move from auto-centric to multi-modal centered transit?</p>
-</div>
-</a>
-<a href="posts/2021-12-19-car-free-cities/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Bikes","Big Picture"]}</script>
-<div class="metadata">
-<div class="publishedDate">June 12, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-12-19-car-free-cities/oslo.jpg"/>
-</div>
-<div class="description">
-<h2>Car Free Cities</h2>
-<div class="dt-tags">
-<div class="dt-tag">Bikes</div>
-<div class="dt-tag">Big Picture</div>
-</div>
-<p>Can you imagine?</p>
-</div>
-</a>
-<a href="posts/2021-10-09-bikes/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Bikes","Big Picture"]}</script>
-<div class="metadata">
-<div class="publishedDate">Feb. 20, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-10-09-bikes/bikecommute.png"/>
-</div>
-<div class="description">
-<h2>What's the Buzz around Bikes?</h2>
-<div class="dt-tags">
-<div class="dt-tag">Bikes</div>
-<div class="dt-tag">Big Picture</div>
-</div>
-<p>*Bring Bring*</p>
-</div>
-</a>
-<a href="posts/2021-11-17-an-introduction-to-car-and-besag-york-mollie-models/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Technical","Cleanup vs. Crime"]}</script>
-<div class="metadata">
-<div class="publishedDate">Jan. 16, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img src="posts/2021-11-17-an-introduction-to-car-and-besag-york-mollie-models/an-introduction-to-car-and-besag-york-mollie-models_files/figure-html5/networkvis-1.png"/>
-</div>
-<div class="description">
-<h2>From CAR to Besag, York &amp; Mollie Models</h2>
-<div class="dt-tags">
-<div class="dt-tag">Technical</div>
-<div class="dt-tag">Cleanup vs. Crime</div>
-</div>
-<p>Different approaches to modeling spatial areal networks within
-the conditional autoregressive family and a novel application.</p>
-</div>
-</a>
-<a href="posts/2021-12-19-cleanup-vs-crime-mechanics/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Cleanup vs. Crime","Social Cohesion"]}</script>
-<div class="metadata">
-<div class="publishedDate">Dec. 19, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-12-19-cleanup-vs-crime-mechanics/Broken_window_large.jpeg"/>
-</div>
-<div class="description">
-<h2>Cleanup vs. Crime: Mechanics</h2>
-<div class="dt-tags">
-<div class="dt-tag">Cleanup vs. Crime</div>
-<div class="dt-tag">Social Cohesion</div>
-</div>
-<p>Why did it work?</p>
-</div>
-</a>
-<a href="posts/2021-11-28-cleanup-vs-crime-causal-inference/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Technical","Cleanup vs. Crime","Social Cohesion"]}</script>
-<div class="metadata">
-<div class="publishedDate">Nov. 28, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-11-28-cleanup-vs-crime-causal-inference/cleanup-vs-crime-causal-inference_files/figure-html5/ATEvis-1.png"/>
-</div>
-<div class="description">
-<h2>Cleanup vs. Crime: Causal Inference</h2>
-<div class="dt-tags">
-<div class="dt-tag">Technical</div>
-<div class="dt-tag">Cleanup vs. Crime</div>
-<div class="dt-tag">Social Cohesion</div>
-</div>
-<p>What kinds of causal claims are justified from an empirical analysis?</p>
-</div>
-</a>
-<a href="posts/2021-08-23-cleanup-vs-crime-methods-of-analysis/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Technical","Cleanup vs. Crime","Social Cohesion"]}</script>
-<div class="metadata">
-<div class="publishedDate">Nov. 7, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-08-23-cleanup-vs-crime-methods-of-analysis/cleanup-vs-crime-methods-of-analysis_files/figure-html5/buffervis-1.png"/>
-</div>
-<div class="description">
-<h2>Cleanup vs. Crime: Methods of Analysis</h2>
-<div class="dt-tags">
-<div class="dt-tag">Technical</div>
-<div class="dt-tag">Cleanup vs. Crime</div>
-<div class="dt-tag">Social Cohesion</div>
-</div>
-<p>From KDEs to Difference-in-Differences</p>
-</div>
-</a>
-<a href="posts/2021-10-17-cleanup-vs-crime/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Big Picture","Cleanup vs. Crime","Social Cohesion"]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 17, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-10-17-cleanup-vs-crime/F1.jpg"/>
-</div>
-<div class="description">
-<h2>Cleanup vs. Crime: A Case Study in 4 Parts</h2>
-<div class="dt-tags">
-<div class="dt-tag">Big Picture</div>
-<div class="dt-tag">Cleanup vs. Crime</div>
-<div class="dt-tag">Social Cohesion</div>
-</div>
-<p>A simple concept and a decent result.</p>
-</div>
-</a>
-<a href="posts/2021-10-10-Shadyside-Connector/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Big Picture"]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 10, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-10-10-Shadyside-Connector/proposed.jpeg"/>
-</div>
-<div class="description">
-<h2>Shadyside Connector: Introduction</h2>
-<div class="dt-tags">
-<div class="dt-tag">Big Picture</div>
-</div>
-<p>Street planning at the local level.</p>
-</div>
-</a>
-<a href="posts/2021-08-26-spatial-models/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Big Picture","Technical"]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 2, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-08-26-spatial-models/spatial-models_files/figure-html5/ozonevis2-1.png"/>
-</div>
-<div class="description">
-<h2>Spatial Models</h2>
-<div class="dt-tags">
-<div class="dt-tag">Big Picture</div>
-<div class="dt-tag">Technical</div>
-</div>
-<p>Have spatial data? You may need a spatial model!</p>
-</div>
-</a>
-<a href="posts/2021-09-12-causal-inference-in-the-built-environment/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Big Picture"]}</script>
-<div class="metadata">
-<div class="publishedDate">Sept. 12, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/2021-09-12-causal-inference-in-the-built-environment/causal-inference-in-the-built-environment_files/figure-html5/wealthvis-1.png"/>
-</div>
-<div class="description">
-<h2>Causal Inference in the Built Environment</h2>
-<div class="dt-tags">
-<div class="dt-tag">Big Picture</div>
-</div>
-<p>How can we know how to best change our environment?</p>
-</div>
-</a>
-<a href="posts/motivation/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":["Big Picture"]}</script>
-<div class="metadata">
-<div class="publishedDate">Aug. 7, 2021</div>
-<div class="dt-authors">
-<div class="dt-author">Adam Peterson</div>
-</div>
-</div>
-<div class="thumbnail">
-<img data-src="posts/motivation/spm1.png"/>
-</div>
-<div class="description">
-<h2>Motivation</h2>
-<div class="dt-tags">
-<div class="dt-tag">Big Picture</div>
-</div>
-<p>Urban spaces are more important than ever: Three reasons why and a highlight
-of what's to come.</p>
-</div>
-</a>
-</div>
-<div class="posts-sidebar">
-<div class="sidebar-section subscribe">
-<h3>Subscribe</h3>
-<form method='post' action='https://blogtrottr.com'>
-  <p>Enjoy this blog? Get notified of new posts via email:</p>
-  <input type='text' name='btr_email' />
-  <input type='hidden' name='btr_url'
-         value='https://xstreetvalidated.com/index.xml'/>
-  <input type='hidden' name='schedule_type' value='0' />
-  <input type='submit' value='Subscribe' />
-</form>
-</div>
-<div class="sidebar-section categories">
-<h3>Categories</h3>
-<ul>
-<li>
-<a href="#category:Articles">Articles</a>
-<span class="category-count">(13)</span>
-</li>
-<li>
-<a href="#category:Big_Picture">Big Picture</a>
-<span class="category-count">(7)</span>
-</li>
-<li>
-<a href="#category:Bikes">Bikes</a>
-<span class="category-count">(3)</span>
-</li>
-<li>
-<a href="#category:Book_Review">Book Review</a>
-<span class="category-count">(1)</span>
-</li>
-<li>
-<a href="#category:Cleanup_vs._Crime">Cleanup vs. Crime</a>
-<span class="category-count">(5)</span>
-</li>
-<li>
-<a href="#category:Social_Cohesion">Social Cohesion</a>
-<span class="category-count">(4)</span>
-</li>
-<li>
-<a href="#category:Technical">Technical</a>
-<span class="category-count">(5)</span>
-</li>
-<li>
-<a href="#category:Zoning">Zoning</a>
-<span class="category-count">(1)</span>
-</li>
-</ul>
-</div>
-</div>
-<div class="posts-more">
-<a href="#">More articles &raquo;</a>
-</div>
-</div>
-<!--/radix_placeholder_article_listing-->
-
-<div class="d-title">
-<h1>X Street Validated</h1>
-<!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-
+<p><p>One zone for this, one zone for that</p></p>
 </div>
 
+<div class="d-byline">
+  Adam Peterson <a href="https://apetersonsite.com/" class="uri">https://apetersonsite.com/</a> 
+  
+<br/>07-15-2023
+</div>
 
 <div class="d-article">
+<blockquote>
+<p>“This was the backbone of zoning: a division of the city into use zones and boxes into which buildings had to fit in order to avoid crowding their neighbors; to avoid creating public health, safety, or fire hazards; and to prevent land use combinations likely to create nuisances in the future.” (p.3 “A Better Way to Zone”)</p>
+</blockquote>
+<h2 id="a-book-review">A Book Review</h2>
+<p>I’ve decided to take a break from the usual statistics papers that I discuss on
+this blog to provide a brief review of a <a href="https://g.co/kgs/hYYsWe">book</a> I
+recently finished, “A Better Way to Zone: Ten Principles to Create More
+Livable Cities” by Donald Elliot. While zoning is not the sexiest of topics,
+the influence zoning has on our built environment cannot be overstated. Indeed,
+many of the serious societal problems we’re facing in the US today, from
+homelessness and housing prices to our dependence on cars, can find some major
+root in the local zoning code.</p>
+<p>While I’ve been fascinated with and studied the built environment for years,
+this was my first major foray into a text that explicitly touched the zoning
+code. As such, I can’t comment on how effectively Elliot offers his readers an
+accurate picture of the zoning landscape, but I can say that my general
+impression of Elliot’s expertise and his writing was very positive. I came away
+feeling much more educated about the history of zoning in the US that led to our
+current problems.</p>
+<p>I can’t hope to cover everything Elliot does in his book, but I’m hoping to
+provide a brief overview of what zoning is and why it matters, a few key
+principles Elliot prescribes for better zoning, as well as touch on why <em>I</em>
+find this topic so exciting. You can also take a look at my <a href="">notes</a>, for those
+interested in reading more.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="BetterWayToZoneReview_files/figure-html5/unnamed-chunk-1-1.png" alt="Zoning Map of Pittsburgh. Each color corresponds to a different zoning district. Data From wprdc.org" width="624" />
+<p class="caption">
+Figure 1: Zoning Map of Pittsburgh. Each color corresponds to a different zoning district. Data From wprdc.org
+</p>
+</div>
+</div>
+<h2 id="zoning-what-it-is-and-what-it-isnt">Zoning: What it is and What it isn’t</h2>
+<p>The logic behind zoning as a legal construct is the same as that quoted at the
+start - place residences and/or businesses sufficiently apart from one another
+to prevent health and safety issues. Intuitively, this idea makes perfect sense.
+Nobody wants to live near a factory billowing smoke, so carving out space on a
+city map with one section for houses to be built, another for shops, and still
+another for factories makes sense.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/1916_Zoning_Resolution">first zoning law</a>
+that put these principles into practice in the US was
+written in New York and strongly influenced by the <a href="https://en.wikipedia.org/wiki/New_York_State_Tenement_House_Act">tenement acts</a>, which
+established standards for room sizes, sanitation, and ventilation. A natural
+next step from deciding people should have enough room <em>within</em> a building is
+to decide they should also have enough room <em>between</em> buildings.</p>
+<p>Similarly, zoning also made distinctions between spaces for industrial
+buildings, like factories, and residential or commercial buildings, like houses
+and shops. This kind of zoning is called “Euclidean Zoning,” named after a
+<a href="https://en.wikipedia.org/wiki/Village_of_Euclid_v._Ambler_Realty_Co">court case</a>
+in Euclid, Ohio. Each zone that’s carved out for a specific <em>use</em> is
+called a zoning district. However, the notion of a zoning district quickly
+became abused. Categories started to proliferate faster than sensible rules
+could restrain them:</p>
+<blockquote>
+<p>“[A] veterinarian wants to open up a clinic in a small-scale neighborhood
+business zone but that is not a permitted use. The question has not come up
+before, and the city decides that it did not really intend to keep veterinarians
+out of neighborhood commercial areas. They are, after all, a neighborhood
+service. The city proposes an amendment to add “veterinarian” as a permitted
+use. The neighbors object and will support the zoning text change only if it is
+limited to a 5,000 square-foot facility. “Done” says the city. Now the
+ordinance has “veterinarian” and “veterinarian, under 5,000 sq. ft” in the
+list of permitted uses. But the following year, when the scenario plays out
+again across town, a different set of neighbors insists that there not be any
+animals on the premises at night. That eliminates the risk of barking for the
+houses across the alley. “Done,” says the city. Now we have “veterinarian, under
+5,000 sq. ft. no overnight boarding” in the list. Next, someone wants a
+big facility and the neighbors are afraid of the noise and smell of the outdoor
+dog run, so “veterinarian, no outdoor enclosures” is added.” (p.44)</p>
+</blockquote>
+<p>Obviously this all seems a bit silly, but as Elliot points out, this is not all
+that hypothetical. City council members have a strong incentive to keep city
+residents happy, so the urgent need to solve today’s problem often means
+overlooking the problems it will create tomorrow.</p>
+<p>It is important to note that zoning codes describe a list of permitted uses
+today but are not in any way forward-looking. In contrast to this present-minded
+state, there is also the concept of a “city plan” (or city planning), which
+takes a forward-looking view to think about how specific areas of the city today
+might be altered to fit a more unified vision of the city for tomorrow.</p>
+<p>You’d think zoning and city plans might have a lot of overlap, but they tend to be thought of separately. Elliot attributes this to the two separate and disjointed publications by the Commerce Department, which introduced each of these ideas separately without providing any kind of unifying framework. The lack of cohesion can lead to problems. As one might imagine, it would be worth having the city plan built into the zoning code itself, so that changes to the zoning code were consistent with the long term vision of the city. However, because these two models of what the city should be were historically maintained separately, this did not always come to pass.</p>
+<aside>
+The two publications in question are the Standard Zoning Enabling Act of 1924
+and the Standard City Planning Enabling Act. You can learn more about these
+acts <a href="https://www.planning.org/growingsmart/enablingacts/#:~:text=A%20Standard%20State%20Zoning%20Enabling%20Act%20(SZEA)&amp;text=It%20included%20a%20grant%20of,and%20amending%20the%20zoning%20regulations.">here</a>
+</aside>
+<h2 id="present-day-consequences">Present Day Consequences</h2>
+<p>Much of the book is spent exposing the flaws present in the typical kind of
+zoning codes practiced today in an effort to expose a key lesson on how zoning
+could be improved moving forward. I’ll limit myself to just a few of these
+ideas: Transportation Planning and Predictability vs. Flexibility.</p>
+<h3 id="transportation-planning">Transportation Planning</h3>
+<p>I wanted to make sure to touch on transportation planning, given that it was
+the subject of previous posts on the blog. Elliot notes that historically,
+zoning didn’t even consider transportation planning as part of their purview.
+A zoning district merely described what was or was not allowed in a certain
+space of the city. While this might include certain details that implicitly
+touched on transportation, like a minimum parking requirement, it typically had
+no concern for how many cars could come to or from the site in question.
+This quickly became a concern, especially in the era of the automobile.
+A new apartment or mixed-use development could include hundreds of apartments
+and several new stores and restaurants leading to potentially hundreds of
+new cars on nearby roads. Could the street network handle that increased
+volume? Yes? No? Maybe?</p>
+<p>As Elliot notes in the book, modeling traffic is not a straightforward exercise and, as I’ll invite you to imagine, involves any myriad number of assumptions about which mode of transit different residents or store customers will use, how often they’ll use it, etc.</p>
+<p>Still, as Elliot notes, it <em>is</em> worth considering transportation planning and zoning hand-in-hand. It likely does not make sense to zone a parcel of land near a one lane road for a mixed-use high density development like previously mentioned if it is understood that most residents will be car-dependent in the city. Zoning and transportation planning go hand-in-hand and current and future planners and city council members would do well to consider the interplay between the two.</p>
+<h3 id="predictability-vs.-flexibility">Predictability vs. Flexibility</h3>
+<p>Elliot repeatedly discusses the theme and balance of predictability vs.
+flexibility throughout his book. We’ve already hit on this idea with Elliot’s
+veterinarian example. Euclidean zoning implicitly strives to be predictable
+within each zoning district. Setting a zone district on the basis of uses
+signals to both the developer and the consumer that there will be at least some
+level of uniform expectation within that zone - whether it be the type of
+building built there, the setback off the street, or the maximum height of the
+building. You can see this in the
+<a href="https://pittsburghpa.gov/dcp/zoning">Pittsburgh zoning code</a> for example
+(Figure _).</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>In the above table, each base zoning district – Residential, Mixed Use, etc. – has different Residential uses that are “Permitted by Right”, denoted by a P in the table, meaning that there are no additional requests that need to be made to the zoning board in order to build. Alternatively, some may require an “Administrator exception” – meaning that a staff member of the city may have to use their judgment on whether or not the use is permitted, and so on. The general theme here being that one can typically expect to see the types of uses that are “permitted by right” in their respective zoning districts and so have some measure of what to expect when they invest or purchase a property there. Still, the system allows for flexibility in allowing individuals to apply for exceptions to the code in order to try to build for uses that would otherwise not be permitted.</p>
+<p>Elliot hits on this theme in particular with a particular type of zoning device called the “Planned Developmental Unit” or PDU. A PDU is a “custom deal” whereby a developer works with a city to develop a zoning ordinance that works perfectly for the development that they’re planning. This represents the extreme side of flexibility and in principle, is intended to let a developer that’s looking to be creative build something that still adds to the city’s urban fabric, even if it doesn’t abide by all the zoning ordinances. Elliot notes here that this extra flexibility is great, but should be used sparingly, as it can easily overwhelm a, typically, low-staffed city planning department and prevent developers from getting permits to build.</p>
+<p>There’s much more to say on other zoning and development tools that play a part in this balance between Predictability and Flexibility but I’ll finish this section by saying that as a statistician with an interest in the built environment, learning more about zoning has been a ton of fun to think about, especially as it relates to how one thinks about modeling different aspects of the urban experience</p>
+<h2 id="a-statisticians-perspective-on-zoning">A Statistician’s Perspective on Zoning</h2>
+<p>As a statistician who has studied the built environment, reading this book was
+fascinating in that it opened my eyes to the implicit model that we impose on
+our cities. As someone who works with models everyday, one of the first things
+one always has to check is the implications of whatever model we’re proposing.
+Both the successes and failures of zoning stem from our ability to anticipate
+and conceptualize the consequences of this implicit model.</p>
+<p>Thinking even further, I can see the possibility of estimating, for a given
+zoning code, the kind of quality of life an individual might have depending on
+where they live in a city. We should be able to bring this back to our
+development of the zoning code itself, so in our aspirations to create
+“A Better Way to Zone”, we’re able to support the construction of a healthy,
+productive and affordable built environment.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
@@ -2964,6 +2667,16 @@ of what's to come.</p>
 <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/apeterson91/XStreetValidated/issues/new">create an issue</a> on the source repository.</p>
 <h3 id="reuse">Reuse</h3>
 <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/apeterson91/XStreetValidated">https://github.com/apeterson91/XStreetValidated</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+<h3 id="citation">Citation</h3>
+<p>For attribution, please cite this work as</p>
+<pre class="citation-appendix short">Peterson (2023, July 15). X Street Validated: A Better Way To Zone. Retrieved from https://xstreetvalidated.com</pre>
+<p>BibTeX citation</p>
+<pre class="citation-appendix long">@misc{peterson2023a,
+  author = {Peterson, Adam},
+  title = {X Street Validated: A Better Way To Zone},
+  url = {https://xstreetvalidated.com},
+  year = {2023}
+}</pre>
 </div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
