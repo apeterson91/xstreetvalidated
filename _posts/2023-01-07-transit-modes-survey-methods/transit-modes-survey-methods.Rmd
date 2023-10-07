@@ -1,0 +1,64 @@
+---
+title: "Transit Modes & Survey Methods"
+description: |
+  What Kinds of Counterfactuals Can We Explore with Street Experiments?
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.org
+date: 2023-01-07
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+The Propensity to cycle tool discussed in the previous [post]() offers its users two very intuitive insights through its dynamic map: (1) It paints a descriptive view of what UK citizens transit patterns were in 2011 and (2) estimates a potential counterfactual view of what transit might look like in the UK if certain cultural attitudes or environmental barriers were overcome. In considering how we might provide these same kinds of tools in the US so the analogous benefits for policymakers could be made, this post focuses on the first, descriptive goal, of the PCT and discusses the advantages and disadvantages of other methods that try to accomplish this goal in the absence of relevant and available census data. I'll end up zooming in on what efforts a *city*, specifically, might take to better gain a sense of transit patterns within its borders.
+
+## Survey Methods
+
+The PCT is very fortunate in that the authors have access to census data. That is, there is no error in the estimate of the proportion of individuals cycling in a given area due to sampling, as every individual --- or sufficiently close to it, we assume--- have had their answer to this question recorded. In the absence of census data, researchers interested in answering a question like this are forced to result to sampling - intentionally selecting a subset of the population for surveying their response to this and similar questions. Indeed, an important component of the US Census, [The American Community Survey](https://www.census.gov/programs-surveys/acs), is actually conducted entirely by sampling in order to, at least in part, manage expenses. Knowing what questions to ask, who to ask, how to combine the results and then communicate them to the relevant stakeholders are some of the most difficult challenges involved in this work and will be the focus of the remainder of this post.
+
+<aside>The American Community Survey has the closest thing the US American census has to the same question on the UK census. Unfortunately it does not have the same kind of explicit individual response data available for users to access, for example, the respondent's biological sex for constructing the sex specific propensity to transit curves.</aside>
+
+## Ask the Right Question
+
+Asking the right question is always the hardest part of any research project. In this case we at least have the previous work of the PCT to guide our own line of inquiry which, for now, remains focused on simply *describing* the rate of different modes of transit across some geographical area. For my own edification we'll let this geographic space be the city of Pittsburgh, since that is where I currently reside.
+
+For our purposes the UK census question is probably "good enough" for demonstrating the idea:
+
+> "How do you usually travel to work?"A: Private automobile, "B: Public Transit,"C: Walk "D: Bike"E: Other"
+
+Still it is worth thinking of the kind of scientific question we're trying to answer *now* and how this question does or does not allow us to accomplish our scientific goals. For example, it may be the case that responses to this question do not map exactly to reality. Individuals may respond with some bias, selecting the answer that they *wish* reflected their real transit pattern, rather than their actual trip mode. Similarly, if they respond when the weather is nice out, and they are biking to work regularly, but in fact often do not bike to work when the weather is anything less than "nice", this response may again obscure the reality. Again, this isn't to say that asking the question isn't worthwhile but to be aware that this may or may not track with reality. Other measurement methods, involving road sensors, for example, may offer a better measure of just how many cyclists are on the road.
+
+Still let's work with the question as-is and set our target estimand as the proportion, $p$ of all $N$ citizens within Pittsburgh who usually bike to work. If we had the census data we'd have a response to this question from every citizen and we could simply add up the responses of all those who answered "D" to the above question and divide it by $N$ and we would have an estimate, free of sampling error to our question of interest:
+
+$$
+p = \frac{1}{N} \sum_{i=1}^{N} Y_i,
+$$
+
+Where we define $Y_i$ as 1 when the individual responded D to our question and 0 otherwise. In the much more realistic case where we don't have census data, we have to resort to sampling and surveys.
+
+## Survey Basics
+
+The basic idea behind a survey is the same as that of statistics more generally - because we can't observe *every* relevant unit of observation, let's focus on a sample and try and infer what the general pattern is in the larger population. In our fictitious example above, we can't observe what every individual in PGH would say to our question, but we could more feasibly pay for a subset of citizens to answer this question and try and estimate the same proportion as found above in 1 without error.
+
+The first and simplest approach would be to just take a simple random sample (without replacement) of $n$ survey respondents and ask them the same question. We could estimate $p$ similarly as before by summing the number of individuals who say they bike to work and divide by $n$ the total number of individuals in the sample. The mean of our estimate $E[\hat{p}]$ would be an unbiased estimate of the true value $p$, but there would also now be variance in our estimate:
+
+$$
+\hat{p} = \frac{1}{n} \sum_{i=1}^{n} Y_i, \\
+V[\hat{p}] = \frac{N-n}{N} \frac{\hat{p}\times (1-\hat{p})}{\sqrt{n}},
+$$
+
+Where the above uses a normal approximation for the variance calculation and adjusts for large sample sizes with the term $\frac{N-n}{N}$ -- the closer $n$ is to $N$ the smaller our variance, since we've seen more of the sample.
+
+If $n$ isn't close to $N$ we might be concerned that our population doesn't meaningfully represent our population in ways that we might consider necessary to correctly answer the question. For example, in order to meaningfully answer a question about biking to work in Pittsburgh, we might think it important to ensure that we're sampling respondents across the different geographic parts, or neighborhoods of the city, to ensure that we're not allowing one particularly populous neighborhood to dominate our sample. In order to define this constraint in our sampling regime, we need to introduce the concept of sampling.
+
+## Complex Surveys: Stratified Sampling
+
+One of the first things we can do to improve our estimate of interest is to **stratify**.
+
+<aside>I'm currently [working](https://github.com/apeterson91/ComplexSurveys) through [Thomas Lumley's](https://profiles.auckland.ac.nz/t-lumley) text on surveys. I highly recommend it as a resource for anyone else who might be interested in this space.</aside>
