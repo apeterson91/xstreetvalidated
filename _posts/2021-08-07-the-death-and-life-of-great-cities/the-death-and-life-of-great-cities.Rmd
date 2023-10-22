@@ -389,15 +389,18 @@ disturbing results. If there is high traffic on a street, a traffic engineer
 would take that as a sign that the street needs to be widened, to give more
 space to automobiles so that the amount of traffic could be lowered. This two
 dimensional problem - city space and traffic - ignores the system level
-phenomenon known as “induced demand,” which means that the traffic problem is
-not solved at all. This has led to increased road widening, requiring billions
-of dollars in construction fees and little-to-no improvement in improving 
-traffic. 
+phenomenon known as 
+[“induced demand”](https://en.wikipedia.org/wiki/Induced_demand#:~:text=In%20economics%2C%20induced%20demand%20%E2%80%93%20related,and%20an%20increase%20in%20consumption.), which means that
+the traffic problem is 
+[not solved at all](https://www.sciencedirect.com/science/article/pii/S0965856423001465). 
+This has led to increased road
+widening, requiring billions of dollars in construction fees and little-to-no 
+improvement in improving traffic. 
 
 I’m very sympathetic to the arguments Jacobs is making in this chapter, though
 I’m afraid we’ve not made as much progress in our scientific efforts to
-understand “organized complexity.” I’ve already discussed some of the principles
-involved in why studying cities is so difficult. After reading this book again,
+understand “organized complexity.” I’ve already 
+[discussed](https://xstreetvalidated.com/posts/2021-09-12-causal-inference-in-the-built-environment/) some of the principles involved in why studying cities is so difficult. After reading this book again,
 I’m thinking of how to best make rigorous scientific arguments about how a city
 “should be,” how to construct a rigorous defense of a position for some
 proposed configuration of city streets that takes into account its
