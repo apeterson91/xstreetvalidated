@@ -1,15 +1,20 @@
 ---
-title: "The Death and Life of Great Cities"
+title: "The Death and Life of Great American Cities"
 description: |
-  A commentary on Jane Jacob's seminal work
+  A review and commentary on Jane Jacob's seminal work
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
-date: 08-07-2021
+date: 10-22-2023
 output:
   distill::distill_article:
     self_contained: false
-draft: true
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+bibliography: death_and_life.bib
+categories:
+  - Book Review 
+draft: false 
 ---
 
 
@@ -18,4 +23,423 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+# Yet Another Book Review
 
+This review comes on the heels of a book club I recently hosted discussing Jane
+Jacobs' seminal work, 
+[“The Death and Life of Great American Cities”](https://g.co/kgs/4Dz2Le),
+published in 1961. While it's been over 60 years since Jacobs’ published this
+book, the themes it discusses are as relevant as ever.  
+
+Jacobs was a writer and editor for the
+[The Architectural Forum](https://usmodernist.org/index-af.htm). While not 
+formally trained, she was able to learn about architectural design,
+zoning codes, and city governance living with her son and architect
+husband in West Manhattan’s Greenwich Village. She also gained “hands on”
+experience with city advocacy in advocating principles she saw as at risk
+amidst the wave federal infrastructure spending that transpired following
+the end of World War II.
+
+```{r, fig.cap="Greenwich Village By Felix Stahlberg, CC BY 2.0, Figure from [wikimedia](https://commons.wikimedia.org/w/index.php?curid=87375115)"}
+knitr::include_graphics("Greenwich_Village.jpg")
+```
+
+Altogether, these experiences gave Jacobs expert insight into both the
+aesthetic and functional design choices that make a city beautiful and
+functional as well as those that can lead to its ruin. In this book, she
+argues for what she thinks makes for a city’s success or failure across several
+dimensions. To focus my review of "Death and Life", I’ll limit my comments to 
+the following:
+
+1. The historical context in which Jacobs is writing.
+2. Diversity of uses and Jacobs’ four conditions for successful cities.
+3. Jacobs’ focus on cities as an environment for children and families.
+4. Car Infrastructure and its damages to the urban environment.
+5. Government Planning Districts - how to best manage and govern city functions.
+6. The kind of problem a city is - how to study cities.
+
+
+Finally I want to mention that one of my favorite YouTube channels, [City Beautiful](https://www.youtube.com/@CityBeautiful), 
+recently published a 
+[video](https://www.youtube.com/watch?v=nISU3uaaOUM&ab_channel=CityBeautiful) 
+on the historic conflict between Jacobs and the city planner, Robert Moses.
+I strongly encourage you check it out!
+
+
+# Historical Context
+
+```{r, fig.cap="Downtown Pittsburgh 1954 Before Federal Highway Construction and Urban renewal. Figure from [iqc](https://iqc.ou.edu/2015/01/21/60yrsnortheast/)"}
+knitr::include_graphics("PGH_before.png")
+```
+
+Let’s first set the stage of what the United States looked like in the time
+leading up to and following Jacobs’ publication of her book in 1961. Following
+the Great Depression in the 1930’s, the Federal Government made various efforts
+to stimulate the economy and provide more housing: [The National Housing Act of 1934](https://en.wikipedia.org/wiki/National_Housing_Act_of_1934), 
+[Housing Act of 1937](https://en.wikipedia.org/wiki/Housing_Act_of_1937) and the
+[Federal Housing Act of 1949](https://en.wikipedia.org/wiki/Housing_Act_of_1949),
+to name a few. 
+
+
+In the 1950’s the United States continued to expand federal investment in
+new ways. In 1956, Dwight Eisenhower signed the 
+[Federal Aid Highway Act](https://highways.dot.gov/public-roads/summer-1996/federal-aid-highway-act-1956-creating-interstate-system),
+which created the interstate highway system and triggered an immense 
+reshaping of the American landscape. A few short years after Jacobs would
+publish her book, Lyndon Johnson would help create the 
+[Department of Housing
+and Urban Development](https://en.wikipedia.org/wiki/United_States_Department_of_Housing_and_Urban_Development) in 1965 to further institutionalize federal investment in 
+public housing projects. All of this new infrastructure and policy – whether it
+be rules set to procure a mortgage by 
+[Fannie Mae](https://en.wikipedia.org/wiki/Fannie_Mae) through the 
+[Federal Housing Administration](https://en.wikipedia.org/wiki/Federal_Housing_Administration) 
+or highway construction splitting cities – collide with the
+social issues of the time. Jacobs’ was no stranger to the forces of systemic
+racism and segregation that plagued mid-century America and she places her
+city and general “good city principles” front-and-center in the fight against
+these societal evils.
+
+> "Sidewalk public contact and sidewalk public safety, taken together, bear directly on our country’s most serious social problem - segregation and racial discrimination."
+
+
+Much of Jacobs’ book is written to push back at the city administrators and
+planners who are redesigning the urban environments for more homogenous or
+segregated populations and uses. One of her more notable
+[achievements](https://www.youtube.com/watch?v=nISU3uaaOUM&ab_channel=CityBeautiful)
+in resisting this tide of redevelopment was saving Greenwich Village from
+destruction for a new highway project by organizing a rigorous protest against
+the neighborhood’s demolition. Depending on your perspective, the wealth and 
+prosperity of Manhattan’s west village is either a glowing testament to her
+wisdom or an ironic criticism of her work. Both perspectives are worth keeping
+in mind as we consider the principles she discusses.
+
+```{r, fig.cap="Downtown Pittsburgh 1954 After Federal Highway Construction and Urban renewal. Figure from [iqc.](https://iqc.ou.edu/2015/01/21/60yrsnortheast/)"}
+knitr::include_graphics("PGH_after.png")
+```
+
+<aside>
+You can see more photos of what American cities looked like before and after 
+federal infrastructure at the 
+[Institute for Quality Communities site](https://iqc.ou.edu/urbanchange) from
+the University of Oklahoma.
+</aside>
+
+# A City Generates Diversity
+
+The foundation of Jacobs’ view on cities is that they enable and generate a 
+diversity of uses. She considers this not only the great strength of a city
+neighborhood but a requirement for it to be considered healthy and successful. 
+She places this first in her conditions for a city district or neighborhood
+must have in order to be considered healthy and successful and all other
+conditions build off of it:
+
+>1. The district, and indeed, as many of its internal parts as possible, must serve
+more than one primary function; preferably more than two.
+2. Most blocks must be short; that is, streets and opportunities to turn corners
+must be frequent.
+3. The district must mingle buildings that vary in age and condition, including a
+good proportion of old ones so that they vary in the economic yield they must
+produce. This mingling must be fairly close-grained.
+4. There must be a sufficiently dense concentration of people, for whatever 
+purposes they may be there. This includes dense concentrations in the case of
+people who are there because of residence.
+
+Let’s work through each of these in turn. (1) For Jacobs, a city neighborhood
+must provide a variety of shops, businesses, residences and/or amenities – 
+collectively known as “uses”  – and consequently a variety of buildings
+and people that use them. (2) Short blocks make the neighborhood more successful
+in that it allows residents and visitors to reach their destination more quickly
+by minimizing the amount of long blocks they must walk. Short blocks also enable
+more diversity by increasing the “surface area” or retail floor space available
+to businesses to rent. (3) A variety of building ages allows for businesses and
+individuals of varying economic means to coexist, as older buildings are
+typically cheaper to rent than newer buildings, another important dimension of
+diversity Jacobs is looking to promote. Finally, (4) dense concentrations of 
+people are required both to support the district “uses” as customers and
+possibly as residents. 
+
+Jacobs’ reasons for requiring these conditions for diversity extend even 
+further. Economically, of course, (1) and (4) mean more individuals are in the
+district to visit and patron the shops, museums or other “uses” there at
+different times of day for different reasons. In her mind, this is the “life”
+of the city. There are less obvious economic benefits as well. Ample housing –
+related to (3) – allows individuals to live close to their work and to
+the shops where they need to go to get items for daily living. In terms of
+security, Jacobs argues that the resulting greater number of individuals, (4)
+– there at different times of day due to the diversity of shops – means that
+many “eyes on the street” will frustrate anyone intent on committing misdeeds. 
+
+<aside>
+Long time readers familiar with my previous 
+[post](https://xstreetvalidated.com/posts/2021-12-19-cleanup-vs-crime-mechanics/)
+evaluating the vacant lot interventions in Philadelphia will remember this 
+argument.
+</aside>
+
+Finally, though there are certainly other benefits as well, Jacobs argues that
+a diversity of uses, which then draws a diversity of patrons, will also result
+in a diversity of contact between individuals living or visiting the
+neighborhood. It is this diversity of contact that she cites as a necessary,
+though certainly not sufficient, condition for overcoming racism and the ugly
+wounds of segregation. This topic arises predominantly in her discussion on
+cities as an environment for children and families more generally.
+
+```{r, fig.cap="Consider the contrast between Jacobs diverse cities and the homogenous suburbs which became popular in post WWII America. Image is titled 'Chicago suburbs from the air' by Scorpions and Centaurs, CC BY-NC-SA 2.0."}
+knitr::include_graphics("chicago_suburbs.jpeg")
+```
+
+# Cities as an Environment for Families and Children
+
+Jacobs adamantly argues that while streets and sidewalks are an important means 
+for pedestrians to make their way through a city, they are important for reasons
+beyond this as well. She sees them as one of the fundamental tools in
+providing the safety and security that is key to any city neighborhood’s 
+success. 
+
+```{r, fig.align="center", fig.cap="photo from NYC's Street Lab [PLAY NYC](https://www.streetlab.org/programming-nyc-public-space/play/) program"}
+knitr::include_graphics("playlab.jpeg")
+```
+
+Jacobs highlights the ability of a good sidewalk - sidewalks that are wide,
+well maintained and consequently, more likely to be well used - to serve as an
+effective place for children to play. While I suspect this claim would raise a
+few eyebrows in the US where most families are accustomed to having their 
+children play in their front or back yards, this certainly makes sense from
+the perspective of a city-dweller without that luxury. Jacobs states that 
+having her young son play on the sidewalk never caused her alarm as she and
+the many members of her local neighborhood were always close by to ensure he
+was kept out of harms way. 
+
+Its worth elaborating on this last point for a moment. Most parents know the
+old adage “it takes a village to raise a child” and will agree that neighbors
+and other community members play an important part in looking out for
+more vulnerable community members. What may be overlooked, when considering 
+how this principle manifests, is just how many community members are at work in
+protecting the public space.
+
+> “The strangers on Hudson street, the allies whose eyes help us natives keep the peace of the street, are so many that they always seem to be different people from one day to the next. That does not matter…When Jimmy Rogan fell through a plate-glass window (he was separating some scuffling friends) and almost lost his arm, a stranger in an Old T-Shirt emerged from the Ideal [a local] bar, swiftly applied an expert tourniquet and, according to the hospital staff, saved Jimmy’s life… The hospital was called in this way: a woman sitting on the steps next to the accident ran over to the bus stop, wordlessly snatched the dime from a stranger who was waiting with his fifteen cent fare ready and raced into the Ideal’s phone booth. The stranger raced after her to offer the nickel too.”
+
+No less than three strangers and one local neighborhood business served
+a critical role in this local neighborhood boy’s life. It sounds as though
+most did not know this boy, or at least not on a first name basis. All of this
+happens among the larger scene playing out day-to-day of city life in this
+neighborhood, bringing strangers into contact with other strangers through the 
+shared public space of city life:
+
+>“The stretch of Hudson Street where I live is each day the scene of an intricate sidewalk ballet. I make my own first entrance into it a little after eight when I put out my garbage can… 
+
+>Mr Halpert unlocking the laundry's handcart from its mooring to a cellar door, Joe Cornacchia's son-in-law stacking out the empty crates from the delicatessen, the barber bringing out his sidewalk folding chair, Mr. Goldstein arranging the coils of wire which proclaim the hardware store is open, the wife of the tenement's superintendent depositing her chunky three-year-old with a toy mandolin on the stoop, the vantage point from which he is learning English his mother cannot speak. Now the primary children, heading for St. Luke's, dribble through the south; the children from St. Veronica's cross, heading to the west, and the children from P.S 41, heading toward the east. Two new entrances are made from the wings: well-dressed and even elegant women and men with briefcases emerge from doorways and side streets. Most of these are heading for the bus and subways, but some hover on the curbs, stopping taxis which have miraculously appeared at the right moment, for the taxis are part of a wider morning ritual: having dropped passengers from midtown in the downtown financial district, they are now bringing downtowners up to midtown. Simultaneously, numbers of women in house dresses have emerged and as they crisscross with one another they pause for quick conversations that sound with laughter or joint indignation, never, it seems, anything in between. It is time for me to hurry to work too, and I exchange my ritual farewell with Mr. Lofaro, the short, thick bodied, white-aproned fruit man who stands outside his doorway a little up the street, his arms folded, his feet planted, looking solid as the earth itself. We nod; we each glance quickly up and down the street, then look back at each other and smile. We have done this many a morning for more than ten years, and we both know what it means: all is well.”
+
+It is this community that Jacobs sought to protect from destruction by 
+highway construction, road widening and urban renewal and it is the same life
+she seeks to foster in places where it has not yet taken root.
+
+
+# The Difficulty of Car Infrastructure
+
+> “Today, everyone who values cities is disturbed by automobiles.”
+
+One of the more destructive forces Jacobs identifies as at-odds with the 
+healthy cultivation of city life that she paints above is that of car
+infrastructure and its infectious spread. 
+
+> “Traffic arteries, along with parking lots, gas stations and drive-ins, are powerful and insistent instruments of city destruction. To accommodate them, city streets are broken down into loose sprawls, incoherent and vacuous for anyone afoot… City character is blurred until every place becomes more like every other place.”
+
+Something I greatly appreciate about Jacobs is that while recognizing all this
+damage that automobile infrastructure causes, immediately after she lists these
+damages she also recognizes that “We blame automobiles for too much.” This
+nuance is important. As she states, there were traffic jams and poor 
+assimilation of horses into city streets, too, and it would seem our
+larger problem is simply not recognizing how to use the tools we have available
+to us most effectively, 
+
+>“We went awry by replacing, in effect, each horse on the crowded city street with half-a-dozen or so mechanized vehicles, instead of using each mechanized vehicle to replace half a dozen or so horses. The mechanical vehicles in their overabundance, work slothfully and idle much. 
+
+I think recognizing this balance is huge. Indeed, Jacobs goes on to recognize
+that trucks have fulfilled the promise that should be hoped for from mechanical
+vehicles; it isn’t easy to imagine how we could transport bulky or heavy items
+around a city without such tools. Yet because of the prevalence of private
+passenger vehicles, the efficacy of trucks or buses is not what it could be.
+
+It is this unfortunate choice to prioritize infrastructure building for 
+automobiles at the scale of individual use that has led to incredible 
+inefficiencies, waste and expense. As Jacobs writes in her book on the planning
+of Fort Worth, TX (emphasis below is mine):
+
+> “Erosion of cities by automobiles is thus an example of what’s known as ‘positive feedback’... something like the grip of a habit-forming addiction.
+
+> A striking statement of the positive-feedback loop was worked out by Victor Gruen in 1955 in connection with his Fort Worth Plan. Gruen, in order to understand the size of problem he had in hand, began by calculating the potential business that For Worth’s currently underdeveloped and stagnating–but traffic-jammed–downtown ought to be doing by 1970, based on its projected population and trading area. He then translated this quantity of economic activity into numbers of users, including workers, shoppers and visitors for other purposes. Then using the ratio of vehicles per downtown users current in Fort Worth, he translated the putative future users into numbers of vehicles. He then calculated how much street space would be required to accommodate the numbers of these vehicles apt to be on the streets at any one time. 
+
+> He got an outlandish figure of … sixteen million square feet, not including parking. This in comparison with the five million square feet of roadbed the underdeveloped downtown now possesses. 
+
+> But the instant Gruen had calculated his sixteen million square feet, the figure was already out of date and much too small. To obtain that much roadbed space, the downtown would have to spread out physically to an enormous extent. A given quantity of economic uses would thereby be spread relatively thin. To use its different elements, people would have to depend much less on walking and much more on driving. This would further increase the need for still more street space or else there would be terrible congestion. Differing uses, necessarily strung out in such relatively loose fashion would be so far from one another that it would become necessary to duplicate parking spaces themselves, because uses bringing people at different hours would not be sufficiently compact for much staggered use of the same accommodations. This would mean spreading the downtown even thinner, in turn requiring still more use of cars, traveling greater absolute distances internally.”
+
+```{r, fig.align="center", fig.cap="Katy Texas Highway From Aliciak3yz, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons"}
+knitr::include_graphics("Katy-Freeway.jpg")
+```
+
+As Jacobs identifies, this is not only concerning from the more
+emotional perspective of seeing a place with a sense of community destroyed by
+asphalt and cars, it is not economically sustainable. She quotes 
+[Harrison Salisbury](https://en.wikipedia.org/wiki/Harrison_Salisbury) here:
+
+>“The drawback is that as more and more space is allotted to the automobile, the goose that lays the golden egg is strangled. Enormous areas go from the tax rolls and are rendered unsuitable for productive economic purposes. The community’s ability to foot the multiplying costs of freeway dwindles.”
+
+At this point, more than 60 years after Jacobs published this book, it is 
+amazing to see the clairvoyance with which Jacobs wrote this chapter, as we 
+have more than ample evidence to see everything she’s written, and more, come 
+true. Whether its the [thousands of lives](https://en.wikipedia.org/wiki/Motor_vehicle_fatality_rate_in_U.S._by_year)
+lost each year to traffic related incidents, the added housing cost from
+[parking mandates](https://www.shoupdogg.com/), 
+[increased maintenance](https://frontiergroup.org/articles/americas-highway-spending-binge-goes-and-and/)
+costs associated with ever widening roadways – that 
+[don’t solve traffic congestion](https://www.sciencedirect.com/science/article/pii/S0965856423001465) – the [enormous health and environmental costs](https://xstreetvalidated.com/posts/2021-10-09-bikes/#cost)
+associated with car use, or the decline in 
+[social capital](https://en.wikipedia.org/wiki/Bowling_Alone), we now know, in somber and disturbing
+ detail, the disastrous design choice that has been made by making the private
+ automobile the primary means of transportation in the United States. 
+
+Unfortunately, Jacobs has no magic solution to this problem any more than we do at present day. She describes the problem like so:
+
+>“Yet although erosion [the process of car infrastructure destroying good city infrastructure] solves nothing, and creates great inefficiency, there is never a good or obvious point at which to swear off; for as the process proceeds, from its small and apparently innocuous beginnings, it becomes harder to halt or reverse it and seemingly, at least, more impractical to do so.”
+
+This is uncomfortably true. While city mayors have made 
+great [progress](https://xstreetvalidated.com/posts/2021-10-09-bikes/) in 
+recent years in dedicating more infrastructure to alternative modes of 
+transit—and there is now a
+[wave](https://www.strongtowns.org/journal/2023/1/12/5-cities-that-repealed-parking-minimums-in-2022) 
+of cities taking steps to make it easier to build housing by, for example, 
+removing or reducing parking mandates—there is no question that we are still 
+[incalculably far](https://t4america.org/2021/11/08/t4america-statement-on-the-passage-of-the-2021-infrastructure-deal/) from achieving the kind of healthy relationship with automobiles
+that Jacobs imagines in this chapter.
+
+# City Administration
+
+One of the more important but, I would guess, more overlooked chapters in 
+"The Death and Life" deals with the day-to-day details of governing a city. 
+Both the organizational structure as well as the operational details. Jacobs 
+opens this chapter with the following sentiment:
+
+> “A public hearing in a big city is apt to be a curious affair, simultaneously discouraging and heartening.”
+
+Speaking as someone who has attended several public hearings, city meetings or
+other similar forums, I heartily agree. The relationship between city residents
+and the officials that represent them is very important but also very difficult
+to manage. There are many well-intentioned city officials who are doing their
+best but city residents are often frustrated with the lack of insight they may
+have into the specific problems they see as most important to their
+neighborhood. This is further hampered by difficulty in information-sharing 
+between the city residents and officials. Jacobs focuses on this problem
+specifically in regards to the structure of city administration itself. 
+
+Specifically, Jacobs takes issue with the fact that city administration is
+arranged vertically – the parks department handles parks, housing authorities
+have separate responsibilities for housing, etc. There is horizontal structure, 
+too—there are different city precincts for which different government entities 
+(typically police or ambulance units) will take responsibility. 
+
+Jacobs argues in her book for more horizontal level administration, so that a
+neighborhood-focused government is the fundamental unit of government
+administration. Her aim in this is to ensure that the government is always
+most responsive to the individuals who live in the city itself. To be sure,
+this still requires a department that specializes in parks, planning, etc.,
+but the focus of that department’s administration would arise from
+neighborhood-specific needs.
+
+Jacobs spends some time talking about the importance in defining the right size
+of the neighborhood or district that would be administered. It has to be big
+enough to ensure it is worth administering, and to have enough clout to gain
+attention politically but not so big that it would be difficult to attend to
+neighborhood requests. 
+
+It is worth taking a moment to reflect on the fact that Jacobs discusses
+org structure in a book about cities, and that her devotion to making cities
+better requires this level of detail and change – an impressive commitment. 
+While I can’t speak with any authority on varying types of city government
+administration structure, her intuition here that the city should be highly
+focused on its residents – and her pragmatic concerns regarding politics –
+resonates strongly with me. I don’t see how a city can improve if it does not
+take the most widely shared concerns of its residents seriously. 
+
+```{r, fig.cap="Org Chart of NYC government. Taken from NYC government site."}
+knitr::include_graphics("NYCGOV_orgchart.png")
+```
+
+# The Kind of Problem a City is
+
+The last subject that Jacobs turns her attention to in this book is that of how to study and learn about cities. I remember discussing this topic with one of the book club members who was very frustrated with the fact that Jacobs wasn’t taking a very scientific approach. Interestingly, in the very last chapter of “Death and Life…” Jacobs explains why this is so, giving a very brief history of scientific progress discussing the complexity of the systems that science could explain, citing a report by Dr. Warren Weaver. I’ll provide a few excerpts here so you get the idea.
+
+> “Dr. Weaver lists three stages of development in the history of scientific thought: (1) ability to deal with problems of simplicity; (2) ability to deal with problems of disorganized complexity; and (3) ability to deal with problems of organized complexity. Problems of simplicity are problems that contain two factors which are directly related to each other in their behavior – two variables – and these problems of simplicity … were the first kinds of problems that science learned to attack…
+
+>Consider first a simple illustration in order to get the flavor of the idea. The classical dynamics of the nineteenth century was well suited for analyzing and predicting the motion of a single ivory ball as it moves about on a billiard table…One can but with a surprising increase in difficulty, analyze the motion of two or even three balls on a billiard table…. But as soon as one tries to analyze the motion of ten or fifteen balls on the table at once, as in pool, the problem becomes unmanageable. 
+
+>Imagine however a large billiard table with millions of balls flying about on its surface…The great surprise is that the problem now becomes easier: the methods of statistical mechanics are now applicable. One cannot trace the detailed history of one special ball, to be sure; there can be answered with useful precision such important questions as: On the average how many balls per second hit a given stretch of rail? On the average how far does a ball move before it is hit by some other ball?...
+
+>One is tempted to oversimplify and say that scientific methodology went from one extreme to the other…and left untouched a great middle region. The importance of this middle region, moreover, does not depend primarily on the fact that the number of variables involved is moderate…Much more important than the mere number of variables is the fact that these variables are all interrelated. These problems… show the essential feature of organization. We will therefore refer to this group of problems as those of organized complexity.
+”
+
+
+Jacobs' point in all of this is that “The kind of problem cities are” is one of
+organized complexity: many interrelated variables that all change with one
+another. She blames the kind of “low dimensional” –2-3 variables– thinking for
+the approach that most planners take to solving city problems, and she’s not
+wrong. It’s now increasingly obvious that the traditional approach to, for
+example, road and street planning, originated from this thinking with
+disturbing results. If there is high traffic on a street, a traffic engineer
+would take that as a sign that the street needs to be widened, to give more
+space to automobiles so that the amount of traffic could be lowered. This two
+dimensional problem - city space and traffic - ignores the system level
+phenomenon known as “induced demand,” which means that the traffic problem is
+not solved at all. This has led to increased road widening, requiring billions
+of dollars in construction fees and little-to-no improvement in improving 
+traffic. 
+
+I’m very sympathetic to the arguments Jacobs is making in this chapter, though
+I’m afraid we’ve not made as much progress in our scientific efforts to
+understand “organized complexity.” I’ve already discussed some of the principles
+involved in why studying cities is so difficult. After reading this book again,
+I’m thinking of how to best make rigorous scientific arguments about how a city
+“should be,” how to construct a rigorous defense of a position for some
+proposed configuration of city streets that takes into account its
+relationship with the rest of the city, the politics of the time,
+anticipated growth, normative goals and so on. 
+
+```{r,fig.cap="Graphic from the open source [A/B Street](https://a-b-street.github.io/docs/index.html) project, which tries to find ways to improve traffic flow. This is a difficult problem space and one that isn't easily solved."}
+knitr::include_graphics("traffic_sim.gif")
+```
+
+<aside>
+See [@nagel1999transims] for one example of how modeling efforts still fail
+to generate insights for understanding traffic. 
+[A/B Street](https://a-b-street.github.io/docs/index.html) tries to provide
+a similar project for the city of Seattle.
+</aside>
+
+It is no trivial thing. If Jacobs' work reminds us of anything though, it
+is of the first principles driving the normative goals – safe streets, diverse
+uses, efficiency in economy, etc. Any progress made in the space of furthering
+cities will have to hold these to heart in whatever direction their aims take 
+them.
+
+# Final Lessons
+
+When finishing this book, I tried to imagine what a modern day
+“Death and Life of Great American Cities” book would contain that would have 
+more to say on the progress we’ve made on adhering to or developing the
+principles laid out by Jacobs. A few books came to mind (
+[1](https://g.co/kgs/evbnD8), [2](https://g.co/kgs/rtLiJB), 
+[3](https://g.co/kgs/2Vgfay), 
+[4](https://g.co/kgs/zeAixe), 
+[5](https://g.co/kgs/br4z7E)) but
+none of which had the same level of personal attachment that Jacobs has. 
+I think that personal attachment is important. Cities have become a subject of 
+professional study, but they’re important because they are where we live out
+the majority of our lives. Jacobs’ book stands out all these years for many
+reasons, but the reason it sticks out to me most as I thought of where cities
+are right now and where they still need to go, is because of Jacobs’ personal
+perspective: a mom raising her family and defending her city, her home. 
+
+## Acknowledgements {.appendix}
+
+Thanks to [Paul Haluszczak](https://www.linkedin.com/in/expertly-paul/) for 
+reading and offering comments on this post.

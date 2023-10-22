@@ -21,7 +21,7 @@
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -90,7 +90,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Transit Modes &amp; Survey Methods</title>
 
-  <meta property="description" itemprop="description" content="What Kinds of Counterfactuals Can We Explore with Street Experiments?"/>
+  <meta property="description" itemprop="description" content="What Kinds of Estimates Can We Gain with Small Estimates"/>
 
 
   <!--  https://schema.org/Article -->
@@ -101,24 +101,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Transit Modes &amp; Survey Methods"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="What Kinds of Counterfactuals Can We Explore with Street Experiments?"/>
+  <meta property="og:description" content="What Kinds of Estimates Can We Gain with Small Estimates"/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Transit Modes &amp; Survey Methods"/>
-  <meta property="twitter:description" content="What Kinds of Counterfactuals Can We Explore with Street Experiments?"/>
+  <meta property="twitter:description" content="What Kinds of Estimates Can We Gain with Small Estimates"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["Transit Modes & Survey Methods"]},{"type":"character","attributes":{},"value":["What Kinds of Counterfactuals Can We Explore with Street Experiments?\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["2023-01-07"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["Transit Modes & Survey Methods"]},{"type":"character","attributes":{},"value":["What Kinds of Estimates Can We Gain with Small Estimates\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["2023-01-07"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["transit-modes-survey-methods_files/anchor-4.2.2/anchor.min.js","transit-modes-survey-methods_files/bowser-1.9.3/bowser.min.js","transit-modes-survey-methods_files/distill-2.2.21/template.v2.js","transit-modes-survey-methods_files/header-attrs-2.11/header-attrs.js","transit-modes-survey-methods_files/jquery-3.6.0/jquery-3.6.0.js","transit-modes-survey-methods_files/jquery-3.6.0/jquery-3.6.0.min.js","transit-modes-survey-methods_files/jquery-3.6.0/jquery-3.6.0.min.map","transit-modes-survey-methods_files/popper-2.6.0/popper.min.js","transit-modes-survey-methods_files/tippy-6.2.7/tippy-bundle.umd.min.js","transit-modes-survey-methods_files/tippy-6.2.7/tippy-light-border.css","transit-modes-survey-methods_files/tippy-6.2.7/tippy.css","transit-modes-survey-methods_files/tippy-6.2.7/tippy.umd.min.js","transit-modes-survey-methods_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["transit-modes-survey-methods_files/anchor-4.2.2/anchor.min.js","transit-modes-survey-methods_files/bowser-1.9.3/bowser.min.js","transit-modes-survey-methods_files/distill-2.2.21/template.v2.js","transit-modes-survey-methods_files/header-attrs-2.11/header-attrs.js","transit-modes-survey-methods_files/header-attrs-2.23/header-attrs.js","transit-modes-survey-methods_files/jquery-3.6.0/jquery-3.6.0.js","transit-modes-survey-methods_files/jquery-3.6.0/jquery-3.6.0.min.js","transit-modes-survey-methods_files/jquery-3.6.0/jquery-3.6.0.min.map","transit-modes-survey-methods_files/popper-2.6.0/popper.min.js","transit-modes-survey-methods_files/tippy-6.2.7/tippy-bundle.umd.min.js","transit-modes-survey-methods_files/tippy-6.2.7/tippy-light-border.css","transit-modes-survey-methods_files/tippy-6.2.7/tippy.css","transit-modes-survey-methods_files/tippy-6.2.7/tippy.umd.min.js","transit-modes-survey-methods_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1475,7 +1475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="transit-modes-survey-methods_files/header-attrs-2.11/header-attrs.js"></script>
+  <script src="transit-modes-survey-methods_files/header-attrs-2.23/header-attrs.js"></script>
   <script src="transit-modes-survey-methods_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="transit-modes-survey-methods_files/popper-2.6.0/popper.min.js"></script>
   <link href="transit-modes-survey-methods_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1496,7 +1496,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Transit Modes & Survey Methods","description":"What Kinds of Counterfactuals Can We Explore with Street Experiments?","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2023-01-07T00:00:00.000-05:00","citationText":"Peterson, 2023"}
+{"title":"Transit Modes & Survey Methods","description":"What Kinds of Estimates Can We Gain with Small Estimates","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2023-01-07T00:00:00.000-05:00","citationText":"Peterson, 2023"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1509,7 +1509,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Transit Modes &amp; Survey Methods</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>What Kinds of Counterfactuals Can We Explore with Street Experiments?</p></p>
+<p><p>What Kinds of Estimates Can We Gain with Small Estimates</p></p>
 </div>
 
 <div class="d-byline">
@@ -1519,40 +1519,120 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>The Propensity to cycle tool discussed in the previous <a href="">post</a> offers its users two very intuitive insights through its dynamic map: (1) It paints a descriptive view of what UK citizens transit patterns were in 2011 and (2) estimates a potential counterfactual view of what transit might look like in the UK if certain cultural attitudes or environmental barriers were overcome. In considering how we might provide these same kinds of tools in the US so the analogous benefits for policymakers could be made, this post focuses on the first, descriptive goal, of the PCT and discusses the advantages and disadvantages of other methods that try to accomplish this goal in the absence of relevant and available census data. I’ll end up zooming in on what efforts a <em>city</em>, specifically, might take to better gain a sense of transit patterns within its borders.</p>
+<p>The Propensity to cycle tool discussed in the previous <a href="">post</a> offers its
+users two very intuitive insights through its dynamic map: (1) It paints a
+descriptive view of what UK citizens transit patterns were in 2011 and (2)
+estimates a potential counterfactual view of what transit might look like in the
+UK if certain cultural attitudes or environmental barriers were overcome. In
+considering how we might provide these same kinds of tools in the US so the
+analogous benefits for policymakers could be made, this post focuses on the
+first, descriptive goal, of the PCT and discusses the advantages and
+disadvantages of other methods that try to accomplish this goal in the
+absence of relevant and available census data. I’ll end up zooming in on what
+efforts a <em>city</em>, specifically, might take to better gain a sense of transit
+patterns within its borders.</p>
 <h2 id="survey-methods">Survey Methods</h2>
-<p>The PCT is very fortunate in that the authors have access to census data. That is, there is no error in the estimate of the proportion of individuals cycling in a given area due to sampling, as every individual — or sufficiently close to it, we assume— have had their answer to this question recorded. In the absence of census data, researchers interested in answering a question like this are forced to result to sampling - intentionally selecting a subset of the population for surveying their response to this and similar questions. Indeed, an important component of the US Census, <a href="https://www.census.gov/programs-surveys/acs">The American Community Survey</a>, is actually conducted entirely by sampling in order to, at least in part, manage expenses. Knowing what questions to ask, who to ask, how to combine the results and then communicate them to the relevant stakeholders are some of the most difficult challenges involved in this work and will be the focus of the remainder of this post.</p>
+<p>The PCT is very fortunate in that the authors have access to census data.
+That is, there is no error in the estimate of the proportion of individuals
+cycling in a given area due to sampling, as every individual — or
+sufficiently close to it, we assume— have had their answer to this question
+recorded. In the absence of census data, researchers interested in answering a
+question like this are forced to result to sampling - intentionally selecting a
+subset of the population for surveying their response to this and similar
+questions. Indeed, an important component of the US Census,
+<a href="https://www.census.gov/programs-surveys/acs">The American Community Survey</a>,
+is actually conducted entirely by sampling in order to, at least in part,
+manage expenses. Knowing what questions to ask, who to ask, how to combine the
+results and then communicate them to the relevant stakeholders are some of the
+most difficult challenges involved in this work and will be the focus of the
+remainder of this post.</p>
 <aside>
-The American Community Survey has the closest thing the US American census has to the same question on the UK census. Unfortunately it does not have the same kind of explicit individual response data available for users to access, for example, the respondent’s biological sex for constructing the sex specific propensity to transit curves.
+The American Community Survey has the closest thing the US American census has
+to the same question on the UK census. Unfortunately it does not have the same
+kind of explicit individual response data available for users to access, for
+example, the respondent’s biological sex for constructing the sex specific
+propensity to transit curves.
 </aside>
 <h2 id="ask-the-right-question">Ask the Right Question</h2>
-<p>Asking the right question is always the hardest part of any research project. In this case we at least have the previous work of the PCT to guide our own line of inquiry which, for now, remains focused on simply <em>describing</em> the rate of different modes of transit across some geographical area. For my own edification we’ll let this geographic space be the city of Pittsburgh, since that is where I currently reside.</p>
-<p>For our purposes the UK census question is probably “good enough” for demonstrating the idea:</p>
+<p>Asking the right question is always the hardest part of any research project.
+In this case we at least have the previous work of the PCT to guide our own
+line of inquiry which, for now, remains focused on simply <em>describing</em> the rate
+of different modes of transit across some geographical area. For my own
+edification we’ll let this geographic space be the city of Pittsburgh, since
+that is where I currently reside.</p>
+<p>For our purposes the UK census question is probably “good enough” for
+demonstrating the idea:</p>
 <blockquote>
-<p>“How do you usually travel to work?
-“A: Private automobile,
-“B: Public Transit,”C: Walk
-“D: Bike”E: Other”</p>
+<p>“How do you usually travel to work?</p>
 </blockquote>
-<p>Still it is worth thinking of the kind of scientific question we’re trying to answer <em>now</em> and how this question does or does not allow us to accomplish our scientific goals. For example, it may be the case that responses to this question do not map exactly to reality. Individuals may respond with some bias, selecting the answer that they <em>wish</em> reflected their real transit pattern, rather than their actual trip mode. Similarly, if they respond when the weather is nice out, and they are biking to work regularly, but in fact often do not bike to work when the weather is anything less than “nice”, this response may again obscure the reality. Again, this isn’t to say that asking the question isn’t worthwhile but to be aware that this may or may not track with reality. Other measurement methods, involving road sensors, for example, may offer a better measure of just how many cyclists are on the road.</p>
-<p>Still let’s work with the question as-is and set our target estimand as the proportion, <span class="math inline">\(p\)</span> of all <span class="math inline">\(N\)</span> citizens within Pittsburgh who usually bike to work. If we had the census data we’d have a response to this question from every citizen and we could simply add up the responses of all those who answered “D” to the above question and divide it by <span class="math inline">\(N\)</span> and we would have an estimate, free of sampling error to our question of interest:</p>
+<blockquote>
+<p>A: Private automobile,
+B: Public Transit,
+C: Walk
+D: Bike
+E: Other”</p>
+</blockquote>
+<p>Still it is worth thinking of the kind of scientific question we’re trying to
+answer <em>now</em> and how this question does or does not allow us to accomplish our
+scientific goals. For example, it may be the case that responses to this
+question do not map exactly to reality. Individuals may respond with some bias,
+selecting the answer that they <em>wish</em> reflected their real transit pattern,
+rather than their actual trip mode. Similarly, if they respond when the weather
+is nice out, and they are biking to work regularly, but in fact often do not
+bike to work when the weather is anything less than “nice”, this response may
+again obscure the reality. Again, this isn’t to say that asking the question
+isn’t worthwhile but to be aware that this may or may not track with reality.
+Other measurement methods, involving road sensors, for example, may offer a
+better measure of just how many cyclists are on the road.</p>
+<p>Still let’s work with the question as-is and set our target estimand as the
+proportion, <span class="math inline">\(p\)</span> of all <span class="math inline">\(N\)</span> citizens within Pittsburgh who usually bike to work.
+If we had the census data we’d have a response to this question from every
+citizen and we could simply add up the responses of all those who answered “D”
+to the above question and divide it by <span class="math inline">\(N\)</span> and we would have an estimate, free
+of sampling error to our question of interest:</p>
 <p><span class="math display">\[
 p = \frac{1}{N} \sum_{i=1}^{N} Y_i,
 \]</span></p>
-<p>Where we define <span class="math inline">\(Y_i\)</span> as 1 when the individual responded D to our question and 0 otherwise. In the much more realistic case where we don’t have census data, we have to resort to sampling and surveys.</p>
+<p>Where we define <span class="math inline">\(Y_i\)</span> as 1 when the individual responded D to our question and
+0 otherwise. In the much more realistic case where we don’t have census data, we
+have to resort to sampling and surveys.</p>
 <h2 id="survey-basics">Survey Basics</h2>
-<p>The basic idea behind a survey is the same as that of statistics more generally - because we can’t observe <em>every</em> relevant unit of observation, let’s focus on a sample and try and infer what the general pattern is in the larger population. In our fictitious example above, we can’t observe what every individual in PGH would say to our question, but we could more feasibly pay for a subset of citizens to answer this question and try and estimate the same proportion as found above in 1 without error.</p>
-<p>The first and simplest approach would be to just take a simple random sample (without replacement) of <span class="math inline">\(n\)</span> survey respondents and ask them the same question. We could estimate <span class="math inline">\(p\)</span> similarly as before by summing the number of individuals who say they bike to work and divide by <span class="math inline">\(n\)</span> the total number of individuals in the sample. The mean of our estimate <span class="math inline">\(E[\hat{p}]\)</span> would be an unbiased estimate of the true value <span class="math inline">\(p\)</span>, but there would also now be variance in our estimate:</p>
+<p>The basic idea behind a survey is the same as that of statistics more generally
+- because we can’t observe <em>every</em> relevant unit of observation, let’s focus on
+a sample and try and infer what the general pattern is in the larger population.
+In our fictitious example above, we can’t observe what every individual in PGH
+would say to our question, but we could more feasibly pay for a subset of
+citizens to answer this question and try and estimate the same proportion as
+found above in 1 without error.</p>
+<p>The first and simplest approach would be to just take a simple random sample
+(without replacement) of <span class="math inline">\(n\)</span> survey respondents and ask them the same question.
+We could estimate <span class="math inline">\(p\)</span> similarly as before by summing the number of individuals
+who say they bike to work and divide by <span class="math inline">\(n\)</span> the total number of individuals in
+the sample. The mean of our estimate <span class="math inline">\(E[\hat{p}]\)</span> would be an unbiased estimate
+of the true value <span class="math inline">\(p\)</span>, but there would also now be variance in our estimate:</p>
 <p><span class="math display">\[
 \hat{p} = \frac{1}{n} \sum_{i=1}^{n} Y_i, \\
 V[\hat{p}] = \frac{N-n}{N} \frac{\hat{p}\times (1-\hat{p})}{\sqrt{n}},
 \]</span></p>
-<p>Where the above uses a normal approximation for the variance calculation and adjusts for large sample sizes with the term <span class="math inline">\(\frac{N-n}{N}\)</span> – the closer <span class="math inline">\(n\)</span> is to <span class="math inline">\(N\)</span> the smaller our variance, since we’ve seen more of the sample.</p>
-<p>If <span class="math inline">\(n\)</span> isn’t close to <span class="math inline">\(N\)</span> we might be concerned that our population doesn’t meaningfully represent our population in ways that we might consider necessary to correctly answer the question. For example, in order to meaningfully answer a question about biking to work in Pittsburgh, we might think it important to ensure that we’re sampling respondents across the different geographic parts, or neighborhoods of the city, to ensure that we’re not allowing one particularly populous neighborhood to dominate our sample. In order to define this constraint in our sampling regime, we need to introduce the concept of sampling.</p>
+<p>Where the above uses a normal approximation for the variance calculation and
+adjusts for large sample sizes with the term <span class="math inline">\(\frac{N-n}{N}\)</span> – the closer <span class="math inline">\(n\)</span>
+is to <span class="math inline">\(N\)</span> the smaller our variance, since we’ve seen more of the sample.</p>
+<p>If <span class="math inline">\(n\)</span> isn’t close to <span class="math inline">\(N\)</span> we might be concerned that our population doesn’t
+meaningfully represent our population in ways that we might consider necessary
+to correctly answer the question. For example, in order to meaningfully answer
+a question about biking to work in Pittsburgh, we might think it important to
+ensure that we’re sampling respondents across the different geographic parts, or
+neighborhoods of the city, to ensure that we’re not allowing one particularly
+populous neighborhood to dominate our sample. In order to define this constraint
+in our sampling regime, we need to introduce the concept of sampling.</p>
 <h2 id="complex-surveys-stratified-sampling">Complex Surveys: Stratified Sampling</h2>
-<p>One of the first things we can do to improve our estimate of interest is to <strong>stratify</strong>.</p>
+<p>One of the first things we can do to improve our estimate of interest is to
+<strong>stratify</strong>.</p>
 <aside>
-I’m currently <a href="https://github.com/apeterson91/ComplexSurveys">working</a> through <a href="https://profiles.auckland.ac.nz/t-lumley">Thomas Lumley’s</a> text on surveys. I highly recommend it as a resource for anyone else who might be interested in this space.
+I’m currently <a href="https://github.com/apeterson91/ComplexSurveys">working</a> through
+<a href="https://profiles.auckland.ac.nz/t-lumley">Thomas Lumley’s</a> text on surveys.
+I highly recommend it as a resource for anyone else who might be interested
+in this space.
 </aside>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
