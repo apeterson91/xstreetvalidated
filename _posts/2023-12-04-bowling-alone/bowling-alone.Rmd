@@ -1,0 +1,277 @@
+---
+title: "Bowling Alone: The Collapse and Revival of American Community Revised and Updated"
+description: |
+  A review of the seminal text on social capital
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.com/
+date: 12-24-2023
+output: distill::distill_article
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+categories:
+  - Book Review
+  - Social Capital
+draft: true 
+---
+
+```{r libraries, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(haven)
+library(sf)
+library(srvyr)
+library(tidyverse)
+library(tidycensus)
+```
+
+```{r plot_theme, include=FALSE}
+theme_set(theme_bw() +
+  theme(
+    strip.background = element_blank(),
+    text = element_text(size = 22)
+  ))
+```
+
+> “In small ways like this – and in larger ways, too – we Americans need to
+reconnect with one another. That is the simple argument of this book.”
+
+## Introduction
+
+One of the very first themes discussed in the motivation for starting this blog
+was the notion of “social cohesion.” In a small post filled with imprecise
+terms, social cohesion stood out as perhaps the most imprecise. In an attempt
+to pin it down, I referred to ideas like crime, civil unrest, and a
+“feeling of belonging.” In Bowling Alone: The Collapse and Revival of American 
+Community, Robert Putnam makes one of the best efforts I’ve seen to speak more 
+precisely and quantitatively about this nuanced and subtle 
+topic[@putnam2000bowling]. He chooses a
+better term, too: social capital. 
+
+
+Inspired by his previous research exploring the relationship between civic
+engagement and healthy democracy, Putnam’s groundwork for writing Bowling Alone 
+was a 1995 article that detailed Americans’ participation in various civic 
+groups or activities during the 20th century[@putnam1995tuning]. Hypothesizing 
+that a decline in these forms of participation would correspond to a 
+proportionate increase in social–political problems, Putnam set out to document 
+the state of US social capital in the decades between 1960 and 2000.
+
+Putnam published the results of his work in the first edition of Bowling Alone 
+in 2000. Two decades later, he published a revised and updated edition of 
+Bowling Alone alongside a new book, The Upswing. This new entry broadened the 
+scope of the story, examining changes in social capital from the late 1800s to 
+2020. The story he tells in the latter book is one that might sound increasingly
+familiar - in a time of growing inequality, unhealthy civil dialogue and severe 
+political polarization, it seems like the only thing Americans can agree on is 
+that they disagree about everything. Putnam points out this was as true at the 
+turn of the 20th century as it has in the 21st century. What happens in between 
+is a story of America coming together in the face of two World Wars and then 
+subsequently falling apart again amidst the rise of a new generation embroiled 
+in social change. Putnam argues in both books that we should – must – come 
+together again, as the challenges we face in 2020 are even greater than those 
+faced in the 20th century.
+
+I plan to focus my commentary predominantly on the material in Bowling Alone, 
+but I’ll do my best to ground it in a modern context. In doing so, I hope to 
+highlight both the relationship between the built environment and the various 
+social measures that are our best proxy for measuring social capital and the 
+importance of social capital itself. While “social capital” broadly refers to 
+the notions of security and belonging that I mentioned previously, at its heart,
+it's a measure of the strength of human relationships. As most individuals 
+report, their relationships are the most important and fulfilling part of their 
+lives. I think it's important to take note of how our environments can be more 
+or less supportive of their growth and stability.
+
+data available [here](http://bowlingalone.com/?page_id=7)
+
+```{r}
+df <- read_tsv("data/bowling_alone_data/DDB master 34 (1975-1998).dat") %>%
+  mutate(
+    State = factor(STATE, labels = c(
+      "Connecicut", "Maine",
+      "Massachusetts", "NewHampshire",
+      "Rhode Island", "Vermont",
+      "New Jersey", "New York",
+      "Pennsylvania", "Illinois",
+      "Indiana", "Michigan",
+      "Ohio", "Wisconsin",
+      "Iowa", "Kansas",
+      "Minnesota", "Missouri",
+      "Nebraska", "North Dakota",
+      "South Dakota", "Delaware",
+      "District of Columbia",
+      "Florida", "Georgia",
+      "Maryland", "North Carolina",
+      "South Carolina", "Virginia",
+      "West Virginia",
+      "Alabama", "Kentucky",
+      "Mississippi", "Tennessee",
+      "Arkansas", "Louisiana",
+      "Oklahoma", "Texas",
+      "Arizona", "Colorado",
+      "Idaho", "Montana",
+      "Nevada", "New Mexico",
+      "Utah", "Wyoming",
+      "California", "Oregon",
+      "Washington"
+    )),
+    Density = factor(POPDEN1, labels = c("Urban", "Rural", "Urban", "SMA", "Urban", "Rural", "SMA", "Urban", "Rural", "SMA", "Urban", "Rural"))
+  )
+```
+
+
+```{r}
+df %>%
+  select(YEAR, WEIGHT, ENTHOME, DINPARTY, PICNIC, FAMDIN) %>%
+  filter(!is.na(ENTHOME), !is.na(DINPARTY), !is.na(FAMDIN), !is.na(PICNIC)) %>%
+  mutate(
+    `entertained` = (ENTHOME > 1),
+    `dinner party` = DINPARTY > 1,
+    `family dinner` = (FAMDIN >= 4),
+    picnic = (PICNIC > 1)
+  ) %>%
+  gather(entertained, `dinner party`, `picnic`, `family dinner`,
+    key = "social_capital", value = "measure"
+  ) %>%
+  as_survey_design(weights = WEIGHT) %>%
+  group_by(YEAR, social_capital) %>%
+  summarize(avg = survey_mean(measure, vartype = "ci")) %>%
+  ggplot(aes(x = YEAR, y = avg, color = social_capital)) +
+  geom_pointrange(aes(ymin = avg_low, ymax = avg_upp)) +
+  geom_line() +
+  theme(legend.title = element_blank(), legend.position = "top") +
+  scale_color_brewer(palette = "Dark2") +
+  ylab("% Of U.S. Population") +
+  xlab("") +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle("Decreases in informal social connections 1975-1998") +
+  labs(caption = "Point indicates mean, line represents 95% confidence interval. \n Data from DDB survey data")
+```
+
+
+## The Time It Takes to Get There: A Causal Account for the Decrease in Social Capital
+
+
+```{r, echo = FALSE, eval=FALSE}
+## commute time doesn't change over years observed
+df %>%
+  select(YEAR, WEIGHT, COMMUTIM) %>%
+  filter_all(function(x) !is.na(x)) %>%
+  as_survey_design(weights = WEIGHT) %>%
+  group_by(YEAR) %>%
+  summarize(min = survey_quantile(COMMUTIM, .05, vartype = "ci")) %>%
+  ggplot(aes(x = YEAR, y = min_05)) +
+  geom_pointrange(aes(ymin = min_05_low, ymax = min_05_high))
+```
+
+
+```{r}
+## TV associated with antisocial behavior
+tvdf <- df %>%
+  select(
+    YEAR, WEIGHT, TVENTER, FINGER, DINPARTY, CLUBMEET,
+    PICNIC, ENTHOME, GREETING, POLITICS, BLOOD, LDPHOCL,
+    SNTEMAIL
+  ) %>%
+  mutate(
+    tv_viewer = if_else(TVENTER >= 4, "TV is my Primary Form of Entertainment",
+      "TV is *not* my Primary Form of Entertainment"
+    ),
+    dinner_party = if_else(DINPARTY > 1, 1, 0),
+    club_meetings = if_else(CLUBMEET > 1, 1, 0),
+    picnic = if_else(PICNIC > 1, 1, 0),
+    entertain = if_else(ENTHOME > 1, 1, 0),
+    greeting_card = if_else(GREETING > 1, 1, 0),
+    # interested in politics = 1
+    politics = if_else(POLITICS >= 4, 1, 0),
+    ## donated blood
+    blood = if_else(BLOOD > 0, 1, 0),
+    ## made long distance call
+    long_distance = if_else(LDPHOCL > 1, 1, 0),
+    ## sent an email
+    email = if_else(SNTEMAIL == 1, 1, 0),
+    ## gave someone the middle finger on the road
+    finger = if_else(FINGER > 1, 1, 0)
+  ) %>%
+  gather(dinner_party, club_meetings, picnic, entertain,
+    greeting_card, politics, blood, long_distance, email, finger,
+    key = "social_capital", value = "measure"
+  ) %>%
+  select(YEAR, WEIGHT, tv_viewer, social_capital, measure) %>%
+  filter(!is.na(measure))
+```
+
+```{r}
+tvdf %>%
+  filter(
+    !is.na(measure), !is.na(tv_viewer),
+    social_capital %in% c(
+      "club_meetings", "dinner_party", "entertain",
+      "greeting_card", "picnic", "politics"
+    )
+  ) %>%
+  mutate(social_capital = case_when(
+    social_capital == "politics" ~ "Interested in Politics",
+    social_capital == "picnic" ~ "Attended a Picnic",
+    social_capital == "entertain" ~ "Entertained Friends",
+    social_capital == "greeting_card" ~ "Sent a Greeting Card",
+    social_capital == "dinner_party" ~ "Hosted a Dinnery Party",
+    social_capital == "club_meetings" ~ "Attended a Club Meeting"
+  )) %>%
+  as_survey_design(weights = WEIGHT) %>%
+  group_by(YEAR, social_capital, tv_viewer) %>%
+  summarize(avg = survey_mean(measure, vartype = "ci", proportion = TRUE)) %>%
+  ungroup() %>%
+  ggplot(aes(x = YEAR, y = avg, color = tv_viewer)) +
+  geom_pointrange(aes(ymin = avg_low, ymax = avg_upp)) +
+  geom_line() +
+  theme(legend.title = element_blank(), legend.position = "top") +
+  scale_color_brewer(palette = "Dark2") +
+  ylab("% Of U.S. Population") +
+  xlab("") +
+  facet_wrap(~social_capital) +
+  scale_y_continuous(labels = scales::percent) +
+  ggtitle("TV Association with Less Social Behavior.",
+    subtitle = "Respondents Self Reported Activities in Last Twelve Months."
+  ) +
+  labs(caption = stringr::str_c(
+    "Point indicates mean, line represents 95%",
+    "confidence interval. \n Data from DDB survey data"
+  ))
+```
+
+```{r}
+volunteer_tv_des <- df %>%
+  select(
+    YEAR, WEIGHT, TVENTER, VOLUNT, INCOME, SEX, RACE,
+    RESAGERG, EDUC,
+  ) %>%
+  mutate(
+    tv_viewer = factor(if_else(TVENTER >= 4, "TV is my Primary Form of Entertainment",
+      "TV is *not* my Primary Form of Entertainment"
+    )),
+    ## TODO add labels
+    volunteered = if_else(VOLUNT > 1, 1L, 0L),
+    income = factor(INCOME),
+    sex = factor(SEX),
+    age = factor(RESAGERG),
+    edu = factor(EDUC),
+    race = factor(RACE),
+  ) %>%
+  filter_all(function(x) !is.na(x)) %>%
+  as_survey_design(weights = WEIGHT)
+```
+
+```{r}
+fit <- survey::svyglm(volunteered ~ tv_viewer + YEAR + race + income +
+  sex + age + edu,
+design = volunteer_tv_des,
+family = binomial()
+)
+```
+
+```{r}
+broom::tidy(fit)
+```
+
+## Other Resources on Bowling Alone

@@ -1,0 +1,47 @@
+---
+title: "Synthetic Controls and Their Applications"
+description: |
+  Creating a comparison group when none is easily available
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.com/
+date: 03-15-2024
+output: distill::distill_article
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+categories:
+  - Technical
+draft: true 
+---
+
+```{r libraries, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+#library(sf)
+```
+
+I've been wanting to do a write up on a series of papers that explore and 
+discuss a relatively new and novel construct in the statistical literature:
+synthetic controls. The first, as far as I can tell, paper that 
+formalized this idea was a work by 
+[Alberto Abadie](https://economics.mit.edu/people/faculty/alberto-abadie),
+titled "The Economic Costs of Conflict: A Case Study of the Basque Country" 
+[@abadie2003economic]. In this post I want to break down the ideas presented
+in this paper, identify the key principles at work and explore how these same
+ideas could be applied to other statistical methods - which we'll explore later
+- as well as studies in the built environment.
+
+
+## Background
+
+
+```{r, fig.width = 4, fig.height = 2, fig.cap="By TUBS - This vector image includes elements that have been taken or adapted from this file:, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=14520652"}
+## TODO(apeterson91): Consider replacing this image with a plot.
+knitr::include_graphics("Pais_Vasco_in_Spain_(including_Canarias).svg")
+```
+
+## Method
+
+## Application 
+
+## Extensions in Methods and Application

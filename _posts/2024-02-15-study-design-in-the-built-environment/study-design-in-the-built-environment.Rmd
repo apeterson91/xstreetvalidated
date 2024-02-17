@@ -1,0 +1,19 @@
+---
+title: "Study Design in the Built Environment"
+description: |
+  Valid inferences when money is tight
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.com/
+date: 12-24-2023
+output: distill::distill_article
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+categories:
+  - Technical
+draft: true 
+---
+
+In a previous post discussing
+```{r}
+```
