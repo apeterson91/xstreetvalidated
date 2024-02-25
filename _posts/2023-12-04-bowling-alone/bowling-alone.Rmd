@@ -1,51 +1,66 @@
 ---
 title: "Bowling Alone: The Collapse and Revival of American Community Revised and Updated"
 description: |
-  A review of the seminal text on social capital
+  The Ups and Downs of Social Capital. 
 author:
   - name: Adam Peterson
     url: https://apetersonsite.com/
-date: 12-24-2023
-output: distill::distill_article
+date: 02-25-2024
+output: 
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_float: true
+bibliography: bowling.bib
 citation_url: https://xstreetvalidated.com
 creative_commons: CC BY
 categories:
   - Book Review
   - Social Capital
-draft: true 
 ---
 
 ```{r libraries, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
-library(haven)
-library(sf)
-library(srvyr)
 library(tidyverse)
-library(tidycensus)
+library(srvyr)
 ```
 
 ```{r plot_theme, include=FALSE}
 theme_set(theme_bw() +
   theme(
     strip.background = element_blank(),
-    text = element_text(size = 22)
+    text = element_text(size = 22),
+    legend.title = element_blank(),
   ))
 ```
 
 > “In small ways like this – and in larger ways, too – we Americans need to
-reconnect with one another. That is the simple argument of this book.”
+reconnect with one another. That is the simple argument of this book.” - 
+Robert Putnam, p.28 of Bowling Alone.
 
 ## Introduction
 
-One of the very first themes discussed in the motivation for starting this blog
-was the notion of “social cohesion.” In a small post filled with imprecise
+One of the very first themes discussed in the 
+[motivation](https://xstreetvalidated.com/posts/motivation/) for starting this 
+blog was the notion of “social cohesion.” In a small post filled with imprecise
 terms, social cohesion stood out as perhaps the most imprecise. In an attempt
 to pin it down, I referred to ideas like crime, civil unrest, and a
-“feeling of belonging.” In Bowling Alone: The Collapse and Revival of American 
-Community, Robert Putnam makes one of the best efforts I’ve seen to speak more 
-precisely and quantitatively about this nuanced and subtle 
-topic[@putnam2000bowling]. He chooses a
-better term, too: social capital. 
+feeling of belonging. In 
+[Bowling Alone: The Collapse and Revival of American Community](http://bowlingalone.com/),
+[Robert Putnam](https://en.wikipedia.org/wiki/Robert_D._Putnam) makes one of 
+the best efforts I have seen, to speak more precisely and quantitatively about 
+this nuanced and subtle topic [@putnam2000bowling]. He chooses a better term,
+too: **social capital**. 
+
+
+```{r}
+#| kittaning, fig.width = 8, fig.height = 12, fig.align = 'center',
+#| fig.cap = "Kittanning, PA Armstrong County Courthouse. One of the many 
+#|   small towns that Putnam's work identifies as a locus of social capital
+#|   and whose population decreased precipitously in the latter half of the 
+#|   20th century."
+knitr::include_graphics("kittaning.jpg")
+```
 
 
 Inspired by his previous research exploring the relationship between civic
@@ -58,33 +73,164 @@ the state of US social capital in the decades between 1960 and 2000.
 
 Putnam published the results of his work in the first edition of Bowling Alone 
 in 2000. Two decades later, he published a revised and updated edition of 
-Bowling Alone alongside a new book, The Upswing. This new entry broadened the 
-scope of the story, examining changes in social capital from the late 1800s to 
-2020. The story he tells in the latter book is one that might sound increasingly
-familiar - in a time of growing inequality, unhealthy civil dialogue and severe 
-political polarization, it seems like the only thing Americans can agree on is 
-that they disagree about everything. Putnam points out this was as true at the 
-turn of the 20th century as it has in the 21st century. What happens in between 
-is a story of America coming together in the face of two World Wars and then 
-subsequently falling apart again amidst the rise of a new generation embroiled 
-in social change. Putnam argues in both books that we should – must – come 
-together again, as the challenges we face in 2020 are even greater than those 
-faced in the 20th century.
+Bowling Alone alongside a new book, 
+[*The Upswing*](https://www.simonandschuster.com/books/The-Upswing/Robert-D-Putnam/9781982129156).
+This new entry broadened the scope of the story, examining changes in social
+capital from the late 1800s to 2020. The story he tells in the latter book is
+one that might sound increasingly familiar. In a time of growing inequality, 
+unhealthy civil dialogue and severe political polarization, it seems like the 
+only thing Americans can agree on is that they disagree about everything. Putnam
+points out this was as true at the turn of the 20th century as it has been in  
+the 21st century. What happens in between is a story of America coming together 
+in the face of two World Wars and then subsequently falling apart again amidst  
+the rise of a new generation embroiled in social change. Putnam argues in both 
+books that we should – must – come together again, as the challenges we face 
+now are even greater than those faced in the 20th century.
 
 I plan to focus my commentary predominantly on the material in Bowling Alone, 
-but I’ll do my best to ground it in a modern context. In doing so, I hope to 
+but I will do my best to ground it in a modern context. In doing so, I hope to 
 highlight both the relationship between the built environment and the various 
-social measures that are our best proxy for measuring social capital and the 
-importance of social capital itself. While “social capital” broadly refers to 
+social measures that are our best proxy for tracking social capital and the 
+importance of social capital itself. While social capital broadly refers to 
 the notions of security and belonging that I mentioned previously, at its heart,
 it's a measure of the strength of human relationships. As most individuals 
-report, their relationships are the most important and fulfilling part of their 
-lives. I think it's important to take note of how our environments can be more 
-or less supportive of their growth and stability.
+[report](https://www.pewresearch.org/global/2021/11/18/what-makes-life-meaningful-views-from-17-advanced-economies/)
+their relationships are the most important and fulfilling part of their 
+lives and at a time when we are [lonelier than ever,](https://www.npr.org/2022/03/15/1086732931/politics-and-americas-loneliness-epidemic)
+I think it's important to take note of how our environments can be more or less
+supportive of our collective relationships' growth and stability.
 
-data available [here](http://bowlingalone.com/?page_id=7)
 
-```{r}
+
+
+## Outline
+
+Putnam’s story of American social capital as told in Bowling Alone is separated 
+into four parts. (1) Background on the concept of social capital and how Putnam 
+confronts the difficult task of trying to measure it. (2) A description and 
+summary of the various measures recorded over time that, to the best extent 
+possible, represent social capital. (3) A causal description of why the changes 
+in social capital occurred. And finally, (4) What now? Now that we know 
+descriptively what’s happening and have some best effort theory for why the 
+change is occurring, Putnam makes several high level calls to action for what 
+we should do with this new understanding.
+
+While Putnam works through seven different areas to describe the change in 
+social capital in the US during the latter half of the 20th century, I’ll focus 
+only on one – changes in informal social connections. Similarly, he provides 
+five chapters working through possible explanations for why these changes 
+occurred, but I will focus on two – mobility and technology. Finally, while 
+Putnam writes eight chapters on the importance of social capital as relevant to
+health, safety and economic prosperity to motivate action, I'll focus solely on 
+Putnam’s arguments for what we should do now as well as provide my own 
+perspective on this problem. 
+
+
+## Social Capital: What is it and Why Should I care?
+
+In his first chapter, Putnam gives a brief history on the term "social capital."
+One early 20th century writer describes it as:
+
+>“...those tangible substances [that] count for most in the daily lives of 
+people: namely good will, fellowship, sympathy, and social intercourse among 
+individuals and families who make up a social unit…If he comes into contact with
+his neighbor, and they with other neighbors, there will be an accumulation of 
+social capital, which may immediately satisfy his social needs and which may 
+bear a social potentiality sufficient to the substantial improvement of living 
+conditions of the whole community. The community as a whole will benefit by the 
+cooperation of all its parts, while the individual will find in his associations
+the advantages of the help, sympathy, and the fellowship of his neighbors.” 
+– L.J. Hanifan, rural state supervisor of schools in West Virginia, writing in 
+1916 in support of community involvement for rural schools.
+
+Here we have the essence of what this story is about and why it is worth 
+telling: social capital is synonymous with human relationships and they are: 
+(1) the thing that counts for most in the daily lives of people and (2) may 
+improve the living conditions of the whole community. 
+
+While both of these things sound generally positive, it's worth considering the 
+darker side of social capital, too. As Putnam notes, social capital can also 
+refer to relationships formed through groups like the Ku Klux Klan just as much 
+as social clubs like the Knights of Columbus or the Elks. Emphasizing this 
+point, Putnam cites Jeff Coleman, a former leader of the KKK stating, “Really, 
+we’re just like the Lions or the Elks. We want to be involved in the community” 
+(p.22).
+
+```{r} 
+#| elkslodge, fig.align = "center", fig.cap = "Elks Grand Lodge in Chicago, IL.
+#|  The Elks total Membership was 1.6 Million in 1976 and 750,000 in June 2020.
+#|  By Smallbones - Own work, Public Domain,
+#|  https://commons.wikimedia.org/w/index.php?curid=9429178"
+knitr::include_graphics("BPOE_Chicago.jpeg")
+```
+
+Regardless of whether the social capital involved might be considered good or 
+bad, if one were to set out to measure human relationships, they would 
+immediately find themselves beset by all manner of challenges. Firstly, what 
+human relationships should we focus on? How could we possibly measure whether a 
+relationship exists or not and the relative strength of it therein? 
+
+
+Putnam starts by making the following distinction in the kinds of social capital
+that one might measure: (1) bridging – social capital that creates new 
+relationships across previously defined groups, like a bowling league or board 
+game group and (2) bonding – social capital that reaffirms or strengthens 
+previously established bonds. Examples of bonding social capital include a 
+church reading group or the aforementioned KKK. 
+
+<aside>
+While put forward as a simple dichotomy, I would invite you to imagine the ways
+in which “bonding” social capital could still lead to “bridge” type experiences 
+or vice versa. These terms are used as generalizations.
+</aside>
+
+To provide a best-effort measure of social capital, Putnam amasses an impressive
+array of data sources, ranging from PTA memberships and social surveys to 
+studies on all manner of social phenomena occurring in the decades leading up to
+the 21st century. He weaves a narrative that can, at times, be overwhelming. 
+Given the many dimensions involved – time, geography, gender, socioeconomic 
+status, etc. – Putnam does his best to keep his story focused on a single idea: 
+social capital is decreasing everywhere you look, no matter how it is measured. 
+We will start our own exploration of this idea on a topic we can all relate to - 
+social gatherings with friends. Along the way I'll do my best to reproduce or 
+supplement Putnam's analysis using the data that he provides at his 
+[website](http://bowlingalone.com/?page_id=7) as well as other social survey 
+data from the past twenty years.
+
+## Fewer Dinner Parties and Picnics: A Descriptive Account
+
+To distill our discussion of the measures of social capital Putnam examines, 
+I’ll limit my discussion of Part I of Bowling Alone to Chapter 6, 
+“Informal Social Connections.” Following his discussion of more formal social 
+roles – political participation, religious attendance, and membership in social 
+groups like the Elks clubs – Putnam turns to what most of us think about when 
+we think of human relationships – our friends, neighbors, and the people who 
+we interact with regularly on a day-to-day basis. 
+
+To estimate a pattern here, Putnam turns first to the 
+[DDB Needham Lifestyle survey](https://en.wikipedia.org/wiki/DDB_Needham_Life_Style_Surveys),
+which surveyed individuals across the US from 1975 to 1998. The first 
+question Putnam looks at asks how often the respondent entertained friends at 
+their house in the past year. A simple question with a straightforward answer. 
+According to Putnam’s analysis, “In the mid-to-late 1970s…the average American 
+entertained friends at home about fourteen-to-fifteen times per year. By the 
+late 1990s, that figure had fallen to eight times per year, a decline of 45 
+percent in barely two decades.” (p.98)  Looking at other data sources (
+[Roper Archives](https://ropercenter.cornell.edu/featured-collections/roper-social-and-political-trends), 
+[Yankelovich Partners](https://yankelovichcenter.ucsd.edu/public-engagement/surveys-and-reports.html))
+collected independently of the DDB data that asked similar questions, Putnam 
+found similar decreases. 
+
+When I looked at the DDB data available on the book’s website, it wasn’t clear 
+to me how Putnam conducted his analysis, but I try to reproduce something 
+similar to what he did by computing the proportion of individuals who gave or 
+attended *any* number of dinner parties or entertained at all in the past year. 
+I also include similar estimates for individuals responding to having gone on 
+any picnics, or agreeing to any extent that their family regularly has dinner 
+together. The plot in Figure \@ref(fig:Informal-Social-Connections) shows a 
+precipitous decrease over the two decades of interest across these measures. 
+
+```{r data}
 df <- read_tsv("data/bowling_alone_data/DDB master 34 (1975-1998).dat") %>%
   mutate(
     State = factor(STATE, labels = c(
@@ -120,7 +266,11 @@ df <- read_tsv("data/bowling_alone_data/DDB master 34 (1975-1998).dat") %>%
 ```
 
 
-```{r}
+```{r} 
+#| Informal-Social-Connections, fig.width = 12, fig.height = 8,
+#|  fig.cap = "% Of US Populations participating
+#|  in at least one of the social measures in the past 12 months as recorded 
+#|  for years 1975 - 1998."
 df %>%
   select(YEAR, WEIGHT, ENTHOME, DINPARTY, PICNIC, FAMDIN) %>%
   filter(!is.na(ENTHOME), !is.na(DINPARTY), !is.na(FAMDIN), !is.na(PICNIC)) %>%
@@ -143,30 +293,228 @@ df %>%
   scale_color_brewer(palette = "Dark2") +
   ylab("% Of U.S. Population") +
   xlab("") +
+  scale_x_continuous(breaks = scales::pretty_breaks()) +
   scale_y_continuous(labels = scales::percent) +
-  ggtitle("Decreases in informal social connections 1975-1998") +
-  labs(caption = "Point indicates mean, line represents 95% confidence interval. \n Data from DDB survey data")
+  ggtitle("Decreases in Informal Social Connections 1975-1998") +
+  labs(caption = stringr::str_c("Point indicates mean, line represents 95% ",
+  "confidence interval. \n Data from DDB survey data"))
 ```
 
 
-## The Time It Takes to Get There: A Causal Account for the Decrease in Social Capital
+To be sure, there’s plenty more that could be said here. These measures, while 
+consistently downward, do vary across men and women, urban vs. rural, and so on.
+In Bowling Alone, Putnam argues that the overarching trend is that, as the turn 
+of the century approached, Americans spent less time with their friends than 
+they had previously. It is in considering how this time would be spent otherwise
+that we turn to Putnam’s arguments for why these changes occurred the way they 
+did.
+
+<aside>
+In his foreword to the revised edition, Putnam is less convinced that he has 
+made a foolproof case that social connections have decreased. See his arguments
+there for more discussion on the research in this area.
+</aside>
 
 
-```{r, echo = FALSE, eval=FALSE}
-## commute time doesn't change over years observed
-df %>%
-  select(YEAR, WEIGHT, COMMUTIM) %>%
-  filter_all(function(x) !is.na(x)) %>%
-  as_survey_design(weights = WEIGHT) %>%
-  group_by(YEAR) %>%
-  summarize(min = survey_quantile(COMMUTIM, .05, vartype = "ci")) %>%
-  ggplot(aes(x = YEAR, y = min_05)) +
-  geom_pointrange(aes(ymin = min_05_low, ymax = min_05_high))
-```
+## The Time It Takes to Build Social Capital: A Causal Account 
 
+In looking to understand **why** social capital declined in the US, Putnam 
+considers several probable causes ranging from changes in technology – the 
+spread of television and automobile use – to changes in social norms and the 
+shift-change of generations. The unifying theme for the most compelling of these
+causes that take effect across all generations is that the time Americans used 
+to dedicate to one another in their community is decreasing, while the time 
+spent on other activities (e.g. driving, TV, or work) now competes more 
+successfully for Americans’ attention.
+
+We’ll start with driving. Construction on the interstate highway began in the 
+1950s and continued in the three decades that followed, allowing the US 
+population to migrate to suburban areas from cities or nonmetro, smaller towns 
+(See Figure \@ref(fig:suburbanization) from the book). This change is important
+to dwell on. 
+
+Putnam points out that small town America was often the site of the greatest 
+social capital in the country – the small towns where you knew your mailman and 
+the local bartender. If suburbs were less amenable to the development of social 
+capital than small towns, the rise of suburbia could play a large role in the 
+observed decreases in social capital.
 
 ```{r}
-## TV associated with antisocial behavior
+#| suburbanization, fig.width = 15, fig.height = 12, fig.align = "center",
+#| fig.cap = "Figure 52 From Bowling Alone by Robert Putnam 
+#|   [@putnam2000bowling]."
+knitr::include_graphics("suburbanization.png")
+```
+
+
+This is precisely the argument that Putnam makes. Suburbs are not only 
+[infamous](https://www.npr.org/2017/05/03/526655831/a-forgotten-history-of-how-the-u-s-government-segregated-america)
+for explicitly excluding certain “undesirables” on the basis of race and class, 
+they also contributed to a deterioration of social connection within, due to 
+increased driving times. As Putnam cites one Californian’s experience,
+
+> “I live in Garden Grove, work in Irvine, shop in Santa Ana, go to the dentist 
+in Anaheim, my husband works in Long Beach and I used to be the president of 
+the League of Women Voters in Fullerton“. (p.211)
+
+It’s difficult to provide definitive evidence that more time driving *caused* 
+individuals to be less social. Since we can’t randomly assign different 
+commutes to individuals, the best we can do without a 
+[natural experiment](https://en.wikipedia.org/wiki/Natural_experiment) or a 
+longitudinal cohort, is to look at association measures and just how much time 
+is spent driving. 
+
+Putnam does just that, reporting that the typical American spent 72 minutes 
+every day behind the wheel in 2000 – more time than was spent (on average) 
+cooking and eating or that parents spent with their children. Furthermore, 
+Putnam identifies an individual’s commute time as the second most influential 
+demographic variable (after education) associated with that 
+individual’s expected civic involvement and informal social commitments. 
+
+<aside>
+One might be quick to point out that Putnam's estimate from 20 years ago doesn’t 
+hold much relevance today. However, 
+[AAA](https://www.aaa.com/),
+[reported](https://aaafoundation.org/wp-content/uploads/2022/11/AAAFTS_Research-Brief_2022-American-Driving-Survey2020-2021.pdf)
+that US drivers spent 61 minutes on average in the car in 
+2021. An 11-minute difference from Putnam’s 2000 estimate. 
+</aside>
+
+This is a big deal. If time is our most valuable asset, and we are spending a 
+significant amount of it on something as simple as getting from A to B, 
+rather than on the things that matter most in life, it’s fair to say we have 
+gone very wrong somewhere.
+
+Of course, the advent of the suburbs isn’t solely responsible for all of the 
+observed decreases in social capital. One subject that Putnam points to as an 
+even bigger factor in the decline of social capital is the rise of mass media 
+technology, specifically television use.
+
+
+### Let's not Forget about TV
+
+When looking at the impact of television on social capital in the latter half of
+20th century America, Putnam paints a stark picture. Given the chance to escape 
+from the daily company of their neighbors, millions of US citizens flock to 
+their TV screens to, as Putnam quotes T.S. Eliot, “Listen to the same joke at 
+the same time, and yet remain lonesome” (p.217).
+
+The uptake of the TV into American homes transpires with impressive speed. 
+Putnam cites evidence showing that while it took 48 years for the air 
+conditioner to become widespread – present in 75% of American households – it 
+took the television only seven years to reach the same 
+benchmark[@bowden1994household]. And what do we do with all these TVs? We watch
+them! Putnam’s most conservative estimate for how much time was spent watching 
+TV in the late 90’s is roughly three hours a day, 40% of the average American’s 
+free time in 1995. My own analysis -- see Figure \@ref(fig:tvwatchplot) --  of 
+[American Time Use Survey](https://www.bls.gov/tus/) data shows that number was 
+largely the same in 2022[@Flood2023-os]. If you’re wondering what Americans 
+would do with some, if not all, of that time if they weren’t regularly watching 
+TV, Putnam’s best guess is that they would be socializing.
+
+```{r tv_time_df}
+## extract was created through the atus time use survey extract portal
+## available here: https://timeuse.ipums.org/
+ddi <- ipumsr::read_ipums_ddi("data/ATUS_data/atus_00005.xml")
+ipums_extract <- ipumsr::read_ipums_micro(ddi)
+## codes for watching TV
+activity_codes <- c(120303, 120304)
+
+activity_dataframe <- ipums_extract %>%
+    filter(RECTYPE == 3) %>%
+    select(
+      YEAR, CPSIDP, CASEID, PERNUM, LINENO, ACTLINE, ACTIVITY, WHERE, DURATION,
+      START, STOP, ACT_FOOD, ACT_SOCIAL, ACT_TRAVEL
+    )
+person_dataframe <- ipums_extract %>%
+    filter(RECTYPE == 2) %>%
+    select(
+      YEAR, CASEID, SERIAL, STRATA,
+      PERNUM, LINENO, WT06, contains("RWT06_")
+    )
+
+joined_dataframe <- activity_dataframe %>%
+    filter(ACTIVITY %in% activity_codes) %>%
+    select(YEAR, CASEID, ACTLINE, ACTIVITY, WHERE, DURATION, START, STOP) %>%
+    group_by(YEAR, CASEID) %>%
+    summarize(DURATION = sum(DURATION)) %>%
+    right_join(person_dataframe, by = c("YEAR", "CASEID"))
+
+design_one <- joined_dataframe %>%
+    select(-starts_with("RWT06_")) %>%
+    filter(!is.na(WT06)) %>%
+    as_survey_design(weights = WT06, strata = STRATA) %>%
+    group_by(YEAR) %>%
+    summarize(
+      tv_watched = survey_mean(replace_na(DURATION, 0), vartype = "ci")
+    )
+
+design_two <- joined_dataframe %>%
+  ## no data collection during pandemic
+    filter(YEAR != 2020) %>%
+    select(CASEID, YEAR, WT06, DURATION, starts_with("RWT06_")) %>%
+    as_survey_rep(
+      repweights = starts_with("RWT06_"), weights = WT06,
+      type = "JK1", rscales = rep(1, 160),
+      scale = 4 / 160, mse = TRUE
+    ) %>%
+    group_by(YEAR) %>%
+    summarize(
+      tv_watched = survey_mean(replace_na(DURATION, 0), vartype = "ci")
+    )
+
+tv_dataframe <- rbind(design_one, design_two)
+```
+
+```{r}
+#| tvwatchplot, fig.width = 12, fig.height=8, fig.cap = "Time spent 
+#|   watching TV by individuals in the US from 2010-2022."
+tv_dataframe %>% 
+  ## Look at past ~ 10 years
+  filter(YEAR >= 2010) %>% 
+  mutate(
+    ## Convert to hours
+    year = as.integer(YEAR),
+    tv_watched = tv_watched / 60,
+    tv_watched_low = tv_watched_low / 60,
+    tv_watched_high = tv_watched_upp / 60
+  ) %>% 
+  ggplot(aes(x = year, y = tv_watched)) +
+  geom_point() +
+  geom_pointrange(aes(ymin = tv_watched_low, ymax = tv_watched_high)) + 
+  geom_line() +
+  ggtitle("Hours US Citizens Spend Watching TV") +
+  xlab("Year") +
+  scale_x_continuous(breaks = scales::pretty_breaks()) +
+  ylab("Hours") +
+  labs(caption = stringr::str_c(
+    "Point indicates mean, line represents 95% ",
+    "confidence interval. \n Data from American Time Use Survey data"
+  ))
+```
+
+<aside>
+You can see a fun infographic on how Americans spend their daily time from
+American Time Use Survey 2008 data in a *New York Times* application
+[here](https://archive.nytimes.com/www.nytimes.com/interactive/2009/07/31/business/20080801-metrics-graphic.html?hp).
+</aside>
+
+
+Putnam identifies all manner of antisocial behavior associated with habitual 
+television viewing. He starts with some of his usual measures of civic 
+engagement: "39 percent of light TV viewers attended some public meeting on 
+town or school affairs last year as compared with only 25% of the 
+demographically-matched heavy TV viewers amongst working-age, college-educated 
+individuals. Similarly, light viewers were nearly three times more likely to 
+have made a speech last year than an equally well educated heavy viewer" (p.228).
+Going further, Putnam reports that those who identify TV as their “primary form 
+of entertainment” show a consistently lower level of social involvement 
+compared to those that don’t report TV as their primary form of engagement. 
+This is seen consistently across several dimensions and across time -- See 
+Figure \@ref(fig:tvplot).
+
+
+```{r tvdf_prep, include = FALSE}
 tvdf <- df %>%
   select(
     YEAR, WEIGHT, TVENTER, FINGER, DINPARTY, CLUBMEET,
@@ -202,6 +550,9 @@ tvdf <- df %>%
 ```
 
 ```{r}
+#| tvplot, fig.height = 8, fig.width = 12, fig.cap = "Percent of 
+#|   US Population Engaging in Social Activity with Reported TV Entertainment 
+#|   Relationship."
 tvdf %>%
   filter(
     !is.na(measure), !is.na(tv_viewer),
@@ -235,43 +586,146 @@ tvdf %>%
     subtitle = "Respondents Self Reported Activities in Last Twelve Months."
   ) +
   labs(caption = stringr::str_c(
-    "Point indicates mean, line represents 95%",
+    "Point indicates mean, line represents 95% ",
     "confidence interval. \n Data from DDB survey data"
   ))
 ```
 
-```{r}
-volunteer_tv_des <- df %>%
-  select(
-    YEAR, WEIGHT, TVENTER, VOLUNT, INCOME, SEX, RACE,
-    RESAGERG, EDUC,
-  ) %>%
-  mutate(
-    tv_viewer = factor(if_else(TVENTER >= 4, "TV is my Primary Form of Entertainment",
-      "TV is *not* my Primary Form of Entertainment"
-    )),
-    ## TODO add labels
-    volunteered = if_else(VOLUNT > 1, 1L, 0L),
-    income = factor(INCOME),
-    sex = factor(SEX),
-    age = factor(RESAGERG),
-    edu = factor(EDUC),
-    race = factor(RACE),
-  ) %>%
-  filter_all(function(x) !is.na(x)) %>%
-  as_survey_design(weights = WEIGHT)
-```
+Perhaps the most conclusive evidence to demonstrate the idea that an uptake in 
+TV use will lead to a decline in social involvement comes from a study of remote
+communities in northern Canada before and after the introduction of television 
+in the 1970s – a natural experiment[@williams1979impact]. The town of “Notel” –
+a pseudonym to protect the inhabitants of the town – did not have access to 
+television in 1973. This was not intentional – due to a quirk of its location 
+in a valley, the transmitter meant to serve the area did not provide reception 
+for most residents. Nearby neighbor towns “Unitel” and “Multitel” were similar 
+in ethnic and economic mix but *did* have access to television. As the 
+researchers go on to report: 
+
+> “Before Notel had television, residents in the longitudinal sample attended a 
+greater variety of club and other meetings than did residents of both Unitel 
+and Multitel, who did not differ. There was a significant decline in Notel 
+following the introduction of television, but no change in either Unitel or 
+Multitel.” – [The Impact of Television](https://eric.ed.gov/?id=ED172293)
+
+Putnam follows the researchers of this study in arguing that this evidence 
+points the finger in a way that previous data cannot, that the act of habitual 
+TV viewing leads to a decrease in outgoing, prosocial behavior. 
+
+Putnam’s conclusion from these data about TV’s impact on the larger picture of 
+social capital is simple: There isn’t enough time in the day for both regular 
+TV viewing and regular social and community involvement. Putnam makes his most 
+damning condemnation on this topic: 
+
+> A major commitment to television viewing – such as most of us have come to 
+have – is incompatible with a major commitment to community life (p.229).
+
+
+### From One Screen To Another
+
+It's hard not to think about the Internet and 
+[smartphone use](https://www.reviews.org/mobile/cell-phone-addiction/) when 
+reading about Putnam's work on TV. Putnam’s writing about the antisocial 
+behavior associated with habitual and prolonged TV use echos his writing about 
+the Internet in the Afterword of the 2020 edition of Bowling Alone:
+
+> “Lonely people express a preference for using the Internet for social 
+interaction and are more likely to use the Internet in a way that displaces 
+time spent in offline social activities…” (p.432) 
+
+History repeats itself. If America is to rebuild its stores of social capital, 
+it will have to find new ways to bring Americans together face-to-face in a way 
+that can effectively compete with the allure of digital technology 
+[@hampton2011core;@nowland2018loneliness;@Carty_2019].
+
+
+## What Now? Both Then and Now
+
+Putnam ends his book with a chapter entitled “Toward an Agenda for Social 
+Capitalists”, in which he lays out his high-level aspirations for readers of his 
+book to vote, work, and donate toward by the year 2010. This includes broad 
+statements such as:
+
+> “Let us act to ensure that by 2010 Americans will spend less time traveling 
+and more time connecting with our neighbors than we do today, that we will live 
+in more integrated and pedestrian friendly areas, and that the design of our 
+communities and the availability of public space will encourage more casual 
+socializing with friends and neighbors” (p.408).
+
+And: 
+
+> “Let us find ways to ensure that by 2010 Americans will spend less leisure time 
+sitting passively alone in front of glowing screens and more time in active 
+connection with our fellow citizens. Let us foster new forms of electronic 
+entertainment and communication that reinforce community engagement rather than 
+forestalling it” (p.410).
+
+Of course, in 2024, we can see that progress towards these goals has been 
+middling at best. As Putnam describes in his book, it took the impact of two 
+world wars to bring together America in a way that was reflected in these social
+measures and it’s difficult to imagine something less dramatic that could bring 
+America together again.
+
+That's not to say all is lost. There is still a lot to be learned from Putnam’s 
+writing. While the path to the world he envisions requires the kind of reforms 
+I've written about elsewhere involving, for example, 
+[zoning reform,](https://xstreetvalidated.com/posts/2023-07-15-betterwaytozonereview/)
+my strongest impression from reading over this 
+material was how our use of technology can cause more problems than it 
+solves. While I’m generally a fan of technology – cars, television, 
+smartphones, etc. – there is little doubt after reading through this book that 
+we can overuse our tech and in so doing, lose sight of what is really important. 
+
+When we replace time having picnics and dinner parties with our friends with
+more time spent driving on our commute or watching TV, it's clear to me we have 
+lost sight of what is important. Putnam frames this as an issue of social and 
+political concern and he is right – by spending less time with one another we are 
+less likely to be open to new ideas and get outside our preferred ideological 
+“bubble” [@cinelli2021echo].  
+
+Even more so than this being a political issue though, I consider it a moral 
+one. This isn’t a philosophy blog, and I am not looking to develop a new 
+metaphysics, but if we were to ask ourselves what it means to live a good life 
+or what makes life worth living, most of us would think of 
+the time we can spend creatively with one another and less of time spent 
+watching the latest TV show or internet phenomenon[@Silver_2021]. Arranging our
+built environment to better incorporate this value will take a considerable and 
+concerted effort.
+
+This leads me to a second, related lesson from this book: The realization that 
+cities have to think of themselves as competing for the time and attention of 
+Americans. Reworking the built environment won't solve all the problems 
+presented in Bowling Alone and it may be true that there will never be anything 
+as satisfying as the cheap and quick dopamine hit that one can get from turning 
+on the TV or unlocking their smartphone,  but my aspiration is that cities 
+reach the absolute limit of their ability in supporting individuals' chance 
+to forge worthwhile connections. My hope is that cities can develop such 
+enthralling beauty, such readily observed potential for social opportunity -- 
+not to mention affordability -- that car commutes and electronic entertainment 
+take their rightful place as a much more modest portion of Americans’ time.
 
 ```{r}
-fit <- survey::svyglm(volunteered ~ tv_viewer + YEAR + race + income +
-  sex + age + edu,
-design = volunteer_tv_des,
-family = binomial()
-)
+#| highline, fig.align = "center", fig.cap = "The
+#|   High Line, NYC. Photo By Dansnguyen - Own work, CC0, 
+#|   https://commons.wikimedia.org/w/index.php?curid=89088130"
+knitr::include_graphics("AHigh_Line_Park,_Section_1a.jpg")
 ```
 
-```{r}
-broom::tidy(fit)
-```
+## Other Resources on Bowling Alone {.appendix}
 
-## Other Resources on Bowling Alone
+One of the advantages of Bowling Alone’s popularity and 2000 publication date is
+that there are a plethora of resources to explore that offer further 
+perspectives on his work. See below for a sample of these:
+
+1. [NPR episode](https://www.npr.org/2022/03/15/1086732931/politics-and-americas-loneliness-epidemic)
+2. [Volunteering is on the decline](https://one.npr.org/?sharedMediaId=1218999240:1218999241)
+3. [Formal Analysis of Bowling Alone](https://www.amazon.com/Bowling-Alone-Library-Elizabeth-Morrow/dp/1912127725/ref=sr_1_4?crid=31SI8BENCX63G&keywords=bowling+alone&qid=1705789676&sprefix=bowlign+alone%2Caps%2C71&sr=8-4)
+
+In my research into car commuting times I also found [this article](https://www.nytimes.com/2024/01/10/magazine/dangerous-driving.html) 
+that describes a peak in car commute times, as well as a
+disturbing increase in automobile caused traffic fatalities across the US.
+
+## Acknowledgements {.appendix}
+
+Thanks to [Paul Haluszczak](https://www.linkedin.com/in/expertly-paul) for 
+reading and offering comments on this post.

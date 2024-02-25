@@ -14,7 +14,7 @@ bibliography: cleanup.bib
 categories:
   - Technical
   - Cleanup vs. Crime
-  - Social Cohesion
+  - Social Capital
 draft: false 
 ---
 

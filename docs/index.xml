@@ -12,7 +12,18 @@
       <link>https://xstreetvalidated.com</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 22 Oct 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Bowling Alone: The Collapse and Revival of American Community Revised and Updated</title>
+      <dc:creator>Adam Peterson</dc:creator>
+      <link>https://xstreetvalidated.com/posts/2023-12-04-bowling-alone</link>
+      <description>The Ups and Downs of Social Capital.</description>
+      <category>Book Review</category>
+      <category>Social Capital</category>
+      <guid>https://xstreetvalidated.com/posts/2023-12-04-bowling-alone</guid>
+      <pubDate>Sun, 25 Feb 2024 00:00:00 +0000</pubDate>
+      <media:content url="https://xstreetvalidated.com/posts/2023-12-04-bowling-alone/kittaning.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>The Death and Life of Great American Cities</title>
       <dc:creator>Adam Peterson</dc:creator>
@@ -85,7 +96,7 @@ the conditional autoregressive family and a novel application.</description>
       <link>https://xstreetvalidated.com/posts/2021-12-19-cleanup-vs-crime-mechanics</link>
       <description>Why did it work?</description>
       <category>Cleanup vs. Crime</category>
-      <category>Social Cohesion</category>
+      <category>Social Capital</category>
       <guid>https://xstreetvalidated.com/posts/2021-12-19-cleanup-vs-crime-mechanics</guid>
       <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
       <media:content url="https://xstreetvalidated.com/posts/2021-12-19-cleanup-vs-crime-mechanics/Broken_window_large.jpeg" medium="image" type="image/jpeg"/>
@@ -97,7 +108,7 @@ the conditional autoregressive family and a novel application.</description>
       <description>What kinds of causal claims are justified from an empirical analysis?</description>
       <category>Technical</category>
       <category>Cleanup vs. Crime</category>
-      <category>Social Cohesion</category>
+      <category>Social Capital</category>
       <guid>https://xstreetvalidated.com/posts/2021-11-28-cleanup-vs-crime-causal-inference</guid>
       <pubDate>Sun, 28 Nov 2021 00:00:00 +0000</pubDate>
       <media:content url="https://xstreetvalidated.com/posts/2021-11-28-cleanup-vs-crime-causal-inference/cleanup-vs-crime-causal-inference_files/figure-html5/ATEvis-1.png" medium="image" type="image/png" width="2688" height="1536"/>
@@ -109,7 +120,7 @@ the conditional autoregressive family and a novel application.</description>
       <description>From KDEs to Difference-in-Differences</description>
       <category>Technical</category>
       <category>Cleanup vs. Crime</category>
-      <category>Social Cohesion</category>
+      <category>Social Capital</category>
       <guid>https://xstreetvalidated.com/posts/2021-08-23-cleanup-vs-crime-methods-of-analysis</guid>
       <pubDate>Sun, 07 Nov 2021 00:00:00 +0000</pubDate>
       <media:content url="https://xstreetvalidated.com/posts/2021-08-23-cleanup-vs-crime-methods-of-analysis/cleanup-vs-crime-methods-of-analysis_files/figure-html5/buffervis-1.png" medium="image" type="image/png" width="2688" height="1536"/>
@@ -121,7 +132,7 @@ the conditional autoregressive family and a novel application.</description>
       <description>A simple concept and a decent result.</description>
       <category>Big Picture</category>
       <category>Cleanup vs. Crime</category>
-      <category>Social Cohesion</category>
+      <category>Social Capital</category>
       <guid>https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime</guid>
       <pubDate>Sun, 17 Oct 2021 00:00:00 +0000</pubDate>
       <media:content url="https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime/F1.jpg" medium="image" type="image/jpeg"/>

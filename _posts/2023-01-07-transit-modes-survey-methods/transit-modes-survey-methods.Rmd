@@ -1,7 +1,7 @@
 ---
 title: "Transit Modes & Survey Methods"
 description: |
-  What Kinds of Estimates Can We Gain with Small Estimates
+   Big Estimates from Small Samples
 author:
   - name: Adam Peterson
     url: https://apetersonsite.org
@@ -16,19 +16,20 @@ draft: true
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-The Propensity to Cycle Tool ([PCT](https://www.pct.bike/)) discussed in the 
-previous [post]() offers its users two very intuitive insights through its 
-dynamic map: (1) It paints a 
-descriptive view of what UK citizens transit patterns were in 2011 and (2)
-estimates a potential counterfactual view of what transit might look like in the
-UK if certain cultural attitudes or environmental barriers were overcome. In
-considering how we might provide these same kinds of tools in the US so the
-analogous benefits for policymakers could be made, this post focuses on the
-first, descriptive goal, of the PCT and discusses the advantages and
-disadvantages of other methods that try to accomplish this goal in the
+The Propensity to Cycle Tool ([PCT](https://www.pct.bike/)) discussed in a 
+previous 
+[post](https://xstreetvalidated.com/posts/2021-12-19-propensity-to-cycle/) 
+offers its users two very intuitive insights through its  dynamic map: 
+(1) It paints a descriptive view of what UK citizens transit patterns were in 
+2011 and (2) estimates a potential counterfactual view of what transit might 
+look like in the UK if certain cultural attitudes or infrastructure were 
+changed. In considering how we might provide these same kinds of tools in 
+the US so the analogous benefits for policymakers could be made, this post 
+focuses on the first, descriptive goal, of the PCT and discusses the advantages 
+and disadvantages of other methods that try to accomplish this goal in the
 absence of relevant and available census data. I'll end up zooming in on what
-efforts a *city*, specifically, might take to better gain a sense of transit
-patterns within its borders.
+efforts could be taken at the *city* -- or metro -- level, specifically to 
+better gain a sense of active-transit patterns within its borders.
 
 ## Survey Methods
 

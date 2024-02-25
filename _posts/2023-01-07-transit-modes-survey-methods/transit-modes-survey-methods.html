@@ -90,7 +90,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Transit Modes &amp; Survey Methods</title>
 
-  <meta property="description" itemprop="description" content="What Kinds of Estimates Can We Gain with Small Estimates"/>
+  <meta property="description" itemprop="description" content="Big Estimates from Small Samples"/>
 
 
   <!--  https://schema.org/Article -->
@@ -101,19 +101,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Transit Modes &amp; Survey Methods"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="What Kinds of Estimates Can We Gain with Small Estimates"/>
+  <meta property="og:description" content="Big Estimates from Small Samples"/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Transit Modes &amp; Survey Methods"/>
-  <meta property="twitter:description" content="What Kinds of Estimates Can We Gain with Small Estimates"/>
+  <meta property="twitter:description" content="Big Estimates from Small Samples"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["Transit Modes & Survey Methods"]},{"type":"character","attributes":{},"value":["What Kinds of Estimates Can We Gain with Small Estimates\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["2023-01-07"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","draft"]}},"value":[{"type":"character","attributes":{},"value":["Transit Modes & Survey Methods"]},{"type":"character","attributes":{},"value":["Big Estimates from Small Samples\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["2023-01-07"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"logical","attributes":{},"value":[true]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1496,7 +1496,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Transit Modes & Survey Methods","description":"What Kinds of Estimates Can We Gain with Small Estimates","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2023-01-07T00:00:00.000-05:00","citationText":"Peterson, 2023"}
+{"title":"Transit Modes & Survey Methods","description":"Big Estimates from Small Samples","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.org","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2023-01-07T00:00:00.000-05:00","citationText":"Peterson, 2023"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1509,7 +1509,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Transit Modes &amp; Survey Methods</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>What Kinds of Estimates Can We Gain with Small Estimates</p></p>
+<p><p>Big Estimates from Small Samples</p></p>
 </div>
 
 <div class="d-byline">
@@ -1519,18 +1519,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>The Propensity to cycle tool discussed in the previous <a href="">post</a> offers its
-users two very intuitive insights through its dynamic map: (1) It paints a
-descriptive view of what UK citizens transit patterns were in 2011 and (2)
-estimates a potential counterfactual view of what transit might look like in the
-UK if certain cultural attitudes or environmental barriers were overcome. In
-considering how we might provide these same kinds of tools in the US so the
-analogous benefits for policymakers could be made, this post focuses on the
-first, descriptive goal, of the PCT and discusses the advantages and
-disadvantages of other methods that try to accomplish this goal in the
+<p>The Propensity to Cycle Tool (<a href="https://www.pct.bike/">PCT</a>) discussed in a
+previous
+<a href="https://xstreetvalidated.com/posts/2021-12-19-propensity-to-cycle/">post</a>
+offers its users two very intuitive insights through its dynamic map:
+(1) It paints a descriptive view of what UK citizens transit patterns were in
+2011 and (2) estimates a potential counterfactual view of what transit might
+look like in the UK if certain cultural attitudes or environmental barriers
+were overcome. In considering how we might provide these same kinds of tools in
+the US so the analogous benefits for policymakers could be made, this post
+focuses on the first, descriptive goal, of the PCT and discusses the advantages
+and disadvantages of other methods that try to accomplish this goal in the
 absence of relevant and available census data. I’ll end up zooming in on what
-efforts a <em>city</em>, specifically, might take to better gain a sense of transit
-patterns within its borders.</p>
+efforts could be taken at the <em>city</em> level, specifically to better gain a
+sense of active-transit patterns within its borders.</p>
 <h2 id="survey-methods">Survey Methods</h2>
 <p>The PCT is very fortunate in that the authors have access to census data.
 That is, there is no error in the estimate of the proportion of individuals

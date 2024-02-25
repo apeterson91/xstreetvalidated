@@ -13,7 +13,7 @@ bibliography: cleanup.bib
 creative_commons: CC BY
 categories:
   - Cleanup vs. Crime
-  - Social Cohesion
+  - Social Capital
 draft: false 
 ---
 

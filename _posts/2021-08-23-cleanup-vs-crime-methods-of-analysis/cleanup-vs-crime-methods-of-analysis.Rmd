@@ -14,7 +14,7 @@ creative_commons: CC BY
 categories:
   - Technical
   - Cleanup vs. Crime
-  - Social Cohesion
+  - Social Capital
 draft: false 
 ---
 

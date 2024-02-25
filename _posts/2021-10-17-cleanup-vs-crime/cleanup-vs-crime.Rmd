@@ -14,7 +14,7 @@ creative_commons: CC BY
 categories:
   - Big Picture 
   - Cleanup vs. Crime
-  - Social Cohesion
+  - Social Capital
 draft: false 
 ---
 

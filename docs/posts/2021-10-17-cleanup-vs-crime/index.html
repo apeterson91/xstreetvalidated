@@ -21,7 +21,7 @@
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,16 +74,38 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
 code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
 </style>
 
   <!--radix_placeholder_meta_tags-->
@@ -124,12 +147,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta name="citation_author" content="Adam Peterson"/>
 <!--/radix_placeholder_meta_tags-->
   
-  <meta name="citation_reference" content="citation_title=Effect of remediating blighted vacant land on shootings: A citywide cluster randomized trial;citation_publication_date=2019;citation_publisher=American Public Health Association;citation_volume=109;citation_author=Ruth Moyer;citation_author=John M MacDonald;citation_author=Greg Ridgeway;citation_author=Charles C Branas"/>
-  <meta name="citation_reference" content="citation_title=Citywide cluster randomized trial to restore blighted vacant land and its effects on violence, crime, and fear;citation_publication_date=2018;citation_publisher=National Academy of Sciences;citation_volume=115;citation_doi=10.1073/pnas.1718503115;citation_issn=0027-8424;citation_author=Charles C. Branas;citation_author=Eugenia South;citation_author=Michelle C. Kondo;citation_author=Bernadette C. Hohl;citation_author=Philippe Bourgois;citation_author=Douglas J. Wiebe;citation_author=John M. MacDonald"/>
+  <meta name="citation_reference" content="citation_title=Effect of remediating blighted vacant land on shootings: A citywide cluster randomized trial;citation_publisher=American Public Health Association;citation_volume=109;citation_author=Ruth Moyer;citation_author=John M MacDonald;citation_author=Greg Ridgeway;citation_author=Charles C Branas"/>
+  <meta name="citation_reference" content="citation_title=Citywide cluster randomized trial to restore blighted vacant land and its effects on violence, crime, and fear;citation_publisher=National Academy of Sciences;citation_volume=115;citation_doi=10.1073/pnas.1718503115;citation_issn=0027-8424;citation_author=Charles C. Branas;citation_author=Eugenia South;citation_author=Michelle C. Kondo;citation_author=Bernadette C. Hohl;citation_author=Philippe Bourgois;citation_author=Douglas J. Wiebe;citation_author=John M. MacDonald"/>
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","bibliography","creative_commons","categories","draft","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Cleanup vs. Crime: A Case Study in 4 Parts"]},{"type":"character","attributes":{},"value":["A simple concept and a decent result."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["10-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["cleanup.bib"]},{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Big Picture","Cleanup vs. Crime","Social Cohesion"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime/"]},{"type":"character","attributes":{},"value":["https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","bibliography","creative_commons","categories","draft","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Cleanup vs. Crime: A Case Study in 4 Parts"]},{"type":"character","attributes":{},"value":["A simple concept and a decent result."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.org"]}]}]},{"type":"character","attributes":{},"value":["10-17-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["cleanup.bib"]},{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Big Picture","Cleanup vs. Crime","Social Capital"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime/"]},{"type":"character","attributes":{},"value":["https://xstreetvalidated.com/posts/2021-10-17-cleanup-vs-crime/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -2409,8 +2432,8 @@ d-appendix d-footnote-list a.footnote-backlink {
   color: var(--hover-color, white);
 }</style>
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/header-attrs-2.9/header-attrs.js"></script>
-  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/header-attrs-2.23/header-attrs.js"></script>
+  <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2514,7 +2537,7 @@ gtag('config', 'UA-207384038-1');
 <div class="dt-tags">
   <a href="../../index.html#category:Big_Picture" class="dt-tag">Big Picture</a>
   <a href="../../index.html#category:Cleanup_vs._Crime" class="dt-tag">Cleanup vs. Crime</a>
-  <a href="../../index.html#category:Social_Cohesion" class="dt-tag">Social Cohesion</a>
+  <a href="../../index.html#category:Social_Capital" class="dt-tag">Social Capital</a>
 </div>
 <!--/radix_placeholder_categories-->
 <p><p>A simple concept and a decent result.</p></p>
@@ -2527,31 +2550,67 @@ gtag('config', 'UA-207384038-1');
 </div>
 
 <div class="d-article">
-<p>I’m a big fan of this <a href="https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752">paper</a> looking at how cleaning up vacant lots has the potential to affect crime<span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>. There’s a lot to love here, and I’m hoping to use this paper as an excuse to explore several different ideas relevant to both understanding the built environment and statistical methods more generally. In this post we’ll focus on a high-level understanding of the paper while future posts will focus on (1) the measures of gun violence and statistical models used, (2) the assumptions and approach that go into the causal inference associated with this trial and finally (3), I’ll devote a post to the conceptual models at play here. Why would cleaning up a vacant lot affect nearby gun violence, or other measures of community health?</p>
-<p>I’ll go on to show alternative methods that could be used to analyze these data and the advantages they may have over the current author’s approach. I’ll leave that, however, for a different series of posts. Hopefully this brief outline has you excited for what’s to come, but for now, let’s dive into the paper!</p>
+<p>I’m a big fan of this
+<a href="https://ajph.aphapublications.org/doi/full/10.2105/AJPH.2018.304752">paper</a>
+looking at how cleaning up vacant lots
+has the potential to affect crime<span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.
+There’s a lot to love here, and I’m hoping to use this paper as an
+excuse to explore several different ideas relevant to both
+understanding the built environment and statistical methods more generally.
+In this post we’ll focus on a high-level
+understanding of the paper while future posts will focus on (1) the measures of
+gun violence and statistical models used, (2) the assumptions and approach
+that go into the causal inference associated with this trial and finally (3),
+I’ll devote a post to the conceptual models at play here. Why would cleaning up
+a vacant lot affect nearby gun violence, or other measures of community health?</p>
+<p>I’ll go on to show alternative methods that could be used to analyze
+these data and the advantages they may have over the current author’s approach.
+I’ll leave that, however, for a different series of posts.
+Hopefully this brief outline has you excited for what’s to come, but for now,
+let’s dive into the paper!</p>
 <aside>
-For related papers see <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2688343">here</a> and <a href="https://www.pnas.org/content/115/12/2946.short">here</a>. The latter paper refers to the same set of vacant lots and provides more details on the vacant lot greening strategy and neighborhoods involved in <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.
+For related papers see <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2688343">here</a> and
+<a href="https://www.pnas.org/content/115/12/2946.short">here</a>.
+The latter paper refers to the same set of vacant lots and provides more details
+on the vacant lot greening strategy and neighborhoods involved in
+<span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.
 </aside>
 <h1 id="background">Background</h1>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:greening"></span>
+<div class="figure"><span style="display:block;" id="fig:greening"></span>
 <img src="F1.jpg" alt="Graphic demonstration of the different cleaning interventions. Figure from 'Citywide cluster randomized trial to restore blighted vacant land...' [@Branas2946]" width="640" />
 <p class="caption">
 Figure 1: Graphic demonstration of the different cleaning interventions. Figure from ‘Citywide cluster randomized trial to restore blighted vacant land…’ <span class="citation" data-cites="Branas2946">(<a href="#ref-Branas2946" role="doc-biblioref">Branas et al. 2018</a>)</span>
 </p>
 </div>
 </div>
-<p>The authors’ objective in this work is to determine whether cleaning up a series of vacant lots in the areas where, unfortunately, many shootings regularly occur, could lead to a reduced rate of gun violence.</p>
-<p>In order to test this hypothesis, the authors randomly assign 1 of three “interventions” to each of 110 geographically close clusters of vacant lots — 541 lots in total — spread across Philadelphia between April and June of 2013.</p>
-<p>The first intervention called “greening,” involved “removing trash and debris, grading the land, planting new grass and a small number of trees to create a parklike setting, installing low wooden perimeter fences, and regularly maintaining the lot.” <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>. You can see a demonstration of this idea in Figure <a href="#fig:greening">1</a>.</p>
-<p>The second intervention labeled “mowing,” made the vacant lot not so much park-like as just generally maintained. The description states it as “mowing existing grass and weeds, removing trash and debris, and regularly maintaining the lot.” <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.</p>
-<p>The third and final “intervention” was simply the control group, where no action was taken on the vacant lot whatsoever.</p>
-<p>The author’s used the Philadelphia Department of Police data of reported shootings not involving police officers from years 2011-2015 as their outcome of interest. You can see a sample of these data from 2015 in the neighborhood of Upper Kensington in Figure <a href="#fig:shootings">2</a>.</p>
+<p>The authors’ objective in this work is to determine whether cleaning up a
+series of vacant lots in the areas where, unfortunately, many shootings regularly
+occur, could lead to a reduced rate of gun violence.</p>
+<p>In order to test this hypothesis, the authors randomly assign 1 of three
+“interventions” to each of 110 geographically close clusters of vacant lots
+— 541 lots in total — spread across Philadelphia between April and June of
+2013.</p>
+<p>The first intervention called “greening”, involved “removing trash and debris,
+grading the land, planting new grass and a small number of trees to create a
+parklike setting, installing low wooden perimeter fences, and regularly
+maintaining the lot.” <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>. You can see a demonstration of this
+idea in Figure <a href="#fig:greening">1</a>.</p>
+<p>The second intervention labeled “mowing”, made the vacant lot not so much park-like
+as just generally maintained. The description states it as
+“mowing existing grass and weeds, removing trash and debris, and regularly
+maintaining the lot.” <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span>.</p>
+<p>The third and final “intervention” was simply
+the control group, where no action was taken on the vacant lot whatsoever.</p>
+<p>The author’s used the Philadelphia Department of Police data of
+reported shootings not involving police officers from years 2011-2015 as their
+outcome of interest. You can see a sample of these data from 2015
+in the neighborhood of Upper Kensington in Figure <a href="#fig:shootings">2</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:shootings"></span>
+<div class="figure"><span style="display:block;" id="fig:shootings"></span>
 <img src="cleanup-vs-crime_files/figure-html5/shootings-1.png" alt="Map of No-Officer Involved Shootings in Upper Kensington, Philadelphia during 2015. Red point indicates the occurrence of one shooting." width="1344" />
 <p class="caption">
 Figure 2: Map of No-Officer Involved Shootings in Upper Kensington, Philadelphia during 2015. Red point indicates the occurrence of one shooting.
@@ -2559,39 +2618,81 @@ Figure 2: Map of No-Officer Involved Shootings in Upper Kensington, Philadelphia
 </div>
 </div>
 <h1 id="methods">Methods</h1>
-<p>The author’s used two different measures of the number of shootings each month in and around vacant lots to determine whether their interventions were effective: a kernel density estimate and two — differently sized — buffer counts. The author’s fit two models of a similar form, estimating the difference in the kernel density estimate and rate, respectively as a function of whether the observed lot density estimate or buffer count had received one of the two interventions during June 2013 - April, 2015.<br />
-They also adjusted for correlation across time, space and within clusters. The kernel density estimate model is shown below, but we’ll leave a more thorough examination of it and the buffer models for a later post.</p>
-<span class="math display">\[ 
+<p>The author’s used two different measures of the number of shootings each month
+in and around vacant lots to determine whether their interventions
+were effective: a kernel density estimate and two — differently sized —
+buffer counts. The author’s fit two models of a similar form, estimating the
+difference in the kernel density estimate and rate, respectively as a function
+of whether the observed lot density estimate or buffer count had received
+one of the two interventions during June 2013 - April, 2015.<br />
+They also adjusted for correlation across time, space and within clusters.
+The kernel density estimate model is shown below, but we’ll leave a more
+thorough examination of it and the buffer models for a later post.</p>
+<span class="math display">\[
 Y_{it} := \text{# Shootings / km}^2 \text{at lot cluster } i\text{, month } t \\
-\]</span> <span class="math display">\[
+\]</span>
+<span class="math display">\[
 \begin{aligned}
 Y_{it} &amp;= \beta_0 + \beta_1 \text{Greening}_i + \beta_2\text{Mowing}_i
 + \beta_3\text{Post}_t + \beta_4\text{AllTreated}_i  \\
-&amp;+ \beta_5 \text{Greening}_i \times \text{Post}_t + 
+&amp;+ \beta_5 \text{Greening}_i \times \text{Post}_t +
 \beta_6\text{Mowing}_i \times \text{Post}_t  \\
-&amp;+ \beta_7\text{Greening}_i\times \text{AllTreated}_t + 
+&amp;+ \beta_7\text{Greening}_i\times \text{AllTreated}_t +
 \beta_8\text{Mowing}_i \times \text{AllTreated}_t \\
 &amp;+ \alpha_{m(t)} + \delta_{s(i)} + \xi_{c(i)} + \epsilon_{it}
 \end{aligned}
 \]</span>
 <aside>
-Why did the author’s fit these different models? And <em>what</em> is going on in that equation? We’ll discuss this more in the post focused on the methods of analysis
+Why did the author’s fit these different models? And <em>what</em> is going
+on in that equation?
+We’ll discuss this more in the post focused on the methods of analysis
 </aside>
 <h1 id="results">Results</h1>
-<p>Converting their estimates to percent change in the number of expected shootings, the author’s determined that the monthly shootings per square kilometer (density estimate model) decreased by 6.8 % (95% <a href="https://en.wikipedia.org/wiki/Confidence_interval">Confidence Interval</a>: -10.6%,-2.7%) for those lots in the greening intervention compared to the pre-intervention baseline and -9.2% (-13.2%,-4.8%) compared to baseline for those lots in the mowing intervention. The author’s estimated a similar significant result for the greening intervention for their buffer analysis and a <em>non-significant</em> change from the mowing intervention from their buffer analysis. The author’s sought to check for “spillover effects” from their interventions using the second, larger buffer model and found no significant difference for those areas adjacent to the greening intervention and a significant decrease in those areas adjacent to the mowing intervention. The author’s state that “these results suggest spillover benefits of vacant lot remediation, rather than displacement.” Meaning that they took this result to be evidence that the interventions didn’t simply push shootings to be one or two blocks away from where the clean-up occurred.</p>
+<p>Converting their estimates to percent change in the number of expected
+shootings, the author’s determined that the monthly shootings per square kilometer
+(density estimate model) decreased by 6.8 % (95%
+<a href="https://en.wikipedia.org/wiki/Confidence_interval">Confidence Interval</a>:
+-10.6%,-2.7%) for those lots in the greening intervention compared to the
+pre-intervention baseline
+and -9.2% (-13.2%,-4.8%) compared to baseline for those lots in the
+mowing intervention. The author’s estimated a similar significant result for
+the greening intervention for their buffer analysis and a <em>non-significant</em>
+change from the mowing intervention from their buffer analysis. The author’s
+sought to check for “spillover effects” from their interventions using the
+second, larger buffer model and found no significant difference for
+those areas adjacent to the greening intervention and a significant decrease
+in those areas adjacent to the mowing intervention. The author’s state that
+“these results suggest spillover benefits of vacant lot remediation, rather than
+displacement”. Meaning that they took this result to be evidence that the
+interventions didn’t simply push shootings to be one or two blocks away from
+where the clean-up occurred.</p>
 <aside>
-A <em>non-significant</em> result here means that the author’s did not think there was sufficient evidence to conclude that the estimated change was not zero. See this <a href="https://en.wikipedia.org/wiki/Confidence_interval#Practical_example_interpretation">example</a> for more.
+A <em>non-significant</em> result here means that the author’s did not think
+there was sufficient evidence to conclude that the estimated change
+was not zero. See this
+<a href="https://en.wikipedia.org/wiki/Confidence_interval#Practical_example_interpretation">example</a>
+for more.
 </aside>
 <h1 id="conclusion">Conclusion</h1>
-<p>So … that’s neat! What’s the take home message? If you clean up that dirty parking lot near where you live, you’ll disincentive crime? Well, maybe. As with all human endeavors, nothing is perfect and rarely simple. In the posts to come we’ll talk more about the strengths and limitations of the author’s approach as well as why this result is still so encouraging in spite of those problems. One overarching theme to keep in mind, is that this is a fairly cheap endeavor, just cleaning up some vacant lots, with a potentially huge payoff — saving human lives! This represents both the simplicity and the power that I hope to show is a regular theme in building better built environments.</p>
+<p>So … that’s neat! What’s the take home message? If you clean up that dirty
+parking lot near where you live, you’ll disincentive crime? Well, maybe.
+As with all human endeavors, nothing is perfect and rarely simple.
+In the posts to come we’ll talk more about the strengths and limitations of
+the author’s approach as well as why this result is still so encouraging in
+spite of those problems. One overarching theme to keep in mind, is that this is
+a fairly cheap endeavor, just cleaning up some vacant lots, with a potentially
+huge payoff — saving human lives! This represents both the simplicity and the
+power that I hope to show is a regular theme in building better
+built environments.</p>
 <h2 class="appendix" id="updates">Updates</h2>
-<p>I added further details on how Branas’ PNAS paper <span class="citation" data-cites="Branas2946">(<a href="#ref-Branas2946" role="doc-biblioref">Branas et al. 2018</a>)</span> is related to the Moyer paper <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span> of concern in this case study on 10/26/21.</p>
+<p>I added further details on how Branas’ PNAS paper <span class="citation" data-cites="Branas2946">(<a href="#ref-Branas2946" role="doc-biblioref">Branas et al. 2018</a>)</span> is related to
+the Moyer paper <span class="citation" data-cites="moyer2019effect">(<a href="#ref-moyer2019effect" role="doc-biblioref">Moyer et al. 2019</a>)</span> of concern in this case study on 10/26/21.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Branas2946" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Branas2946" class="csl-entry" role="listitem">
 Branas, Charles C., Eugenia South, Michelle C. Kondo, Bernadette C. Hohl, Philippe Bourgois, Douglas J. Wiebe, and John M. MacDonald. 2018. <span>“Citywide Cluster Randomized Trial to Restore Blighted Vacant Land and Its Effects on Violence, Crime, and Fear.”</span> <em>Proceedings of the National Academy of Sciences</em> 115 (12): 2946–51. <a href="https://doi.org/10.1073/pnas.1718503115">https://doi.org/10.1073/pnas.1718503115</a>.
 </div>
-<div id="ref-moyer2019effect" class="csl-entry" role="doc-biblioentry">
+<div id="ref-moyer2019effect" class="csl-entry" role="listitem">
 Moyer, Ruth, John M MacDonald, Greg Ridgeway, and Charles C Branas. 2019. <span>“Effect of Remediating Blighted Vacant Land on Shootings: A Citywide Cluster Randomized Trial.”</span> <em>American Journal of Public Health</em> 109 (1): 140–44.
 </div>
 </div>
