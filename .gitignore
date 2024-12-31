@@ -9,3 +9,5 @@ Projects/
 .Ruserdata
 _posts/**/*.rdx
 _posts/.DS_Store
+_posts/**/data/
+docs/posts/**/data/
