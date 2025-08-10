@@ -1,0 +1,168 @@
+---
+title: "Housing Economics"
+description: |
+   A Review of "The Economic Implications of Housing Supply"
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.com/
+date: 9-01-2025
+draft: true
+output: 
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_float: true
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+bibliography: housing.bib
+categories:
+  - Urban Economics
+---
+
+```{r libraries, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(haven)
+library(tidyverse)
+library(tidycensus)
+theme_set(theme_bw() + 
+          theme(text = element_text(size = 22),
+                strip.background = element_blank()))
+here::i_am("_posts/2025-08-09-housing-economics/housing-economics.Rmd")
+data_path <- here::here("_posts/2025-08-09-housing-economics/data")
+# Wharton Residential Land use index sourced from
+# https://real-faculty.wharton.upenn.edu/gyourko/land-use-survey/
+```
+
+## A First Foray into Urban Economics 
+
+Digging more deeply into the subject of urban economics, as I mentioned in my 
+most recent 
+[book review](https://xstreetvalidated.com/posts/2024-12-28-order-without-design/) 
+of "Order Without Design", has been no small affair. The subject covers a wide
+array of topics that are each of interest in their own right. The list includes 
+["agglomeration economics"](https://en.wikipedia.org/wiki/Economies_of_agglomeration),
+[transport economics](https://en.wikipedia.org/wiki/Transport_economics) and 
+more. For my first post within this subject though, I wanted to learn more
+about housing and housing markets.
+
+My reasons for this are many:
+
+1. I've put away money for several years now with the idea of it being used as a
+down payment and have often wondered at how houses got *so* expensive. 
+
+2. Related to the first point, this topic is increasingly relevant:
+
+    * It featured [prominently](https://www.ap.org/news-highlights/elections/2024/housing-on-the-ballot-harris-trump-push-different-plans-for-tackling-housing-affordability-crisis/) in the 2024 US Presidential Campaign.
+    * It continues to dominate City Council [legislation](https://denverite.com/2025/08/05/denver-parking-minimums-abolished/).
+    * [Advocacy groups](https://yimbyaction.org) have formed around the issue, pushing for more or less
+    supply.
+
+3. Finally, I think there are some very interesting cultural and moral questions
+that surround housing. Both in terms of how it represents a fundamental need
+of all humans (shelter) as well as an aspiration --- the American dream
+is often associated with owning a single family house. 
+
+
+I'll leave these last questions for the end of the post. To begin with, I'll 
+draw from two sources to form the foundation of our technical understanding of 
+housing markets. The first, [@o1996urban], will be a rudimentary *theoretical* 
+introduction to the topic, drawing on a basic understanding of Supply and Demand.
+If you're not familiar with these topics, I'd suggest 
+[reviewing](https://www.youtube.com/watch?v=PEMkfgrifDw&ab_channel=KhanAcademy) 
+them.
+
+
+For the majority of this post, we'll review a paper by 
+[Ed Glaeser](https://share.google/Ucl8neKLs8m0593Fy) and 
+[Joseph Gyourko](https://share.google/Y5KVNvH0ZzxluK19P) titled 
+"The Economic Implications of Housing Supply" [@glaeser2018economic]. 
+This paper provides a nice overview of how the housing market has functioned 
+*empirically* and also provides an opportunity to review their study with more
+updated data.
+
+```{r}
+#| label: thumbnail-fig
+#| fig-cap: "The ol' Supply and Demand Curve"
+line1 <- data.frame(x = c(1, 9), y = c(1, 9))
+line2 <- data.frame(x = c(9, 1), y = c(1, 9))
+line_intersection <- reconPlots::curve_intersect(line1, line2)
+ggplot(mapping = aes(x = x, y = y)) +
+  geom_line(data = line1, color = "red", size = 1) +
+  geom_line(data = line2, color = "blue", size = 1) +
+  geom_vline(xintercept = line_intersection$x, linetype = "dotted") +
+  geom_hline(yintercept = line_intersection$y, linetype = "dotted") +
+  theme_classic() +
+  xlab("Quantity") +
+  ylab("Price") +
+  ggtitle("Classic Market Equilibrium")
+```
+
+## An Introduction to Housing Market Theory
+
+O'Sullivan starts his chapter on Housing by noting that housing is a **durable** 
+good. This means that, in contrast to the apple bought at the supermarket, a 
+house doesn't "go bad" after its been used by a particular occupant or occupants
+but can be resold later, especially if it has been maintained well. Secondly,
+the housing market is heterogeneous; there are different types of houses in 
+terms of age, size, layout, etc. that can be purchased.
+
+All of this filters into what Sullivan argues is a "Filtering Model" for the
+housing market. Whereas in a "classic market", like our apple example,
+there is no interaction between the supply of a given product at a previous 
+point in time and the present, housing supply has an explicit dependence on
+previous instances of supply. Sullivan formulates the model like this:
+
+$$
+H_t = H_{t-1} \times (1-f) + \text{new},
+$$
+
+where $H_t$ represents the quantity of housing supplied at an arbitrary 
+time point $t$, dependent on the quantity at a previous time point $t-1$ 
+multiplied by some drop out rate $f$, plus the addition of newly constructed 
+housing, "new".
+
+```{r}
+#| label: housing-model
+#| fig-cap: "Housing Filtering Supply Model"
+q <- c(0, 20, 40, 50)
+p <- c(108, 115, 200, 250)
+house_supply <- tibble(quantity = q, price = p, display = c("",letters[1:3]))
+
+house_supply |> 
+  ggplot(aes(x = q, y = p)) +
+  geom_line() +
+  geom_point() +
+  xlab("Quantity Supplied") +
+  ylab("Price / Unit") +
+  geom_text(aes(label = display), position = position_nudge(y = 5)) +
+  ggtitle("Filtering Model of Housing Supply")
+```
+
+## The Economic Implications of Housing Supply
+
+```{r}
+#| label: wharton-reg-index
+land_reg <- read_dta(file.path(
+  data_path,
+  "WHARTON LAND REGULATION DATA_1_24_2008.dta"
+)) |>
+  mutate(year = 2008) |>
+  select(year, msaname99, state, weight, WRLURI)
+```
+
+```{r}
+#| label: american-housing-survey
+#| eval: FALSE
+ahs <- read_sas(file.path(data_path, "ahs2007n.sas7bdat")) |>
+  select(CPRICE, LPRICE, contains("REPWGT"), REGION, METRO3, CMSA, SMSA) |>
+  rename(
+    CurrentPrice = "CPRICE",
+    LandPrice = "LPRICE",
+    CensusRegion = "REGION",
+    Metro = "METRO3"
+  )
+```
+
+## Acknowledgements {.appendix}
+Thanks to [Paul Haluszczak](https://www.linkedin.com/in/expertly-paul) for
+reading and offering comments on this post.
