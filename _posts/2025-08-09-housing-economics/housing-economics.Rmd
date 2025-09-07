@@ -1,7 +1,7 @@
 ---
 title: "Housing Economics"
 description: |
-   A Review of "The Economic Implications of Housing Supply"
+   A Review of basic Economic Theory of Housing Supply
 author:
   - name: Adam Peterson
     url: https://apetersonsite.com/
@@ -20,65 +20,68 @@ categories:
 ---
 
 ```{r libraries, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-library(haven)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(tidyverse)
-library(tidycensus)
-theme_set(theme_bw() + 
-          theme(text = element_text(size = 22),
-                strip.background = element_blank()))
+library(patchwork)
+theme_set(theme_bw() +
+  theme(
+    text = element_text(size = 22),
+    strip.background = element_blank(),
+    legend.title = element_blank()
+  ))
 here::i_am("_posts/2025-08-09-housing-economics/housing-economics.Rmd")
-data_path <- here::here("_posts/2025-08-09-housing-economics/data")
-# Wharton Residential Land use index sourced from
-# https://real-faculty.wharton.upenn.edu/gyourko/land-use-survey/
 ```
 
 ## A First Foray into Urban Economics 
 
-Digging more deeply into the subject of urban economics, as I mentioned in my 
-most recent 
-[book review](https://xstreetvalidated.com/posts/2024-12-28-order-without-design/) 
-of "Order Without Design", has been no small affair. The subject covers a wide
-array of topics that are each of interest in their own right. The list includes 
+Digging more deeply into the subject of urban economics, as I mentioned in my
+most recent [book review](https://xstreetvalidated.com/posts/2024-12-28-order-without-design/) of
+"Order Without Design", has been no small affair. The subject covers a wide
+array of topics that are each of interest in their own right. The list includes
 ["agglomeration economics"](https://en.wikipedia.org/wiki/Economies_of_agglomeration),
-[transport economics](https://en.wikipedia.org/wiki/Transport_economics) and 
-more. For my first post within this subject though, I wanted to learn more
-about housing and housing markets.
+[transport economics](https://en.wikipedia.org/wiki/Transport_economics) and
+more. For my first series of posts within this subject though, I wanted to learn
+more about housing and housing markets.
 
 My reasons for this are many:
 
 1. I've put away money for several years now with the idea of it being used as a
-down payment and have often wondered at how houses got *so* expensive. 
+down payment and have often wondered at how houses have gotten *so* expensive. 
 
 2. Related to the first point, this topic is increasingly relevant:
 
     * It featured [prominently](https://www.ap.org/news-highlights/elections/2024/housing-on-the-ballot-harris-trump-push-different-plans-for-tackling-housing-affordability-crisis/) in the 2024 US Presidential Campaign.
-    * It continues to dominate City Council [legislation](https://denverite.com/2025/08/05/denver-parking-minimums-abolished/).
-    * [Advocacy groups](https://yimbyaction.org) have formed around the issue, pushing for more or less
-    supply.
+    * It continues to dominate city council [legislation](https://denverite.com/2025/08/05/denver-parking-minimums-abolished/).
+    * [Advocacy groups](https://yimbyaction.org) have formed around the issue, 
+    pushing for more or less supply.
 
 3. Finally, I think there are some very interesting cultural and moral questions
 that surround housing. Both in terms of how it represents a fundamental need
 of all humans (shelter) as well as an aspiration --- the American dream
-is often associated with owning a single family house. 
+is synonymous with owning a single family house.
 
 
-I'll leave these last questions for the end of the post. To begin with, I'll 
-draw from two sources to form the foundation of our technical understanding of 
-housing markets. The first, [@o1996urban], will be a rudimentary *theoretical* 
-introduction to the topic, drawing on a basic understanding of Supply and Demand.
-If you're not familiar with these topics, I'd suggest 
-[reviewing](https://www.youtube.com/watch?v=PEMkfgrifDw&ab_channel=KhanAcademy) 
+I'll leave these last questions for the end of the series, however. For this
+series, I'll draw from a number of sources to form the foundation of our
+technical understanding of housing markets. The first, [@o1996urban], will be
+a rudimentary *theoretical* introduction to the topic, drawing on a basic
+understanding of Supply and Demand. If you're not familiar with these topics,
+I'd suggest
+[reviewing](https://www.youtube.com/watch?v=PEMkfgrifDw&ab_channel=KhanAcademy)
 them.
 
+In subsequent posts, I plan to dig into more empirical work in the field,
+looking at two papers published by [Ed
+Glaeser](https://share.google/Ucl8neKLs8m0593Fy) and [Joseph
+Gyourko](https://share.google/Y5KVNvH0ZzxluK19P):
 
-For the majority of this post, we'll review a paper by 
-[Ed Glaeser](https://share.google/Ucl8neKLs8m0593Fy) and 
-[Joseph Gyourko](https://share.google/Y5KVNvH0ZzxluK19P) titled 
-"The Economic Implications of Housing Supply" [@glaeser2018economic]. 
-This paper provides a nice overview of how the housing market has functioned 
-*empirically* and also provides an opportunity to review their study with more
-updated data.
+1.  "The Economic Implications of Housing Supply" [@glaeser2018economic] 
+2.  "America's Housing Supply Problem: The Closing of the Suburban Frontier?"
+    [@glaeser2025america].
+    
+Each of these offer an opportunity to look at both the historical state of the
+U.S.' housing market as well as how the market operates in the present day.
+
 
 ```{r}
 #| label: thumbnail-fig
@@ -94,74 +97,412 @@ ggplot(mapping = aes(x = x, y = y)) +
   theme_classic() +
   xlab("Quantity") +
   ylab("Price") +
-  ggtitle("Classic Market Equilibrium")
+  ggtitle("Classical Market Equilibrium")
 ```
 
 ## An Introduction to Housing Market Theory
 
-O'Sullivan starts his chapter on Housing by noting that housing is a **durable** 
-good. This means that, in contrast to the apple bought at the supermarket, a 
-house doesn't "go bad" after its been used by a particular occupant or occupants
-but can be resold later, especially if it has been maintained well. Secondly,
-the housing market is heterogeneous; there are different types of houses in 
-terms of age, size, layout, etc. that can be purchased.
+O'Sullivan starts his chapter on Housing by noting that housing is a **durable**
+good. This means that, in contrast to an apple bought at the supermarket, a
+house doesn't "go bad" after its been purchased and used by a particular
+consumer but can be resold later, especially if it has been maintained well.
+Secondly, the housing market is **heterogeneous**; there are different types of
+houses in terms of age, size, layout, etc. that can be purchased. O'Sullivan
+describes a "High Quality" housing market and a "Low Quality" housing market, as
+a simple example of how one might understand the heterogeneity in the market as
+well as how the two markets can interact with one another.
 
-All of this filters into what Sullivan argues is a "Filtering Model" for the
-housing market. Whereas in a "classic market", like our apple example,
-there is no interaction between the supply of a given product at a previous 
-point in time and the present, housing supply has an explicit dependence on
-previous instances of supply. Sullivan formulates the model like this:
+<aside>
+These two markets are meant as a simplification of the real world. While we
+might understand the High Quality market to be the "Luxury Market", there are
+really multiple luxury markets targeting different types of consumers and so on
+for more affordable residences. The point here is that these markets are related
+to one another.
+</aside>
+
+All of this results in what Sullivan argues is a "Filtering Model" for the
+housing market. Whereas in our apple example there is no interaction between the
+supply of a given product at a previous point in time and the present, housing
+supply has an explicit dependence on previous instances of supply. Sullivan
+formulates the model like this:
 
 $$
 H_t = H_{t-1} \times (1-f) + \text{new},
 $$
 
-where $H_t$ represents the quantity of housing supplied at an arbitrary 
-time point $t$, dependent on the quantity at a previous time point $t-1$ 
-multiplied by some drop out rate $f$, plus the addition of newly constructed 
-housing, "new".
+where $H_t$ represents the quantity of housing supplied at an arbitrary time
+point $t$, dependent on the quantity at a previous time point $t-1$ multiplied
+by some filtration rate $(1-f) \in (0,1)$, plus the addition of newly
+constructed housing, "new".
+
+The "filtration" refers to the idea previously mentioned, that high quality 
+housing will filter down to become "low quality", if not properly maintained. A
+similar expression for the dependence in low quality housing across time can
+be formulated as follows:
+
+$$
+L_t = L_{t-1} \times (1 - r) + H_{t-1} \times f,
+$$
+
+where $r$ is the retirement rate, of all low quality houses leaving the housing
+market permanently, and $L_{t-1} \times (1-r)$ all houses that remain
+consequently. Adding this latter term to the houses that filtered down from the
+high quality market produces the total quantity of low quality houses.
+
+A natural question follows from this model - **"what determines the filtering
+rate?"** The plot below provides a graphical answer.
 
 ```{r}
-#| label: housing-model
-#| fig-cap: "Housing Filtering Supply Model"
+#| label: fig-filter-maintenance
+#| fig-cap: "Maintenance and Filtering"
+#| fig-width: 12
+#| fig-height: 8
+
 q <- c(0, 20, 40, 50)
 p <- c(108, 115, 200, 250)
-house_supply <- tibble(quantity = q, price = p, display = c("",letters[1:3]))
+house_supply <- tibble(
+  quantity = q, price = p, display = c("", letters[1:3]),
+  Supply = "Maintenance Cost"
+)
+GetLowQualityQuantity <- function(high_q) {
+  case_when(
+    high_q == 0 ~ 65,
+    high_q == 20 ~ 45,
+    high_q == 40 ~ 25,
+    TRUE ~ 15
+  )
+}
 
-house_supply |> 
-  ggplot(aes(x = q, y = p)) +
+p1 <- house_supply |>
+  ggplot(aes(x = q, y = p, color = Supply)) +
   geom_line() +
   geom_point() +
-  xlab("Quantity Supplied") +
+  scale_y_continuous(labels = scales::dollar, limits = c(0, 350)) +
+  scale_x_continuous(labels = ~ paste(., GetLowQualityQuantity(.), sep = "\n")) +
+  scale_color_manual(values = c("Maintenance Cost" = "black")) +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank()
+  ) +
+  xlab("High Quality Quantity Supplied \n Low Quality Quantity Supplied") +
   ylab("Price / Unit") +
-  geom_text(aes(label = display), position = position_nudge(y = 5)) +
-  ggtitle("Filtering Model of Housing Supply")
+  geom_hline(yintercept = 200, linetype = 2, color = "gray") +
+  annotate("text", x = 7, y = 207, label = "Benefit from upkeep", size = 5) +
+  geom_text(aes(label = display),
+    position = position_nudge(y = 10), size = 7,
+    show.legend = FALSE
+  ) +
+  ggtitle("Filtering and Maintenance Housing Supply Dyanmics")
+
+p1
 ```
 
-## The Economic Implications of Housing Supply
+The horizontal line in Figure \@ref(fig:fig-filter-maintenance) shows the
+difference between the current equilibrium (market-rate) high quality house
+price and low quality house price. Or, in other words, the benefit from keeping
+one's house in the high quality market. If we suppose that there are a total
+of 65 houses in the high quality market, households will decide whether or not
+to invest in their house to keep it in the high market according to whether or
+not it is worth the investment. The following three cases are highlighted.
+
+  - **Point a**: The maintenance cost is only \~$100, but if the
+    home owner were to let their house slip into the low-quality market, they
+    would receive less than what it would cost to upkeep it. So the equilibrium
+    does not exist here.
+
+  - **Point b**: The exact number of households considering letting
+    their houses filter to the low quality market will get an equivalent benefit
+    as those performing the necessary upkeep from the required maintenance. This
+    is the equilibrium point.
+
+  - **Point c**: The maintenance cost is higher than the benefit, so more
+    homeowners will move their houses out of the high quality market, and let
+    them filter to the low quality market.
+
+Next, we consider how these filtering supply dynamics relate to prices in each
+market. Consider the plots below which use fictitious data to illustrate these
+concepts further.
 
 ```{r}
-#| label: wharton-reg-index
-land_reg <- read_dta(file.path(
-  data_path,
-  "WHARTON LAND REGULATION DATA_1_24_2008.dta"
-)) |>
-  mutate(year = 2008) |>
-  select(year, msaname99, state, weight, WRLURI)
-```
+#| label: fig-supply-dynamics
+#| fig-cap: "Supply Dyanmics in High and Low Quality Markets"
+#| fig-width: 15
+#| fig-height: 8
 
-```{r}
-#| label: american-housing-survey
-#| eval: FALSE
-ahs <- read_sas(file.path(data_path, "ahs2007n.sas7bdat")) |>
-  select(CPRICE, LPRICE, contains("REPWGT"), REGION, METRO3, CMSA, SMSA) |>
-  rename(
-    CurrentPrice = "CPRICE",
-    LandPrice = "LPRICE",
-    CensusRegion = "REGION",
-    Metro = "METRO3"
+df <- tibble(q = seq(from = 1, to = 55, by = 1)) |>
+  mutate(
+    p_new = 200 + q * 10,
+    p_old = 100 + q * 10,
+  )
+
+hq_market_kink_intercept <- df |>
+  filter(min(p_new) == p_old) |>
+  pull(q)
+
+hq_market_kink_price <- df |>
+  summarize(p_new = min(p_new)) |>
+  pull(p_new)
+
+p1 <- df |>
+  mutate(p_market = if_else(q < hq_market_kink_intercept, p_old,
+    hq_market_kink_intercept * 10 + 100 + 5 * (q - hq_market_kink_intercept)
+  )) |>
+  gather(contains("p"), key = "Supply", value = "Price") |>
+  mutate(cat = case_when(
+    str_detect(Supply, "old") ~ "Leftover Supply",
+    str_detect(Supply, "new") ~ "New Supply",
+    TRUE ~ "Market Supply"
+  )) |>
+  ggplot(aes(x = q, y = Price, color = cat)) +
+  geom_line() +
+  scale_y_continuous(labels = scales::dollar) +
+  geom_hline(aes(yintercept = hq_market_kink_price),
+    linetype = 2,
+    color = "red"
+  ) +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(0.25, .8)
+  ) +
+  scale_color_manual(values = c(
+    "Leftover Supply" = "blue",
+    "New Supply" = "red",
+    "Market Supply" = "black"
+  )) +
+  xlab("Quantity Supplied") +
+  ggtitle("High Quality Market")
+
+
+# Low Quality Filtering Model ---------------------------------------------
+
+df <- tibble(q = seq(from = 1, to = 40)) |>
+  mutate(
+    p_filtered = 50 + q * 5,
+    p_old = 25 + q * 5
+  )
+market_kink_intercept <- df |>
+  filter(min(p_filtered) == p_old) |>
+  pull(q)
+market_kink_price <- df |>
+  summarize(price = min(p_filtered)) |>
+  pull(price)
+p2 <- df |>
+  mutate(
+    p_market = if_else(q < market_kink_intercept, p_old,
+      market_kink_intercept * 5 + 25 + 2.5 * (q - market_kink_intercept)
+    )
+  ) |>
+  gather(contains("p"), key = "Supply", value = "Price") |>
+  mutate(cat = case_when(
+    str_detect(Supply, "old") ~ "Leftover Supply",
+    str_detect(Supply, "filtered") ~ "Filtered Supply",
+    TRUE ~ "Market Supply"
+  )) |>
+  ggplot(aes(x = q, y = Price, color = cat)) +
+  geom_line() +
+  geom_hline(aes(yintercept = market_kink_price),
+    linetype = 2,
+    color = "red"
+  ) +
+  theme(
+    legend.position = "inside",
+    legend.position.inside = c(.25, .8)
+  ) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_color_manual(values = c(
+    "Leftover Supply" = "blue",
+    "Filtered Supply" = "red",
+    "Market Supply" = "black"
+  )) +
+  xlab("Quantity Supplied") +
+  ggtitle("Low Quality Market")
+
+p1 + p2 +
+  patchwork::plot_layout(axes = "collect") +
+  plot_annotation(
+    caption = str_c(
+      "Reference line at new housing construction price. ",
+      "Note the different y-axes."
+    ),
+    title = "Housing Supply Filtering Dynamics"
   )
 ```
+
+Figure \@ref(fig:fig-supply-dynamics) shows the interplay between the high
+quality and low quality markets. In the left panel, we have new houses supplied
+at a price of $200 and up, with the "left over" supply starting at a lower
+value. It isn't until the quantity supplied reaches a point where the price in
+the left over market is *higher* than that of the initial, or minimum, supply
+price for the new construction that we see a kink in the supply chain. This kink
+,marked by the reference line, is the market supply. The lowest of all three
+supply curves in price, results from a combination in quantity from each
+supply curve - leftover and new construction - at all subsequent prices higher
+than that initial.
+
+A similar mechanism is at play in the right panel. The role that new
+construction plays in the "High Quality Market" is played by the houses that
+filtered down in the "Low Quality Market". Similar to before, the minimum price
+at which a filtered house enters the market is the same price at which the 
+market will start to incorporate a greater quantity of housing from both 
+filtered and leftover housing.
+
+To summarize, the key principles at play in the housing market dynamics are as
+follows:
+
+1.  Housing is durable - Houses that were bought last year, could be resold this
+    year.
+
+2.  Houses are heterogeneous - Houses serve different types of needs and will
+    move from one market to another. The way in which they move is motivated by
+    the cost of maintenance to keep them in one market, and the benefit obtained
+    from selling them in one market vs. another.
+
+3.  Both of these dynamics combine --- in addition to the classic economic
+    principles of supply, demand, substitution, etc. --- to form the housing
+    market consumers and sellers participate in.
+
+To finish off this post, let's look at what happens when a theoretical
+restriction is applied to the market and the resulting changes that ensue.
+
+## An Application of the Filtering Model: Permit Restrictions
+
+Suppose we have our same model as before but now the government has, in some
+way, limited the number of *new* houses that can enter the market. The simplest
+way that this can occur is through
+[permitting](https://en.wikipedia.org/wiki/Planning_permission). In most
+municipalities house builders have to obtain a permit in order to build a house.
+If the municipality limited the number of permits that were distributed in a
+given time frame, what impact would that have on the housing market?
+
+A simple, extreme case, in our permitting example would be if the government did
+not issue *any* permits for new construction. In this setting we'd see the
+market supply of houses restricted to the "Left Over Supply" curve. For a less
+restrictive case, the supply curve would move along the demand curve, in between
+the original market supply curve and the Left Over curve. The animation below
+shows how the market price respond will respond according to the permit
+restrictions on new construction.
+
+
+```{r fig-animated-restrictions, dev='png'}
+library(gganimate)
+df <- tibble(q = seq(from = 1, to = 55, by = 1)) |>
+  mutate(
+    p_new = 200 + q * 10,
+    p_old = 100 + q * 10,
+  )
+market_kink_intercept <- df |>
+  filter(min(p_new) == p_old) |>
+  pull(q)
+
+df <- df |>
+  mutate(
+    p_market = if_else(q < market_kink_intercept, p_old,
+      market_kink_intercept * 10 + 100 + 5 * (q - market_kink_intercept)
+    ),
+    p_demand = 1E3 - 15 * q,
+    restrictions = "0%",
+    state = 1,
+  )
+
+# when there are no restrictions the quantity supplied is composed of the
+# left over market quantity (at the market price) and the new construction
+# at the market price
+df |>
+  filter(abs(p_demand - p_market) == min(abs(p_demand - p_market))) |>
+  pull(p_demand) -> market_price # 370
+
+df <- df |> mutate(market_price = market_price)
+
+q_old <- df |>
+  filter(p_old == market_price) |>
+  pull(q) # q is 27
+
+# q is 17 (the sum of each is ~ equal to market quantity supplied)
+q_new <- df |>
+  filter(p_new == market_price) |>
+  pull(q)
+
+p_restricted_quarter <- df |>
+  filter(q == q_new - 4) |>
+  pull(p_market)
+
+new_slope <- 7 # hacky solution - should replace with linear interpolation
+
+df_restriction_quarter <- tibble(
+  restrictions = "25%", # roughly quarter of new construction is blocked
+  state = 2,
+  p_demand = df$p_demand, # demand is unchanged
+  q = df$q,
+  p_old = df$p_old,
+  p_new = df$p_new,
+  p_market = if_else(q < market_kink_intercept, p_old,
+    market_kink_intercept * 10 + 100 + new_slope * (q - market_kink_intercept)
+  )
+)
+
+market_price <- df_restriction_quarter |>
+  filter(abs(p_demand - p_market) == min(abs(p_demand - p_market))) |>
+  pull(p_demand) -> market_price
+
+df_restriction_quarter <- df_restriction_quarter |>
+  mutate(market_price = market_price)
+
+
+df_restriction_full <- tibble(
+  restrictions = "100%", # all new construction is blocked,
+  state = 3,
+  p_demand = df$p_demand,
+  q = df$q,
+  p_old = df$p_old,
+  p_new = df$p_new,
+  p_market = df$p_old # market is reduced to leftover supply
+)
+market_price <- df_restriction_full |>
+  filter(abs(p_demand - p_market) == min(abs(p_demand - p_market))) |>
+  pull(p_demand) -> market_price
+
+df_restriction_full <- df_restriction_full |>
+  mutate(market_price = market_price)
+
+pltdf <-
+  bind_rows(df, df_restriction_quarter, df_restriction_full) |>
+  gather(contains("p_"), key = "Supply", value = "Price") |>
+  mutate(
+    cat = case_when(
+      str_detect(Supply, "old") ~ "Leftover Supply",
+      str_detect(Supply, "new") ~ "New Supply",
+      str_detect(Supply, "demand") ~ "Demand",
+      TRUE ~ "Market Supply"
+    ),
+    market_price = str_c("$", market_price)
+  )
+
+
+anim <- pltdf |>
+  ggplot(aes(x = q, y = Price, color = cat)) +
+  geom_line() +
+  scale_y_continuous(labels = scales::dollar) +
+  xlab("Quantity") +
+  ylab("Price") +
+  transition_states(restrictions, transition_length = 2, state_length = 2) +
+  labs(
+    title = "Housing Supply",
+    subtitle = "Permit Restrictions: {closest_state}"
+  )
+
+anim
+```
+
+
+While the example of permitting restrictions offers a straightforward way to
+understand how the market would respond to restrictions in the supply of new
+house construction, a similar effect would be observed under *any* restrictions
+imposed on new housing construction. In subsequent posts, we'll examine other
+barriers to housing construction that arise in the US housing market and look at
+the evidence economists have put forward to show that, empirically, the result
+predicted by the theoretical models outlined above can also be observed in
+practice.
+
 
 ## Acknowledgements {.appendix}
 Thanks to [Paul Haluszczak](https://www.linkedin.com/in/expertly-paul) for
