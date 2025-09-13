@@ -61,10 +61,10 @@ of all humans (shelter) as well as an aspiration --- the American dream
 is synonymous with owning a single family house.
 
 
-I'll leave these last questions for the end of the series, however. For this
-series, I'll draw from a number of sources to form the foundation of our
-technical understanding of housing markets. The first, [@o1996urban], will be
-a rudimentary *theoretical* introduction to the topic, drawing on a basic
+I'll leave these last questions for the end of the series, however. To start,
+I'll draw from a number of sources to form the foundation of our technical
+understanding of housing markets. The first, [@o1996urban], will be a
+rudimentary *theoretical* introduction to the topic, drawing on a basic
 understanding of Supply and Demand. If you're not familiar with these topics,
 I'd suggest
 [reviewing](https://www.youtube.com/watch?v=PEMkfgrifDw&ab_channel=KhanAcademy)
@@ -378,9 +378,17 @@ A simple, extreme case, in our permitting example would be if the government did
 not issue *any* permits for new construction. In this setting we'd see the
 market supply of houses restricted to the "Left Over Supply" curve. For a less
 restrictive case, the supply curve would move along the demand curve, in between
-the original market supply curve and the Left Over curve. The animation below
-shows how the market price respond will respond according to the permit
-restrictions on new construction.
+the original market supply curve and the Left Over curve. These changes also
+ripple through to the Low Quality housing market via the filtering mechanism;
+since there are fewer houses being built, fewer houses will filter down into the
+low quality market. This will result in a shift in the overall supply in the low
+quality market upward. At the same time, O'Sullivan argues that demand will
+increase, as consumers will move into the low quality market since they can't
+afford the higher prices in the more restricted high quality market. 
+
+All of these changes happen dynamically --- the animation below shows how the
+market price will respond according to the permit restrictions on new
+construction.
 
 
 ```{r fig-animated-restrictions, dev='png'}
@@ -401,7 +409,6 @@ df <- df |>
     ),
     p_demand = 1E3 - 15 * q,
     restrictions = "0%",
-    state = 1,
   )
 
 # when there are no restrictions the quantity supplied is composed of the
@@ -426,11 +433,10 @@ p_restricted_quarter <- df |>
   filter(q == q_new - 4) |>
   pull(p_market)
 
-new_slope <- 7 # hacky solution - should replace with linear interpolation
+new_slope <- 7 # hack solution - should replace with linear interpolation
 
 df_restriction_quarter <- tibble(
   restrictions = "25%", # roughly quarter of new construction is blocked
-  state = 2,
   p_demand = df$p_demand, # demand is unchanged
   q = df$q,
   p_old = df$p_old,
@@ -450,7 +456,6 @@ df_restriction_quarter <- df_restriction_quarter |>
 
 df_restriction_full <- tibble(
   restrictions = "100%", # all new construction is blocked,
-  state = 3,
   p_demand = df$p_demand,
   q = df$q,
   p_old = df$p_old,
@@ -474,16 +479,75 @@ pltdf <-
       str_detect(Supply, "demand") ~ "Demand",
       TRUE ~ "Market Supply"
     ),
-    market_price = str_c("$", market_price)
+    market_price = str_c("$", market_price),
+    market = "High Quality"
   )
 
+## Low Quality
+df <- tibble(q = seq(from = 1, to = 40)) |>
+  mutate(
+    p_supply = 35 + q * 5,
+    p_demand = 250 - q * 5,
+    market = "Low Quality",
+    restrictions = "0%"
+  )
+
+market_price <- df |> 
+  filter(abs(p_supply - p_demand) == min(abs(p_supply - p_demand))) |> 
+  pull(p_supply) |> head(1)
+
+df$market_price <- market_price
+
+df_full_restrictions <- tibble(
+  q = df$q,
+  p_supply = 75 + q * 5,
+  p_demand =  350 - q * 5,
+  restrictions = "100%",
+  market = "Low Quality"
+)
+
+market_price <- df_full_restrictions |> 
+  filter(abs(p_supply - p_demand) == min(abs(p_supply - p_demand))) |> 
+  pull(p_supply) |> head(1)
+
+df_full_restrictions$market_price <- market_price
+
+df_restriction_quarter <- tibble(
+  q = df$q,
+  p_supply = 50 + q * 5,
+  p_demand =  300 - q * 5,
+  restrictions = "25%",
+  market = "Low Quality"
+)
+
+market_price <- df_restriction_quarter |> 
+  filter(abs(p_supply - p_demand) == min(abs(p_supply - p_demand))) |> 
+  pull(p_supply) |> 
+  head(1)
+
+df_restriction_quarter$market_price <- market_price
+  
+
+pltdf <- bind_rows(df, df_full_restrictions, df_restriction_quarter) |> 
+   gather(contains("p_"), key = "Supply", value = "Price") |> 
+   mutate(cat = case_when(
+      str_detect(Supply, "demand") ~ "Demand",
+      TRUE ~ "Supply"
+    )) |> 
+  rbind(pltdf) |> 
+  mutate(market_quantity = if_else(market_price == Price, q, 0)) |> 
+  group_by(market, restrictions) |> 
+  mutate(market_quantity = max(market_quantity)) |> 
+  ungroup()
+         
 
 anim <- pltdf |>
   ggplot(aes(x = q, y = Price, color = cat)) +
   geom_line() +
   scale_y_continuous(labels = scales::dollar) +
   xlab("Quantity") +
-  ylab("Price") +
+  ylab("Price") + 
+  facet_wrap(~market) +
   transition_states(restrictions, transition_length = 2, state_length = 2) +
   labs(
     title = "Housing Supply",
