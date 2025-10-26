@@ -23,43 +23,163 @@ categories:
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(haven)
 library(tidyverse)
-library(patchwork)
-library(tidycensus)
+library(sf)
+library(srvyr)
+library(survey)
 theme_set(theme_bw() +
   theme(
     text = element_text(size = 20),
     strip.background = element_blank(),
     legend.title = element_blank()
   ))
-here::i_am("_posts/2025-08-09-housing-economics/housing-economics.Rmd")
-data_path <- here::here("_posts/2025-08-09-housing-economics/data")
+here::i_am("_posts/2025-09-07-housing-economics-2/housing-economics-2.Rmd")
+data_path <- here::here("_posts/2025-09-07-housing-economics-2/data")
+# Mapping data brought from 
+# https://www.nhgis.org/1980-block-boundaries
 # Wharton Residential Land use index sourced from
 # https://real-faculty.wharton.upenn.edu/gyourko/land-use-survey/
 ```
 
+
 # From Theory To Practice
 
-In the first post of this series examining housing markets, we explored the 
+In the first post of this series examining housing markets, we explored the
 theory underlying housing markets including how houses filter from higher cost
-markets to lower, as well as the impact on the market price when the 
+markets to lower, as well as the impact on the market price when the
 construction of new housing is restricted. In this post we're going to examine
-[@glaeser2018economic] which looks to understand how the cost of constructing a
-new house relates to the observed market price.
+[@glaeser2018economic] which examines the following 3 high level ideas in
+detail in the US economy:
 
-The authors want to understand how much it costs to construct a house *because*
-if the cost of construction is roughly the price at which the house sells then
-the market can be said to be operating efficiently. 
+Are housing markets -- housing supply specifically -- operating efficiently?
+Spoiler, they’re not. What might explain the lack of efficiency in (1)? What are
+the broader consequences of this lack of efficiency across the economy?
 
-<aside> 
-You can read more about the underlying principle behind this idea
-[here](https://en.wikipedia.org/wiki/Marginal_revenue#Marginal_revenue_curve_and_marginal_cost_curve).
-</aside>
+We’ll work through each of these piece by piece and deconstruct the author’s
+arguments, digging into the author’s data and methods for each question.
 
-If the house price is not close to the construction price, then there must be
-some other factor that explains the gap. To investigate one possible source, 
-the authors examine the extent to which increased regulation corresponds to 
-increases in prices across different US Housing markets.
+# Housing Market Efficiency
 
+The authors start their paper by asking whether housing markets are operating
+efficiently. While there might be a number of ways to try and identify how this
+might be the case, the authors decide to focus on finding out how much it costs
+to construct a new house. The reason they start with this amount is because the
+cost of construction can be compared to the market price as a measure of the
+market’s efficiency. This speaks to a fundamental economic principle but one
+that the authors can take for granted that their econ savvy reader will
+understand. While I’m not as certain of my readership’s economic literacy, I
+don’t want to spend too much time on this concept, so if you’re unfamiliar
+with this idea I’d suggest reading this Wikipedia article and/or watching this
+khan academy video.
+
+In order to come up with a production cost, the authors put together the
+following model consisting of 3 quantities:
+
+The land value the house will reside on (L) The cost of constructing the house
+on the land (CC) The profit needed to compensate the construction firm for
+building the house (EP)
+
+These three components combine to define the minimum profitable production cost
+(MPPC) in the following manner:
+
+$$ 
+MPPC = (L + CC)EP,
+$$
+
+Where EP is defined as some scalar inflation factor, $EP > 1$, so that if
+$EP=1$, there’s no profit and any value above represents the additional portion
+of the cost that returns to the firm.
+
+To fill in this equation the authors take the following strategy:
+
+1.  Using a rule of thumb from an “ad-hoc survey” of home builders, the authors
+    assume $L \leq .2 (L +CC) \iff   L .25 CC$
+2.  Physical construction costs are taken from a company – R.S. Means – which
+    compiles data on the physical construction costs for different types of
+    housing units across several US housing markets.
+      - An “economy-quality home” construction costs are \~ 140K for a 2K sq.
+        ft. home. In cheaper markets, 180K in more expensive markets.
+      - These costs haven’t changed much over time.
+3.  The authors assume $EP = 1.17$ in their calculations based on the assumption
+    that the gross profit margin ranges from 9-11% / year. Further assuming that
+    this profit margin represents \~60% of the total margin, the authors arrive
+    at $EP = 1.17 = 1 + 1% / 60%$
+
+Putting this together, the authors determine that an “efficient” housing market
+should be able to supply an 2000 sq. ft. “economy” house for \~
+\$200K in a low construction cost market and \~ \$265K in the higher construction
+cost markets.
+
+
+## Comparing MPCC TO Observed Housing Prices
+
+```{r}
+#| label: load-american-housing-survey
+
+# TODO: need to find a way to map to geo-setting, CMSA / SMSA are old
+# ahs <- read_sas(file.path(data_path, "AHS_yearly/2005/ahs2005n.sas7bdat")) |>
+#   select(CPRICE, LPRICE, contains("REPWGT"), REGION, METRO3, CMSA, SMSA) |>
+#   rename(
+#     CurrentPrice = "CPRICE",
+#     LandPrice = "LPRICE",
+#     CensusRegion = "REGION",
+#     Metro = "METRO3",
+#   ) |>
+#   as_survey_design(weight = WGT90GEO)
+
+
+tiles <- sf::read_sf(file.path(data_path, "US_block_1980/US_block_1980.shp"))
+smsa_code <- readxl::read_xlsx(file.path(data_path, "nhgis_1980_block_shapefile_coverage.xlsx"))
+
+# used 1980 block boundaries recreated at nhghis.org to get mappings
+# can't make data publicly available
+
+ahs_13 <- read_sas(file.path(data_path, "AHS_yearly/2013/ahs2013n.sas7bdat")) |>
+  select(CPRICE, LPRICE, contains("REPWGT"), SMSA) |>
+  rename(
+    CurrentPrice = "CPRICE",
+    LandPrice = "LPRICE"
+  ) |>
+  survey::svrepdesign(
+    repweights = "REPWGT*",
+    type = "Fay",
+    rho = (1 - 1 / sqrt(4)),
+    mse = TRUE,
+    data = _
+  )
+
+ahs_23 <- read_sas(file.path(data_path, "AHS_yearly/2023/ahs2023n.sas7bdat")) |>
+  select(CPRICE, LPRICE, contains("REPWGT"), REGION, METRO3, CMSA, SMSA) |>
+  rename(
+    CurrentPrice = "CPRICE",
+    LandPrice = "LPRICE",
+    CensusRegion = "REGION",
+    Metro = "METRO3",
+  ) |>
+  as_survey_rep(
+    repweights = starts_with("REPWGT"),
+    type = "Fay",
+    rho = (1 - 1 / sqrt(4)),
+    mse = TRUE
+  )
+```
+
+```{r}
+# Bug here in svyby / svrepdesign code
+svyby(~LandPrice + CurrentPrice, ~ SMSA, design = ahs_13, svymean)
+ahs_13 |>
+  group_by(SMSA) |>
+  summarize(
+    across(contains("Price"), ~ survey_mean(.x, na.rm = TRUE, vartype = "ci"))
+  ) |>
+  left_join(smsa_code, by = c("SMSA" = "SMSA CODE")) |> 
+  left_join(tiles, by = c(""))
+```
+
+
+<transition paragraph>
+Since, if the house price is not close to the construction price, then there must be some other factor that explains the gap. To investigate one possible source, the authors examine the extent to which increased regulation corresponds to increases in prices across different US Housing markets.
+
+## Housing Supply Regulatory Environment
 
 ```{r}
 #| label: wharton-reg-index
@@ -69,17 +189,20 @@ land_reg <- read_dta(file.path(
 )) |>
   mutate(year = 2008) |>
   select(year, msaname99, state, weight, WRLURI)
+
+land_reg_20 <- read_dta(file.path(data_path, "WRLURI_01_15_2020.dta")) |>
+  mutate(year = 2020) |>
+  select(year, contains("msa"), state, contains("weight"), contains("WRLURI"))
 ```
 
-```{r}
-#| label: american-housing-survey
-#| eval: FALSE
-ahs <- read_sas(file.path(data_path, "ahs2007n.sas7bdat")) |>
-  select(CPRICE, LPRICE, contains("REPWGT"), REGION, METRO3, CMSA, SMSA) |>
-  rename(
-    CurrentPrice = "CPRICE",
-    LandPrice = "LPRICE",
-    CensusRegion = "REGION",
-    Metro = "METRO3"
-  )
-```
+## Broader Implications
+
+2 descriptive implications:
+
+Patterns in household wealth
+Older generations hold on to wealth at the expense of newer generations
+Patterns in relocation – moving households from one area to the other
+
+1 normative implication
+
+Authors argue that the Implicit tax on development is higher than negative externalities associated with density / new construction - need for new housing
