@@ -134,21 +134,22 @@ smsa_code <- readxl::read_xlsx(file.path(data_path, "nhgis_1980_block_shapefile_
 # can't make data publicly available
 
 ahs_13 <- read_sas(file.path(data_path, "AHS_yearly/2013/ahs2013n.sas7bdat")) |>
-  select(CPRICE, LPRICE, contains("REPWGT"), SMSA) |>
+  select(CONTROL, CPRICE, LPRICE, WGT90GEO, contains("REPWGT"), SMSA) |>
   rename(
     CurrentPrice = "CPRICE",
     LandPrice = "LPRICE"
   ) |>
-  survey::svrepdesign(
-    repweights = "REPWGT*",
+  as_survey_rep(
+    repweights = starts_with("REPWGT"),
+    weights = WGT90GEO,
     type = "Fay",
     rho = (1 - 1 / sqrt(4)),
-    mse = TRUE,
-    data = _
+    mse = TRUE
   )
 
+# Maybe use zillow data if I can't get this to work easily
 ahs_23 <- read_sas(file.path(data_path, "AHS_yearly/2023/ahs2023n.sas7bdat")) |>
-  select(CPRICE, LPRICE, contains("REPWGT"), REGION, METRO3, CMSA, SMSA) |>
+  select(CPRICE, LPRICE, contains("REPWEIGHT"), REGION, METRO3, CMSA, SMSA) |>
   rename(
     CurrentPrice = "CPRICE",
     LandPrice = "LPRICE",
@@ -156,22 +157,21 @@ ahs_23 <- read_sas(file.path(data_path, "AHS_yearly/2023/ahs2023n.sas7bdat")) |>
     Metro = "METRO3",
   ) |>
   as_survey_rep(
-    repweights = starts_with("REPWGT"),
+    repweights = starts_with("REPWEIGHT"),
     type = "Fay",
     rho = (1 - 1 / sqrt(4)),
-    mse = TRUE
+    mse = TRUE,
   )
 ```
 
 ```{r}
-# Bug here in svyby / svrepdesign code
-svyby(~LandPrice + CurrentPrice, ~ SMSA, design = ahs_13, svymean)
 ahs_13 |>
   group_by(SMSA) |>
   summarize(
-    across(contains("Price"), ~ survey_mean(.x, na.rm = TRUE, vartype = "ci"))
+    lprice = survey_mean(LandPrice, vartype = "ci", na.rm = TRUE)
+    # across(contains("Price"), ~ survey_mean(.x, na.rm = TRUE, vartype = "ci"))
   ) |>
-  left_join(smsa_code, by = c("SMSA" = "SMSA CODE")) |> 
+  left_join(smsa_code, by = c("SMSA" = "SMSA Code")) |> 
   left_join(tiles, by = c(""))
 ```
 
@@ -205,4 +205,5 @@ Patterns in relocation – moving households from one area to the other
 
 1 normative implication
 
-Authors argue that the Implicit tax on development is higher than negative externalities associated with density / new construction - need for new housing
+Authors argue that the Implicit tax on development is higher than negative
+externalities associated with density / new construction - need for new housing
