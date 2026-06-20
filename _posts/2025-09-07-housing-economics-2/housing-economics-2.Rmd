@@ -5,7 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.com/
-date: 9-01-2025
+date: 7-01-2026
 draft: true
 output: 
   distill::distill_article:
@@ -32,9 +32,12 @@ theme_set(theme_bw() +
     strip.background = element_blank(),
     legend.title = element_blank()
   ))
+library(knitr)
 here::i_am("_posts/2025-09-07-housing-economics-2/housing-economics-2.Rmd")
 data_path <- here::here("_posts/2025-09-07-housing-economics-2/data")
-# Mapping data brought from 
+# Cost model + AHS loader helpers (Glaeser & Gyourko replication).
+source(here::here("_posts/2025-09-07-housing-economics-2/R/housing_helpers.R"))
+# Mapping data brought from
 # https://www.nhgis.org/1980-block-boundaries
 # Wharton Residential Land use index sourced from
 # https://real-faculty.wharton.upenn.edu/gyourko/land-use-survey/
@@ -50,9 +53,11 @@ construction of new housing is restricted. In this post we're going to examine
 [@glaeser2018economic] which examines the following 3 high level ideas in
 detail in the US economy:
 
-Are housing markets -- housing supply specifically -- operating efficiently?
-Spoiler, they’re not. What might explain the lack of efficiency in (1)? What are
-the broader consequences of this lack of efficiency across the economy?
+1.  Are housing markets -- housing supply specifically -- operating efficiently?
+    Spoiler, they’re not.
+2.  What might explain the lack of efficiency in (1)?
+3.  What are the broader consequences of this lack of efficiency across the
+    economy?
 
 We’ll work through each of these piece by piece and deconstruct the author’s
 arguments, digging into the author’s data and methods for each question.
@@ -110,87 +115,183 @@ should be able to supply an 2000 sq. ft. “economy” house for \~
 cost markets.
 
 
-## Comparing MPCC TO Observed Housing Prices
+## Comparing MPPC to Observed Housing Prices
+
+The authors compare prices to costs by computing, for every single-family home, the
+ratio of its market value to its minimum profitable production cost. This ratio is
+essentially **Tobin's q for housing**: a value below 1 means the home is worth less
+than it would cost to rebuild (so it would not pay to replace it), while a value
+above 1 signals some barrier to new construction -- in their interpretation, mostly
+regulation. They sort homes into four bins: a ratio of 0.75 or less (priced well
+below cost), 0.75--1.25 (roughly at cost), 1.25--2, and greater than 2 (more than
+double production cost).
+
+Their price data come from the micro records of the **American Housing Survey
+(AHS)**, which from 1985--2013 reports each unit's self-assessed value, its living
+area in square feet, whether it is single-family detached, and its metropolitan
+area. The square footage matters because it lets them match each home to the R.S.
+Means construction cost for a home of that size. R.S. Means is a proprietary data
+product, so here we substitute the cost figures the paper itself quotes -- an
+economy-quality home running from roughly \$66 to \$85 per square foot (in constant
+2010 dollars) -- applied nationally rather than market by market. Our absolute
+shares therefore differ from the paper; the pattern over time is what we are after.
 
 ```{r}
-#| label: load-american-housing-survey
-
-# TODO: need to find a way to map to geo-setting, CMSA / SMSA are old
-# ahs <- read_sas(file.path(data_path, "AHS_yearly/2005/ahs2005n.sas7bdat")) |>
-#   select(CPRICE, LPRICE, contains("REPWGT"), REGION, METRO3, CMSA, SMSA) |>
-#   rename(
-#     CurrentPrice = "CPRICE",
-#     LandPrice = "LPRICE",
-#     CensusRegion = "REGION",
-#     Metro = "METRO3",
-#   ) |>
-#   as_survey_design(weight = WGT90GEO)
-
-
-tiles <- sf::read_sf(file.path(data_path, "US_block_1980/US_block_1980.shp"))
-smsa_code <- readxl::read_xlsx(file.path(data_path, "nhgis_1980_block_shapefile_coverage.xlsx"))
-
-# used 1980 block boundaries recreated at nhghis.org to get mappings
-# can't make data publicly available
-
-ahs_13 <- read_sas(file.path(data_path, "AHS_yearly/2013/ahs2013n.sas7bdat")) |>
-  select(CONTROL, CPRICE, LPRICE, WGT90GEO, contains("REPWGT"), SMSA) |>
-  rename(
-    CurrentPrice = "CPRICE",
-    LandPrice = "LPRICE"
-  ) |>
-  as_survey_rep(
-    repweights = starts_with("REPWGT"),
-    weights = WGT90GEO,
-    type = "Fay",
-    rho = (1 - 1 / sqrt(4)),
-    mse = TRUE
-  )
-
-# Maybe use zillow data if I can't get this to work easily
-ahs_23 <- read_sas(file.path(data_path, "AHS_yearly/2023/ahs2023n.sas7bdat")) |>
-  select(CPRICE, LPRICE, contains("REPWEIGHT"), REGION, METRO3, CMSA, SMSA) |>
-  rename(
-    CurrentPrice = "CPRICE",
-    LandPrice = "LPRICE",
-    CensusRegion = "REGION",
-    Metro = "METRO3",
-  ) |>
-  as_survey_rep(
-    repweights = starts_with("REPWEIGHT"),
-    type = "Fay",
-    rho = (1 - 1 / sqrt(4)),
-    mse = TRUE,
-  )
+#| label: ahs-load
+# Compact extract built once by R/build_ahs_extract.R (reads the multi-GB SAS
+# files, filters to single-family detached owner-occupied units, computes the
+# q-ratio). Re-run that script if the underlying AHS data changes.
+ahs <- readRDS(file.path(data_path, "ahs_extract.rds"))
+smsa_xw <- load_smsa_crosswalk(data_path)
 ```
 
 ```{r}
-ahs_13 |>
-  group_by(SMSA) |>
-  summarize(
-    lprice = survey_mean(LandPrice, vartype = "ci", na.rm = TRUE)
-    # across(contains("Price"), ~ survey_mean(.x, na.rm = TRUE, vartype = "ci"))
-  ) |>
-  left_join(smsa_code, by = c("SMSA" = "SMSA Code")) |> 
-  left_join(tiles, by = c(""))
+#| label: ahs-table1
+# Table 1: weighted distribution of the price-to-cost ratio across all micro obs.
+tab1 <- ahs |>
+  as_survey_design(weights = weight) |>
+  group_by(year, qbin) |>
+  summarise(share = survey_mean(), .groups = "drop") |>
+  select(year, qbin, share) |>
+  pivot_wider(names_from = qbin, values_from = share)
+
+tab1 |>
+  mutate(across(-year, ~scales::percent(.x, accuracy = 0.1))) |>
+  kable(caption = "Table 1. Distribution of single-family homes by price-to-cost ratio (weighted micro data).")
 ```
 
+As in the paper, most homes sit near or below production cost, and the share of
+"expensive" homes (ratios above 1.25) swells during the mid-2000s boom and then
+collapses after the financial crisis: the share priced at more than double cost
+peaks around 2005--2007 and falls sharply by 2013.
 
-<transition paragraph>
-Since, if the house price is not close to the construction price, then there must be some other factor that explains the gap. To investigate one possible source, the authors examine the extent to which increased regulation corresponds to increases in prices across different US Housing markets.
+```{r}
+#| label: ahs-table2
+# Table 2: distribution of metro-level MEDIAN ratios, markets with >= 25 obs.
+metro_med <- ahs |>
+  group_by(year, smsa) |>
+  filter(n() >= 25) |>
+  summarise(med_ratio = median(ratio), .groups = "drop") |>
+  mutate(qbin = q_bin(med_ratio))
+
+tab2 <- metro_med |>
+  group_by(year) |>
+  mutate(n_markets = n()) |>
+  count(year, n_markets, qbin) |>
+  group_by(year) |>
+  mutate(share = n / sum(n)) |>
+  ungroup() |>
+  select(year, n_markets, qbin, share) |>
+  pivot_wider(names_from = qbin, values_from = share, values_fill = 0)
+
+tab2 |>
+  mutate(across(c(-year, -n_markets), ~scales::percent(.x, accuracy = 0.1))) |>
+  kable(caption = "Table 2. Distribution of metro areas by median price-to-cost ratio (>= 25 obs).")
+```
+
+Looking at metropolitan medians rather than individual homes tells the same story
+with less noise. In 1985 essentially no market had a typical home worth more than
+double its production cost; by the 2005--2007 peak a meaningful minority did; and by
+2013 roughly a third of markets had median values below 0.75 -- places where, on our
+cost assumptions, it would not pay to build.
+
+### A Zillow cross-check
+
+The AHS series ends in 2013 (the survey was redesigned afterward, dropping
+continuous square footage). To extend the picture we repeat the exercise with
+Zillow's Home Value Index for a typical 3-bedroom home, treating it as roughly an
+1,800 square-foot economy unit and dividing by the same production-cost model. This
+trades the AHS's per-unit size detail for far broader market coverage, so its levels
+run lower -- but the cycle is unmistakable.
+
+```{r}
+#| label: zillow-q
+zhvi <- read_csv(file.path(data_path,
+  "zillow data/Metro_zhvi_bdrmcnt_3_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv"),
+  show_col_types = FALSE)
+
+zq <- zhvi |>
+  filter(RegionType == "msa") |>
+  pivot_longer(matches("^[0-9]{4}-"), names_to = "date", values_to = "zhvi") |>
+  mutate(year = as.integer(str_sub(date, 1, 4)),
+         month = as.integer(str_sub(date, 6, 7))) |>
+  filter(month == 12, !is.na(zhvi)) |>
+  mutate(mppc = mppc(1800, year, "economy"),
+         ratio = zhvi / mppc,
+         qbin = q_bin(ratio))
+
+zq |>
+  count(year, qbin) |>
+  group_by(year) |>
+  mutate(share = n / sum(n)) |>
+  ungroup() |>
+  ggplot(aes(year, share, fill = qbin)) +
+  geom_area() +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_brewer(palette = "RdYlBu", direction = -1) +
+  labs(x = NULL, y = "Share of metros",
+       title = "Metro price-to-cost ratios over time",
+       subtitle = "Zillow 3-bed ZHVI used as reference")
+```
+
+The boom into 2006, the post-crisis collapse, and the renewed run-up after 2012 all
+show through -- the same dynamics the AHS reveals through 2013, now carried to the
+present.
+
+The same ratio mapped across counties shows how concentrated high price-to-cost
+values are: the coasts and a handful of mountain-west markets stand well above
+production cost, while much of the interior sits at or below it.
+
+```{r}
+#| label: zillow-county-map
+#| fig.height: 5
+county_zhvi <- read_csv(file.path(data_path,
+  "zillow data/County_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv"),
+  show_col_types = FALSE)
+map_month <- tail(grep("^[0-9]{4}-", names(county_zhvi), value = TRUE), 1)
+map_year  <- as.integer(str_sub(map_month, 1, 4))
+
+county_q <- county_zhvi |>
+  transmute(
+    GEOID = paste0(str_pad(StateCodeFIPS, 2, pad = "0"),
+                   str_pad(MunicipalCodeFIPS, 3, pad = "0")),
+    zhvi  = .data[[map_month]]
+  ) |>
+  filter(!is.na(zhvi)) |>
+  mutate(ratio = zhvi / mppc(1800, map_year, "economy"),
+         qbin  = q_bin(ratio))
+
+counties <- read_sf(file.path(data_path,
+  "cb_2018_us_county_500k/cb_2018_us_county_500k.shp")) |>
+  filter(!STATEFP %in% c("02", "15", "60", "66", "69", "72", "78")) |>  # contiguous US
+  left_join(county_q, by = "GEOID")
+
+ggplot(counties) +
+  geom_sf(aes(fill = qbin), color = NA) +
+  scale_fill_brewer(palette = "RdYlBu", direction = -1, na.value = "grey90") +
+  coord_sf(crs = 5070) +
+  labs(title = paste0("County price-to-cost ratio, ", map_month),
+       fill = NULL) +
+  theme_void() + theme(text = element_text(size = 16))
+```
+
+Since, if the house price is not close to the construction price, then there must be
+some other factor that explains the gap. To investigate one possible source, the
+authors examine the extent to which increased regulation corresponds to increases in
+prices across different US housing markets.
 
 ## Housing Supply Regulatory Environment
 
 ```{r}
 #| label: wharton-reg-index
-land_reg <- read_dta(file.path(
-  data_path,
-  "WHARTON LAND REGULATION DATA_1_24_2008.dta"
-)) |>
-  mutate(year = 2008) |>
-  select(year, msaname99, state, weight, WRLURI)
+# land_reg <- read_dta(file.path(
+#   data_path,
+#   "WHARTON LAND REGULATION DATA_1_24_2008.dta"
+# )) |>
+#   mutate(year = 2008) |>
+#   select(year, msaname99, state, weight, WRLURI)
 
-land_reg_20 <- read_dta(file.path(data_path, "WRLURI_01_15_2020.dta")) |>
+land_reg_20 <- read_dta(file.path(data_path, "Wharton Data/WRLURI_01_15_2020.dta")) |>
   mutate(year = 2020) |>
   select(year, contains("msa"), state, contains("weight"), contains("WRLURI"))
 ```
