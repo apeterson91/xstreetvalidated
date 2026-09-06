@@ -17,6 +17,9 @@ creative_commons: CC BY
 bibliography: housing.bib
 categories:
   - Urban Economics
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r libraries, include=FALSE}
@@ -43,98 +46,100 @@ source(here::here("_posts/2025-09-07-housing-economics-2/R/housing_helpers.R"))
 # https://real-faculty.wharton.upenn.edu/gyourko/land-use-survey/
 ```
 
-
 # From Theory To Practice
 
-In the first post of this series examining housing markets, we explored the
-theory underlying housing markets including how houses filter from higher cost
-markets to lower, as well as the impact on the market price when the
-construction of new housing is restricted. In this post we're going to examine
-[@glaeser2018economic] which examines the following 3 high level ideas in
-detail in the US economy:
+In the first post of this series examining housing markets, we explored
+the theory underlying housing markets including how houses filter from
+higher cost markets to lower, as well as the impact on the market price
+when the construction of new housing is restricted. In this post we're
+going to examine [@glaeser2018economic] which examines the following 3
+high level ideas in detail in the US economy:
 
-1.  Are housing markets -- housing supply specifically -- operating efficiently?
-    Spoiler, they’re not.
+1.  Are housing markets -- housing supply specifically -- operating
+    efficiently? Spoiler, they're not.
 2.  What might explain the lack of efficiency in (1)?
-3.  What are the broader consequences of this lack of efficiency across the
-    economy?
+3.  What are the broader consequences of this lack of efficiency across
+    the economy?
 
-We’ll work through each of these piece by piece and deconstruct the author’s
-arguments, digging into the author’s data and methods for each question.
+We'll work through each of these piece by piece and deconstruct the
+author's arguments, digging into the author's data and methods for each
+question.
 
 # Housing Market Efficiency
 
 The authors start their paper by asking whether housing markets are operating
-efficiently. While there might be a number of ways to try and identify how this
-might be the case, the authors decide to focus on finding out how much it costs
-to construct a new house. The reason they start with this amount is because the
-cost of construction can be compared to the market price as a measure of the
-market’s efficiency. This speaks to a fundamental economic principle but one
-that the authors can take for granted that their econ savvy reader will
-understand. While I’m not as certain of my readership’s economic literacy, I
-don’t want to spend too much time on this concept, so if you’re unfamiliar
-with this idea I’d suggest reading this Wikipedia article and/or watching this
-khan academy video.
+efficiently. The authors specific method to answer this question uses the cost
+of construction compared to the market price. This speaks to a fundamental
+economic principle but one that the authors can take for granted that their econ
+savvy reader will understand. While I'm not as certain of my readership's
+economic literacy, I don't want to spend too much time on this concept, so if
+you're unfamiliar with this idea I'd suggest reading this Wikipedia
+[article](https://en.wikipedia.org/wiki/Competition_\(economics\)#Perfect_competition)
+and/or this khan academy
+[piece](https://www.khanacademy.org/economics-finance-domain/microeconomics/perfect-competition-topic/perfect-competition/a/perfect-competition-and-why-it-matters-cnx).
 
 In order to come up with a production cost, the authors put together the
 following model consisting of 3 quantities:
 
-The land value the house will reside on (L) The cost of constructing the house
-on the land (CC) The profit needed to compensate the construction firm for
-building the house (EP)
+The land value the house will reside on (L) The cost of constructing the
+house on the land (CC) The profit needed to compensate the construction
+firm for building the house (EP)
 
-These three components combine to define the minimum profitable production cost
-(MPPC) in the following manner:
+These three components combine to define the minimum profitable
+production cost (MPPC) in the following manner:
 
 $$ 
 MPPC = (L + CC)EP,
 $$
 
-Where EP is defined as some scalar inflation factor, $EP > 1$, so that if
-$EP=1$, there’s no profit and any value above represents the additional portion
-of the cost that returns to the firm.
+Where EP is defined as some scalar inflation factor, $EP > 1$, so that
+if $EP=1$, there's no profit and any value above represents the
+additional portion of the cost that returns to the firm.
 
 To fill in this equation the authors take the following strategy:
 
-1.  Using a rule of thumb from an “ad-hoc survey” of home builders, the authors
-    assume $L \leq .2 (L +CC) \iff   L .25 CC$
-2.  Physical construction costs are taken from a company – R.S. Means – which
-    compiles data on the physical construction costs for different types of
-    housing units across several US housing markets.
-      - An “economy-quality home” construction costs are \~ 140K for a 2K sq.
-        ft. home. In cheaper markets, 180K in more expensive markets.
-      - These costs haven’t changed much over time.
-3.  The authors assume $EP = 1.17$ in their calculations based on the assumption
-    that the gross profit margin ranges from 9-11% / year. Further assuming that
-    this profit margin represents \~60% of the total margin, the authors arrive
-    at $EP = 1.17 = 1 + 1% / 60%$
+1.  Using a rule of thumb from an "ad-hoc survey" of home builders, the authors
+    assume $L \leq .2 (L +CC) \iff L .25 CC$
+2.  Physical construction costs are taken from a company -- [R.S.
+    Means](https://www.rsmeans.com/?srsltid=AfmBOopn2waitkQ0_5LwatHT5pHZIUorFAWiF2gMAyhx6xN-kbW-mw7H)
+    -- which compiles data on the physical construction costs for
+    different types of housing units across several US housing markets.
+    -   An "economy-quality home" construction costs are \~ 140K for a
+        2K sq. ft. home. In cheaper markets, 180K in more expensive
+        markets.
+    -   According to the authors, these costs haven't changed much over time.
+3.  The authors assume $EP = 1.17$ in their calculations based on the
+    assumption that the gross profit margin ranges from 9-11% / year.
+    Further assuming that this profit margin represents \~60% of the
+    total margin, the authors arrive at $EP = 1.17 = \frac{1 + 1%}{60\%}$
 
-Putting this together, the authors determine that an “efficient” housing market
-should be able to supply an 2000 sq. ft. “economy” house for \~
-\$200K in a low construction cost market and \~ \$265K in the higher construction
-cost markets.
-
+Putting this together, the authors determine that an "efficient" housing
+market should be able to supply an 2000 sq. ft. "economy" house for \~
+\$200K in a low construction cost market and \~ \$265K in the higher
+construction cost markets.
 
 ## Comparing MPPC to Observed Housing Prices
 
-The authors compare prices to costs by computing, for every single-family home, the
-ratio of its market value to its minimum profitable production cost. This ratio is
-essentially **Tobin's q for housing**: a value below 1 means the home is worth less
-than it would cost to rebuild (so it would not pay to replace it), while a value
-above 1 signals some barrier to new construction -- in their interpretation, mostly
-regulation. They sort homes into four bins: a ratio of 0.75 or less (priced well
-below cost), 0.75--1.25 (roughly at cost), 1.25--2, and greater than 2 (more than
+The authors compare prices to costs by computing, for every single-family home,
+the ratio of its market value to its minimum profitable production cost. This
+ratio is essentially **[Tobin's q](https://en.wikipedia.org/wiki/Tobin%27s_q)
+for housing**: a value below 1 means the home is worth less than it would cost
+to rebuild (so it would not pay to replace it), while a value above 1 signals
+some barrier to new construction -- in their interpretation, mostly regulation.
+They sort homes into four bins: a ratio of 0.75 or less (priced well below
+cost), 0.75--1.25 (roughly at cost), 1.25--2, and greater than 2 (more than
 double production cost).
 
-Their price data come from the micro records of the **American Housing Survey
-(AHS)**, which from 1985--2013 reports each unit's self-assessed value, its living
-area in square feet, whether it is single-family detached, and its metropolitan
-area. The square footage matters because it lets them match each home to the R.S.
-Means construction cost for a home of that size. R.S. Means is a proprietary data
-product, so here we substitute the cost figures the paper itself quotes -- an
-economy-quality home running from roughly \$66 to \$85 per square foot (in constant
-2010 dollars) -- applied nationally rather than market by market. Our absolute
-shares therefore differ from the paper; the pattern over time is what we are after.
+The authors' observed market price data come from the micro records of the
+**American Housing Survey (AHS)**, which from 1985--2013 reports each unit's
+self-assessed value, its living area in square feet, whether it is single-family
+detached, and its metropolitan area. The square footage matters because it lets
+them match each home to the R.S. Means construction cost for a home of that
+size. R.S. Means is a proprietary data product, so here we substitute the cost
+figures the paper itself quotes -- an economy-quality home running from roughly
+\\$66 to \$85 per square foot (in constant 2010 dollars) -- applied nationally
+rather than market by market. Our absolute shares therefore differ from the
+paper; the pattern over time is what we are after.
 
 ```{r}
 #| label: ahs-load
@@ -145,64 +150,150 @@ ahs <- readRDS(file.path(data_path, "ahs_extract.rds"))
 smsa_xw <- load_smsa_crosswalk(data_path)
 ```
 
-```{r}
-#| label: ahs-table1
-# Table 1: weighted distribution of the price-to-cost ratio across all micro obs.
-tab1 <- ahs |>
-  as_survey_design(weights = weight) |>
-  group_by(year, qbin) |>
-  summarise(share = survey_mean(), .groups = "drop") |>
-  select(year, qbin, share) |>
-  pivot_wider(names_from = qbin, values_from = share)
+Rather than recompute this ourselves with a substitute cost series, we use the
+authors' own published results here -- Table 1 of [@glaeser2018economic] --
+since it is exactly the pooled micro-data distribution R.S. Means was built to
+support, and reproducing it with a national cost proxy would only add noise to
+a number the authors have already estimated properly.
 
-tab1 |>
+```{r}
+#| label: ahs-table1-paper
+# Table 1 from Glaeser & Gyourko (2018), "The Economic Implications of Housing
+# Supply," Journal of Economic Perspectives 32(1): 3-30. Transcribed from the
+# published table (biannual AHS waves, 1985-2013).
+tab1_paper <- tribble(
+  ~year, ~`<= 0.75`, ~`0.75 - 1.25`, ~`1.25 - 2`, ~`> 2`,
+  1985,  0.380, 0.405, 0.179, 0.036,
+  1987,  0.334, 0.383, 0.217, 0.066,
+  1989,  0.318, 0.346, 0.203, 0.133,
+  1991,  0.311, 0.353, 0.225, 0.111,
+  1993,  0.318, 0.361, 0.236, 0.085,
+  1995,  0.274, 0.377, 0.265, 0.084,
+  1997,  0.315, 0.400, 0.230, 0.055,
+  1999,  0.220, 0.401, 0.262, 0.118,
+  2001,  0.194, 0.382, 0.252, 0.171,
+  2003,  0.162, 0.321, 0.259, 0.259,
+  2005,  0.180, 0.287, 0.253, 0.280,
+  2007,  0.199, 0.281, 0.240, 0.280,
+  2009,  0.314, 0.339, 0.216, 0.131,
+  2011,  0.374, 0.354, 0.160, 0.112,
+  2013,  0.403, 0.333, 0.162, 0.102
+)
+
+tab1_paper |>
   mutate(across(-year, ~scales::percent(.x, accuracy = 0.1))) |>
-  kable(caption = "Table 1. Distribution of single-family homes by price-to-cost ratio (weighted micro data).")
+  kable(caption = "Table 1. House price-to-minimum profitable production cost ratio (micro data). Source: @glaeser2018economic.")
 ```
-
-As in the paper, most homes sit near or below production cost, and the share of
-"expensive" homes (ratios above 1.25) swells during the mid-2000s boom and then
-collapses after the financial crisis: the share priced at more than double cost
-peaks around 2005--2007 and falls sharply by 2013.
 
 ```{r}
-#| label: ahs-table2
-# Table 2: distribution of metro-level MEDIAN ratios, markets with >= 25 obs.
-metro_med <- ahs |>
-  group_by(year, smsa) |>
-  filter(n() >= 25) |>
-  summarise(med_ratio = median(ratio), .groups = "drop") |>
-  mutate(qbin = q_bin(med_ratio))
+#| label: ahs-table1-area-plot
+#| fig.cap: "Distribution of the price-to-cost ratio over time. Source: @glaeser2018economic, Table 1."
+q_levels <- c("<= 0.75", "0.75 - 1.25", "1.25 - 2", "> 2")
 
-tab2 <- metro_med |>
-  group_by(year) |>
-  mutate(n_markets = n()) |>
-  count(year, n_markets, qbin) |>
-  group_by(year) |>
-  mutate(share = n / sum(n)) |>
-  ungroup() |>
-  select(year, n_markets, qbin, share) |>
-  pivot_wider(names_from = qbin, values_from = share, values_fill = 0)
-
-tab2 |>
-  mutate(across(c(-year, -n_markets), ~scales::percent(.x, accuracy = 0.1))) |>
-  kable(caption = "Table 2. Distribution of metro areas by median price-to-cost ratio (>= 25 obs).")
+tab1_paper |>
+  pivot_longer(-year, names_to = "qbin", values_to = "share") |>
+  mutate(qbin = factor(qbin, levels = rev(q_levels))) |>
+  ggplot(aes(year, share, fill = qbin)) +
+  geom_area() +
+  scale_x_continuous(breaks = tab1_paper$year) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_brewer(palette = "RdYlBu") +
+  labs(x = NULL, y = "Share of homes",
+       title = "House price-to-cost ratio, 1985-2013") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-Looking at metropolitan medians rather than individual homes tells the same story
-with less noise. In 1985 essentially no market had a typical home worth more than
-double its production cost; by the 2005--2007 peak a meaningful minority did; and by
-2013 roughly a third of markets had median values below 0.75 -- places where, on our
-cost assumptions, it would not pay to build.
+The area plot makes the cycle the authors describe easy to see at a glance.
+The top band -- homes valued at more than double their production cost --
+is thin in the mid-1980s, thickens steadily through the 1990s, and by
+2003--2007 has swollen to more than a quarter of all owner-occupied
+single-family homes in the sample, right alongside the top of the housing
+boom. It then collapses just as sharply after the financial crisis, falling
+back below 15 percent by 2011--2013. The bottom band tells the mirror-image
+story: the share of homes priced at or below three-quarters of production
+cost bottoms out during the same 2001--2007 window before rebounding to its
+highest level in the series by 2013. In other words, the market swings from
+a large majority of homes priced near or below cost in the 1980s and early
+1990s, to a market where a rising share of homes command prices well above
+what it would cost to build them from scratch, and back again -- consistent
+with the authors' argument that these swings reflect changes in the
+binding-ness of supply constraints rather than a one-way drift toward
+higher-priced housing.
+
+As with Table 1, we use the authors' published Table 2 directly rather than
+recompute metro-level medians with our substitute cost series. Table 2 looks
+at the *median* price-to-cost ratio within each metro area (markets with at
+least 25 AHS observations that year), which tells the same story as Table 1
+with less noise from unobserved differences in home quality within a market.
+
+```{r}
+#| label: ahs-table2-paper
+# Table 2 from Glaeser & Gyourko (2018), "The Economic Implications of Housing
+# Supply," Journal of Economic Perspectives 32(1): 3-30. Median price-to-cost
+# ratio by metro area (CBSAs with >= 25 AHS observations that year).
+tab2_paper <- tribble(
+  ~year, ~n_msa, ~`<= 0.75`, ~`0.75 - 1.25`, ~`1.25 - 2`, ~`> 2`,
+  1985,  78, 0.372, 0.564, 0.064, 0.000,
+  1987,  72, 0.292, 0.569, 0.139, 0.000,
+  1989,  78, 0.346, 0.500, 0.103, 0.051,
+  1991,  70, 0.243, 0.586, 0.129, 0.043,
+  1993,  78, 0.256, 0.615, 0.115, 0.013,
+  1995,  69, 0.188, 0.681, 0.101, 0.029,
+  1997,  65, 0.138, 0.723, 0.138, 0.000,
+  1999,  68, 0.074, 0.750, 0.147, 0.029,
+  2001,  67, 0.045, 0.701, 0.179, 0.075,
+  2003,  69, 0.043, 0.623, 0.232, 0.101,
+  2005,  65, 0.108, 0.446, 0.277, 0.169,
+  2007,  64, 0.109, 0.406, 0.297, 0.188,
+  2009,  62, 0.258, 0.500, 0.210, 0.032,
+  2011,  64, 0.281, 0.516, 0.156, 0.047,
+  2013,  65, 0.338, 0.508, 0.108, 0.046
+)
+
+tab2_paper |>
+  mutate(across(-c(year, n_msa), ~scales::percent(.x, accuracy = 0.1))) |>
+  kable(caption = "Table 2. House price-to-minimum profitable production cost ratio, median values by CBSA. Source: @glaeser2018economic.")
+```
+
+```{r}
+#| label: ahs-table2-area-plot
+#| fig.cap: "Distribution of metro-median price-to-cost ratios over time. Source: @glaeser2018economic, Table 2."
+tab2_paper |>
+  select(-n_msa) |>
+  pivot_longer(-year, names_to = "qbin", values_to = "share") |>
+  mutate(qbin = factor(qbin, levels = rev(q_levels))) |>
+  ggplot(aes(year, share, fill = qbin)) +
+  geom_area() +
+  scale_x_continuous(breaks = tab2_paper$year) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_brewer(palette = "RdYlBu") +
+  labs(x = NULL, y = "Share of metro areas",
+       title = "Metro-median house price-to-cost ratio, 1985-2013") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Looking at metro medians compresses the extremes a little relative to Table
+1 -- individual home quality differences wash out when we take the median
+within a market -- but the same cycle is unmistakable. In 1985, essentially
+no metro area had a *typical* home worth more than double its production
+cost, and nearly 94 percent of markets clustered at or below the "roughly at
+cost" range. Through the 1990s the top of the distribution creeps up
+steadily, and by 2005--2007 nearly half of all metro areas had a typical
+home priced more than 25 percent above production cost, with close to
+one-fifth of markets more than double cost -- a striking shift from twenty
+years earlier. The reversal after the crisis is just as dramatic: by 2013,
+34 percent of metro areas had typical homes priced at or below three-quarters
+of cost, close to the highest share in the whole series.
 
 ### A Zillow cross-check
 
-The AHS series ends in 2013 (the survey was redesigned afterward, dropping
-continuous square footage). To extend the picture we repeat the exercise with
-Zillow's Home Value Index for a typical 3-bedroom home, treating it as roughly an
-1,800 square-foot economy unit and dividing by the same production-cost model. This
-trades the AHS's per-unit size detail for far broader market coverage, so its levels
-run lower -- but the cycle is unmistakable.
+The AHS series ends in 2013 (the survey was redesigned afterward,
+dropping continuous square footage). To extend the picture we repeat the
+exercise with Zillow's Home Value Index for a typical 3-bedroom home,
+treating it as roughly an 1,800 square-foot economy unit and dividing by
+the same production-cost model. This trades the AHS's per-unit size
+detail for far broader market coverage, so its levels run lower -- but
+the cycle is unmistakable.
 
 ```{r}
 #| label: zillow-q
@@ -234,13 +325,14 @@ zq |>
        subtitle = "Zillow 3-bed ZHVI used as reference")
 ```
 
-The boom into 2006, the post-crisis collapse, and the renewed run-up after 2012 all
-show through -- the same dynamics the AHS reveals through 2013, now carried to the
-present.
+The boom into 2006, the post-crisis collapse, and the renewed run-up
+after 2012 all show through -- the same dynamics the AHS reveals through
+2013, now carried to the present.
 
-The same ratio mapped across counties shows how concentrated high price-to-cost
-values are: the coasts and a handful of mountain-west markets stand well above
-production cost, while much of the interior sits at or below it.
+The same ratio mapped across counties shows how concentrated high
+price-to-cost values are: the coasts and a handful of mountain-west
+markets stand well above production cost, while much of the interior
+sits at or below it.
 
 ```{r}
 #| label: zillow-county-map
@@ -275,36 +367,85 @@ ggplot(counties) +
   theme_void() + theme(text = element_text(size = 16))
 ```
 
-Since, if the house price is not close to the construction price, then there must be
-some other factor that explains the gap. To investigate one possible source, the
-authors examine the extent to which increased regulation corresponds to increases in
-prices across different US housing markets.
+### 3 Markets of Interest
+
+The authors pick out three markets in particular as highlighting the different
+housing dynamics on display in the US: (1) San Francisco, (2) Detroit and (3)
+Atlanta. Each of these illustrate a different dynamic in how policy, supply and
+demand have all interacted to produce different housing prices over time.
+
+We can see this directly in our own AHS extract: rather than pooling every
+metro into a single distribution as Tables 1 and 2 do, we can track the
+price-to-cost ratio for these three markets individually, using short
+abbreviations (SF, DET, ATL) in place of the underlying numeric AHS metro
+codes.
+
+```{r}
+#| label: three-markets-q
+#| fig.cap: "Price-to-cost ratio, three illustrative metros."
+market_abbrev <- tribble(
+  ~smsa, ~metro,
+  "7360", "SF",
+  "2160", "DET",
+  "0520", "ATL"
+)
+
+three_markets <- ahs |>
+  inner_join(market_abbrev, by = "smsa") |>
+  group_by(year, metro) |>
+  summarise(median_ratio = median(ratio), n = n(), .groups = "drop")
+
+three_markets |>
+  ggplot(aes(year, median_ratio, color = metro)) +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "grey50") +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(x = NULL, y = "Median price-to-cost ratio", color = NULL,
+       title = "San Francisco, Detroit, and Atlanta over time")
+```
+
+San Francisco sits well above the cost line in every year we observe, and
+climbs further still through the 2000s -- a market where, per the authors'
+argument, persistent regulatory constraints keep prices detached from
+production cost regardless of the cycle. Detroit and Atlanta, by contrast,
+track close to (or below) a ratio of 1 throughout, consistent with the
+authors' description of these as more supply-elastic markets where prices
+cannot stray far from cost before new construction pulls them back down.
+
+In the more expensive markets like San Francisco and the rest of the coastal
+areas, the authors explore other factors that may explain the gap between
+construction cost and housing market price. One possible source,
+increased regulation comes into the spotlight in particular.
 
 ## Housing Supply Regulatory Environment
 
 ```{r}
 #| label: wharton-reg-index
-# land_reg <- read_dta(file.path(
-#   data_path,
-#   "WHARTON LAND REGULATION DATA_1_24_2008.dta"
-# )) |>
-#   mutate(year = 2008) |>
-#   select(year, msaname99, state, weight, WRLURI)
+land_reg <- read_dta(file.path(
+  data_path,
+  "Wharton Data/WHARTON LAND REGULATION DATA_1_24_2008.dta"
+)) |>
+  mutate(year = 2008) |>
+  select(year, state, weight, WRLURI)
+
 
 land_reg_20 <- read_dta(file.path(data_path, "Wharton Data/WRLURI_01_15_2020.dta")) |>
   mutate(year = 2020) |>
   select(year, contains("msa"), state, contains("weight"), contains("WRLURI"))
+
+
 ```
 
 ## Broader Implications
 
 2 descriptive implications:
 
-Patterns in household wealth
-Older generations hold on to wealth at the expense of newer generations
-Patterns in relocation – moving households from one area to the other
+Patterns in household wealth: Older generations hold on to wealth at the
+expense of newer generations Patterns in relocation -- moving households
+from one area to the other
 
 1 normative implication
 
-Authors argue that the Implicit tax on development is higher than negative
-externalities associated with density / new construction - need for new housing
+Authors argue that the Implicit tax on development is higher than
+negative externalities associated with density / new construction - need
+for new housing
