@@ -40,10 +40,16 @@ here::i_am("_posts/2025-09-07-housing-economics-2/housing-economics-2.Rmd")
 data_path <- here::here("_posts/2025-09-07-housing-economics-2/data")
 # Cost model + AHS loader helpers (Glaeser & Gyourko replication).
 source(here::here("_posts/2025-09-07-housing-economics-2/R/housing_helpers.R"))
+# Compact tabbed table/chart panel widget (no xaringanExtra dependency).
+source(here::here("_posts/2025-09-07-housing-economics-2/R/panelset.R"))
 # Mapping data brought from
 # https://www.nhgis.org/1980-block-boundaries
 # Wharton Residential Land use index sourced from
 # https://real-faculty.wharton.upenn.edu/gyourko/land-use-survey/
+```
+
+```{r panelset-assets, results='asis'}
+panelset_init()
 ```
 
 # From Theory To Practice
@@ -149,14 +155,9 @@ ahs <- readRDS(file.path(data_path, "ahs_extract.rds"))
 smsa_xw <- load_smsa_crosswalk(data_path)
 ```
 
-Rather than recompute this ourselves with a substitute cost series, we use the
-authors' own published results here -- Table 1 of [@glaeser2018economic] --
-since it is exactly the pooled micro-data distribution R.S. Means was built to
-support, and reproducing it with a national cost proxy would only add noise to
-a number the authors have already estimated properly.
+You can see Table 1 of [@glaeser2018economic] reproduced below. 
 
-```{r}
-#| label: ahs-table1-paper
+```{r ahs-table1-panel, results='asis'}
 # Table 1 from Glaeser & Gyourko (2018), "The Economic Implications of Housing
 # Supply," Journal of Economic Perspectives 32(1): 3-30. Transcribed from the
 # published table (biannual AHS waves, 1985-2013).
@@ -178,18 +179,26 @@ tab1_paper <- tribble(
   2011,  0.374, 0.354, 0.160, 0.112,
   2013,  0.403, 0.333, 0.162, 0.102
 )
-
-tab1_paper |>
-  mutate(across(-year, ~scales::percent(.x, accuracy = 0.1))) |>
-  kable(caption = "Table 1. House price-to-minimum profitable production cost ratio (micro data). Source: @glaeser2018economic.")
-```
-
-```{r}
-#| label: ahs-table1-area-plot
-#| fig.cap: "Distribution of the price-to-cost ratio over time. Source: @glaeser2018economic, Table 1."
 q_levels <- c("<= 0.75", "0.75 - 1.25", "1.25 - 2", "> 2")
 
-tab1_paper |>
+# The citation span below is written out by hand (matching pandoc's own
+# citeproc output exactly) because captions embedded in raw HTML via
+# results='asis' are not run back through pandoc's citation processor.
+cite_gg18 <- '<span class="citation" data-cites="glaeser2018economic">Glaeser and Gyourko (<a href="#ref-glaeser2018economic" role="doc-biblioref">2018</a>)</span>'
+
+tab1_table_caption <- paste0(
+  '<p style="font-size:0.9em;">Table 1. House price-to-minimum profitable production cost ratio (micro data). Source: ',
+  cite_gg18, ".</p>"
+)
+tab1_html <- paste0(
+  tab1_table_caption,
+  tab1_paper |>
+    mutate(across(-year, ~scales::percent(.x, accuracy = 0.1))) |>
+    kable(format = "html") |>  # no caption= here: kable/distill auto-numbers
+    as.character()             # captions, which would double up with ours
+)
+
+tab1_plot <- tab1_paper |>
   pivot_longer(-year, names_to = "qbin", values_to = "share") |>
   mutate(qbin = factor(qbin, levels = rev(q_levels))) |>
   ggplot(aes(year, share, fill = qbin)) +
@@ -200,6 +209,21 @@ tab1_paper |>
   labs(x = NULL, y = "Share of homes",
        title = "House price-to-cost ratio, 1985-2013") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+tab1_img <- panelset_img(
+  tab1_plot,
+  "housing-economics-2_files/figure-html5/ahs-table1-panel-chart-1.png",
+  alt = "Distribution of the price-to-cost ratio over time."
+)
+tab1_caption <- paste0(
+  '<p style="font-size:0.9em;">Distribution of the price-to-cost ratio over time. Source: ',
+  cite_gg18, ", Table 1.</p>"
+)
+
+cat(panelset("ahs-table1", list(
+  Table = tab1_html,
+  Chart = paste0(tab1_img, tab1_caption)
+)))
 ```
 
 The area plot makes the cycle the authors describe easy to see at a glance.
@@ -225,8 +249,7 @@ at the *median* price-to-cost ratio within each metro area (markets with at
 least 25 AHS observations that year), which tells the same story as Table 1
 with less noise from unobserved differences in home quality within a market.
 
-```{r}
-#| label: ahs-table2-paper
+```{r ahs-table2-panel, results='asis'}
 # Table 2 from Glaeser & Gyourko (2018), "The Economic Implications of Housing
 # Supply," Journal of Economic Perspectives 32(1): 3-30. Median price-to-cost
 # ratio by metro area (CBSAs with >= 25 AHS observations that year).
@@ -249,15 +272,19 @@ tab2_paper <- tribble(
   2013,  65, 0.338, 0.508, 0.108, 0.046
 )
 
-tab2_paper |>
-  mutate(across(-c(year, n_msa), ~scales::percent(.x, accuracy = 0.1))) |>
-  kable(caption = "Table 2. House price-to-minimum profitable production cost ratio, median values by CBSA. Source: @glaeser2018economic.")
-```
+tab2_table_caption <- paste0(
+  '<p style="font-size:0.9em;">Table 2. House price-to-minimum profitable production cost ratio, median values by CBSA. Source: ',
+  cite_gg18, ".</p>"
+)
+tab2_html <- paste0(
+  tab2_table_caption,
+  tab2_paper |>
+    mutate(across(-c(year, n_msa), ~scales::percent(.x, accuracy = 0.1))) |>
+    kable(format = "html") |>  # no caption= here: kable/distill auto-numbers
+    as.character()             # captions, which would double up with ours
+)
 
-```{r}
-#| label: ahs-table2-area-plot
-#| fig.cap: "Distribution of metro-median price-to-cost ratios over time. Source: @glaeser2018economic, Table 2."
-tab2_paper |>
+tab2_plot <- tab2_paper |>
   select(-n_msa) |>
   pivot_longer(-year, names_to = "qbin", values_to = "share") |>
   mutate(qbin = factor(qbin, levels = rev(q_levels))) |>
@@ -269,6 +296,21 @@ tab2_paper |>
   labs(x = NULL, y = "Share of metro areas",
        title = "Metro-median house price-to-cost ratio, 1985-2013") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+tab2_img <- panelset_img(
+  tab2_plot,
+  "housing-economics-2_files/figure-html5/ahs-table2-panel-chart-1.png",
+  alt = "Distribution of metro-median price-to-cost ratios over time."
+)
+tab2_caption <- paste0(
+  '<p style="font-size:0.9em;">Distribution of metro-median price-to-cost ratios over time. Source: ',
+  cite_gg18, ", Table 2.</p>"
+)
+
+cat(panelset("ahs-table2", list(
+  Table = tab2_html,
+  Chart = paste0(tab2_img, tab2_caption)
+)))
 ```
 
 Looking at metro medians compresses the extremes a little relative to Table
