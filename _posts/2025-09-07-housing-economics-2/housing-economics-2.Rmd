@@ -123,23 +123,22 @@ construction cost markets.
 The authors compare prices to costs by computing, for every single-family home,
 the ratio of its market value to its minimum profitable production cost. This
 ratio is essentially **[Tobin's q](https://en.wikipedia.org/wiki/Tobin%27s_q)
-for housing**: a value below 1 means the home is worth less than it would cost
-to rebuild (so it would not pay to replace it), while a value above 1 signals
-some barrier to new construction -- in their interpretation, mostly regulation.
-They sort homes into four bins: a ratio of 0.75 or less (priced well below
-cost), 0.75--1.25 (roughly at cost), 1.25--2, and greater than 2 (more than
-double production cost).
+for housing**: 
+  - a value below 1 means the home is worth less than it would cost to rebuild
+    (so it would not pay to replace it),
+  - a value above 1 signals some barrier to new construction -- in their
+    interpretation, mostly regulation.
+    
+The authors sort homes into four bins: a ratio of 0.75 or less (priced well
+below cost), 0.75--1.25 (roughly at cost), 1.25--2, and greater than 2 (more
+than double production cost).
 
 The authors' observed market price data come from the micro records of the
 **American Housing Survey (AHS)**, which from 1985--2013 reports each unit's
 self-assessed value, its living area in square feet, whether it is single-family
 detached, and its metropolitan area. The square footage matters because it lets
 them match each home to the R.S. Means construction cost for a home of that
-size. R.S. Means is a proprietary data product, so here we substitute the cost
-figures the paper itself quotes -- an economy-quality home running from roughly
-\\$66 to \$85 per square foot (in constant 2010 dollars) -- applied nationally
-rather than market by market. Our absolute shares therefore differ from the
-paper; the pattern over time is what we are after.
+size -- a proprietary dataset we don't have access to ourselves.
 
 ```{r}
 #| label: ahs-load
@@ -288,12 +287,17 @@ of cost, close to the highest share in the whole series.
 ### A Zillow cross-check
 
 The AHS series ends in 2013 (the survey was redesigned afterward,
-dropping continuous square footage). To extend the picture we repeat the
-exercise with Zillow's Home Value Index for a typical 3-bedroom home,
-treating it as roughly an 1,800 square-foot economy unit and dividing by
-the same production-cost model. This trades the AHS's per-unit size
-detail for far broader market coverage, so its levels run lower -- but
-the cycle is unmistakable.
+dropping continuous square footage). To extend the picture past 2013 we
+need to compute our own price-to-cost ratios rather than lean on the
+authors' published tables, which means standing in for R.S. Means. We
+substitute the cost figures the paper itself quotes -- an economy-quality
+home running from roughly \$66 to \$85 per square foot (in constant 2010
+dollars) -- applied nationally rather than market by market, since we
+don't have R.S. Means's market-by-market cost data. With that production-cost
+model in hand, we repeat the exercise with Zillow's Home Value Index for a
+typical 3-bedroom home, treating it as roughly an 1,800 square-foot economy
+unit. This trades the AHS's per-unit size detail for far broader market
+coverage, so its levels run lower -- but the cycle is unmistakable.
 
 ```{r}
 #| label: zillow-q
