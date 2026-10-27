@@ -7,6 +7,7 @@ author:
     url: https://apetersonsite.com/
 date: 7-01-2026
 draft: true
+preview: fig10.png
 output: 
   distill::distill_article:
     self_contained: false
@@ -66,6 +67,16 @@ following 3 high level ideas in detail in the US housing market:
 2.  If not, what might explain the lack of efficiency in?
 3.  What are the broader consequences of this lack of efficiency across
     the economy?
+
+```{r fig-welfare, echo=FALSE, fig.alt="Diagram of wages in a zoning-constrained area and in other areas as the constrained area's population changes, showing equilibrium with and without zoning and the land rents between them.", fig.cap="Welfare consequences of restricting development in a productive market. Source: @glaeser2018economic."}
+knitr::include_graphics("fig10.png")
+```
+
+<aside>
+This figure illustrates some of the consequences of housing market
+inefficiencies: when zoning restricts how many people can live in a productive
+area, wages and land rents diverge from their unconstrained equilibrium.
+</aside>
 
 We'll work through each of these piece by piece and deconstruct the
 author's arguments, digging into the author's data and methods for each
@@ -304,6 +315,126 @@ areas, the authors identify other factors that may explain the gap between
 construction cost and housing market price.
 
 ### Deconstructing San Francisco's Housing Market
+
+San Francisco is a relatively high construction cost market, but that is not
+what makes its homes so expensive. To see what does, let's take the median home
+in the authors' 2013 data and work backwards from its price to figure out what
+each piece of it must have cost.
+
+```{r sf-math, include=FALSE}
+hp   <- 800000             # self-reported value at SF's median price-to-cost ratio, 2013
+q    <- 2.84               # HP / MPPC for that home
+mppc_sf <- hp / q          # minimum profitable production cost
+cc_sf   <- mppc_sf / 1.46  # physical construction cost
+land_free   <- 0.25 * cc_sf          # "free market" land value
+margin_free <- mppc_sf - cc_sf - land_free
+land_actual   <- hp / 1.17 - cc_sf   # what the land must have actually cost
+margin_actual <- hp - hp / 1.17
+d <- function(x) scales::dollar(round(x))
+# helpers for display math: plain digits (no 8e+05) and an escaped dollar sign
+n  <- function(x) format(round(x), big.mark = ",", scientific = FALSE)
+dm <- function(x) paste0("\\$", n(x))
+```
+
+**Step 1: Start with what we observe.** The self-reported value of the home at
+San Francisco's median price-to-cost ratio is `r d(hp)`, and its ratio is
+$\frac{HP}{MPPC} = `r q`$.
+
+**Step 2: Back out the minimum profitable production cost.** Since the ratio is
+just the price divided by MPPC, we can rearrange to solve for MPPC:
+
+$$
+MPPC = \frac{HP}{2.84} = \frac{`r n(hp)`}{2.84} \approx `r dm(mppc_sf)`
+$$
+
+This is what it would cost to build this home *and* earn the builder a normal
+profit in an efficient market.
+
+**Step 3: Strip out land and profit to get the construction cost.** Recall from
+earlier that $MPPC = (L + CC) \times EP$, with $L = 0.25 \times CC$ and
+$EP = 1.17$. Substituting the land rule of thumb:
+
+$$
+MPPC = (0.25\,CC + CC) \times 1.17 = 1.25 \times 1.17 \times CC \approx 1.46 \times CC
+$$
+
+so the physical construction cost is
+
+$$
+CC = \frac{MPPC}{1.46} = \frac{`r n(mppc_sf)`}{1.46} \approx `r dm(cc_sf)`
+$$
+
+**Step 4: What would the land cost in an unregulated market?** Using the same
+rule of thumb that land is a quarter of construction costs:
+
+$$
+L = 0.25 \times CC = 0.25 \times `r n(cc_sf)` \approx `r dm(land_free)`
+$$
+
+That is what the underlying land would cost in a relatively unregulated
+residential development market. As a check, land plus construction is
+`r d(land_free)` + `r d(cc_sf)` = `r d(land_free + cc_sf)`, and the builder's 17%
+margin on top of that gets us to roughly `r d((land_free + cc_sf) * 1.17)`,
+which matches the `r d(mppc_sf)` from Step 2 up to rounding.
+
+**Step 5: What did the land actually cost?** Now go back to the $800,000 price.
+Developers cannot earn super-normal profits on the margin, so the builder still
+only takes the same 17% margin. Removing it from the price and then subtracting
+the construction cost leaves whatever must have been paid for the land:
+
+$$
+L_{actual} = \frac{HP}{1.17} - CC = \frac{`r n(hp)`}{1.17} - `r n(cc_sf)` \approx `r dm(land_actual)`
+$$
+
+That is roughly **10 times** the `r d(land_free)` we assumed when computing MPPC
+(`r d(land_actual)` / `r d(land_free)` $\approx$ `r round(land_actual / land_free, 1)`).
+
+```{r sf-stack, echo=FALSE, fig.width=8, fig.height=5.5}
+#| fig.cap: "Where the money goes: an efficient-market cost stack versus San Francisco's median home. Calculations follow @glaeser2018economic."
+sf_stack <- tribble(
+  ~bar, ~part, ~value,
+  "Efficient market\n(MPPC)", "Builder margin", margin_free,
+  "Efficient market\n(MPPC)", "Land", land_free,
+  "Efficient market\n(MPPC)", "Construction", cc_sf,
+  "San Francisco\nmedian home", "Builder margin", margin_actual,
+  "San Francisco\nmedian home", "Land", land_actual,
+  "San Francisco\nmedian home", "Construction", cc_sf
+) |>
+  mutate(
+    bar  = factor(bar, levels = c("Efficient market\n(MPPC)", "San Francisco\nmedian home")),
+    part = factor(part, levels = c("Builder margin", "Land", "Construction"))
+  ) |>
+  group_by(bar) |>
+  arrange(bar, desc(as.integer(part))) |>  # bottom-to-top stacking order
+  mutate(share = value / sum(value),
+         ypos = cumsum(value) - value / 2,
+         label = ifelse(bar == "San Francisco\nmedian home",
+                        paste0(d(value), "\n(", scales::percent(share, accuracy = 1), ")"),
+                        d(value))) |>
+  ungroup()
+
+ggplot(sf_stack, aes(bar, value, fill = part)) +
+  geom_col(width = 0.6) +
+  geom_text(aes(y = ypos, label = label, color = part), size = 4.5, lineheight = 0.9) +
+  scale_fill_manual(values = c(Construction = "grey80", `Builder margin` = "grey60", Land = "#b2182b")) +
+  scale_color_manual(values = c(Construction = "black", `Builder margin` = "black", Land = "white"),
+                     guide = "none") +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(x = NULL, y = NULL, fill = NULL,
+       title = "The land is what's expensive")
+```
+
+Construction costs are identical in both bars. Almost the entire gap between
+what this home should cost and what it sells for is the bidding up of land
+values. Because the scarce factor is land, not building materials or
+construction labor, that is what makes San Francisco housing so expensive.
+And since most of the inflation in the price comes from the value of the land
+itself rather than the building on it, it helps motivate policies such as a
+[land value tax](https://en.wikipedia.org/wiki/Land_value_tax), which taxes the
+value of land rather than the structures built on it. This is a larger topic
+that I hope to return to in a future post.
+
+As the authors have now established the relative presence of this 
 
 ## Broader Implications
 
