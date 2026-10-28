@@ -63,9 +63,10 @@ panelset <- function(id, tabs) {
 
 # Render a ggplot to a PNG next to the post's other knitr figures and return
 # an <img> tag referencing it (sized to match the document's default figure
-# dimensions: fig.width=6.5in, fig.height=4in @ 192dpi retina).
-panelset_img <- function(plot, path, alt = "") {
+# dimensions: fig.width=6.5in, fig.height=4in @ 192dpi retina; override
+# `width`/`height` for plots that need more room, e.g. faceted ones).
+panelset_img <- function(plot, path, alt = "", width = 6.5, height = 4) {
   dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
-  ggplot2::ggsave(path, plot, width = 6.5, height = 4, units = "in", dpi = 192)
+  ggplot2::ggsave(path, plot, width = width, height = height, units = "in", dpi = 192)
   sprintf('<img src="%s" alt="%s" />', path, alt)
 }
