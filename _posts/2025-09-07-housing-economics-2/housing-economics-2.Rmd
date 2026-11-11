@@ -136,10 +136,6 @@ market should be able to supply an 2000 sq. ft. "economy" house for \~
 \$200K in a low construction cost market and \~ \$265K in the higher
 construction cost markets.
 
-$$
-MPCC = (L + CC) 1.17
-$$
-
 Plugging in the construction costs from above, with $L = 0.25 \times CC$ (the
 same as $L = 0.2 \times (L + CC)$):
 
