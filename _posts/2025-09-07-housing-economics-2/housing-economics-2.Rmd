@@ -58,15 +58,16 @@ panelset_init()
 In the first post of this series examining housing markets, we explored the
 theory underlying housing markets including how houses filter from higher cost
 markets to lower, as well as the impact on the market price when the
-construction of new housing is restricted. In this post we're moving from theory
-to practice by studying [@glaeser2018economic]. This paper examines the
+construction of new housing is restricted. In this post, we're moving from theory
+to practice by studying [@glaeser2018economic] and the related material in 
+[@glaeser2025america].  [@glaeser2018economic] examines the
 following 3 high level ideas in detail in the US housing market:
 
 1.  Are housing markets -- housing supply specifically -- operating
     efficiently? 
 2.  If not, what might explain the lack of efficiency in?
-3.  What are the broader consequences of this lack of efficiency across
-    the economy?
+3.  And, what are the broader consequences of this lack of efficiency across the
+    economy?
 
 ```{r fig-welfare, echo=FALSE, fig.alt="Diagram of wages in a zoning-constrained area and in other areas as the constrained area's population changes, showing equilibrium with and without zoning and the land rents between them.", fig.cap="Welfare consequences of restricting development in a productive market. Source: @glaeser2018economic."}
 knitr::include_graphics("fig10.png")
@@ -82,16 +83,14 @@ We'll work through each of these piece by piece and deconstruct the
 author's arguments, digging into the author's data and methods for each
 question.
 
-# Housing Market Efficiency
+# Are Housing Markets Operating Efficiently?
 
-The authors start their paper by asking whether housing markets are operating
-efficiently. The authors specific method to answer this question uses the cost
-of construction compared to the market price. This speaks to a fundamental
-economic principle defining the properties of efficient markets - in an
-efficient market the market price is equal to the cost of production. The
-authors can take for granted that their econ savvy reader have the background to
-understand the logic underlying this argument but if you'd like a reference to
-refresh yourself I'd encourage checking out this wikipedia
+To answer the first question, the authors compare construction cost to the
+market price at which a house sells. This speaks to a fundamental economic
+principle defining the properties of efficient markets - in a perfectly
+efficient market the market price is equal to the cost of production. The authors can take for granted that their econ savvy reader have
+the background to understand the logic underlying this argument but if you'd
+like a reference to refresh yourself I'd encourage checking out this wikipedia
 [article](https://en.wikipedia.org/wiki/Competition_\(economics\)#Perfect_competition)
 and/or this khan academy
 [piece](https://www.khanacademy.org/economics-finance-domain/microeconomics/perfect-competition-topic/perfect-competition/a/perfect-competition-and-why-it-matters-cnx).
@@ -118,7 +117,7 @@ additional portion of the cost that returns to the firm.
 To fill in this equation the authors take the following strategy:
 
 1.  Using a rule of thumb from an "ad-hoc survey" of home builders, the authors
-    assume $L \leq .2 (L +CC) \iff L .25 CC$
+    assume $L \leq .2 (L +CC)$ or $4L \leq CC$.
 2.  Physical construction costs are taken from a company -- [R.S.
     Means](https://www.rsmeans.com/?srsltid=AfmBOopn2waitkQ0_5LwatHT5pHZIUorFAWiF2gMAyhx6xN-kbW-mw7H)
     -- which compiles data on the physical construction costs for
@@ -127,21 +126,31 @@ To fill in this equation the authors take the following strategy:
         2K sq. ft. home. In cheaper markets, 180K in more expensive
         markets.
     -   According to the authors, these costs haven't changed much over time.
-3.  The authors assume $EP = 1.17$ in their calculations based on the
-    assumption that the gross profit margin ranges from 9-11% / year.
-    Further assuming that this profit margin represents \~60% of the
-    total margin, the authors arrive at $EP = 1.17 = \frac{1 + 1%}{60\%}$
+3.  The authors assume $EP = 1.17$. Homebuilders' profit margins on land and
+    construction costs run 9-11% per year across the cycle. Because operating
+    costs take roughly 35-40% of a builder's gross margin, this implies a gross
+    margin of about 17%, so $EP = 1 + 0.17 = 1.17$.
 
 Putting this together, the authors determine that an "efficient" housing
 market should be able to supply an 2000 sq. ft. "economy" house for \~
 \$200K in a low construction cost market and \~ \$265K in the higher
 construction cost markets.
 
+$$
+MPCC = (L + CC) 1.17
+$$
+
+Plugging in the construction costs from above, with $L = 0.25 \times CC$ (the
+same as $L = 0.2 \times (L + CC)$):
+
+-   Cheaper market: MPPC = (L + CC) × EP = 1.25 × \$140K × 1.17 ≈ \$205K
+-   More expensive market: MPPC = 1.25 × \$180K × 1.17 ≈ \$263K
+
 ## Comparing MPPC to Observed Housing Prices
 
 The authors compare prices to costs by computing, for every single-family home,
 the ratio of the housing price ($HP$) to its minimum profitable production cost,
-$\frac{HP}{MPCC}$. This ratio is effectively **[Tobin's
+$\frac{HP}{MPPC}$. As stated in the paper, this ratio is effectively **[Tobin's
 q](https://en.wikipedia.org/wiki/Tobin%27s_q) for housing**:
   - a value below 1 or above 1 signals some barrier to the market operating
     efficiently for any number of reasons. 
@@ -152,12 +161,13 @@ The authors sort homes into four bins: a ratio of 0.75 or less (priced well
 below cost), 0.75--1.25 (roughly at cost), 1.25--2, and greater than 2 (more
 than double production cost).
 
-The authors' observed market price data come from the micro records of the
-**American Housing Survey (AHS)**, which from 1985--2013 reports each unit's
+The authors' observed market price data come from the 1985--2013 micro records
+of the **American Housing Survey (AHS)**, which report each unit's
 self-assessed value, its living area in square feet, whether it is single-family
-detached, and its metropolitan area. The square footage matters because it lets
-them match each home to the R.S. Means construction cost for a home of that
-size -- a proprietary dataset we don't have access to ourselves.
+detached, and its metropolitan area. The square footage matters because the
+authors use the R.S. Means construction cost for a 2,000 sq. ft. home -- a
+proprietary dataset we don't have access to ourselves -- and match it to houses
+of approximately that size in the numbers below.
 
 ```{r}
 #| label: ahs-load
@@ -262,12 +272,12 @@ grow much larger than the cost of production, in the run-up to the financial
 crisis. However, just because that large picture comes into view, doesn't mean
 there aren't specific markets where we might see different trends emerge.
 
-### 3 Markets of Interest
+# What’s Driving Inefficiency? 3 Markets of Interest
 
 The authors pick out three markets in particular as highlighting the different
 housing dynamics on display in the US: (1) San Francisco, (2) Detroit and (3)
-Atlanta. Each of these illustrate a different dynamic in how policy, supply and
-demand have all interacted to produce different housing prices over time.
+Atlanta. Each illustrates a different way policy, supply and demand have
+interacted to produce different housing prices over time.
 
 
 While I didn't have the R.S. data available to compute these values exactly
@@ -301,25 +311,23 @@ three_markets |>
 San Francisco sits well above the cost line in every year we observe, and climbs
 further still through the 2000s -- a market where, per the authors' argument,
 both geographic limitations and self-imposed regulatory constraints keep prices
-detached from production cost regardless of the cycle. Detroit and Atlanta, by
-contrast, track close to (or below) a ratio of 1 throughout, consistent with the
-authors' description of these as more supply-elastic markets where prices cannot
-stray far from cost before, in Detroit's case, abundant supply^[Due to the
-demand shock from the
-[recession](https://en.wikipedia.org/wiki/Early_1990s_recession_in_the_United_States)
-in the auto industry during the 90's] or, as in Atlanta, new construction pulls
-them back down.
+detached from production cost regardless of the broader economic environment.
+Detroit and Atlanta, by contrast, track close to (or below) a ratio of 1
+throughout, consistent with the authors' description of these as more
+supply-elastic markets where prices cannot stray far from cost. In Detroit's
+case, there is abundant supply without new construction (housing demand
+continued to fall as foreign competition hurt the auto industry and people [left
+Detroit](https://en.wikipedia.org/wiki/Demographic_history_of_Detroit)), whereas
+in Atlanta, active new construction pulls prices back down to meet demand.
 
 In the more expensive markets like San Francisco and the rest of the coastal
 areas, the authors identify other factors that may explain the gap between
 construction cost and housing market price.
 
-### Deconstructing San Francisco's Housing Market
-
-If we go back to the MPCC formula, there are three suspects for what could be
+If we go back to the MPPC formula, there are three suspects for what could be
 causing the housing price to be so expensive: the cost of construction $(CC)$,
-the construction firm's profit ($EP$) and/or the cost of land $(L)$. San
-Francisco is a relatively high construction cost market, but that is not what
+the construction firm's profit ($EP$), and/or the cost of land $(L)$. San
+Francisco has relatively high construction costs, but that is not what
 makes its homes so expensive. To see what does, let's take the median home in
 the authors' 2013 data and work backwards from its price to figure out what each
 piece of it must have cost.
@@ -354,20 +362,31 @@ This is what it would cost to build this home *and* earn the builder a normal
 profit in an efficient market.
 
 **Step 3: Strip out land and profit to get the construction cost.** Recall from
-earlier that $MPPC = (L + CC) \times EP$, with $L = 0.25 \times CC$ and
-$EP = 1.17$. Substituting the land rule of thumb:
+earlier that $MPPC = (L + CC) \times EP$, with $L \leq 0.2 (L + CC)$, which
+simplifies to $L = 0.25 \times CC$, and $EP = 1.17$. Substituting the land rule
+of thumb:
 
 $$
 MPPC = (0.25\,CC + CC) \times 1.17 = 1.25 \times 1.17 \times CC \approx 1.46 \times CC
 $$
 
-so the physical construction cost is
+so the physical construction cost ($CC$) is
 
 $$
 CC = \frac{MPPC}{1.46} = \frac{`r n(mppc_sf)`}{1.46} \approx `r dm(cc_sf)`
 $$
 
-**Step 4: What would the land cost in an unregulated market?** Using the same
+**Step 4: What did the land actually cost?** Now go back to the $800,000 price.
+Developers cannot earn
+[super-normal](https://www.economicshelp.org/blog/3181/economics/supernormal-profits/)
+profits at the margin, so the builder still only takes the same 17% margin. Removing it from the price and then subtracting
+the construction cost leaves whatever must have been paid for the land:
+
+$$
+L_{actual} = \frac{HP}{1.17} - CC = \frac{`r n(hp)`}{1.17} - `r n(cc_sf)` \approx `r dm(land_actual)`
+$$
+
+**Step 5: What would the land cost in an unregulated market?** Using the same
 rule of thumb that land is a quarter of construction costs:
 
 $$
@@ -380,16 +399,8 @@ residential development market. As a check, land plus construction is
 margin on top of that gets us to roughly `r d((land_free + cc_sf) * 1.17)`,
 which matches the `r d(mppc_sf)` from Step 2 up to rounding.
 
-**Step 5: What did the land actually cost?** Now go back to the $800,000 price.
-Developers cannot earn super-normal profits on the margin, so the builder still
-only takes the same 17% margin. Removing it from the price and then subtracting
-the construction cost leaves whatever must have been paid for the land:
-
-$$
-L_{actual} = \frac{HP}{1.17} - CC = \frac{`r n(hp)`}{1.17} - `r n(cc_sf)` \approx `r dm(land_actual)`
-$$
-
-That is roughly **10 times** the `r d(land_free)` we assumed when computing MPPC
+Compare that with Step 4: the land actually cost roughly **10 times** the
+`r d(land_free)` an unregulated market would imply
 (`r d(land_actual)` / `r d(land_free)` $\approx$ `r round(land_actual / land_free, 1)`).
 
 ```{r sf-stack, echo=FALSE, fig.width=8, fig.height=5.5}
@@ -445,14 +456,14 @@ throughout the US, as well as some possible sources of the rising cost, they now
 turn to the larger implications of what these high costs can do to the economic
 well-being of those living in places with higher housing costs.
 
-## Impacts of high housing costs
+# Impacts of high housing costs
 
 It's quite intuitive that high housing prices are bad. The authors explore just
 how these inflated prices might have negative impacts in the less efficient 
 markets identified in their work. They present two general themes of just what
 happens when the cost of housing becomes so high. 
 
-### Household Wealth 
+## Household Wealth
 
 The authors work through what might be an un-intuitive line of thinking when
 reasoning around the wealth created from rising land prices. Since the rise in
@@ -467,11 +478,11 @@ renting in an inefficient market like New York or San Francisco, since they
 experience no increase in the value of their home to compensate their increased
 cost of living. Their rent simply rises along with all of their other costs. 
 The authors argue that because older households tend to own homes and younger
-ones rent, when housing costs rise their is an inter-generational transfer of 
+ones rent, rising housing costs lead to an intergenerational transfer of
 wealth from young to old through the increased value of the land.
 
-Table 3 of [@glaeser2018economic] makes this concrete using the Federal
-Reserve's [Survey of Consumer
+Table 3 of [@glaeser2018economic] tries to make this more concrete using the
+Federal Reserve's [Survey of Consumer
 Finances](https://www.federalreserve.gov/econres/scfindex.htm). It compares
 housing net worth at several points in the distribution for the same age groups
 in 1983 and in 2013, three decades apart.
@@ -568,46 +579,57 @@ cat(panelset("wealth-table3", list(
 
 The pattern is lopsided. Younger households -- 18-24, 25-34 and 35-44 -- hold the
 same or less housing wealth in 2013 than their counterparts did in 1983 through
-much of the distribution (the median 35-44 year old, for example, went from
-about \$56,000 to \$6,000), and only the very top of these groups -- the 95th
-and 99th percentiles -- is somewhat higher. The oldest groups tell a different
+much of the distribution. The median 35-44 year old, for example, went from
+about \$56,000 to \$6,000. Only the very top of the 25-34 and 35-44 groups --
+the 95th and 99th percentiles -- is somewhat higher. The oldest groups tell a different
 story: at the
 90th percentile and above, housing wealth for 55-64 and 65-74 year olds is up
 considerably, and a 65-74 year old at the 99th percentile now holds about \$2
 million, more than double 1983. Many of them became homeowners 30-40 years
 earlier and were best positioned to benefit from rising prices. In other words,
 the sharpest gains in housing wealth go to a small number of the richest, oldest
-owners. note that this is a survey of the same aged individuals at different 
+owners. Note that this is a survey of the same aged individuals at different 
 points in time and there is no evidence of a causal relationship of supply 
-restrictions, construction costs or any of the other factors leading to the 
-outcomes in this data set - it is merely descriptive.
+restrictions, construction costs, or any of the other factors leading to the 
+outcomes in this data set - it is merely descriptive of the wealth of these
+two different groups at different points in time.
     
-### Labor Market Productivity
+## Labor Market Productivity
 
 A second consequence of the inefficient housing markets is that individuals that
-might otherwise move to these highly productive and dynamic labor markets,
-the authors argue, can't move and participate in these economies. The authors
-work through a modeling exercise to try and illustrate the elasticity of labor
-demand and supply in these markets absent the supply restrictions that I'll
-spare the reader in this post. The larger point they argue though is worth 
-reflection, as I think it is very intuitive. When the cost of living somewhere
-like San Francisco, New York, etc. becomes very high, it deters individuals who
-might otherwise benefit professionally from the experience of moving to those 
-cities and obtaining the training, network contacts, etc. that they could 
-(historically at least) only receive in those cities.
+might otherwise move to these highly productive and dynamic labor markets, the
+authors argue, can't move and participate in these economies. The authors work
+through a modeling exercise to try and illustrate the elasticity of labor demand
+and supply in these markets with and without the supply restrictions increasing
+land values.
+
+I'll spare you this exercise, but the larger, intuitive point they argue is worth
+reflection. When the cost of
+living somewhere like San Francisco, New York, etc. becomes very high, it deters
+individuals who might otherwise benefit professionally from the experience of
+moving to those cities and obtaining the training, network contacts, etc. that
+they could (historically at least) only receive in those cities. They're more
+likely to stay in their less productive towns where they might receive a lower
+salary. Note here, that the lower salary is not just because they're in a lower
+cost of living location, it is also because they are not as productive as they
+might be *counter-factually* living in some place with better connections and
+professional opportunities.
 
 # Looking forward  
 
 There should be little surprise that the authors identify and argue for more
-efficient housing markets given the negative impacts they identify. 
+efficient housing markets given the negative impacts they identify in this work.
+While sympathetic to the fact that new construction and increasing density can
+carry negative impacts - more traffic, noise etc. - the authors argue that the
+positives outweigh the negatives in terms of the impact on intergenerational
+wealth, labor market flexibility, and more.
 
-The authors' more recent follow-up, [@glaeser2025america], returns to the
-price-to-cost comparison with finer geographic detail. Rather than asking what
-share of *homes* sit in each bin, it asks what share of census *tracts* do, for
-six focal metros from 1970 through 2023. The bins differ slightly from the
-earlier paper: tracts are classed as priced below 0.8, between 0.8 and 1.2, or
-above 1.2 times the minimum profitable production cost, using each tract's real
-median home value.
+In their more recent paper, [@glaeser2025america], the authors extend their
+price cost comparison to the 2020's. They find the same pattern in their 2018
+paper now shows up again in present day - the sales price of a house in Atlanta,
+for example is starting to become more expensive than what it costs to produce
+the house.
+
 
 ```{r looking-forward-table3-panel, results='asis'}
 # Table 3 from Glaeser & Gyourko (2025), "America's Housing Supply Problem: The
@@ -686,6 +708,15 @@ cat(panelset("looking-forward-table3", list(
 )))
 ```
 
+<aside>
+Note that in this analysis, rather than asking what share of *homes* sit in each
+bin, the authors determined what share of census *tracts* do, for six focal
+metros from 1970 through 2023. The bins differ slightly from the earlier paper:
+tracts are classed as priced below 0.8, between 0.8 and 1.2, or above 1.2 times
+the minimum profitable production cost, using each tract's real median home
+value.
+</aside>
+
 The contrast across markets is stark. In Los Angeles, the share of tracts priced
 above 1.2 times production cost climbs from under 5 percent in 1970 to about 93
 percent in 2023. The sunbelt metros that once built freely have been heading the
@@ -693,3 +724,13 @@ same way: the share of high-priced tracts in Atlanta, Dallas, Miami and Phoenix
 has risen from under 7 percent of tracts in 1970 to between roughly a quarter
 and two-fifths. Detroit, where prices remain well below the cost of
 building, barely moves.
+
+
+The insight to draw here is that we're facing a persistent problem. The 
+inefficiency spotted in [@glaeser2018economic] is now spreading. At the end of
+[@glaeser2025america] the authors argue that these problems share a common 
+problem: after homes and neighborhoods are built those who own the homes push
+back on any attempts to increase the density of the neighborhood, limiting
+the potential for new housing supply to offset any increased demand. A 
+political and economic problem, we'll turn to potential remedies for this problem
+in the next post(s).
