@@ -5,9 +5,8 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.com/
-date: 7-01-2026
-draft: true
-preview: fig10.png
+date: 11-11-2026
+preview: sf-stack.png
 output: 
   distill::distill_article:
     self_contained: false
@@ -68,16 +67,6 @@ following 3 high level ideas in detail in the US housing market:
 2.  If not, what might explain the lack of efficiency in?
 3.  And, what are the broader consequences of this lack of efficiency across the
     economy?
-
-```{r fig-welfare, echo=FALSE, fig.alt="Diagram of wages in a zoning-constrained area and in other areas as the constrained area's population changes, showing equilibrium with and without zoning and the land rents between them.", fig.cap="Welfare consequences of restricting development in a productive market. Source: @glaeser2018economic."}
-knitr::include_graphics("fig10.png")
-```
-
-<aside>
-This figure illustrates some of the consequences of housing market
-inefficiencies: when zoning restricts how many people can live in a productive
-area, wages and land rents diverge from their unconstrained equilibrium.
-</aside>
 
 We'll work through each of these piece by piece and deconstruct the
 author's arguments, digging into the author's data and methods for each
@@ -268,7 +257,7 @@ grow much larger than the cost of production, in the run-up to the financial
 crisis. However, just because that large picture comes into view, doesn't mean
 there aren't specific markets where we might see different trends emerge.
 
-# What’s Driving Inefficiency? 3 Markets of Interest
+# What’s Driving Inefficiency: 3 Markets of Interest
 
 The authors pick out three markets in particular as highlighting the different
 housing dynamics on display in the US: (1) San Francisco, (2) Detroit and (3)
@@ -423,7 +412,7 @@ sf_stack <- tribble(
                         d(value))) |>
   ungroup()
 
-ggplot(sf_stack, aes(bar, value, fill = part)) +
+sf_stack_plot <- ggplot(sf_stack, aes(bar, value, fill = part)) +
   geom_col(width = 0.6) +
   geom_text(aes(y = ypos, label = label, color = part), size = 4.5, lineheight = 0.9) +
   scale_fill_manual(values = c(Construction = "grey80", `Builder margin` = "grey60", Land = "#b2182b")) +
@@ -432,6 +421,10 @@ ggplot(sf_stack, aes(bar, value, fill = part)) +
   scale_y_continuous(labels = scales::dollar) +
   labs(x = NULL, y = NULL, fill = NULL,
        title = "The land is what's expensive")
+
+# Saved alongside the post so it can serve as the blog-list preview image.
+ggsave("sf-stack.png", sf_stack_plot, width = 8, height = 5.5, dpi = 192)
+sf_stack_plot
 ```
 
 Construction costs are identical in both bars. Almost the entire gap between
@@ -442,10 +435,75 @@ since most of the inflation in the price comes from the value of the land itself
 rather than the building on it, it helps motivate policies such as a [land value
 tax](https://en.wikipedia.org/wiki/Land_value_tax), which taxes the value of
 land rather than the structures built on it. Other restrictions on development,
-also cause this piece to inflate, and the author's use a survey of local
-government regulation to identify association - not causation - between these
+also cause this piece to inflate, and the authors' use a survey of local
+government regulation [@gyourko2008new] to identify association - not causation - between these
 two measures. All of this speaks to a larger topic that I hope to return to in a
 future post.
+
+To see how much local regulation varies across these three markets, the chart
+below plots the Wharton Residential Land Use Regulatory Index for each community
+surveyed in each metro. The index is standardized so that 0 is the national
+average and higher values mean more restrictive regulation.
+
+<aside>
+The index summarizes a 2005 national survey of local planning directors (or the
+top administrator where there is no planning office). It asks who is involved
+in approving development, what rules apply -- minimum lot sizes, open space and
+infrastructure requirements, and so on -- and how lot costs and review times
+have changed. Eleven sub-indexes, plus state-level and community-pressure data,
+are combined into one score per community, standardized across the roughly
+2,600 surveyed communities nationwide (mean 0, standard deviation 1). It
+measures how hard it is to build, not what happens to prices.
+</aside>
+
+```{r wharton-regulation, echo=FALSE, fig.width=8, fig.height=5}
+#| fig.cap: "Local land-use regulation in three metros (2005 Wharton survey). Small points are surveyed communities; the large point and bars are the survey-weighted metro mean and 95% confidence interval. Source: @gyourko2008new."
+#| fig.alt: "Dot plot of the Wharton Residential Land Use Regulatory Index for communities in San Francisco, Atlanta and Detroit, with each metro's mean and confidence interval. San Francisco is well above the national average of zero; Atlanta and Detroit are near zero, with Detroit more spread out."
+wrluri <- read_dta(
+  file.path(data_path, "Wharton Data", "WHARTON LAND REGULATION DATA_1_24_2008.dta"),
+  col_select = c(msa99, msaname99, name, WRLURI, weight_metro)
+) |>
+  mutate(smsa = sprintf("%04d", as.integer(msa99))) |>
+  inner_join(market_abbrev, by = "smsa") |>
+  filter(!is.na(WRLURI)) |>
+  mutate(metro = factor(metro, levels = c("SF", "ATL", "DET")))
+
+wrluri_summary <- wrluri |>
+  as_survey(weights = weight_metro) |>
+  group_by(metro) |>
+  summarise(n = unweighted(dplyr::n()),  # the SF section defines its own n()
+            mean = survey_mean(WRLURI, vartype = c("se", "ci")),
+            var = survey_var(WRLURI, vartype = "se"))
+
+ggplot(wrluri, aes(metro, WRLURI)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_jitter(aes(color = metro), width = 0.12, height = 0, alpha = 0.6, size = 2) +
+  geom_pointrange(
+    data = wrluri_summary,
+    aes(y = mean, ymin = mean_low, ymax = mean_upp),
+    position = position_nudge(x = 0.3), size = 0.8, linewidth = 1
+  ) +
+  scale_color_manual(values = c(SF = "#b2182b", ATL = "grey55", DET = "grey55"),
+                     guide = "none") +
+  scale_x_discrete(labels = c(SF = "San Francisco", ATL = "Atlanta", DET = "Detroit")) +
+  labs(x = NULL, y = "Index (0 = national average)",
+       title = "Local land-use regulation by metro")
+```
+
+```{r wharton-numbers, include=FALSE}
+wr <- wrluri_summary |> split(~metro)
+f2 <- function(x) formatC(x, format = "f", digits = 2)
+```
+
+San Francisco's communities are, on average, much more restrictive than the
+national norm: the survey-weighted mean index is `r f2(wr$SF$mean)` (95% CI
+`r f2(wr$SF$mean_low)` to `r f2(wr$SF$mean_upp)`), compared with
+`r f2(wr$ATL$mean)` in Atlanta and `r f2(wr$DET$mean)` in Detroit, both close to
+the national average. Detroit's communities vary the most (variance of
+`r f2(wr$DET$var)`, versus `r f2(wr$ATL$var)` in Atlanta), so some Detroit-area
+suburbs are quite restrictive even though the metro as a whole is not. These
+confidence intervals treat each surveyed community as an independent draw, so
+they are best read as a rough guide.
 
 As the authors have now established the different types of housing markets
 throughout the US, as well as some possible sources of the rising cost, they now
@@ -598,6 +656,17 @@ authors argue, can't move and participate in these economies. The authors work
 through a modeling exercise to try and illustrate the elasticity of labor demand
 and supply in these markets with and without the supply restrictions increasing
 land values.
+
+```{r fig-welfare, echo=FALSE, fig.alt="Diagram of wages in a zoning-constrained area and in other areas as the constrained area's population changes, showing equilibrium with and without zoning and the land rents between them.", fig.cap="Welfare consequences of restricting development in a productive market. Source: @glaeser2018economic."}
+knitr::include_graphics("fig10.png")
+```
+
+<aside>
+This figure, from the authors' modeling exercise, illustrates some of the
+consequences of housing market
+inefficiencies: when zoning restricts how many people can live in a productive
+area, wages and land rents diverge from their unconstrained equilibrium.
+</aside>
 
 I'll spare you this exercise, but the larger, intuitive point they argue is worth
 reflection. When the cost of
