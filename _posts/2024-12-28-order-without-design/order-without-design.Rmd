@@ -1,0 +1,257 @@
+---
+title: "Order Without Design: How Markets Shape Cities"
+description: |
+  Urban Economics Made Relevant
+author:
+  - name: Adam Peterson
+    url: https://apetersonsite.com/
+date: 12-30-2024
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_float: true
+citation_url: https://xstreetvalidated.com
+creative_commons: CC BY
+preview: shanghai.jpg
+categories:
+  - Book Review
+  - Urban Economics
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Update on the Blog
+
+While I think any dedicated reader of this blog knows this isn't the kind of
+blog that gets updated on a regular basis, it will soon be a year since I've
+published my last blog post. So, I wanted to reassure any reader that this blog
+is alive and I have many ideas, if not time, to keep it alive for the
+foreseeable future.
+
+Those ideas, however, will not be exclusively statistical. The observant reader
+will notice that the past three published posts have all been book reviews and
+this one will continue that trend. That doesn't mean I haven't been working or
+thinking about statistical ideas. They just haven't intersected enough with the
+built environment to merit a post here. For example, I recently completed some
+[notes](https://apeterson91.github.io/ComplexSurveys/ComplexSurveyNotes.html) on
+Thomas Lumley's book on design-based inference and related software. Even though
+I haven't written about them in this context, these methods are still relevant
+for studying the built environment and are used implicitly in both the previous
+post and this one!
+
+However, this post won't be about design-based inference. Instead, to allow
+myself the freedom to write about those ideas more easily and connect the
+different places where I write, I've started a Substack, like all the cool kids,
+from which I'll share a bite-size blurb from whatever I've written and any
+appropriate links. My hope is that this will provide a centralized location from
+which to receive my writing with a nicer subscription interface than this
+website currently offers. Be sure to
+[subscribe](https://articulatednote.substack.com/?r=6395r&utm_campaign=pub-share-checklist)!
+
+# The Review
+
+I can't remember exactly where I heard of Alain Bertraud's
+[book](https://g.co/kgs/koSkSnu), *Order Without Design: How Markets Shape
+Cities*. I think I found it while looking through book recommendations on an
+urbanist website and kept finding references to it in subsequent forums or
+threads. The mentions are well deserved! Bertraud has an impressive resume
+spanning several large urban planning projects across the world, but he also
+recognizes his field's limits.
+## Two Visions of Cities: Markets and Plans
+Bertraud wrote this book to argue that the view urban planners bring to cities
+-- one of planning, control, and regulatory requirements -- needs to incorporate
+the view urban economists bring -- how cities manifest and function primarily as
+labor markets. As Bertraud says,
+
+> "We are facing a strangely paradoxical situation in the way cities are
+> managed: the professionals in charge of modifying market outcomes through
+> regulations (planners) know very little about markets, and the professionals
+> who understand markets (urban economists) are seldom involved in the design of
+> regulations aimed at restraining these markets... My aim is not to develop a
+> new urban theory but to introduce already existing urban economics knowledge
+> into urban planning practices." (p.1)
+
+Bertraud considers both types of work important. As an urban planner himself,
+Bertraud recognizes the direct impact planners have on cities, but throughout
+his career, he also learned that ignoring the underlying forces that drive land
+values, city/metro population growth and more would lead to poor policies.
+Bertraud bore witness to some of the most dramatic instances of urban planning
+in the history of the world. From the so-called "command economies" of the
+former Soviet Union and Communist China to newly developed cities in Algeria
+during the 60's, Bertraud saw how urban policies could not only be written with
+great force and impact but also with equally great ignorance of how those rules
+would hamper cities' subsequent development.
+
+In *Order Without Design*, Bertraud details these experiences and gives a crash
+course in urban economics. Working through the abstract principles that helped
+him understand what he observed directly in the cities he worked in, Bertraud
+affirms the importance of both skill sets in setting the foundation for a
+successful city.
+
+In my brief review, I'll recount one of Bertraud's more influential personal
+experiences, and dive into one of the economics lessons he presents as a tool
+for urban planning. I'll then finish with how this book is setting the stage for
+my own thinking on this topic and my writing moving forward.
+
+## The Power of Urban Policies
+
+To demonstrate the power of urban policies, Bertraud recounts his experience
+working for the World Bank in 1983 as part of a team conducting preliminary work
+to determine whether or not they should give the city of Shanghai a loan. As a
+tangential part of his assignment, Bertraud had been asked to collect some
+rudimentary housing data to inform potential housing reform.
+At the time, China was starting to emerge from a communist command economy in
+which state-owned companies provided housing, food, clothing, and even
+vacations. Since there was no market system in play, prices were not available
+to signal relative scarcity or abundance of goods. It was only through norms set
+by government institutes like the Land and Planning Bureau that land use, for
+example, was allocated. As Bertraud shares,
+
+> "I had an occasion to discuss norms with my Chinese colleagues and they were
+> curious to compare their norms with Western ones. I remember a discussion
+> about the number and size of barbershops that should be planned per 1,000
+> people in residential neighborhoods. I had to use my favorite response of
+> economists to answer the question from my Chinese counterpart on planning
+> barber shops norms in the United States: 'It all depends!'" (p.12)
+
+Bertraud goes on to share his perspective that these norms and rules are often
+the bread and butter of planners. Deciding how to subdivide land parcels, set
+street widths, and so on according to some norm or technical regulation is where
+they thrive. Having a standard to help determine how much land should be
+allocated for commercial uses for a given population density should remind
+readers of Donald Elliot's A Better Way to Zone and his discussion on how city
+zoning districts might be set.
+However, Bertraud argues that by not using prices to signal the value of land,
+Chinese and Russian cities under or emerging from communist rule were unable to
+make the best use of their resources. They were forced to continue building out
+from their city centers because their regulations had no room to allow for new
+growth in areas where the rules had already been set for one kind of use or some
+previously established building. Bertraud uses the example of China as it
+incorporated market economy tactics of how re-developing land where there is
+strong demand can help stimulate greater efficiencies. The China of today,
+replete with skyscrapers and dense urban centers, would not be the economic
+giant it is without harnessing these efficiencies.
+
+<aside>
+Of course, that's not to say they've been fully faithful to market
+principles. China's real estate system is not doing well right now, and I bet
+Bertraud would argue that is precisely because the Chinese ignored basic market
+principles.
+</aside>
+
+```{r shanghai, echo=FALSE, layout="l-body", fig.cap="Image of Downtown Shanghai by Legolas1024 - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=86486380"}
+knitr::include_graphics("shanghai.jpg")
+```
+
+## Urban Econ 101
+
+While harnessing land value to make more efficient use of land resources in
+cities was one lesson learned from his time abroad, Bertraud spends much of the
+book giving a basic crash course on the economics lessons he deems most
+impactful to urban planning practices. The first and foremost among them? Cities
+are what they are because they are labor markets.
+### Cities as Labor Markets
+While I didn't explicitly mention labor markets in the opening post for this
+blog, I did mention the economic efficiency of cities. It is that same economic
+efficiency, specifically in terms of offering a variety of labor demand, that
+Bertraud cites as the fundamental necessary condition for a city's existence.
+
+> A city nucleus might have been created originally as a commercial post, a
+> trading post, an administrative center, a military stronghold, or a centre of
+> religious pilgrimage, but over the years the growth of a diversified labor
+> force would be the only possible cause for the expansion of the original urban
+> nucleus. (p.19)
+
+In Bertraud's view, since the labor market is the core reason for a cities'
+existence, everything that supports or limits the labor market in turn supports
+or limits the city and its ability to grow or support its citizens.
+Bertraud gives several examples where urban planning strategies ignored the
+city's underlying market economics---limiting a city's growth potential or
+exacerbating the problems they were trying to solve from the start. These
+examples include government housing support in South Africa, rental support in
+New York City, and aesthetic-driven zoning ordinances in Paris.
+Bertraud walks through each of these efforts by their respective city (or
+country) government's attempt, in turn, to shape the city environment through
+planning regulations. In each example, consequences that are unanticipated by
+the initial planning choices result from the underlying economic mechanisms
+driving market decisions in the city.
+
+Bertraud's argument with each of these examples is not to ignore design choices
+entirely but to incorporate and inform design with a more complete understanding
+of the urban economic principles that underlie each city's housing, labor, or
+commuting markets.
+
+## How to use Urban Economics in Cities
+
+After working through these various case studies and different economic
+principles, Bertraud finishes Order Without Design with a chapter that proposes
+how to operationalize these principles into the daily efforts of running a city.
+He proposes constructing a dashboard that monitors several dimensions of the
+city's structural changes, mobility and affordability, each with various alerts
+or "blinking indicators" that signal the need for new policy or strategy.
+For example, by monitoring average commuting time, Bertraud argues that any
+meaningful increase should be met with a policy solution that, perhaps, more
+appropriately prices the scarcity of road supply so that alternative methods of
+transportation can be utilized more efficiently and congestion can be limited.
+This is the idea of a congestion or expressway tax, which Bertraud briefly
+discusses in the book as well.
+
+Going further, Bertraud argues that monitoring these metrics could provide a
+measure of guiding project success and determining those projects with the
+greatest economic return on investment for the city. This effort must occur
+alongside a regular audit of the current planning regulations to assess if
+regulation changes are needed.
+
+## Philosophy of Design and More to Come
+
+While I lack Bertraud's experience in city planning, I share his general
+aspiration here. Incorporating sensible economic principles is a challenge in
+any political domain -- see the failed efforts to introduce a carbon market in
+the U.S. -- but that makes it no less worthy a goal.
+With that said, I have a few slight criticisms of the ideas put forth. First,
+I'd wager most cities are a little bit further along than he gives them credit
+for in trying to track down some of these data. I've been to city planning
+meetings and met with former mayor's Chiefs of Staff, and I've seen them cite
+traffic data, census data, and more in their presentations as justification for
+change.
+
+Second, in order to truly operationalize these data in the manner he suggests
+would require a non-trivial amount of work. Not only in terms of collecting,
+analyzing and applying the data appropriately but, most importantly, explaining
+to constituents how the data justifies various policy actions around the city.
+This is an area in which I do have some level of expertise. Working at Google
+has taught me something about what's required to take a statistical idea and
+operationalize it. I can only imagine how much more difficult this job would be
+when one not only has to explain abstract ideas and mathematical models to
+technical stakeholders but to the lay public as well.
+
+However, this isn't to say that Bertraud is wrong. Whether we're discussing the
+housing crisis or the rising number of traffic accidents, many of the largest
+problems the U.S. and other developed countries face arise from attempts to
+subvert or control market forces. The resulting shortages, inefficiencies, and
+misuse of resources lead to the problems we are challenged with as a public.
+It is because of this critical role that economics plays at the heart of these
+problems that I intend to take this blog in a more economic bent. This doesn't
+mean topics will necessarily be any less statistical. After all, many of the
+economic metrics Bertraud cites above are estimated using methods like those I
+work through in these notes. Much like physics, economics needs statistical
+methods to provide empirical evidence to justify its theories.
+
+So it will be both economic theory and statistics that I'll turn my attention to
+for the near future. I'm currently working through MIT's introductory
+[class](https://ocw.mit.edu/courses/14-01sc-principles-of-microeconomics-fall-2011/) on
+Microeconomics and plan to read through O'Sullivan's
+[text](https://www.mheducation.com/highered/product/Urban-Economics-OSullivan.html)
+on urban economics as
+well as Brueckner's
+[lectures](https://mitpress.mit.edu/9780262016360/lectures-on-urban-economics/).
+I'm planning my next series of blog posts to summarize my key learnings from
+these resources. Stay tuned for all this and more!
+
+## Acknowledgements {.appendix}
+
+Thanks to [Paul Haluszczak](https://www.linkedin.com/in/expertly-paul) for
+reading and offering comments on this post.

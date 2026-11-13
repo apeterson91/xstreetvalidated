@@ -5,8 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.com/
-date: 9-01-2025
-draft: true
+date: 11-12-2025
 output: 
   distill::distill_article:
     self_contained: false
@@ -70,7 +69,7 @@ I'd suggest
 [reviewing](https://www.youtube.com/watch?v=PEMkfgrifDw&ab_channel=KhanAcademy)
 them.
 
-In subsequent posts, I plan to dig into more empirical work in the field,
+In a subsequent post(s), I plan to dig into more empirical work in the field,
 looking at two papers published by [Ed
 Glaeser](https://share.google/Ucl8neKLs8m0593Fy) and [Joseph
 Gyourko](https://share.google/Y5KVNvH0ZzxluK19P):
@@ -148,9 +147,18 @@ where $r$ is the retirement rate, of all low quality houses leaving the housing
 market permanently, and $L_{t-1} \times (1-r)$ all houses that remain
 consequently. Adding this latter term to the houses that filtered down from the
 high quality market produces the total quantity of low quality houses.
-
 A natural question follows from this model - **"what determines the filtering
-rate?"** The plot below provides a graphical answer.
+rate?"** 
+
+### Filtering Rate and Maintenace Costs
+
+Intuitively, the main force is the maintenance cost. In other words, how much
+does it cost to keep a house in the high quality market – where the selling
+price will be higher – as opposed to letting it slip into the low quality market
+where the selling price is lower. As with all things economic, there’s an
+equilibrium point that defines the trade-off point, illustrated conceptually in
+the plot below.
+
 
 ```{r}
 #| label: fig-filter-maintenance
@@ -201,9 +209,10 @@ The horizontal line in Figure \@ref(fig:fig-filter-maintenance) shows the
 difference between the current equilibrium (market-rate) high quality house
 price and low quality house price. Or, in other words, the benefit from keeping
 one's house in the high quality market. If we suppose that there are a total
-of 65 houses in the high quality market, households will decide whether or not
-to invest in their house to keep it in the high market according to whether or
-not it is worth the investment. The following three cases are highlighted.
+of 65 houses in the market total, all starting as high quality, households will
+decide whether or not to invest in their house to keep it in the high market
+according to whether or not it is worth the investment. The following three
+cases are highlighted.
 
   - **Point a**: The maintenance cost is only \~$100, but if the
     home owner were to let their house slip into the low-quality market, they
@@ -218,6 +227,13 @@ not it is worth the investment. The following three cases are highlighted.
   - **Point c**: The maintenance cost is higher than the benefit, so more
     homeowners will move their houses out of the high quality market, and let
     them filter to the low quality market.
+
+The exact number of houses moving back and forth are determined by the market
+selling prices, but here the key principle is that the higher the maintenance
+cost – the more it costs to keep a house in the high quality market – the higher
+the selling price needs to be to justify that maintenance.
+
+### Filtering Rate and Market Supply Dynamics
 
 Next, we consider how these filtering supply dynamics relate to prices in each
 market. Consider the plots below which use fictitious data to illustrate these
@@ -334,10 +350,10 @@ at a price of $200 and up, with the "left over" supply starting at a lower
 value. It isn't until the quantity supplied reaches a point where the price in
 the left over market is *higher* than that of the initial, or minimum, supply
 price for the new construction that we see a kink in the supply chain. This kink
-,marked by the reference line, is the market supply. The lowest of all three
+, marked by the reference line, is the market supply. The lowest of all three
 supply curves in price, results from a combination in quantity from each
 supply curve - leftover and new construction - at all subsequent prices higher
-than that initial.
+than that initial entry price.
 
 A similar mechanism is at play in the right panel. The role that new
 construction plays in the "High Quality Market" is played by the houses that
@@ -345,6 +361,13 @@ filtered down in the "Low Quality Market". Similar to before, the minimum price
 at which a filtered house enters the market is the same price at which the 
 market will start to incorporate a greater quantity of housing from both 
 filtered and leftover housing.
+
+<aside>
+Note that in my simple example I'm making up some relationship between the
+the supply and cost so that the new supply slope is something like that a linear
+decrease as a function of the new supply. In reality this is more complicated
+and determined by things like the market's elasticity of supply.
+</aside>
 
 To summarize, the key principles at play in the housing market dynamics are as
 follows:
@@ -564,8 +587,8 @@ house construction, a similar effect would be observed under *any* restrictions
 imposed on new housing construction. In subsequent posts, we'll examine other
 barriers to housing construction that arise in the US housing market and look at
 the evidence economists have put forward to show that, empirically, the result
-predicted by the theoretical models outlined above can also be observed in
-practice.
+predicted by the theoretical models outlined above are also be observed in
+practice - or not!
 
 
 ## Acknowledgements {.appendix}

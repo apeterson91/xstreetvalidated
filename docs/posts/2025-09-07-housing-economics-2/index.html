@@ -1,0 +1,4299 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { color: #00769e; background-color: #f1f3f5; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #00769e; } /* Normal */
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #657422; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #00769e; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #00769e; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #00769e; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+<style>
+  div.csl-bib-body { }
+  div.csl-entry {
+    clear: both;
+    }
+  .hanging div.csl-entry {
+    margin-left:2em;
+    text-indent:-2em;
+  }
+  div.csl-left-margin {
+    min-width:2em;
+    float:left;
+  }
+  div.csl-right-inline {
+    margin-left:2em;
+    padding-left:1em;
+  }
+  div.csl-indent {
+    margin-left: 2em;
+  }
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>X Street Validated: Housing Economics - Part II</title>
+
+<meta property="description" itemprop="description" content="A Review of &quot;The Economic Implications of Housing Supply&quot;"/>
+
+<link rel="canonical" href="https://xstreetvalidated.com/"/>
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+<link rel="icon" type="image/png" href="../../images/XSV_tinylogo.png"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2026-11-12"/>
+<meta property="article:created" itemprop="dateCreated" content="2026-11-12"/>
+<meta name="article:author" content="Adam Peterson"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="X Street Validated: Housing Economics - Part II"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="A Review of &quot;The Economic Implications of Housing Supply&quot;"/>
+<meta property="og:url" content="https://xstreetvalidated.com/"/>
+<meta property="og:image" content="https://xstreetvalidated.com/posts/2025-09-07-housing-economics-2/sf-stack.png"/>
+<meta property="og:image:width" content="1536"/>
+<meta property="og:image:height" content="1056"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="X Street Validated"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="X Street Validated: Housing Economics - Part II"/>
+<meta property="twitter:description" content="A Review of &quot;The Economic Implications of Housing Supply&quot;"/>
+<meta property="twitter:url" content="https://xstreetvalidated.com/"/>
+<meta property="twitter:image" content="https://xstreetvalidated.com/posts/2025-09-07-housing-economics-2/sf-stack.png"/>
+<meta property="twitter:image:width" content="1536"/>
+<meta property="twitter:image:height" content="1056"/>
+
+<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+<meta name="citation_title" content="X Street Validated: Housing Economics - Part II"/>
+<meta name="citation_fulltext_html_url" content="https://xstreetvalidated.com"/>
+<meta name="citation_fulltext_world_readable" content=""/>
+<meta name="citation_online_date" content="2026/11/12"/>
+<meta name="citation_publication_date" content="2026/11/12"/>
+<meta name="citation_author" content="Adam Peterson"/>
+<!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=The economic implications of housing supply;citation_publisher=American Economic Association 2014 Broadway, Suite 305, Nashville, TN 37203-2418;citation_volume=32;citation_author=Edward Glaeser;citation_author=Joseph Gyourko"/>
+  <meta name="citation_reference" content="citation_title=America’s housing supply problem: The closing of the suburban frontier?;citation_publisher=National Bureau of Economic Research;citation_author=Edward L Glaeser;citation_author=Joseph Gyourko"/>
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","preview","output","citation_url","creative_commons","bibliography","categories","editor_options","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Housing Economics - Part II"]},{"type":"character","attributes":{},"value":["A Review of \"The Economic Implications of Housing Supply\""]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Adam Peterson"]},{"type":"character","attributes":{},"value":["https://apetersonsite.com/"]}]}]},{"type":"character","attributes":{},"value":["11-12-2026"]},{"type":"character","attributes":{},"value":["sf-stack.png"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["https://xstreetvalidated.com"]},{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["housing.bib"]},{"type":"character","attributes":{},"value":["Urban Economics"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["markdown"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["wrap"]}},"value":[{"type":"integer","attributes":{},"value":[72]}]}]},{"type":"character","attributes":{},"value":["https://xstreetvalidated.com/"]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["data/ahs_extract.rds","data/AHS_sas_snapshot/AHS 2007 National Value Labels Package/AHS 2007N Value Labels.csv","data/AHS_sas_snapshot/AHS 2007 National Value Labels Package/ahs2007n.csv","data/AHS_sas_snapshot/AHS 2007 National Value Labels Package/Apply AHS Formats.SAS","data/AHS_sas_snapshot/AHS 2007 National Value Labels Package/READ ME American Housing Survey 2007 Value Labels Package.pdf","data/AHS_sas_snapshot/AHS 2023 Value Labels Package/AHS 2023 Value Labels.csv","data/AHS_sas_snapshot/AHS 2023 Value Labels Package/Apply AHS Formats.SAS","data/AHS_sas_snapshot/AHS 2023 Value Labels Package/READ ME The American Housing Survey 2023 Value Labels Package.pdf","data/AHS_sas_snapshot/AHS Variable Name Index/ReadMe.txt","data/AHS_sas_snapshot/AHS Variable Name Index/varnames.csv","data/AHS_sas_snapshot/ahs2007n.sas7bdat","data/AHS_sas_snapshot/ahs2023n.sas7bdat","data/AHS_yearly/1985/AHS 1985 Metropolitan PUF v2.0 SAS.zip","data/AHS_yearly/1985/AHS 1985 National PUF v2.0 SAS.zip","data/AHS_yearly/1985/AHS 1985 National PUF Version Control.pdf","data/AHS_yearly/1985/ahs1985m.sas7bdat","data/AHS_yearly/1985/ahs1985n.sas7bdat","data/AHS_yearly/1999/ahs1999n.sas7bdat","data/AHS_yearly/2005/AHS 2005 National PUF v2.0 Flat SAS.zip","data/AHS_yearly/2005/AHS 2005 National Value Labels Package/AHS 2005N Value Labels.csv","data/AHS_yearly/2005/AHS 2005 National Value Labels Package/Apply AHS Formats.SAS","data/AHS_yearly/2005/AHS 2005 National Value Labels Package/READ ME American Housing Survey 2005 Value Labels Package.pdf","data/AHS_yearly/2005/AHS_2005_Items_Booklet.pdf","data/AHS_yearly/2005/AHS_2005_Topcodes.zip","data/AHS_yearly/2005/AHS_2005_Topcodes/AHS05topcodes.pdf","data/AHS_yearly/2005/AHS_2005_Topcodes/AHS05topcodes.xls","data/AHS_yearly/2005/ahs2005n.sas7bdat","data/AHS_yearly/2005/AHS2005TableSpecs.pdf","data/AHS_yearly/2013/AHS 2013 National PUF v2.0 Flat SAS.zip","data/AHS_yearly/2013/ahs2013n.sas7bdat","data/AHS_yearly/2019/AHS 2019 National PUF v1.1 Flat SAS.zip","data/AHS_yearly/2019/ahs2019n.sas7bdat","data/AHS_yearly/2023/AHS 2023 National PUF v1.0 Flat SAS.zip","data/AHS_yearly/2023/ahs2023n.sas7bdat","data/AHS_yearly/AHS Variable Name Index/ReadMe.txt","data/AHS_yearly/AHS Variable Name Index/varnames.csv","data/AHS_yearly/README.md","data/cb_2018_us_county_500k/cb_2018_us_county_500k.cpg","data/cb_2018_us_county_500k/cb_2018_us_county_500k.dbf","data/cb_2018_us_county_500k/cb_2018_us_county_500k.prj","data/cb_2018_us_county_500k/cb_2018_us_county_500k.shp","data/cb_2018_us_county_500k/cb_2018_us_county_500k.shp.ea.iso.xml","data/cb_2018_us_county_500k/cb_2018_us_county_500k.shp.iso.xml","data/cb_2018_us_county_500k/cb_2018_us_county_500k.shx","data/nhgis_1980_block_shapefile_coverage.xlsx","data/US_block_1980.zip","data/US_block_1980/block_boundaries_1980_codebook.txt","data/US_block_1980/US_block_1980.dbf","data/US_block_1980/US_block_1980.GISJOIN.atx","data/US_block_1980/US_block_1980.prj","data/US_block_1980/US_block_1980.shp","data/US_block_1980/US_block_1980.shp.xml","data/US_block_1980/US_block_1980.shx","data/US_block_1980/US_data_missing_polygon.csv","data/US_block_1980/US_polygon_missing_data.csv","data/Wharton Data/GyourkoHartleyKrimmel_NBERw26573appendix.pdf","data/Wharton Data/The Wharton Zoning Regulation Index-July 2, 2007.pdf","data/Wharton Data/WHARTON LAND REGULATION DATA_1_24_2008.dta","data/Wharton Data/WRLURI_01_15_2020.dta","data/zillow data/County_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv","data/zillow data/Metro_zhvi_bdrmcnt_3_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv","economic_implications_of_housing_supply_nberwp.pdf","fig10.png","fig3.png","housing-economics-2_files/anchor-4.2.2/anchor.min.js","housing-economics-2_files/bowser-1.9.3/bowser.min.js","housing-economics-2_files/distill-2.2.21/template.v2.js","housing-economics-2_files/figure-html5/ahs-table1-panel-chart-1.png","housing-economics-2_files/figure-html5/looking-forward-table3-panel-chart-1.png","housing-economics-2_files/figure-html5/sf-stack-1.png","housing-economics-2_files/figure-html5/three-markets-q-1.png","housing-economics-2_files/figure-html5/wealth-table3-panel-chart-1.png","housing-economics-2_files/figure-html5/wharton-regulation-1.png","housing-economics-2_files/header-attrs-2.25/header-attrs.js","housing-economics-2_files/header-attrs-2.32/header-attrs.js","housing-economics-2_files/jquery-3.6.0/jquery-3.6.0.js","housing-economics-2_files/jquery-3.6.0/jquery-3.6.0.min.js","housing-economics-2_files/jquery-3.6.0/jquery-3.6.0.min.map","housing-economics-2_files/popper-2.6.0/popper.min.js","housing-economics-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","housing-economics-2_files/tippy-6.2.7/tippy-light-border.css","housing-economics-2_files/tippy-6.2.7/tippy.css","housing-economics-2_files/tippy-6.2.7/tippy.umd.min.js","housing-economics-2_files/webcomponents-2.0.0/webcomponents.js","housing.bib","R/build_ahs_extract.R","R/housing_helpers.R","R/panelset.R","sf-stack.png","the_closing_of_the_suburban_frontier.pdf"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
+</style>
+
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../../site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
+  font-size: 100%;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+hr.section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0px;
+}
+
+
+d-byline {
+  border-top: none;
+}
+
+d-article {
+  padding-top: 2.5rem;
+  padding-bottom: 30px;
+  border-top: none;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
+}
+
+d-article div.sourceCode {
+  background-color: white;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+d-article pre {
+  font-size: 12px;
+  color: black;
+  background: none;
+  margin-top: 0;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+d-article details {
+  grid-column: text;
+  margin-bottom: 0.8em;
+}
+
+@media(min-width: 768px) {
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+/* tweak for Pandoc numbered line within distill */
+d-article pre.numberSource code > span {
+    left: -2em;
+}
+
+d-article pre {
+  font-size: 14px;
+}
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+/* Citation hover box */
+
+.tippy-box[data-theme~=light-border] {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.tippy-content > p {
+  margin-bottom: 0;
+  padding: 2px;
+}
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+.sidebar-section.custom {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.custom p {
+  margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // separator
+  var separator = '<hr class="section-separator" style="clear: both"/>';
+  // prepend separator above appendix
+  $('.d-byline').before(separator);
+  $('.d-article').before(separator);
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('details, div.sourceCode, pre, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme, except when numbering line
+  // in code chunk
+  $('pre:not(.numberLines) code.sourceCode a:empty').remove();
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      var author_name = front_matter.authors[i].author
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', author_name ? 'ORCID ID for ' + author_name : 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // hoverable references
+    $('span.citation[data-cites]').each(function() {
+      const citeChild = $(this).children()[0]
+      // Do not process if @xyz has been used without escaping and without bibliography activated
+      // https://github.com/rstudio/distill/issues/466
+      if (citeChild === undefined) return true
+
+      if (citeChild.nodeName == "D-FOOTNOTE") {
+        var fn = citeChild
+        $(this).html(fn.shadowRoot.querySelector("sup"))
+        $(this).id = fn.id
+        fn.remove()
+      }
+      var refs = $(this).attr('data-cites').split(" ");
+      var refHtml = refs.map(function(ref) {
+        // Could use CSS.escape too here, we insure backward compatibility in navigator
+        return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
+      }).join("\n");
+      window.tippy(this, {
+        allowHTML: true,
+        content: refHtml,
+        maxWidth: 500,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start'
+      });
+    });
+
+    // fix footnotes in tables (#411)
+    // replacing broken distill.pub feature
+    $('table d-footnote').each(function() {
+      // we replace internal showAtNode methode which is triggered when hovering a footnote
+      this.hoverBox.showAtNode = function(node) {
+        // ported from https://github.com/distillpub/template/pull/105/files
+        calcOffset = function(elem) {
+            let x = elem.offsetLeft;
+            let y = elem.offsetTop;
+            // Traverse upwards until an `absolute` element is found or `elem`
+            // becomes null.
+            while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                x += elem.offsetLeft;
+                y += elem.offsetTop;
+            }
+
+            return { left: x, top: y };
+        }
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+        const bbox = node.getBoundingClientRect();
+        const offset = calcOffset(node);
+        this.show([offset.left + bbox.width, offset.top + bbox.height]);
+      }
+    })
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-contents').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    // ignore leaflet img layers (#106)
+    figures = figures.filter(':not(img[class*="leaflet"])')
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    sans-serif;
+  --mono-font:       monospace;
+  --body-font:       sans-serif;
+  --navbar-font:     sans-serif;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+</style>
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+@import url('https://fonts.googleapis.com/css2?family=Amiri');
+@import url('https://fonts.googleapis.com/css2?family=Bitter');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono');
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.07rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    'Amiri',sans-serif;
+  --mono-font:       monospace;
+  --body-font:       'Bitter',sans-serif;
+  --navbar-font:     'DM+Mono',sans-serif;  /* websites + blogs only */
+  --footer-font:     'Amiri',sans-serif;
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       #000  /*edited from rgba(255, 255, 255, 0.8);*/
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #fff; /* #0F2E3D; */
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        20px;
+  --hover-color:      white;
+  --bkgd-color:       #000;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+</style>
+<style type="text/css">
+/* base style */
+
+/* FONT FAMILIES */
+
+:root {
+  --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+body,
+.posts-list .post-preview p,
+.posts-list .description p {
+  font-family: var(--body-font), var(--body-default);
+}
+
+h1, h2, h3, h4, h5, h6,
+.posts-list .post-preview h2,
+.posts-list .description h2 {
+  font-family: var(--heading-font), var(--heading-default);
+}
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: var(--mono-font), var(--mono-default);
+}
+
+
+/*-- TITLE --*/
+d-title h1,
+.posts-list > h1 {
+  color: var(--title-color, black);
+}
+
+d-title h1 {
+  font-size: var(--title-size, 50px);
+}
+
+/*-- HEADERS --*/
+d-article h1,
+d-article h2,
+d-article h3,
+d-article h4,
+d-article h5,
+d-article h6 {
+  color: var(--header-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- BODY --*/
+d-article > p,  /* only text inside of <p> tags */
+d-article > ul, /* lists */
+d-article > ol {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+  font-size: var(--body-size, 1.06rem);
+}
+
+
+/*-- CODE --*/
+d-article div.sourceCode code,
+d-article pre code {
+  font-size: var(--code-size, 14px);
+}
+
+/*-- ASIDE --*/
+d-article aside {
+  font-size: var(--aside-size, 12px);
+  color: var(--aside-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- FIGURE CAPTIONS --*/
+figure .caption,
+figure figcaption,
+.figure .caption {
+  font-size: var(--fig-cap-size, 13px);
+  color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- METADATA --*/
+d-byline h3 {
+  font-size: var(--heading-size, 0.6rem);
+  color: var(--heading-color, rgba(0, 0, 0, 0.5));
+}
+
+d-byline {
+  font-size: var(--body-size, 0.8rem);
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+d-byline a,
+d-article d-byline a {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- TABLE OF CONTENTS --*/
+.d-contents nav h3 {
+  font-size: var(--heading-size, 18px);
+}
+
+.d-contents nav a {
+  font-size: var(--contents-size, 13px);
+}
+
+/*-- APPENDIX --*/
+d-appendix h3 {
+  font-size: var(--heading-size, 15px);
+  color: var(--heading-color, rgba(0, 0, 0, 0.65));
+}
+
+d-appendix {
+  font-size: var(--text-size, 0.8em);
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+d-appendix d-footnote-list a.footnote-backlink {
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+.distill-site-header .title {
+  font-size: var(--title-size, 18px);
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a,
+.nav-dropdown .nav-dropbtn {
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.nav-dropdown .nav-dropbtn {
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  font-size: var(--text-size, 15px);
+}
+
+.distill-site-header a:hover,
+.nav-dropdown:hover .nav-dropbtn {
+  color: var(--hover-color, white);
+}
+
+.distill-site-header {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer a:hover {
+  color: var(--hover-color, white);
+}</style>
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.32/header-attrs.js"></script>
+  <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+     if (!/posts/.test(location.pathname)) {
+       return;
+     }
+
+     var script = document.createElement("script");
+     script.src = "https://giscus.app/client.js";
+     script.setAttribute("data-repo", "apeterson91/xstreetvalidated");
+     script.setAttribute("data-repo-id", "MDEwOlJlcG9zaXRvcnkzOTQwMDY4Njk=");
+     script.setAttribute("data-category", "Comments");
+     script.setAttribute("data-category-id", "DIC_kwDOF3wRVc4CAWhh");
+     script.setAttribute("data-mapping", "pathname");
+     script.setAttribute("data-reactions-enabled", "1");
+     script.setAttribute("data-emit-metadata", "0");
+     script.setAttribute("data-theme", "light");
+     script.setAttribute("data-lang", "en");
+
+     /* wait for article to load, append script to article element */
+     var observer = new MutationObserver(function (mutations, observer) {
+       var article = document.querySelector("d-article");
+       if (article) {
+         observer.disconnect();
+         /* HACK: article scroll */
+         article.setAttribute("style", "overflow-y: hidden");
+         article.appendChild(script);
+       }
+     });
+
+     observer.observe(document.body, { childList: true });
+   });
+ </script>
+
+<script type="text/javascript" src="https://www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+'notice_banner_type':'simple',
+'consent_type': 'express',
+'palette': 'light',
+'language': 'en',
+'website_name': 'XStreetValidated',
+'cookies_policy_url': 'url',
+'change_preferences_selector':'#CookiePreferences'
+});});</script>
+<script type="text/plain" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=UA-207384038-1"></script>
+<script type="text/plain" cookie-consent="tracking">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-207384038-1');
+</script>
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Housing Economics - Part II","description":"A Review of \"The Economic Implications of Housing Supply\"","authors":[{"author":"Adam Peterson","authorURL":"https://apetersonsite.com/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2026-11-12T00:00:00.000-07:00","citationText":"Peterson, 2026"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="../../index.html" class="title">X Street Validated</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="../../index.html">Home</a>
+<a href="../../about.html">About</a>
+<a href="../../references.html">References</a>
+<a href="../../index.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Housing Economics - Part II</h1>
+
+<!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../index.html#category:Urban_Economics" class="dt-tag">Urban Economics</a>
+</div>
+<!--/radix_placeholder_categories-->
+<p><p>A Review of “The Economic Implications of Housing Supply”</p></p>
+</div>
+
+<div class="d-byline">
+  Adam Peterson <a href="https://apetersonsite.com/" class="uri">https://apetersonsite.com/</a> 
+  
+<br/>11-12-2026
+</div>
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#from-theory-to-practice" id="toc-from-theory-to-practice">From Theory To Practice</a></li>
+<li><a href="#are-housing-markets-operating-efficiently" id="toc-are-housing-markets-operating-efficiently">Are Housing Markets Operating Efficiently?</a>
+<ul>
+<li><a href="#comparing-mppc-to-observed-housing-prices" id="toc-comparing-mppc-to-observed-housing-prices">Comparing MPPC to Observed Housing Prices</a></li>
+</ul></li>
+<li><a href="#whats-driving-inefficiency-3-markets-of-interest" id="toc-whats-driving-inefficiency-3-markets-of-interest">What’s Driving Inefficiency: 3 Markets of Interest</a>
+<ul>
+<li><a href="#local-regulation" id="toc-local-regulation">Local Regulation</a></li>
+</ul></li>
+<li><a href="#impacts-of-high-housing-costs" id="toc-impacts-of-high-housing-costs">Impacts of high housing costs</a>
+<ul>
+<li><a href="#household-wealth" id="toc-household-wealth">Household Wealth</a></li>
+<li><a href="#labor-market-productivity" id="toc-labor-market-productivity">Labor Market Productivity</a></li>
+</ul></li>
+<li><a href="#looking-forward" id="toc-looking-forward">Looking forward</a></li>
+</ul>
+</nav>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<style>
+.panelset { margin: 1.5em 0 2em; }
+.panelset .panel-tabs { margin-bottom: 0; }
+.panelset .panel-tab {
+  display: inline-block; cursor: pointer; font-family: inherit; font-size: 0.9em;
+  padding: 6px 16px; margin: 0 4px -1px 0;
+  border: 1px solid #ccc; border-bottom: none; border-radius: 4px 4px 0 0;
+  background: #f2f2f2;
+}
+.panelset .panel-tab.active { background: #fff; font-weight: 600; border-bottom: 1px solid #fff; }
+.panelset .panel-pane { display: none; border: 1px solid #ccc; padding: 1em; }
+.panelset .panel-pane.active { display: block; }
+.panelset .panel-pane img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+.panelset .panel-pane table { margin: 0 auto; }
+</style>
+<script>
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('.panel-tab');
+  if (!btn) return;
+  var panelset = btn.closest('.panelset');
+  panelset.querySelectorAll('.panel-tab').forEach(function(b){ b.classList.remove('active'); });
+  panelset.querySelectorAll('.panel-pane').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  panelset.querySelector('#' + btn.dataset.pane).classList.add('active');
+});
+</script>
+</div>
+<h1 id="from-theory-to-practice">From Theory To Practice</h1>
+<p>In the first post of this series examining housing markets, we explored the
+theory underlying housing markets including how houses filter from higher cost
+markets to lower, as well as the impact on the market price when the
+construction of new housing is restricted. In this post, we’re moving from theory
+to practice by studying <span class="citation" data-cites="glaeser2018economic">(<a href="#ref-glaeser2018economic" role="doc-biblioref">Glaeser and Gyourko 2018</a>)</span> and the related material in
+<span class="citation" data-cites="glaeser2025america">(<a href="#ref-glaeser2025america" role="doc-biblioref">Glaeser and Gyourko 2025</a>)</span>. <span class="citation" data-cites="glaeser2018economic">(<a href="#ref-glaeser2018economic" role="doc-biblioref">Glaeser and Gyourko 2018</a>)</span> examines the
+following 3 high level ideas in detail in the US housing market:</p>
+<ol type="1">
+<li>Are housing markets – housing supply specifically – operating
+efficiently?</li>
+<li>If not, what might explain the lack of efficiency in?</li>
+<li>And, what are the broader consequences of this lack of efficiency across the
+economy?</li>
+</ol>
+<p>We’ll work through each of these piece by piece and deconstruct the
+author’s arguments, digging into the author’s data and methods for each
+question.</p>
+<h1 id="are-housing-markets-operating-efficiently">Are Housing Markets Operating Efficiently?</h1>
+<p>To answer the first question, the authors compare construction cost to the
+market price at which a house sells. This speaks to a fundamental economic
+principle defining the properties of efficient markets - in a perfectly
+efficient market the market price is equal to the cost of production. The authors can take for granted that their econ savvy reader have
+the background to understand the logic underlying this argument but if you’d
+like a reference to refresh yourself I’d encourage checking out this wikipedia
+<a href="https://en.wikipedia.org/wiki/Competition_(economics)#Perfect_competition">article</a>
+and/or this khan academy
+<a href="https://www.khanacademy.org/economics-finance-domain/microeconomics/perfect-competition-topic/perfect-competition/a/perfect-competition-and-why-it-matters-cnx">piece</a>.</p>
+<p>In order to come up with a production cost, the authors put together the
+following model consisting of 3 quantities:</p>
+<ol type="1">
+<li>The land value the house will reside on (<span class="math inline">\(L\)</span>),</li>
+<li>The cost of constructing the house on the land (<span class="math inline">\(CC\)</span>) and</li>
+<li>The profit needed to compensate the construction firm for building the house
+(<span class="math inline">\(EP\)</span>)</li>
+</ol>
+<p>These three components combine to define the minimum profitable
+production cost (<span class="math inline">\(MPPC\)</span>) in the following manner:</p>
+<p><span class="math display">\[
+MPPC = (L + CC)EP,
+\]</span></p>
+<p>Where EP is defined as some scalar inflation factor, <span class="math inline">\(EP &gt; 1\)</span>, so that
+if <span class="math inline">\(EP=1\)</span>, there’s no profit and any value above represents the
+additional portion of the cost that returns to the firm.</p>
+<p>To fill in this equation the authors take the following strategy:</p>
+<ol type="1">
+<li>Using a rule of thumb from an “ad-hoc survey” of home builders, the authors
+assume <span class="math inline">\(L \leq .2 (L +CC)\)</span> or <span class="math inline">\(4L \leq CC\)</span>.</li>
+<li>Physical construction costs are taken from a company – <a href="https://www.rsmeans.com/?srsltid=AfmBOopn2waitkQ0_5LwatHT5pHZIUorFAWiF2gMAyhx6xN-kbW-mw7H">R.S.
+Means</a>
+– which compiles data on the physical construction costs for
+different types of housing units across several US housing markets.
+<ul>
+<li>An “economy-quality home” construction costs are ~ 140K for a
+2K sq. ft. home. In cheaper markets, 180K in more expensive
+markets.</li>
+<li>According to the authors, these costs haven’t changed much over time.</li>
+</ul></li>
+<li>The authors assume <span class="math inline">\(EP = 1.17\)</span>. Homebuilders’ profit margins on land and
+construction costs run 9-11% per year across the cycle. Because operating
+costs take roughly 35-40% of a builder’s gross margin, this implies a gross
+margin of about 17%, so <span class="math inline">\(EP = 1 + 0.17 = 1.17\)</span>.</li>
+</ol>
+<p>Putting this together, the authors determine that an “efficient” housing
+market should be able to supply an 2000 sq. ft. “economy” house for ~
+$200K in a low construction cost market and ~ $265K in the higher
+construction cost markets.</p>
+<p>Plugging in the construction costs from above, with <span class="math inline">\(L = 0.25 \times CC\)</span> (the
+same as <span class="math inline">\(L = 0.2 \times (L + CC)\)</span>):</p>
+<ul>
+<li>Cheaper market: MPPC = (L + CC) × EP = 1.25 × $140K × 1.17 ≈ $205K</li>
+<li>More expensive market: MPPC = 1.25 × $180K × 1.17 ≈ $263K</li>
+</ul>
+<h2 id="comparing-mppc-to-observed-housing-prices">Comparing MPPC to Observed Housing Prices</h2>
+<p>The authors compare prices to costs by computing, for every single-family home,
+the ratio of the housing price (<span class="math inline">\(HP\)</span>) to its minimum profitable production cost,
+<span class="math inline">\(\frac{HP}{MPPC}\)</span>. As stated in the paper, this ratio is effectively <strong><a href="https://en.wikipedia.org/wiki/Tobin%27s_q">Tobin’s
+q</a> for housing</strong>:
+- a value below 1 or above 1 signals some barrier to the market operating
+efficiently for any number of reasons.
+- However, if this number is ~ 1, then we have evidence to support the
+hypothesis that the market is operating efficiently.</p>
+<p>The authors sort homes into four bins: a ratio of 0.75 or less (priced well
+below cost), 0.75–1.25 (roughly at cost), 1.25–2, and greater than 2 (more
+than double production cost).</p>
+<p>The authors’ observed market price data come from the 1985–2013 micro records
+of the <strong>American Housing Survey (AHS)</strong>, which report each unit’s
+self-assessed value, its living area in square feet, whether it is single-family
+detached, and its metropolitan area. The square footage matters because the
+authors use the R.S. Means construction cost for a 2,000 sq. ft. home – a
+proprietary dataset we don’t have access to ourselves – and match it to houses
+of approximately that size in the numbers below.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>You can see Table 1 of <span class="citation" data-cites="glaeser2018economic">(<a href="#ref-glaeser2018economic" role="doc-biblioref">Glaeser and Gyourko 2018</a>)</span> reproduced below.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div id="ahs-table1" class="panelset">
+<div class="panel-tabs">
+<button type="button" class="panel-tab active" data-pane="ahs-table1-1">
+Table
+</button>
+<button type="button" class="panel-tab" data-pane="ahs-table1-2">
+Chart
+</button>
+</div>
+<div id="ahs-table1-1" class="panel-pane active">
+<p style="font-size:0.9em;">
+Table 1. House price-to-minimum profitable production cost ratio (micro data). Source: <span class="citation" data-cites="glaeser2018economic">Glaeser and Gyourko (<a href="#ref-glaeser2018economic" role="doc-biblioref">2018</a>)</span>.
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:left;">
+&lt;= 0.75
+</th>
+<th style="text-align:left;">
+0.75 - 1.25
+</th>
+<th style="text-align:left;">
+1.25 - 2
+</th>
+<th style="text-align:left;">
+&gt; 2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1985
+</td>
+<td style="text-align:left;">
+38.0%
+</td>
+<td style="text-align:left;">
+40.5%
+</td>
+<td style="text-align:left;">
+17.9%
+</td>
+<td style="text-align:left;">
+3.6%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1987
+</td>
+<td style="text-align:left;">
+33.4%
+</td>
+<td style="text-align:left;">
+38.3%
+</td>
+<td style="text-align:left;">
+21.7%
+</td>
+<td style="text-align:left;">
+6.6%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1989
+</td>
+<td style="text-align:left;">
+31.8%
+</td>
+<td style="text-align:left;">
+34.6%
+</td>
+<td style="text-align:left;">
+20.3%
+</td>
+<td style="text-align:left;">
+13.3%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1991
+</td>
+<td style="text-align:left;">
+31.1%
+</td>
+<td style="text-align:left;">
+35.3%
+</td>
+<td style="text-align:left;">
+22.5%
+</td>
+<td style="text-align:left;">
+11.1%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1993
+</td>
+<td style="text-align:left;">
+31.8%
+</td>
+<td style="text-align:left;">
+36.1%
+</td>
+<td style="text-align:left;">
+23.6%
+</td>
+<td style="text-align:left;">
+8.5%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1995
+</td>
+<td style="text-align:left;">
+27.4%
+</td>
+<td style="text-align:left;">
+37.7%
+</td>
+<td style="text-align:left;">
+26.5%
+</td>
+<td style="text-align:left;">
+8.4%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1997
+</td>
+<td style="text-align:left;">
+31.5%
+</td>
+<td style="text-align:left;">
+40.0%
+</td>
+<td style="text-align:left;">
+23.0%
+</td>
+<td style="text-align:left;">
+5.5%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:left;">
+22.0%
+</td>
+<td style="text-align:left;">
+40.1%
+</td>
+<td style="text-align:left;">
+26.2%
+</td>
+<td style="text-align:left;">
+11.8%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2001
+</td>
+<td style="text-align:left;">
+19.4%
+</td>
+<td style="text-align:left;">
+38.2%
+</td>
+<td style="text-align:left;">
+25.2%
+</td>
+<td style="text-align:left;">
+17.1%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2003
+</td>
+<td style="text-align:left;">
+16.2%
+</td>
+<td style="text-align:left;">
+32.1%
+</td>
+<td style="text-align:left;">
+25.9%
+</td>
+<td style="text-align:left;">
+25.9%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2005
+</td>
+<td style="text-align:left;">
+18.0%
+</td>
+<td style="text-align:left;">
+28.7%
+</td>
+<td style="text-align:left;">
+25.3%
+</td>
+<td style="text-align:left;">
+28.0%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2007
+</td>
+<td style="text-align:left;">
+19.9%
+</td>
+<td style="text-align:left;">
+28.1%
+</td>
+<td style="text-align:left;">
+24.0%
+</td>
+<td style="text-align:left;">
+28.0%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2009
+</td>
+<td style="text-align:left;">
+31.4%
+</td>
+<td style="text-align:left;">
+33.9%
+</td>
+<td style="text-align:left;">
+21.6%
+</td>
+<td style="text-align:left;">
+13.1%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2011
+</td>
+<td style="text-align:left;">
+37.4%
+</td>
+<td style="text-align:left;">
+35.4%
+</td>
+<td style="text-align:left;">
+16.0%
+</td>
+<td style="text-align:left;">
+11.2%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:left;">
+40.3%
+</td>
+<td style="text-align:left;">
+33.3%
+</td>
+<td style="text-align:left;">
+16.2%
+</td>
+<td style="text-align:left;">
+10.2%
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="ahs-table1-2" class="panel-pane">
+<img src="housing-economics-2_files/figure-html5/ahs-table1-panel-chart-1.png" alt="Distribution of the price-to-cost ratio over time." />
+<p style="font-size:0.9em;">
+Distribution of the price-to-cost ratio over time. Source: <span class="citation" data-cites="glaeser2018economic">Glaeser and Gyourko (<a href="#ref-glaeser2018economic" role="doc-biblioref">2018</a>)</span>, Table 1.
+</p>
+</div>
+</div>
+</div>
+<p>The area plot makes the cycle the authors describe easy to see at a glance.
+The top band – homes valued at more than double their production cost –
+is thin in the mid-1980s, thickens steadily through the 1990s, and by
+2003–2007 has swollen to more than a quarter of all owner-occupied
+single-family homes in the sample, right alongside the top of the housing
+boom. It then collapses just as sharply after the financial crisis, falling
+back below 15 percent by 2011–2013. The bottom band tells the mirror-image
+story: the share of homes priced at or below three-quarters of production
+cost bottoms out during the same 2001–2007 window before rebounding to its
+highest level in the series by 2013. In other words, the market swings from
+a large majority of homes priced near or below cost in the 1980s and early
+1990s, to a market where a rising share of homes command prices well above
+what it would cost to build them from scratch, and back again – consistent
+with the authors’ argument that these swings reflect changes in the
+binding-ness of supply constraints rather than a one-way drift toward
+higher-priced housing.</p>
+<p>All of this serves to illustrate the author’s larger point: the housing market
+-nationally - is not operating efficiently as we see the cost of buying a home
+grow much larger than the cost of production, in the run-up to the financial
+crisis. However, just because that large picture comes into view, doesn’t mean
+there aren’t specific markets where we might see different trends emerge.</p>
+<h1 id="whats-driving-inefficiency-3-markets-of-interest">What’s Driving Inefficiency: 3 Markets of Interest</h1>
+<p>The authors pick out three markets in particular as highlighting the different
+housing dynamics on display in the US: (1) San Francisco, (2) Detroit and (3)
+Atlanta. Each illustrates a different way policy, supply and demand have
+interacted to produce different housing prices over time.</p>
+<p>While I didn’t have the R.S. data available to compute these values exactly
+I used the grid heuristic values to match the data and recomputed the ratios
+for these three markets using the AHS data below.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:three-markets-q"></span>
+<img src="housing-economics-2_files/figure-html5/three-markets-q-1.png" alt="Price-to-cost ratio, three illustrative metros." width="624" />
+<p class="caption">
+Figure 1: Price-to-cost ratio, three illustrative metros.
+</p>
+</div>
+</div>
+<p>San Francisco sits well above the cost line in every year we observe, and climbs
+further still through the 2000s – a market where, per the authors’ argument,
+both geographic limitations and self-imposed regulatory constraints keep prices
+detached from production cost regardless of the broader economic environment.
+Detroit and Atlanta, by contrast, track close to (or below) a ratio of 1
+throughout, consistent with the authors’ description of these as more
+supply-elastic markets where prices cannot stray far from cost. In Detroit’s
+case, there is abundant supply without new construction (housing demand
+continued to fall as foreign competition hurt the auto industry and people <a href="https://en.wikipedia.org/wiki/Demographic_history_of_Detroit">left
+Detroit</a>), whereas
+in Atlanta, active new construction pulls prices back down to meet demand.</p>
+<p>In the more expensive markets like San Francisco and the rest of the coastal
+areas, the authors identify other factors that may explain the gap between
+construction cost and housing market price.</p>
+<p>If we go back to the MPPC formula, there are three suspects for what could be
+causing the housing price to be so expensive: the cost of construction <span class="math inline">\((CC)\)</span>,
+the construction firm’s profit (<span class="math inline">\(EP\)</span>), and/or the cost of land <span class="math inline">\((L)\)</span>. San
+Francisco has relatively high construction costs, but that is not what
+makes its homes so expensive. To see what does, let’s take the median home in
+the authors’ 2013 data and work backwards from its price to figure out what each
+piece of it must have cost.</p>
+<p><strong>Step 1: Start with what we observe.</strong> The self-reported value of the home at
+San Francisco’s median price-to-cost ratio is $800,000, and its ratio is
+<span class="math inline">\(\frac{HP}{MPPC} = 2.84\)</span>.</p>
+<p><strong>Step 2: Back out the minimum profitable production cost.</strong> Since the ratio is
+just the price divided by MPPC, we can rearrange to solve for MPPC:</p>
+<p><span class="math display">\[
+MPPC = \frac{HP}{2.84} = \frac{800,000}{2.84} \approx \$281,690
+\]</span></p>
+<p>This is what it would cost to build this home <em>and</em> earn the builder a normal
+profit in an efficient market.</p>
+<p><strong>Step 3: Strip out land and profit to get the construction cost.</strong> Recall from
+earlier that <span class="math inline">\(MPPC = (L + CC) \times EP\)</span>, with <span class="math inline">\(L \leq 0.2 (L + CC)\)</span>, which
+simplifies to <span class="math inline">\(L = 0.25 \times CC\)</span>, and <span class="math inline">\(EP = 1.17\)</span>. Substituting the land rule
+of thumb:</p>
+<p><span class="math display">\[
+MPPC = (0.25\,CC + CC) \times 1.17 = 1.25 \times 1.17 \times CC \approx 1.46 \times CC
+\]</span></p>
+<p>so the physical construction cost (<span class="math inline">\(CC\)</span>) is</p>
+<p><span class="math display">\[
+CC = \frac{MPPC}{1.46} = \frac{281,690}{1.46} \approx \$192,938
+\]</span></p>
+<p><strong>Step 4: What did the land actually cost?</strong> Now go back to the $800,000 price.
+Developers cannot earn
+<a href="https://www.economicshelp.org/blog/3181/economics/supernormal-profits/">super-normal</a>
+profits at the margin, so the builder still only takes the same 17% margin. Removing it from the price and then subtracting
+the construction cost leaves whatever must have been paid for the land:</p>
+<p><span class="math display">\[
+L_{actual} = \frac{HP}{1.17} - CC = \frac{800,000}{1.17} - 192,938 \approx \$490,822
+\]</span></p>
+<p><strong>Step 5: What would the land cost in an unregulated market?</strong> Using the same
+rule of thumb that land is a quarter of construction costs:</p>
+<p><span class="math display">\[
+L = 0.25 \times CC = 0.25 \times 192,938 \approx \$48,235
+\]</span></p>
+<p>That is what the underlying land would cost in a relatively unregulated
+residential development market. As a check, land plus construction is
+$48,235 + $192,938 = $241,173, and the builder’s 17%
+margin on top of that gets us to roughly $282,172,
+which matches the $281,690 from Step 2 up to rounding.</p>
+<p>Compare that with Step 4: the land actually cost roughly <strong>10 times</strong> the
+$48,235 an unregulated market would imply
+($490,822 / $48,235 <span class="math inline">\(\approx\)</span> 10.2).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:sf-stack"></span>
+<img src="housing-economics-2_files/figure-html5/sf-stack-1.png" alt="Where the money goes: an efficient-market cost stack versus San Francisco's median home. Calculations follow @glaeser2018economic." width="768" />
+<p class="caption">
+Figure 2: Where the money goes: an efficient-market cost stack versus San Francisco’s median home. Calculations follow <span class="citation" data-cites="glaeser2018economic">Glaeser and Gyourko (<a href="#ref-glaeser2018economic" role="doc-biblioref">2018</a>)</span>.
+</p>
+</div>
+</div>
+<p>Construction costs are identical in both bars. Almost the entire gap between
+what this home should cost and what it sells for is the bidding up of land
+values. Because the scarce factor is land, not building materials or
+construction labor, that is what makes San Francisco housing so expensive. And
+since most of the inflation in the price comes from the value of the land itself
+rather than the building on it, it helps motivate policies such as a <a href="https://en.wikipedia.org/wiki/Land_value_tax">land value
+tax</a>, which taxes the value of
+land rather than the structures built on it. Other restrictions on development,
+also cause this piece to inflate, and the authors’ use a survey of local
+government regulation <span class="citation" data-cites="gyourko2008new">(<a href="#ref-gyourko2008new" role="doc-biblioref">Gyourko et al. 2008</a>)</span> to identify association - not
+causation - between these two measures.</p>
+<h3 id="local-regulation">Local Regulation</h3>
+<p>To see how much local regulation varies across these three markets, the chart
+below plots the <a href="https://realestate.wharton.upenn.edu/working-papers/a-new-measure-of-the-local-regulatory-environment-for-housing-markets-the-wharton-residential-land-use-regulatory-index/">Wharton Residential Land Use Regulatory
+Index</a>
+for each community surveyed in each metro. The index is standardized so that 0
+is the national average and higher values mean more restrictive
+regulation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:wharton-regulation"></span>
+<img src="housing-economics-2_files/figure-html5/wharton-regulation-1.png" alt="Dot plot of the Wharton Residential Land Use Regulatory Index for communities in San Francisco, Atlanta and Detroit, with each metro's mean and confidence interval. San Francisco is well above the national average of zero; Atlanta and Detroit are near zero, with Detroit more spread out." width="768" />
+<p class="caption">
+Figure 3: Local land-use regulation in three metros (2005 Wharton survey). Small points are surveyed communities; the large point and bars are the survey-weighted metro mean and 95% confidence interval. Source: <span class="citation" data-cites="gyourko2008new">Gyourko et al. (<a href="#ref-gyourko2008new" role="doc-biblioref">2008</a>)</span>.
+</p>
+</div>
+</div>
+<p>San Francisco’s communities are, on average, much more restrictive than the
+national norm: the survey-weighted mean index is 0.72 (95% CI
+0.17 to 1.28), compared with
+0.03 in Atlanta and 0.05 in Detroit, both close to
+the national average. Detroit’s communities vary the most (variance of
+0.71, versus 0.28 in Atlanta), so some Detroit-area
+suburbs are quite restrictive even though the metro as a whole is not. These
+confidence intervals treat each surveyed community as an independent draw, when
+they’re likely correlated, so they are best read as a rough guide.</p>
+<p>As the authors have now established the different types of housing markets
+throughout the US, as well as some possible sources of the rising cost, they now
+turn to the larger implications of what these high costs can do to the economic
+well-being of those living in places with higher housing costs.</p>
+<h1 id="impacts-of-high-housing-costs">Impacts of high housing costs</h1>
+<p>It’s quite intuitive that high housing prices are bad. The authors explore just
+how these inflated prices might have negative impacts in the less efficient
+markets identified in their work. They present two general themes of just what
+happens when the cost of housing becomes so high.</p>
+<h2 id="household-wealth">Household Wealth</h2>
+<p>The authors work through what might be an un-intuitive line of thinking when
+reasoning around the wealth created from rising land prices. Since the rise in
+land values may also increase the cost of living, an individual who experiences
+an increase in their home’s value may not be all that better off, since they
+have to compensate for their home’s increased value with increased property
+taxes, and inflation on other goods and services they buy in their area, to
+support others’ ability to live in the less efficient market.</p>
+<p>However, the authors’ argue that the larger impact falls on those who are
+renting in an inefficient market like New York or San Francisco, since they
+experience no increase in the value of their home to compensate their increased
+cost of living. Their rent simply rises along with all of their other costs.
+The authors argue that because older households tend to own homes and younger
+ones rent, rising housing costs lead to an intergenerational transfer of
+wealth from young to old through the increased value of the land.</p>
+<p>Table 3 of <span class="citation" data-cites="glaeser2018economic">(<a href="#ref-glaeser2018economic" role="doc-biblioref">Glaeser and Gyourko 2018</a>)</span> tries to make this more concrete using the
+Federal Reserve’s <a href="https://www.federalreserve.gov/econres/scfindex.htm">Survey of Consumer
+Finances</a>. It compares
+housing net worth at several points in the distribution for the same age groups
+in 1983 and in 2013, three decades apart.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div id="wealth-table3" class="panelset">
+<div class="panel-tabs">
+<button type="button" class="panel-tab active" data-pane="wealth-table3-1">
+Table
+</button>
+<button type="button" class="panel-tab" data-pane="wealth-table3-2">
+Chart
+</button>
+</div>
+<div id="wealth-table3-1" class="panel-pane active">
+<p style="font-size:0.9em;">
+Table 3. Housing net worth, 30 year changes ($2013), by age group and percentile. Source: <span class="citation" data-cites="glaeser2018economic">Glaeser and Gyourko (<a href="#ref-glaeser2018economic" role="doc-biblioref">2018</a>)</span>, using the 1983 and 2013 Survey of Consumer Finances.
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Percentile
+</th>
+<th style="text-align:left;">
+18-24 (1983)
+</th>
+<th style="text-align:left;">
+45-54 (1983)
+</th>
+<th style="text-align:left;">
+18-24 (2013)
+</th>
+<th style="text-align:left;">
+45-54 (2013)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+$0
+</td>
+<td style="text-align:left;">
+$87,120
+</td>
+<td style="text-align:left;">
+$0
+</td>
+<td style="text-align:left;">
+$30,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:left;">
+$0
+</td>
+<td style="text-align:left;">
+$152,159
+</td>
+<td style="text-align:left;">
+$0
+</td>
+<td style="text-align:left;">
+$109,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:left;">
+$24,803
+</td>
+<td style="text-align:left;">
+$248,818
+</td>
+<td style="text-align:left;">
+$5,500
+</td>
+<td style="text-align:left;">
+$250,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:left;">
+$47,488
+</td>
+<td style="text-align:left;">
+$353,190
+</td>
+<td style="text-align:left;">
+$43,000
+</td>
+<td style="text-align:left;">
+$400,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:left;">
+$141,808
+</td>
+<td style="text-align:left;">
+$862,359
+</td>
+<td style="text-align:left;">
+$95,000
+</td>
+<td style="text-align:left;">
+$1,000,000
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Percentile
+</th>
+<th style="text-align:left;">
+25-34 (1983)
+</th>
+<th style="text-align:left;">
+55-64 (1983)
+</th>
+<th style="text-align:left;">
+25-34 (2013)
+</th>
+<th style="text-align:left;">
+55-64 (2013)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+$0
+</td>
+<td style="text-align:left;">
+$94,184
+</td>
+<td style="text-align:left;">
+$0
+</td>
+<td style="text-align:left;">
+$60,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:left;">
+$45,352
+</td>
+<td style="text-align:left;">
+$161,886
+</td>
+<td style="text-align:left;">
+$21,000
+</td>
+<td style="text-align:left;">
+$167,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:left;">
+$91,827
+</td>
+<td style="text-align:left;">
+$255,361
+</td>
+<td style="text-align:left;">
+$74,000
+</td>
+<td style="text-align:left;">
+$350,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:left;">
+$123,135
+</td>
+<td style="text-align:left;">
+$353,190
+</td>
+<td style="text-align:left;">
+$140,000
+</td>
+<td style="text-align:left;">
+$543,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:left;">
+$230,751
+</td>
+<td style="text-align:left;">
+$760,380
+</td>
+<td style="text-align:left;">
+$256,000
+</td>
+<td style="text-align:left;">
+$1,500,000
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Percentile
+</th>
+<th style="text-align:left;">
+35-44 (1983)
+</th>
+<th style="text-align:left;">
+65-74 (1983)
+</th>
+<th style="text-align:left;">
+35-44 (2013)
+</th>
+<th style="text-align:left;">
+65-74 (2013)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+$55,799
+</td>
+<td style="text-align:left;">
+$82,411
+</td>
+<td style="text-align:left;">
+$6,000
+</td>
+<td style="text-align:left;">
+$100,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:left;">
+$118,660
+</td>
+<td style="text-align:left;">
+$150,136
+</td>
+<td style="text-align:left;">
+$58,200
+</td>
+<td style="text-align:left;">
+$225,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:left;">
+$180,763
+</td>
+<td style="text-align:left;">
+$279,972
+</td>
+<td style="text-align:left;">
+$168,000
+</td>
+<td style="text-align:left;">
+$440,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:left;">
+$247,349
+</td>
+<td style="text-align:left;">
+$426,936
+</td>
+<td style="text-align:left;">
+$300,000
+</td>
+<td style="text-align:left;">
+$701,000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:left;">
+$531,198
+</td>
+<td style="text-align:left;">
+$941,840
+</td>
+<td style="text-align:left;">
+$1,025,000
+</td>
+<td style="text-align:left;">
+$2,000,000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="wealth-table3-2" class="panel-pane">
+<img src="housing-economics-2_files/figure-html5/wealth-table3-panel-chart-1.png" alt="Bar chart of housing net worth at the 50th to 99th percentiles for six age groups in 1983 and 2013." />
+<p style="font-size:0.9em;">
+Housing net worth by age group and percentile, 1983 vs 2013 ($2013). Source: <span class="citation" data-cites="glaeser2018economic">Glaeser and Gyourko (<a href="#ref-glaeser2018economic" role="doc-biblioref">2018</a>)</span>, Table 3.
+</p>
+</div>
+</div>
+</div>
+<p>The pattern is lopsided. Younger households – 18-24, 25-34 and 35-44 – hold the
+same or less housing wealth in 2013 than their counterparts did in 1983 through
+much of the distribution. The median 35-44 year old, for example, went from
+about $56,000 to $6,000. Only the very top of the 25-34 and 35-44 groups –
+the 95th and 99th percentiles – is somewhat higher. The oldest groups tell a different
+story: at the
+90th percentile and above, housing wealth for 55-64 and 65-74 year olds is up
+considerably, and a 65-74 year old at the 99th percentile now holds about $2
+million, more than double 1983. Many of them became homeowners 30-40 years
+earlier and were best positioned to benefit from rising prices. In other words,
+the sharpest gains in housing wealth go to a small number of the richest, oldest
+owners. Note that this is a survey of the same aged individuals at different
+points in time and there is no evidence of a causal relationship of supply
+restrictions, construction costs, or any of the other factors leading to the
+outcomes in this data set - it is merely descriptive of the wealth of these
+two different groups at different points in time.</p>
+<h2 id="labor-market-productivity">Labor Market Productivity</h2>
+<p>A second consequence of the inefficient housing markets is that individuals that
+might otherwise move to these highly productive and dynamic labor markets, the
+authors argue, can’t move and participate in these economies. The authors work
+through a modeling exercise to try and illustrate the elasticity of labor demand
+and supply in these markets with and without the supply restrictions increasing
+land values.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:fig-welfare"></span>
+<img src="fig10.png" alt="Diagram of wages in a zoning-constrained area and in other areas as the constrained area's population changes, showing equilibrium with and without zoning and the land rents between them." width="774" />
+<p class="caption">
+Figure 4: Welfare consequences of restricting development in a productive market. Source: <span class="citation" data-cites="glaeser2018economic">Glaeser and Gyourko (<a href="#ref-glaeser2018economic" role="doc-biblioref">2018</a>)</span>.
+</p>
+</div>
+</div>
+<aside>
+This figure, from the authors’ modeling exercise, illustrates some of the
+consequences of housing market
+inefficiencies: when zoning restricts how many people can live in a productive
+area, wages and land rents diverge from their unconstrained equilibrium.
+</aside>
+<p>I’ll spare you this exercise, but the larger, intuitive point they argue is worth
+reflection. When the cost of
+living somewhere like San Francisco, New York, etc. becomes very high, it deters
+individuals who might otherwise benefit professionally from the experience of
+moving to those cities and obtaining the training, network contacts, etc. that
+they could (historically at least) only receive in those cities. They’re more
+likely to stay in their less productive towns where they might receive a lower
+salary. Note here, that the lower salary is not just because they’re in a lower
+cost of living location, it is also because they are not as productive as they
+might be <em>counter-factually</em> living in some place with better connections and
+professional opportunities.</p>
+<h1 id="looking-forward">Looking forward</h1>
+<p>There should be little surprise that the authors identify and argue for more
+efficient housing markets given the negative impacts they identify in this work.
+While sympathetic to the fact that new construction and increasing density can
+carry negative impacts - more traffic, noise etc. - the authors argue that the
+positives outweigh the negatives in terms of the impact on intergenerational
+wealth, labor market flexibility, and more.</p>
+<p>In their more recent paper, <span class="citation" data-cites="glaeser2025america">(<a href="#ref-glaeser2025america" role="doc-biblioref">Glaeser and Gyourko 2025</a>)</span>, the authors extend their
+price cost comparison to the 2020’s. They find the same pattern in their 2018
+paper now shows up again in present day - the sales price of a house in Atlanta,
+for example is starting to become more expensive than what it costs to produce
+the house.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div id="looking-forward-table3" class="panelset">
+<div class="panel-tabs">
+<button type="button" class="panel-tab active" data-pane="looking-forward-table3-1">
+Table
+</button>
+<button type="button" class="panel-tab" data-pane="looking-forward-table3-2">
+Chart
+</button>
+</div>
+<div id="looking-forward-table3-1" class="panel-pane active">
+<p style="font-size:0.9em;">
+Table 3. Share of census tracts in each P:MPPC bin, six focal markets. Source: <span class="citation" data-cites="glaeser2025america">Glaeser and Gyourko (<a href="#ref-glaeser2025america" role="doc-biblioref">2025</a>)</span>.
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+CBSA
+</th>
+<th style="text-align:left;">
+P:MPPC bin
+</th>
+<th style="text-align:left;">
+1970
+</th>
+<th style="text-align:left;">
+1980
+</th>
+<th style="text-align:left;">
+1990
+</th>
+<th style="text-align:left;">
+2000
+</th>
+<th style="text-align:left;">
+2010
+</th>
+<th style="text-align:left;">
+2020
+</th>
+<th style="text-align:left;">
+2023
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Atlanta
+</td>
+<td style="text-align:left;">
+&lt; 0.8
+</td>
+<td style="text-align:left;">
+83.5%
+</td>
+<td style="text-align:left;">
+81.8%
+</td>
+<td style="text-align:left;">
+72.7%
+</td>
+<td style="text-align:left;">
+55.3%
+</td>
+<td style="text-align:left;">
+53.9%
+</td>
+<td style="text-align:left;">
+55.5%
+</td>
+<td style="text-align:left;">
+41.6%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Atlanta
+</td>
+<td style="text-align:left;">
+0.8 - 1.2
+</td>
+<td style="text-align:left;">
+9.7%
+</td>
+<td style="text-align:left;">
+14.0%
+</td>
+<td style="text-align:left;">
+13.5%
+</td>
+<td style="text-align:left;">
+19.3%
+</td>
+<td style="text-align:left;">
+23.3%
+</td>
+<td style="text-align:left;">
+20.2%
+</td>
+<td style="text-align:left;">
+26.7%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Atlanta
+</td>
+<td style="text-align:left;">
+&gt; 1.2
+</td>
+<td style="text-align:left;">
+6.8%
+</td>
+<td style="text-align:left;">
+4.2%
+</td>
+<td style="text-align:left;">
+13.9%
+</td>
+<td style="text-align:left;">
+25.4%
+</td>
+<td style="text-align:left;">
+22.9%
+</td>
+<td style="text-align:left;">
+24.4%
+</td>
+<td style="text-align:left;">
+31.7%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dallas
+</td>
+<td style="text-align:left;">
+&lt; 0.8
+</td>
+<td style="text-align:left;">
+87.6%
+</td>
+<td style="text-align:left;">
+83.8%
+</td>
+<td style="text-align:left;">
+79.1%
+</td>
+<td style="text-align:left;">
+75.4%
+</td>
+<td style="text-align:left;">
+77.6%
+</td>
+<td style="text-align:left;">
+68.4%
+</td>
+<td style="text-align:left;">
+52.7%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dallas
+</td>
+<td style="text-align:left;">
+0.8 - 1.2
+</td>
+<td style="text-align:left;">
+9.9%
+</td>
+<td style="text-align:left;">
+9.2%
+</td>
+<td style="text-align:left;">
+11.5%
+</td>
+<td style="text-align:left;">
+13.1%
+</td>
+<td style="text-align:left;">
+12.1%
+</td>
+<td style="text-align:left;">
+14.6%
+</td>
+<td style="text-align:left;">
+23.0%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dallas
+</td>
+<td style="text-align:left;">
+&gt; 1.2
+</td>
+<td style="text-align:left;">
+2.5%
+</td>
+<td style="text-align:left;">
+7.0%
+</td>
+<td style="text-align:left;">
+9.4%
+</td>
+<td style="text-align:left;">
+11.4%
+</td>
+<td style="text-align:left;">
+10.3%
+</td>
+<td style="text-align:left;">
+17.0%
+</td>
+<td style="text-align:left;">
+24.3%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Detroit
+</td>
+<td style="text-align:left;">
+&lt; 0.8
+</td>
+<td style="text-align:left;">
+93.4%
+</td>
+<td style="text-align:left;">
+90.3%
+</td>
+<td style="text-align:left;">
+89.9%
+</td>
+<td style="text-align:left;">
+75.2%
+</td>
+<td style="text-align:left;">
+89.5%
+</td>
+<td style="text-align:left;">
+91.2%
+</td>
+<td style="text-align:left;">
+88.4%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Detroit
+</td>
+<td style="text-align:left;">
+0.8 - 1.2
+</td>
+<td style="text-align:left;">
+4.9%
+</td>
+<td style="text-align:left;">
+7.2%
+</td>
+<td style="text-align:left;">
+6.5%
+</td>
+<td style="text-align:left;">
+16.5%
+</td>
+<td style="text-align:left;">
+7.9%
+</td>
+<td style="text-align:left;">
+6.7%
+</td>
+<td style="text-align:left;">
+8.7%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Detroit
+</td>
+<td style="text-align:left;">
+&gt; 1.2
+</td>
+<td style="text-align:left;">
+1.8%
+</td>
+<td style="text-align:left;">
+2.6%
+</td>
+<td style="text-align:left;">
+3.6%
+</td>
+<td style="text-align:left;">
+8.4%
+</td>
+<td style="text-align:left;">
+2.6%
+</td>
+<td style="text-align:left;">
+2.1%
+</td>
+<td style="text-align:left;">
+2.8%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Los Angeles
+</td>
+<td style="text-align:left;">
+&lt; 0.8
+</td>
+<td style="text-align:left;">
+85.6%
+</td>
+<td style="text-align:left;">
+38.3%
+</td>
+<td style="text-align:left;">
+8.5%
+</td>
+<td style="text-align:left;">
+14.9%
+</td>
+<td style="text-align:left;">
+1.5%
+</td>
+<td style="text-align:left;">
+1.9%
+</td>
+<td style="text-align:left;">
+1.1%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Los Angeles
+</td>
+<td style="text-align:left;">
+0.8 - 1.2
+</td>
+<td style="text-align:left;">
+9.6%
+</td>
+<td style="text-align:left;">
+36.1%
+</td>
+<td style="text-align:left;">
+29.2%
+</td>
+<td style="text-align:left;">
+45.1%
+</td>
+<td style="text-align:left;">
+9.6%
+</td>
+<td style="text-align:left;">
+23.2%
+</td>
+<td style="text-align:left;">
+5.7%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Los Angeles
+</td>
+<td style="text-align:left;">
+&gt; 1.2
+</td>
+<td style="text-align:left;">
+4.8%
+</td>
+<td style="text-align:left;">
+25.6%
+</td>
+<td style="text-align:left;">
+62.4%
+</td>
+<td style="text-align:left;">
+40.0%
+</td>
+<td style="text-align:left;">
+88.9%
+</td>
+<td style="text-align:left;">
+74.9%
+</td>
+<td style="text-align:left;">
+93.2%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miami
+</td>
+<td style="text-align:left;">
+&lt; 0.8
+</td>
+<td style="text-align:left;">
+89.9%
+</td>
+<td style="text-align:left;">
+65.7%
+</td>
+<td style="text-align:left;">
+65.9%
+</td>
+<td style="text-align:left;">
+53.1%
+</td>
+<td style="text-align:left;">
+28.8%
+</td>
+<td style="text-align:left;">
+39.3%
+</td>
+<td style="text-align:left;">
+18.3%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miami
+</td>
+<td style="text-align:left;">
+0.8 - 1.2
+</td>
+<td style="text-align:left;">
+8.1%
+</td>
+<td style="text-align:left;">
+19.8%
+</td>
+<td style="text-align:left;">
+16.1%
+</td>
+<td style="text-align:left;">
+25.8%
+</td>
+<td style="text-align:left;">
+36.1%
+</td>
+<td style="text-align:left;">
+30.0%
+</td>
+<td style="text-align:left;">
+40.3%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Miami
+</td>
+<td style="text-align:left;">
+&gt; 1.2
+</td>
+<td style="text-align:left;">
+2.0%
+</td>
+<td style="text-align:left;">
+14.5%
+</td>
+<td style="text-align:left;">
+18.0%
+</td>
+<td style="text-align:left;">
+21.0%
+</td>
+<td style="text-align:left;">
+35.1%
+</td>
+<td style="text-align:left;">
+30.7%
+</td>
+<td style="text-align:left;">
+41.3%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Phoenix
+</td>
+<td style="text-align:left;">
+&lt; 0.8
+</td>
+<td style="text-align:left;">
+95.5%
+</td>
+<td style="text-align:left;">
+83.9%
+</td>
+<td style="text-align:left;">
+82.5%
+</td>
+<td style="text-align:left;">
+68.3%
+</td>
+<td style="text-align:left;">
+53.5%
+</td>
+<td style="text-align:left;">
+58.8%
+</td>
+<td style="text-align:left;">
+34.6%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Phoenix
+</td>
+<td style="text-align:left;">
+0.8 - 1.2
+</td>
+<td style="text-align:left;">
+3.6%
+</td>
+<td style="text-align:left;">
+10.6%
+</td>
+<td style="text-align:left;">
+12.2%
+</td>
+<td style="text-align:left;">
+22.9%
+</td>
+<td style="text-align:left;">
+28.7%
+</td>
+<td style="text-align:left;">
+26.8%
+</td>
+<td style="text-align:left;">
+35.5%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Phoenix
+</td>
+<td style="text-align:left;">
+&gt; 1.2
+</td>
+<td style="text-align:left;">
+0.9%
+</td>
+<td style="text-align:left;">
+5.5%
+</td>
+<td style="text-align:left;">
+5.2%
+</td>
+<td style="text-align:left;">
+8.8%
+</td>
+<td style="text-align:left;">
+17.8%
+</td>
+<td style="text-align:left;">
+14.5%
+</td>
+<td style="text-align:left;">
+29.8%
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="looking-forward-table3-2" class="panel-pane">
+<img src="housing-economics-2_files/figure-html5/looking-forward-table3-panel-chart-1.png" alt="Stacked area charts of the share of census tracts priced below 0.8, between 0.8 and 1.2, and above 1.2 times minimum profitable production cost, for six metros from 1970 to 2023." />
+<p style="font-size:0.9em;">
+Share of census tracts by price-to-cost bin. Source: <span class="citation" data-cites="glaeser2025america">Glaeser and Gyourko (<a href="#ref-glaeser2025america" role="doc-biblioref">2025</a>)</span>, Table 3.
+</p>
+</div>
+</div>
+</div>
+<aside>
+Note that in this analysis, rather than asking what share of <em>homes</em> sit in each
+bin, the authors determined what share of census <em>tracts</em> do, for six focal
+metros from 1970 through 2023. The bins differ slightly from the earlier paper:
+tracts are classed as priced below 0.8, between 0.8 and 1.2, or above 1.2 times
+the minimum profitable production cost, using each tract’s real median home
+value.
+</aside>
+<p>The contrast across markets is stark. In Los Angeles, the share of tracts priced
+above 1.2 times production cost climbs from under 5 percent in 1970 to about 93
+percent in 2023. The sunbelt metros that once built freely have been heading the
+same way: the share of high-priced tracts in Atlanta, Dallas, Miami and Phoenix
+has risen from under 7 percent of tracts in 1970 to between roughly a quarter
+and two-fifths. Detroit, where prices remain well below the cost of
+building, barely moves.</p>
+<p>The insight to draw here is that we’re facing a persistent problem. The
+inefficiency spotted in <span class="citation" data-cites="glaeser2018economic">(<a href="#ref-glaeser2018economic" role="doc-biblioref">Glaeser and Gyourko 2018</a>)</span> is now spreading. At the end of
+<span class="citation" data-cites="glaeser2025america">(<a href="#ref-glaeser2025america" role="doc-biblioref">Glaeser and Gyourko 2025</a>)</span> the authors argue that these problems share a common
+problem: after homes and neighborhoods are built those who own the homes push
+back on any attempts to increase the density of the neighborhood, limiting
+the potential for new housing supply to offset any increased demand. A
+political and economic problem, we’ll turn to potential remedies for this problem
+in the next post(s).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-glaeser2025america" class="csl-entry" role="listitem">
+Glaeser, Edward L, and Joseph Gyourko. 2025. <em>America’s Housing Supply Problem: The Closing of the Suburban Frontier?</em> National Bureau of Economic Research.
+</div>
+<div id="ref-glaeser2018economic" class="csl-entry" role="listitem">
+Glaeser, Edward, and Joseph Gyourko. 2018. <span>“The Economic Implications of Housing Supply.”</span> <em>Journal of Economic Perspectives</em> 32 (1): 3–30.
+</div>
+<div id="ref-gyourko2008new" class="csl-entry" role="listitem">
+Gyourko, Joseph, Albert Saiz, and Anita Summers. 2008. <span>“A New Measure of the Local Regulatory Environment for Housing Markets: The Wharton Residential Land Use Regulatory Index.”</span> <em>Urban Studies</em> 45 (3): 693–729.
+</div>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>The index summarizes a 2005 survey of local planning directors on
+who approves development, what rules apply, and how lot costs and review times
+have changed. Eleven sub-indexes are combined into one score per community. It
+measures how hard it is to build, not what happens to prices.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+<!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=Housing%20Economics%20-%20Part%20II&amp;url=https%3A%2F%2Fxstreetvalidated.com%2Fposts%2F2025-09-07-housing-economics-2%2F" aria-label="share on twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fxstreetvalidated.com%2Fposts%2F2025-09-07-housing-economics-2%2F&amp;title=Housing%20Economics%20-%20Part%20II" aria-label="share on linkedin">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+      </a>
+    </span>
+  </p>
+  <p>
+    <div class="subscribe"><form method='post' action='https://blogtrottr.com'>
+  <p>Enjoy this blog? Get notified of new posts via email:</p>
+  <input type='text' name='btr_email' />
+  <input type='hidden' name='btr_url'
+         value='https://xstreetvalidated.com/index.xml'/>
+  <input type='hidden' name='schedule_type' value='0' />
+  <input type='submit' value='Subscribe' />
+</form></div>
+  </p>
+</div>
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+  <h3 id="references">References</h3>
+  <div id="references-listing"></div>
+  <h3 id="updates-and-corrections">Corrections</h3>
+  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/apeterson91/XStreetValidated/issues/new">create an issue</a> on the source repository.</p>
+  <h3 id="reuse">Reuse</h3>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/apeterson91/XStreetValidated">https://github.com/apeterson91/XStreetValidated</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+  <h3 id="citation">Citation</h3>
+  <p>For attribution, please cite this work as</p>
+  <pre class="citation-appendix short">Peterson (2026, Nov. 12). X Street Validated: Housing Economics - Part II. Retrieved from https://xstreetvalidated.com</pre>
+  <p>BibTeX citation</p>
+  <pre class="citation-appendix long">@misc{peterson2026housing,
+  author = {Peterson, Adam},
+  title = {X Street Validated: Housing Economics - Part II},
+  url = {https://xstreetvalidated.com},
+  year = {2026}
+}</pre>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
