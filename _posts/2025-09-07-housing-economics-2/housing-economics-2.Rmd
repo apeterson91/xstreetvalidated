@@ -5,7 +5,7 @@ description: |
 author:
   - name: Adam Peterson
     url: https://apetersonsite.com/
-date: 11-11-2026
+date: 11-12-2026
 preview: sf-stack.png
 output: 
   distill::distill_article:
@@ -436,25 +436,20 @@ rather than the building on it, it helps motivate policies such as a [land value
 tax](https://en.wikipedia.org/wiki/Land_value_tax), which taxes the value of
 land rather than the structures built on it. Other restrictions on development,
 also cause this piece to inflate, and the authors' use a survey of local
-government regulation [@gyourko2008new] to identify association - not causation - between these
-two measures. All of this speaks to a larger topic that I hope to return to in a
-future post.
+government regulation [@gyourko2008new] to identify association - not
+causation - between these two measures.
+
+### Local Regulation
 
 To see how much local regulation varies across these three markets, the chart
-below plots the Wharton Residential Land Use Regulatory Index for each community
-surveyed in each metro. The index is standardized so that 0 is the national
-average and higher values mean more restrictive regulation.
-
-<aside>
-The index summarizes a 2005 national survey of local planning directors (or the
-top administrator where there is no planning office). It asks who is involved
-in approving development, what rules apply -- minimum lot sizes, open space and
-infrastructure requirements, and so on -- and how lot costs and review times
-have changed. Eleven sub-indexes, plus state-level and community-pressure data,
-are combined into one score per community, standardized across the roughly
-2,600 surveyed communities nationwide (mean 0, standard deviation 1). It
-measures how hard it is to build, not what happens to prices.
-</aside>
+below plots the [Wharton Residential Land Use Regulatory
+Index](https://realestate.wharton.upenn.edu/working-papers/a-new-measure-of-the-local-regulatory-environment-for-housing-markets-the-wharton-residential-land-use-regulatory-index/)
+for each community surveyed in each metro. The index is standardized so that 0
+is the national average and higher values mean more restrictive
+regulation.^[The index summarizes a 2005 survey of local planning directors on
+who approves development, what rules apply, and how lot costs and review times
+have changed. Eleven sub-indexes are combined into one score per community. It
+measures how hard it is to build, not what happens to prices.]
 
 ```{r wharton-regulation, echo=FALSE, fig.width=8, fig.height=5}
 #| fig.cap: "Local land-use regulation in three metros (2005 Wharton survey). Small points are surveyed communities; the large point and bars are the survey-weighted metro mean and 95% confidence interval. Source: @gyourko2008new."
@@ -502,8 +497,8 @@ national norm: the survey-weighted mean index is `r f2(wr$SF$mean)` (95% CI
 the national average. Detroit's communities vary the most (variance of
 `r f2(wr$DET$var)`, versus `r f2(wr$ATL$var)` in Atlanta), so some Detroit-area
 suburbs are quite restrictive even though the metro as a whole is not. These
-confidence intervals treat each surveyed community as an independent draw, so
-they are best read as a rough guide.
+confidence intervals treat each surveyed community as an independent draw, when
+they're likely correlated, so they are best read as a rough guide.
 
 As the authors have now established the different types of housing markets
 throughout the US, as well as some possible sources of the rising cost, they now
