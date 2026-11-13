@@ -60,7 +60,9 @@ urbanist website and kept finding references to it in subsequent forums or
 threads. The mentions are well deserved! Bertraud has an impressive resume
 spanning several large urban planning projects across the world, but he also
 recognizes his field's limits.
+
 ## Two Visions of Cities: Markets and Plans
+
 Bertraud wrote this book to argue that the view urban planners bring to cities
 -- one of planning, control, and regulatory requirements -- needs to incorporate
 the view urban economists bring -- how cities manifest and function primarily as
@@ -153,7 +155,9 @@ cities was one lesson learned from his time abroad, Bertraud spends much of the
 book giving a basic crash course on the economics lessons he deems most
 impactful to urban planning practices. The first and foremost among them? Cities
 are what they are because they are labor markets.
+
 ### Cities as Labor Markets
+
 While I didn't explicitly mention labor markets in the opening post for this
 blog, I did mention the economic efficiency of cities. It is that same economic
 efficiency, specifically in terms of offering a variety of labor demand, that
